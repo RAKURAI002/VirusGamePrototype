@@ -1,0 +1,92 @@
+{
+    "Items": [
+        {
+            "id": 0,
+            "name": "Wood",
+            "rarity": 1,
+            "description": "Just a certain Wood.",
+            "spritePath": "Sprites/Resource/Wood",
+            "type": 3
+        },
+        {
+            "id": 1,
+            "name": "Stone",
+            "rarity": 1,
+            "description": "Just a certain Stone.",
+            "spritePath": "Sprites/Resource/Stone",
+            "type": 3
+        },
+        {
+            "id": 2,
+            "name": "Water",
+            "rarity": 1,
+            "description": "No water No life.",
+            "spritePath": "Sprites/Resource/Water",
+            "type": 1
+        },
+        {
+            "id": 3,
+            "name": "Food",
+            "rarity": 1,
+            "description": "Wanna starve to death?",
+            "spritePath": "Sprites/Resource/Food",
+            "type": 1
+        },
+        {
+            "id": 4,
+            "name": "Fabric",
+            "rarity": 1,
+            "description": "I'm so cold.",
+            "spritePath": "Sprites/Resource/Fabric",
+            "type": 3
+        },
+        {
+            "id": 5,
+            "name": "Rubber",
+            "rarity": 1,
+            "description": "Useless? who knows.",
+            "spritePath": "Sprites/Resource/Rubber",
+            "type": 3
+        },
+        {
+            "id": 6,
+            "name": "Steel",
+            "rarity": 2,
+            "description": "Just a certain Wood.",
+            "spritePath": "Sprites/Resource/Steel",
+            "type": 3
+        },
+        {
+            "id": 7,
+            "name": "Meteorite",
+            "rarity": 5,
+            "description": "BOOOOOM!!!",
+            "spritePath": "Sprites/Resource/Meteorite",
+            "type": 3
+        },
+        {
+            "id": 8,
+            "name": "Production",
+            "rarity": 0,
+            "description": "Specific Building Production .",
+            "spritePath": "Sprites/Resource/Production",
+            "type": 4
+        },
+        {
+            "id": 9,
+            "name": "Gold",
+            "rarity": 0,
+            "description": "Specific Building Production .",
+            "spritePath": "Sprites/Resource/Gold",
+            "type": 5
+        },
+        {
+            "id": 10,
+            "name": "Diamond",
+            "rarity": 0,
+            "description": "Specific Building Production .",
+            "spritePath": "Sprites/Resource/Diamond",
+            "type": 5
+        }
+    ]
+}

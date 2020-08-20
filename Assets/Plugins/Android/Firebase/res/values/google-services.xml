@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources tools:keep="@string/firebase_database_url,@string/gcm_defaultSenderId,@string/google_storage_bucket,@string/project_id,@string/google_api_key,@string/google_crash_reporting_api_key,@string/google_app_id,@string/default_web_client_id" xmlns:tools="http://schemas.android.com/tools">
+  <string name="firebase_database_url" translatable="false">https://virusgame-6eb14.firebaseio.com</string>
+  <string name="gcm_defaultSenderId" translatable="false">19064855058</string>
+  <string name="google_storage_bucket" translatable="false">virusgame-6eb14.appspot.com</string>
+  <string name="project_id" translatable="false">virusgame-6eb14</string>
+  <string name="google_api_key" translatable="false">AIzaSyBo6-xOBJ2U07GS1l6999de_2cE0iZphRo</string>
+  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBo6-xOBJ2U07GS1l6999de_2cE0iZphRo</string>
+  <string name="google_app_id" translatable="false">1:19064855058:android:5c372f3298f7900d2b56cb</string>
+  <string name="default_web_client_id" translatable="false">19064855058-ua87r4ihjl98qdlhjfoo5v6hs4m38n81.apps.googleusercontent.com</string>
+</resources>

@@ -1,0 +1,4987 @@
+{
+    "Items": [
+        {
+            "type": 1,
+            "buildingCost": [
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        2,
+                        2
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        2,
+                        3
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        3,
+                        3
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        3,
+                        4
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        4,
+                        4
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        4,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        5,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        5,
+                        6
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        6,
+                        6
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        6,
+                        7
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        6,
+                        7
+                    ]
+                },
+                {
+                    "keys": [],
+                    "values": []
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        2,
+                        2
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        2,
+                        3
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        3,
+                        3
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        3,
+                        4
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        4,
+                        4
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        4,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        5,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        5,
+                        6
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        6,
+                        6
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        6,
+                        7
+                    ]
+                }
+            ],
+            "production": [
+                {
+                    "keys": [],
+                    "values": []
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        2,
+                        3,
+                        20
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        3,
+                        3,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        3,
+                        4,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        4,
+                        4,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        4,
+                        5,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        5,
+                        5,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        5,
+                        6,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        6,
+                        6,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        6,
+                        7,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        6,
+                        7,
+                        30
+                    ]
+                }
+            ],
+            "consuming": [],
+            "upgradePoint": [
+                200,
+                600,
+                300,
+                600,
+                600,
+                600,
+                600,
+                600,
+                600,
+                600,
+                600
+            ],
+            "maxActiveAmount": 2,
+            "maxLevel": 9,
+            "maxCharacterStored": {
+                "keys": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10
+                ],
+                "values": [
+                    {
+                        "amount": [
+                            0
+                        ]
+                    },
+                    {
+                        "amount": [
+                            1
+                        ]
+                    },
+                    {
+                        "amount": [
+                            2
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            1
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            2
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    }
+                ]
+            },
+            "spritePath": [
+                "Sprites/Building/Farm0",
+                "Sprites/Building/Farm1",
+                "Sprites/Building/Farm1",
+                "Sprites/Building/Farm1",
+                "Sprites/Building/Farm1",
+                "Sprites/Building/Farm1",
+                "Sprites/Building/Farm1",
+                "Sprites/Building/Farm1",
+                "Sprites/Building/Farm1",
+                "Sprites/Building/Farm1"
+            ],
+            "description": "NO !!!"
+        },
+        {
+            "type": 10,
+            "buildingCost": [
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        2,
+                        2
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        2,
+                        3
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        3,
+                        3
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        3,
+                        4
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        4,
+                        4
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        4,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        5,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        5,
+                        6
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        6,
+                        6
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        6,
+                        7
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        6,
+                        7
+                    ]
+                },
+                {
+                    "keys": [],
+                    "values": []
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        2,
+                        2
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        2,
+                        3
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        3,
+                        3
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        3,
+                        4
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        4,
+                        4
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        4,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        5,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        5,
+                        6
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        6,
+                        6
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        6,
+                        7
+                    ]
+                }
+            ],
+            "production": [
+                {
+                    "keys": [],
+                    "values": []
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        2,
+                        3,
+                        20
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        3,
+                        3,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        3,
+                        4,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        4,
+                        4,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        4,
+                        5,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        5,
+                        5,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        5,
+                        6,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        6,
+                        6,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        6,
+                        7,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        6,
+                        7,
+                        30
+                    ]
+                }
+            ],
+            "consuming": [],
+            "upgradePoint": [
+                200,
+                600,
+                300,
+                600,
+                600,
+                600,
+                600,
+                600,
+                600,
+                600,
+                600
+            ],
+            "maxActiveAmount": 1,
+            "maxLevel": 9,
+            "maxCharacterStored": {
+                "keys": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10
+                ],
+                "values": [
+                    {
+                        "amount": [
+                            0
+                        ]
+                    },
+                    {
+                        "amount": [
+                            1
+                        ]
+                    },
+                    {
+                        "amount": [
+                            2
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            1
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            2
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    }
+                ]
+            },
+            "spritePath": [
+                "Sprites/Building/FishingPond0",
+                "Sprites/Building/FishingPond1",
+                "Sprites/Building/FishingPond1",
+                "Sprites/Building/FishingPond1",
+                "Sprites/Building/FishingPond1",
+                "Sprites/Building/FishingPond1",
+                "Sprites/Building/FishingPond1",
+                "Sprites/Building/FishingPond1",
+                "Sprites/Building/FishingPond1",
+                "Sprites/Building/FishingPond1"
+            ],
+            "description": "NO !!!"
+        },
+        {
+            "type": 2,
+            "buildingCost": [
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        2,
+                        2
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        2,
+                        3
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        3,
+                        3
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        3,
+                        4
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        4,
+                        4
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        4,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        5,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        5,
+                        6
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        6,
+                        6
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        6,
+                        7
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        6,
+                        7
+                    ]
+                },
+                {
+                    "keys": [],
+                    "values": []
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        2,
+                        2
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        2,
+                        3
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        3,
+                        3
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        3,
+                        4
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        4,
+                        4
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        4,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        5,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        5,
+                        6
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        6,
+                        6
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        6,
+                        7
+                    ]
+                }
+            ],
+            "production": [
+                {
+                    "keys": [],
+                    "values": []
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        2,
+                        3,
+                        20
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        3,
+                        3,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        3,
+                        4,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        4,
+                        4,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        4,
+                        5,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        5,
+                        5,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        5,
+                        6,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        6,
+                        6,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        6,
+                        7,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        6,
+                        7,
+                        30
+                    ]
+                }
+            ],
+            "consuming": [],
+            "upgradePoint": [
+                200,
+                600,
+                300,
+                600,
+                600,
+                600,
+                600,
+                600,
+                600,
+                600,
+                600
+            ],
+            "maxActiveAmount": 1,
+            "maxLevel": 9,
+            "maxCharacterStored": {
+                "keys": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10
+                ],
+                "values": [
+                    {
+                        "amount": [
+                            0
+                        ]
+                    },
+                    {
+                        "amount": [
+                            1
+                        ]
+                    },
+                    {
+                        "amount": [
+                            2
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            1
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            2
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    }
+                ]
+            },
+            "spritePath": [
+                "Sprites/Building/Kitchen0",
+                "Sprites/Building/Kitchen1",
+                "Sprites/Building/Kitchen1",
+                "Sprites/Building/Kitchen1",
+                "Sprites/Building/Kitchen1",
+                "Sprites/Building/Kitchen1",
+                "Sprites/Building/Kitchen1",
+                "Sprites/Building/Kitchen1",
+                "Sprites/Building/Kitchen1",
+                "Sprites/Building/Kitchen1"
+            ],
+            "description": "NO !!!"
+        },
+        {
+            "type": 3,
+            "buildingCost": [
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        2,
+                        2
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        2,
+                        3
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        3,
+                        3
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        3,
+                        4
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        4,
+                        4
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        4,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        5,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        5,
+                        6
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        6,
+                        6
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        6,
+                        7
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        6,
+                        7
+                    ]
+                },
+                {
+                    "keys": [],
+                    "values": []
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        2,
+                        2
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        2,
+                        3
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        3,
+                        3
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        3,
+                        4
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        4,
+                        4
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        4,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        5,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        5,
+                        6
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        6,
+                        6
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        6,
+                        7
+                    ]
+                }
+            ],
+            "production": [
+                {
+                    "keys": [],
+                    "values": []
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        2,
+                        3,
+                        20
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        3,
+                        3,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        3,
+                        4,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        4,
+                        4,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        4,
+                        5,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        5,
+                        5,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        5,
+                        6,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        6,
+                        6,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        6,
+                        7,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        6,
+                        7,
+                        30
+                    ]
+                }
+            ],
+            "consuming": [],
+            "upgradePoint": [
+                200,
+                600,
+                300,
+                600,
+                600,
+                600,
+                600,
+                600,
+                600,
+                600,
+                600
+            ],
+            "maxActiveAmount": 1,
+            "maxLevel": 9,
+            "maxCharacterStored": {
+                "keys": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10
+                ],
+                "values": [
+                    {
+                        "amount": [
+                            0
+                        ]
+                    },
+                    {
+                        "amount": [
+                            1
+                        ]
+                    },
+                    {
+                        "amount": [
+                            2
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            1
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            2
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    }
+                ]
+            },
+            "spritePath": [
+                "Sprites/Building/Laboratory0",
+                "Sprites/Building/Laboratory1",
+                "Sprites/Building/Laboratory1",
+                "Sprites/Building/Laboratory1",
+                "Sprites/Building/Laboratory1",
+                "Sprites/Building/Laboratory1",
+                "Sprites/Building/Laboratory1",
+                "Sprites/Building/Laboratory1",
+                "Sprites/Building/Laboratory1",
+                "Sprites/Building/Laboratory1"
+            ],
+            "description": "NO !!!"
+        },
+        {
+            "type": 11,
+            "buildingCost": [
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        2,
+                        2
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        2,
+                        3
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        3,
+                        3
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        3,
+                        4
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        4,
+                        4
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        4,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        5,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        5,
+                        6
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        6,
+                        6
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        6,
+                        7
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        6,
+                        7
+                    ]
+                },
+                {
+                    "keys": [],
+                    "values": []
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        2,
+                        2
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        2,
+                        3
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        3,
+                        3
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        3,
+                        4
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        4,
+                        4
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        4,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        5,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        5,
+                        6
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        6,
+                        6
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        6,
+                        7
+                    ]
+                }
+            ],
+            "production": [
+                {
+                    "keys": [],
+                    "values": []
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        2,
+                        3,
+                        20
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        3,
+                        3,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        3,
+                        4,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        4,
+                        4,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        4,
+                        5,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        5,
+                        5,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        5,
+                        6,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        6,
+                        6,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        6,
+                        7,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        6,
+                        7,
+                        30
+                    ]
+                }
+            ],
+            "consuming": [],
+            "upgradePoint": [
+                200,
+                600,
+                300,
+                600,
+                600,
+                600,
+                600,
+                600,
+                600,
+                600,
+                600
+            ],
+            "maxActiveAmount": 1,
+            "maxLevel": 9,
+            "maxCharacterStored": {
+                "keys": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10
+                ],
+                "values": [
+                    {
+                        "amount": [
+                            0
+                        ]
+                    },
+                    {
+                        "amount": [
+                            1
+                        ]
+                    },
+                    {
+                        "amount": [
+                            2
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            1
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            2
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    }
+                ]
+            },
+            "spritePath": [
+                "Sprites/Building/LaborCenter0",
+                "Sprites/Building/LaborCenter1",
+                "Sprites/Building/LaborCenter1",
+                "Sprites/Building/LaborCenter1",
+                "Sprites/Building/LaborCenter1",
+                "Sprites/Building/LaborCenter1",
+                "Sprites/Building/LaborCenter1",
+                "Sprites/Building/LaborCenter1",
+                "Sprites/Building/LaborCenter1",
+                "Sprites/Building/LaborCenter1"
+            ],
+            "description": "NO !!!"
+        },
+        {
+            "type": 4,
+            "buildingCost": [
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        2,
+                        2
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        2,
+                        3
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        3,
+                        3
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        3,
+                        4
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        4,
+                        4
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        4,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        5,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        5,
+                        6
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        6,
+                        6
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        6,
+                        7
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        6,
+                        7
+                    ]
+                },
+                {
+                    "keys": [],
+                    "values": []
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        2,
+                        2
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        2,
+                        3
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        3,
+                        3
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        3,
+                        4
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        4,
+                        4
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        4,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        5,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        5,
+                        6
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        6,
+                        6
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        6,
+                        7
+                    ]
+                }
+            ],
+            "production": [
+                {
+                    "keys": [],
+                    "values": []
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        2,
+                        3,
+                        20
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        3,
+                        3,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        3,
+                        4,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        4,
+                        4,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        4,
+                        5,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        5,
+                        5,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        5,
+                        6,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        6,
+                        6,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        6,
+                        7,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        6,
+                        7,
+                        30
+                    ]
+                }
+            ],
+            "consuming": [],
+            "upgradePoint": [
+                200,
+                600,
+                300,
+                600,
+                600,
+                600,
+                600,
+                600,
+                600,
+                600,
+                600
+            ],
+            "maxActiveAmount": 1,
+            "maxLevel": 9,
+            "maxCharacterStored": {
+                "keys": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10
+                ],
+                "values": [
+                    {
+                        "amount": [
+                            0
+                        ]
+                    },
+                    {
+                        "amount": [
+                            1
+                        ]
+                    },
+                    {
+                        "amount": [
+                            2
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            1
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            2
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    }
+                ]
+            },
+            "spritePath": [
+                "Sprites/Building/MedicalCenter0",
+                "Sprites/Building/MedicalCenter1",
+                "Sprites/Building/MedicalCenter1",
+                "Sprites/Building/MedicalCenter1",
+                "Sprites/Building/MedicalCenter1",
+                "Sprites/Building/MedicalCenter1",
+                "Sprites/Building/MedicalCenter1",
+                "Sprites/Building/MedicalCenter1",
+                "Sprites/Building/MedicalCenter1",
+                "Sprites/Building/MedicalCenter1"
+            ],
+            "description": "NO !!!"
+        },
+        {
+            "type": 5,
+            "buildingCost": [
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        2,
+                        2
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        2,
+                        3
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        3,
+                        3
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        3,
+                        4
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        4,
+                        4
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        4,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        5,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        5,
+                        6
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        6,
+                        6
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        6,
+                        7
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        6,
+                        7
+                    ]
+                },
+                {
+                    "keys": [],
+                    "values": []
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        2,
+                        2
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        2,
+                        3
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        3,
+                        3
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        3,
+                        4
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        4,
+                        4
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        4,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        5,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        5,
+                        6
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        6,
+                        6
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        6,
+                        7
+                    ]
+                }
+            ],
+            "production": [
+                {
+                    "keys": [],
+                    "values": []
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        2,
+                        3,
+                        20
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        3,
+                        3,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        3,
+                        4,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        4,
+                        4,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        4,
+                        5,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        5,
+                        5,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        5,
+                        6,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        6,
+                        6,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        6,
+                        7,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        6,
+                        7,
+                        30
+                    ]
+                }
+            ],
+            "consuming": [],
+            "upgradePoint": [
+                200,
+                600,
+                300,
+                600,
+                600,
+                600,
+                600,
+                600,
+                600,
+                600,
+                600
+            ],
+            "maxActiveAmount": 1,
+            "maxLevel": 9,
+            "maxCharacterStored": {
+                "keys": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10
+                ],
+                "values": [
+                    {
+                        "amount": [
+                            0
+                        ]
+                    },
+                    {
+                        "amount": [
+                            1
+                        ]
+                    },
+                    {
+                        "amount": [
+                            2
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            1
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            2
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    }
+                ]
+            },
+            "spritePath": [
+                "Sprites/Building/QuarantineSite0",
+                "Sprites/Building/QuarantineSite1",
+                "Sprites/Building/QuarantineSite1",
+                "Sprites/Building/QuarantineSite1",
+                "Sprites/Building/QuarantineSite1",
+                "Sprites/Building/QuarantineSite1",
+                "Sprites/Building/QuarantineSite1",
+                "Sprites/Building/QuarantineSite1",
+                "Sprites/Building/QuarantineSite1",
+                "Sprites/Building/QuarantineSite1"
+            ],
+            "description": "NO !!!"
+        },
+        {
+            "type": 6,
+            "buildingCost": [
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        2,
+                        2
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        2,
+                        3
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        3,
+                        3
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        3,
+                        4
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        4,
+                        4
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        4,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        5,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        5,
+                        6
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        6,
+                        6
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        6,
+                        7
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        6,
+                        7
+                    ]
+                },
+                {
+                    "keys": [],
+                    "values": []
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        2,
+                        2
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        2,
+                        3
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        3,
+                        3
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        3,
+                        4
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        4,
+                        4
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        4,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        5,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        5,
+                        6
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        6,
+                        6
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        6,
+                        7
+                    ]
+                }
+            ],
+            "production": [
+                {
+                    "keys": [],
+                    "values": []
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        2,
+                        3,
+                        20
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        3,
+                        3,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        3,
+                        4,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        4,
+                        4,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        4,
+                        5,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        5,
+                        5,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        5,
+                        6,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        6,
+                        6,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        6,
+                        7,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        6,
+                        7,
+                        30
+                    ]
+                }
+            ],
+            "consuming": [],
+            "upgradePoint": [
+                200,
+                600,
+                300,
+                600,
+                600,
+                600,
+                600,
+                600,
+                600,
+                600,
+                600
+            ],
+            "maxActiveAmount": 1,
+            "maxLevel": 9,
+            "maxCharacterStored": {
+                "keys": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10
+                ],
+                "values": [
+                    {
+                        "amount": [
+                            0
+                        ]
+                    },
+                    {
+                        "amount": [
+                            1
+                        ]
+                    },
+                    {
+                        "amount": [
+                            2
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            1
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            2
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    }
+                ]
+            },
+            "spritePath": [
+                "Sprites/Building/Residence0",
+                "Sprites/Building/Residence1",
+                "Sprites/Building/Residence1",
+                "Sprites/Building/Residence1",
+                "Sprites/Building/Residence1",
+                "Sprites/Building/Residence1",
+                "Sprites/Building/Residence1",
+                "Sprites/Building/Residence1",
+                "Sprites/Building/Residence1",
+                "Sprites/Building/Residence1"
+            ],
+            "description": "NO !!!"
+        },
+        {
+            "type": 7,
+            "buildingCost": [
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        2,
+                        2
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        2,
+                        3
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        3,
+                        3
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        3,
+                        4
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        4,
+                        4
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        4,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        5,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        5,
+                        6
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        6,
+                        6
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        6,
+                        7
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        6,
+                        7
+                    ]
+                },
+                {
+                    "keys": [],
+                    "values": []
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        2,
+                        2
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        2,
+                        3
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        3,
+                        3
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        3,
+                        4
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        4,
+                        4
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        4,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        5,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        5,
+                        6
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        6,
+                        6
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        6,
+                        7
+                    ]
+                }
+            ],
+            "production": [
+                {
+                    "keys": [],
+                    "values": []
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        2,
+                        3,
+                        20
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        3,
+                        3,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        3,
+                        4,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        4,
+                        4,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        4,
+                        5,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        5,
+                        5,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        5,
+                        6,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        6,
+                        6,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        6,
+                        7,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        6,
+                        7,
+                        30
+                    ]
+                }
+            ],
+            "consuming": [],
+            "upgradePoint": [
+                200,
+                600,
+                300,
+                600,
+                600,
+                600,
+                600,
+                600,
+                600,
+                600,
+                600
+            ],
+            "maxActiveAmount": 1,
+            "maxLevel": 9,
+            "maxCharacterStored": {
+                "keys": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10
+                ],
+                "values": [
+                    {
+                        "amount": [
+                            0
+                        ]
+                    },
+                    {
+                        "amount": [
+                            1
+                        ]
+                    },
+                    {
+                        "amount": [
+                            2
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            1
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            2
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    }
+                ]
+            },
+            "spritePath": [
+                "Sprites/Building/TownBase0",
+                "Sprites/Building/TownBase1",
+                "Sprites/Building/TownBase1",
+                "Sprites/Building/TownBase1",
+                "Sprites/Building/TownBase1",
+                "Sprites/Building/TownBase1",
+                "Sprites/Building/TownBase1",
+                "Sprites/Building/TownBase1",
+                "Sprites/Building/TownBase1",
+                "Sprites/Building/TownBase1"
+            ],
+            "description": "NO !!!"
+        },
+        {
+            "type": 9,
+            "buildingCost": [
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        2,
+                        2
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        2,
+                        3
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        3,
+                        3
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        3,
+                        4
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        4,
+                        4
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        4,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        5,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        5,
+                        6
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        6,
+                        6
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        6,
+                        7
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        6,
+                        7
+                    ]
+                },
+                {
+                    "keys": [],
+                    "values": []
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        2,
+                        2
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        2,
+                        3
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        3,
+                        3
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        3,
+                        4
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        4,
+                        4
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        4,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        5,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        5,
+                        6
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        6,
+                        6
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        6,
+                        7
+                    ]
+                }
+            ],
+            "production": [
+                {
+                    "keys": [],
+                    "values": []
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        2,
+                        3,
+                        20
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        3,
+                        3,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        3,
+                        4,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        4,
+                        4,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        4,
+                        5,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        5,
+                        5,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        5,
+                        6,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        6,
+                        6,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        6,
+                        7,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        6,
+                        7,
+                        30
+                    ]
+                }
+            ],
+            "consuming": [],
+            "upgradePoint": [
+                200,
+                600,
+                300,
+                600,
+                600,
+                600,
+                600,
+                600,
+                600,
+                600,
+                600
+            ],
+            "maxActiveAmount": 1,
+            "maxLevel": 9,
+            "maxCharacterStored": {
+                "keys": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10
+                ],
+                "values": [
+                    {
+                        "amount": [
+                            0
+                        ]
+                    },
+                    {
+                        "amount": [
+                            1
+                        ]
+                    },
+                    {
+                        "amount": [
+                            2
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            1
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            2
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    }
+                ]
+            },
+            "spritePath": [
+                "Sprites/Building/WareHouse0",
+                "Sprites/Building/WareHouse1",
+                "Sprites/Building/WareHouse1",
+                "Sprites/Building/WareHouse1",
+                "Sprites/Building/WareHouse1",
+                "Sprites/Building/WareHouse1",
+                "Sprites/Building/WareHouse1",
+                "Sprites/Building/WareHouse1",
+                "Sprites/Building/WareHouse1",
+                "Sprites/Building/WareHouse1"
+            ],
+            "description": "NO !!!"
+        },
+        {
+            "type": 8,
+            "buildingCost": [
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        2,
+                        2
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        2,
+                        3
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        3,
+                        3
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        3,
+                        4
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        4,
+                        4
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        4,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        5,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        5,
+                        6
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        6,
+                        6
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        6,
+                        7
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        6,
+                        7
+                    ]
+                },
+                {
+                    "keys": [],
+                    "values": []
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        2,
+                        2
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        2,
+                        3
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        3,
+                        3
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        3,
+                        4
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        4,
+                        4
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        4,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        5,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        5,
+                        6
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        6,
+                        6
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water"
+                    ],
+                    "values": [
+                        6,
+                        7
+                    ]
+                }
+            ],
+            "production": [
+                {
+                    "keys": [],
+                    "values": []
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        2,
+                        3,
+                        20
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        3,
+                        3,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        3,
+                        4,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        4,
+                        4,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        4,
+                        5,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        5,
+                        5,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        5,
+                        6,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        6,
+                        6,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        6,
+                        7,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        6,
+                        7,
+                        30
+                    ]
+                }
+            ],
+            "consuming": [],
+            "upgradePoint": [
+                200,
+                600,
+                300,
+                600,
+                600,
+                600,
+                600,
+                600,
+                600,
+                600,
+                600
+            ],
+            "maxActiveAmount": 2,
+            "maxLevel": 9,
+            "maxCharacterStored": {
+                "keys": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10
+                ],
+                "values": [
+                    {
+                        "amount": [
+                            0
+                        ]
+                    },
+                    {
+                        "amount": [
+                            1
+                        ]
+                    },
+                    {
+                        "amount": [
+                            2
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            1
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            2
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
+                            3
+                        ]
+                    }
+                ]
+            },
+            "spritePath": [
+                "Sprites/Building/WaterTreatmentCenter0",
+                "Sprites/Building/WaterTreatmentCenter1",
+                "Sprites/Building/WaterTreatmentCenter1",
+                "Sprites/Building/WaterTreatmentCenter1",
+                "Sprites/Building/WaterTreatmentCenter1",
+                "Sprites/Building/WaterTreatmentCenter1",
+                "Sprites/Building/WaterTreatmentCenter1",
+                "Sprites/Building/WaterTreatmentCenter1",
+                "Sprites/Building/WaterTreatmentCenter1",
+                "Sprites/Building/WaterTreatmentCenter1"
+            ],
+            "description": "NO !!!"
+        }
+    ]
+}

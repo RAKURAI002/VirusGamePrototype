@@ -1,0 +1,259 @@
+{
+    "Items": [
+        {
+            "id": 1,
+            "name": "Item1",
+            "rarity": 2,
+            "description": "Too mighty blade.",
+            "spritePath": "Sprites/Equipments/Item1",
+            "position": 3,
+            "stats": {
+                "speed": -1,
+                "crafting": 0,
+                "intelligence": 0,
+                "strength": 8,
+                "observing": 0,
+                "luck": 0,
+                "healthy": 0
+            }
+        },
+        {
+            "id": 2,
+            "name": "Item2",
+            "rarity": 5,
+            "description": "Seems like a MONKEY's heart ?",
+            "spritePath": "Sprites/Equipments/Item2",
+            "position": 4,
+            "stats": {
+                "speed": 10,
+                "crafting": 0,
+                "intelligence": 0,
+                "strength": 20,
+                "observing": 0,
+                "luck": 0,
+                "healthy": 20
+            }
+        },
+        {
+            "id": 3,
+            "name": "Item3",
+            "rarity": 2,
+            "description": "What is this ?",
+            "spritePath": "Sprites/Equipments/Item3",
+            "position": 2,
+            "stats": {
+                "speed": 0,
+                "crafting": 0,
+                "intelligence": 0,
+                "strength": 1,
+                "observing": 3,
+                "luck": 0,
+                "healthy": 0
+            }
+        },
+        {
+            "id": 4,
+            "name": "Item4",
+            "rarity": 3,
+            "description": "Hmmm . . .",
+            "spritePath": "Sprites/Equipments/Item4",
+            "position": 5,
+            "stats": {
+                "speed": 4,
+                "crafting": 0,
+                "intelligence": 4,
+                "strength": 0,
+                "observing": 0,
+                "luck": 0,
+                "healthy": 0
+            }
+        },
+        {
+            "id": 5,
+            "name": "Item5",
+            "rarity": 3,
+            "description": "Unleash your TRUE power.",
+            "spritePath": "Sprites/Equipments/Item5",
+            "position": 3,
+            "stats": {
+                "speed": 3,
+                "crafting": 3,
+                "intelligence": 3,
+                "strength": 3,
+                "observing": 3,
+                "luck": 3,
+                "healthy": 3
+            }
+        },
+        {
+            "id": 6,
+            "name": "Item6",
+            "rarity": 2,
+            "description": "An ancient Sorcerer's boots.",
+            "spritePath": "Sprites/Equipments/Item6",
+            "position": 6,
+            "stats": {
+                "speed": 0,
+                "crafting": 0,
+                "intelligence": 5,
+                "strength": 2,
+                "observing": 0,
+                "luck": 0,
+                "healthy": 0
+            }
+        },
+        {
+            "id": 7,
+            "name": "Item7",
+            "rarity": 3,
+            "description": "That seems heavy.",
+            "spritePath": "Sprites/Equipments/Item7",
+            "position": 4,
+            "stats": {
+                "speed": -3,
+                "crafting": 0,
+                "intelligence": 0,
+                "strength": 12,
+                "observing": 0,
+                "luck": 0,
+                "healthy": 0
+            }
+        },
+        {
+            "id": 8,
+            "name": "Item8",
+            "rarity": 2,
+            "description": "Can cut everything except trees.",
+            "spritePath": "Sprites/Equipments/Item8",
+            "position": 3,
+            "stats": {
+                "speed": -1,
+                "crafting": 0,
+                "intelligence": 0,
+                "strength": 6,
+                "observing": 0,
+                "luck": 0,
+                "healthy": 0
+            }
+        },
+        {
+            "id": 9,
+            "name": "Item9",
+            "rarity": 2,
+            "description": "Make you more tanky.",
+            "spritePath": "Sprites/Equipments/Item9",
+            "position": 3,
+            "stats": {
+                "speed": 0,
+                "crafting": 0,
+                "intelligence": 0,
+                "strength": 3,
+                "observing": 0,
+                "luck": 0,
+                "healthy": 0
+            }
+        },
+        {
+            "id": 10,
+            "name": "Item10",
+            "rarity": 3,
+            "description": "Smell bloody . . .",
+            "spritePath": "Sprites/Equipments/Item10",
+            "position": 3,
+            "stats": {
+                "speed": 0,
+                "crafting": 0,
+                "intelligence": 1,
+                "strength": 6,
+                "observing": 0,
+                "luck": -1,
+                "healthy": 0
+            }
+        },
+        {
+            "id": 11,
+            "name": "Item11",
+            "rarity": 4,
+            "description": "Better than your Nike :)",
+            "spritePath": "Sprites/Equipments/Item11",
+            "position": 6,
+            "stats": {
+                "speed": 8,
+                "crafting": 0,
+                "intelligence": 0,
+                "strength": 0,
+                "observing": 0,
+                "luck": 0,
+                "healthy": 0
+            }
+        },
+        {
+            "id": 12,
+            "name": "Item12",
+            "rarity": 2,
+            "description": "How this could wear as pants ?",
+            "spritePath": "Sprites/Equipments/Item12",
+            "position": 5,
+            "stats": {
+                "speed": 0,
+                "crafting": 0,
+                "intelligence": 0,
+                "strength": 0,
+                "observing": 0,
+                "luck": 0,
+                "healthy": 0
+            }
+        },
+        {
+            "id": 13,
+            "name": "Item13",
+            "rarity": 2,
+            "description": "A certain shield.",
+            "spritePath": "Sprites/Equipments/Item13",
+            "position": 3,
+            "stats": {
+                "speed": -1,
+                "crafting": 0,
+                "intelligence": 0,
+                "strength": 4,
+                "observing": 0,
+                "luck": 0,
+                "healthy": 0
+            }
+        },
+        {
+            "id": 14,
+            "name": "Item14",
+            "rarity": 4,
+            "description": "Cheese? on head?",
+            "spritePath": "Sprites/Equipments/Item14",
+            "position": 1,
+            "stats": {
+                "speed": 0,
+                "crafting": 0,
+                "intelligence": 0,
+                "strength": 0,
+                "observing": 15,
+                "luck": 15,
+                "healthy": 0
+            }
+        },
+        {
+            "id": 15,
+            "name": "Item15",
+            "rarity": 3,
+            "description": "A cursed crown of something. Bruhhh...",
+            "spritePath": "Sprites/Equipments/Item15",
+            "position": 1,
+            "stats": {
+                "speed": 0,
+                "crafting": 0,
+                "intelligence": 10,
+                "strength": 10,
+                "observing": 0,
+                "luck": -10,
+                "healthy": 10
+            }
+        }
+    ]
+}
