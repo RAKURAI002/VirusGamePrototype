@@ -43,13 +43,14 @@ public class MainCanvas : MonoBehaviour
         EventManager.Instance.OnPlayerLevelUp += OnPlayerLevelUp;
         EventManager.Instance.OnResourceChanged += OnResourceChanged;
     }
+    
     void OnResourceChanged(string name)
     {
         Transform resourceGO = resourcePanel.transform.Find(name + "Panel");
 
         if(resourceGO)
         {
-            resourceGO.gameObject.GetComponentInChildren<Text>().text = ItemManager.Instance.AllResources[name].ToString();
+            resourceGO.gameObject.GetComponentInChildren<Text>().text = ItemManager.Instance.AllResources[name].Amount.ToString();
         }
     }
     void OnPlayerLevelUp(int level)
@@ -210,8 +211,7 @@ public class MainCanvas : MonoBehaviour
         {
             return;
         }
-        editBuilding.builder = selectedBuilding;
-        editBuildingPanel.SetActive(true);
+        editBuilding.ShowThisCanvas(selectedBuilding);
         canvasActive = true;
     }
 

@@ -124,7 +124,7 @@ public class TeamSelectorPanel : MonoBehaviour
         {
 
             GameObject characterSlot = new GameObject();
-            characterSlot.name = character.Name;
+            characterSlot.name = character.ID.ToString();
 
             characterSlot.transform.SetParent(container.transform);
             characterSlot.AddComponent<RectTransform>();

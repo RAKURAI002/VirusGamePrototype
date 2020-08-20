@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 public class BuildingInformationCanvas : MonoBehaviour
 {
-    public Builder builder { get; set; }
+    Builder builder;
     Building buildingData;
 
     private void Awake()
@@ -29,7 +29,7 @@ public class BuildingInformationCanvas : MonoBehaviour
     }
     private void OnEnable()
     {
-        EventManager.Instance.OnCharacterAssigned += RefreshInformationCanvas;
+        EventManager.Instance.OnCharacterAssigned += RefreshAssignUI;
         transform.Find("UpgradeInformationPanel").gameObject.SetActive(false);
         transform.Find("InformationPanel").gameObject.SetActive(true);
         buildingData = buildingData = LoadManager.Instance.allBuildingData[builder.Type];
@@ -39,7 +39,23 @@ public class BuildingInformationCanvas : MonoBehaviour
     private void OnDisable()
     {
         if(EventManager.Instance)
-            EventManager.Instance.OnCharacterAssigned -= RefreshInformationCanvas;
+            EventManager.Instance.OnCharacterAssigned -= RefreshAssignUI;
+    }
+    public void ShowThisCanvas(Builder builder)
+    {
+        this.builder = builder;
+
+        GameObject craftButtonGO = transform.Find("InformationPanel/BuildingOption/Craft").gameObject;
+        if (builder.Type == Building.BuildingType.Kitchen || builder.Type == Building.BuildingType.MedicalCenter)
+        {
+            craftButtonGO.SetActive(true);
+        }
+        else
+        {
+            craftButtonGO.SetActive(false);
+        }
+
+        gameObject.SetActive(true);
     }
     public void OnClickTryUpgradeButton()
     {
@@ -51,6 +67,11 @@ public class BuildingInformationCanvas : MonoBehaviour
     {
 
         ShowAssignPanel();
+    }
+    public void OnClickCraftButton()
+    {
+
+        ShowCraftingPanelPanel();
     }
     public void OnClickDestroyButton()
     {
@@ -96,6 +117,11 @@ public class BuildingInformationCanvas : MonoBehaviour
         assignPanel.SetActive(true);
         RefreshAssignUI();
     }
+    void ShowCraftingPanelPanel()
+    {
+        GameObject craftingPanel = GameManager.FindInActiveObjectByName("CraftingPanel");
+        craftingPanel.SetActive(true);
+    }
 
     public void RefreshInformationCanvas()
     {
@@ -135,7 +161,7 @@ public class BuildingInformationCanvas : MonoBehaviour
         foreach (KeyValuePair<string, int> resource in buildingData.buildingCost[builder.Level])
         {
            
-            bool isAffordable = (resource.Value <= (ItemManager.Instance.AllResources.ContainsKey(resource.Key)? ItemManager.Instance.AllResources[resource.Key] : 0));
+            bool isAffordable = (resource.Value <= (ItemManager.Instance.AllResources.ContainsKey(resource.Key)? ItemManager.Instance.AllResources[resource.Key].Amount : 0));
             upgradeCost.text += "\n" + LoadManager.Instance.allResourceData[resource.Key].Name + " : " +   
             ((!isAffordable ? ($"<color=red>{resource.Value.ToString()}(Not Enough)</color>") : resource.Value.ToString()));
            
@@ -228,7 +254,7 @@ public class BuildingInformationCanvas : MonoBehaviour
         {
 
             GameObject characterSlot = new GameObject();
-            characterSlot.name = character.Name;
+            characterSlot.name = character.ID.ToString();
 
             characterSlot.transform.SetParent(container.transform);
             characterSlot.AddComponent<RectTransform>();

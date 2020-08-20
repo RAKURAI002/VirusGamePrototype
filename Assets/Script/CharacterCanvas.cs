@@ -65,7 +65,7 @@ public class CharacterCanvas : MonoBehaviour
         {
 
             GameObject characterSlot = new GameObject();
-            characterSlot.name = character.Name;
+            characterSlot.name = character.ID.ToString();
             
             characterSlot.transform.SetParent(container.transform);
             characterSlot.AddComponent<RectTransform>();
@@ -99,7 +99,7 @@ public class CharacterCanvas : MonoBehaviour
     {
         equipmentSlotPanel.SetActive(false);
         equipmentListPanel.SetActive(false);
-        character = CharacterManager.Instance.AllCharacters.SingleOrDefault( c => c.Name == EventSystem.current.currentSelectedGameObject.name);
+        character = CharacterManager.Instance.AllCharacters.SingleOrDefault( c => c.ID.ToString() == EventSystem.current.currentSelectedGameObject.name);
         
         if (this.character == null)
         {

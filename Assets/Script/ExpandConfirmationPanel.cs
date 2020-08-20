@@ -30,14 +30,14 @@ public class ExpandConfirmationPanel : MonoBehaviour
             if (MapManager.Instance.PurchaseNewArea(expandingAreaID, purchaseOption))
             {
                 Debug.Log("Complete");
-                gameObject.SetActive(false);
+                GetComponent<ClosePanelHelper>().ForceClosePanel();
             }
             else
             {
                  string resourceName = purchaseOption == 0 ? "Gold" : "Diamond";
                  gameObject.GetComponentInChildren<Text>().text = $"Not enough {resourceName}. ";
             }
-        }
+    }
     // Update is called once per frame
     void Update()
     {

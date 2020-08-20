@@ -27,6 +27,8 @@ public class Item
     public string Name { get { return name; } }
     public RarityTier Rarity { get { return rarity; } }
 
+   
+
     public override string ToString()
     {
         return ($"ID : {id}, Name : {name}, Rarity : {rarity}, Description : {description} ");

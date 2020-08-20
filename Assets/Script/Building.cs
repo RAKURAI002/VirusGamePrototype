@@ -51,7 +51,7 @@ public class Building
     [SerializeField] public List<int> upgradePoint;
     [SerializeField] public int maxActiveAmount;
     [SerializeField] public int maxLevel;
- //   [SerializeField] public List<int> maxCharacterStored;
+
     [SerializeField] public CharacterAmountDictionary maxCharacterStored;
 
     [SerializeField] public List<string> spritePath;

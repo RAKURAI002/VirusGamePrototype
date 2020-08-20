@@ -16,7 +16,7 @@ public class DraggableItem : MonoBehaviour, IPointerDownHandler, IDragHandler, I
     // Start is called before the first frame update
     void Start()
     {
-        character = CharacterManager.Instance.AllCharacters.Single(c => c.Name == gameObject.name);
+        character = CharacterManager.Instance.AllCharacters.Single(c => c.ID.ToString() == gameObject.name);
     }
 
     // Update is called once per frame
@@ -39,7 +39,7 @@ public class DraggableItem : MonoBehaviour, IPointerDownHandler, IDragHandler, I
     }
     public void OnPointerDown(PointerEventData eventData)
     {
-      //  Debug.Log(this.gameObject.name + " Was Clicked.");
+        Debug.Log(this.gameObject.name + " Was Clicked.");
 
         isSelected = true;
         draggingGO = new GameObject();
@@ -48,7 +48,7 @@ public class DraggableItem : MonoBehaviour, IPointerDownHandler, IDragHandler, I
         
         if (character.workStatus == Character.WorkStatus.Quest)
         {
-            Debug.LogWarning("This character is already doing some Quest !");
+            Debug.LogWarning($"This character({character.Name} : ID {character.ID}) is already doing some Quest !");
             Destroy(draggingGO);
             return;
         }
@@ -69,13 +69,13 @@ public class DraggableItem : MonoBehaviour, IPointerDownHandler, IDragHandler, I
         }
         else if (eventData.pointerEnter.tag == "DropSlot")
         {
-           // Debug.Log($"Finding {eventData.pointerEnter.transform.parent.transform.parent.name}");
+            
 
             Slot slot = eventData.pointerEnter.GetComponent<Slot>();
-
+           // Debug.Log($"Finding {slot.character.Name} :  {slot.character.ID}");
             if (CharacterManager.Instance.AssignWork(character, slot.builder, slot.teamNumber))
             {
-                slot.character = CharacterManager.Instance.AllCharacters.Single(c => c.Name == draggingGO.name);
+                slot.character = CharacterManager.Instance.AllCharacters.Single(c => c.ID.ToString() == draggingGO.name);
                 eventData.pointerEnter.GetComponent<Slot>().character = character;
             }
           

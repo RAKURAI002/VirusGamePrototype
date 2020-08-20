@@ -9,7 +9,7 @@ public class PlayerData
     {
         buildingInPossession = new List<Builder>();
         characterInPossession = new List<Character>();
-        resourceInPossession = new DictionaryStringToInt();
+        resourceInPossession = new ResourceDictionary();
         equipmentInPossession = new EquipmentDictionary();
         //questInProgress = new QuestDictionary();
         currentActivities = new ActivityProgressDictionary();
@@ -25,7 +25,7 @@ public class PlayerData
 
    [SerializeField] public List<Builder> buildingInPossession;
     [SerializeField] public List<Character> characterInPossession;
-    [SerializeField] public DictionaryStringToInt resourceInPossession;
+    [SerializeField] public ResourceDictionary resourceInPossession;
     [SerializeField] public EquipmentDictionary equipmentInPossession;
 
     [SerializeField] public List<int> expandedArea;

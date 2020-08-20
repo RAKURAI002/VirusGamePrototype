@@ -139,7 +139,7 @@ public class BuildManager : SingletonComponent<BuildManager>
         {
             for (int j = builder.CharacterInBuilding[i].Characters.Count - 1; j >= 0; j--)
             {
-                builder.CharacterInBuilding[i].Characters[j] = CharacterManager.Instance.AllCharacters.Single(c => c.Name == builder.CharacterInBuilding[i].Characters[j].Name);
+                builder.CharacterInBuilding[i].Characters[j] = CharacterManager.Instance.AllCharacters.Single(c => c.ID == builder.CharacterInBuilding[i].Characters[j].ID);
             }
         }
 

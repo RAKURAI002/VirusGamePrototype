@@ -22,7 +22,7 @@
             "rarity": 1,
             "description": "No water No life.",
             "spritePath": "Sprites/Resource/Water",
-            "type": 1
+            "type": 3
         },
         {
             "id": 3,
@@ -30,7 +30,7 @@
             "rarity": 1,
             "description": "Wanna starve to death?",
             "spritePath": "Sprites/Resource/Food",
-            "type": 1
+            "type": 3
         },
         {
             "id": 4,
@@ -66,6 +66,38 @@
         },
         {
             "id": 8,
+            "name": "Wheat",
+            "rarity": 1,
+            "description": "CoCoCrunch !?",
+            "spritePath": "Sprites/Resource/Wheat",
+            "type": 2
+        },
+        {
+            "id": 9,
+            "name": "Bread",
+            "rarity": 1,
+            "description": "qwerty",
+            "spritePath": "Sprites/Resource/Bread",
+            "type": 2
+        },
+        {
+            "id": 10,
+            "name": "Meat",
+            "rarity": 1,
+            "description": "YumYum . . .",
+            "spritePath": "Sprites/Resource/Meat",
+            "type": 2
+        },
+        {
+            "id": 11,
+            "name": "Burger",
+            "rarity": 1,
+            "description": "Recipe.",
+            "spritePath": "Sprites/Resource/Burger",
+            "type": 1
+        },
+        {
+            "id": 12,
             "name": "Production",
             "rarity": 0,
             "description": "Specific Building Production .",
@@ -73,7 +105,7 @@
             "type": 4
         },
         {
-            "id": 9,
+            "id": 13,
             "name": "Gold",
             "rarity": 0,
             "description": "Specific Building Production .",
@@ -81,12 +113,28 @@
             "type": 5
         },
         {
-            "id": 10,
+            "id": 14,
             "name": "Diamond",
             "rarity": 0,
             "description": "Specific Building Production .",
             "spritePath": "Sprites/Resource/Diamond",
             "type": 5
+        },
+        {
+            "id": 15,
+            "name": "Recipe:Bread",
+            "rarity": 1,
+            "description": "Recipe.",
+            "spritePath": "Sprites/Resource/Recipe",
+            "type": 6
+        },
+        {
+            "id": 16,
+            "name": "Recipe:Burger",
+            "rarity": 1,
+            "description": "Recipe.",
+            "spritePath": "Sprites/Resource/Recipe",
+            "type": 6
         }
     ]
 }

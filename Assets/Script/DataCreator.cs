@@ -660,18 +660,25 @@ public class DataCreator : MonoBehaviour
 
         r.Add(new Resource(r.Count, "Wood", Item.RarityTier.Common, "Just a certain Wood.", Resource.ResourceType.Material, "Sprites/Resource/Wood"));
         r.Add(new Resource(r.Count, "Stone", Item.RarityTier.Common, "Just a certain Stone.", Resource.ResourceType.Material, "Sprites/Resource/Stone"));
-        r.Add(new Resource(r.Count, "Water", Item.RarityTier.Common, "No water No life.", Resource.ResourceType.Consumable, "Sprites/Resource/Water"));
-        r.Add(new Resource(r.Count, "Food", Item.RarityTier.Common, "Wanna starve to death?", Resource.ResourceType.Consumable, "Sprites/Resource/Food"));
+        r.Add(new Resource(r.Count, "Water", Item.RarityTier.Common, "No water No life.", Resource.ResourceType.Material, "Sprites/Resource/Water"));
+        r.Add(new Resource(r.Count, "Food", Item.RarityTier.Common, "Wanna starve to death?", Resource.ResourceType.Material, "Sprites/Resource/Food"));
         r.Add(new Resource(r.Count, "Fabric", Item.RarityTier.Common, "I'm so cold.", Resource.ResourceType.Material, "Sprites/Resource/Fabric"));
         r.Add(new Resource(r.Count, "Rubber", Item.RarityTier.Common, "Useless? who knows.", Resource.ResourceType.Material, "Sprites/Resource/Rubber"));
         r.Add(new Resource(r.Count, "Steel", Item.RarityTier.Uncommon, "Just a certain Wood.", Resource.ResourceType.Material, "Sprites/Resource/Steel"));
         r.Add(new Resource(r.Count, "Meteorite", Item.RarityTier.UltraRare, "BOOOOOM!!!", Resource.ResourceType.Material, "Sprites/Resource/Meteorite"));
 
+        r.Add(new Resource(r.Count, "Wheat", Item.RarityTier.Common, "CoCoCrunch !?", Resource.ResourceType.Ingredient, "Sprites/Resource/Wheat"));
+        r.Add(new Resource(r.Count, "Bread", Item.RarityTier.Common, "qwerty", Resource.ResourceType.Ingredient, "Sprites/Resource/Bread"));
+        r.Add(new Resource(r.Count, "Meat", Item.RarityTier.Common, "YumYum . . .", Resource.ResourceType.Ingredient, "Sprites/Resource/Meat"));
+        r.Add(new Resource(r.Count, "Burger", Item.RarityTier.Common, "Recipe.", Resource.ResourceType.Consumable, "Sprites/Resource/Burger"));
+
         r.Add(new Resource(r.Count, "Production", Item.RarityTier.Unknown, "Specific Building Production .", Resource.ResourceType.Special, "Sprites/Resource/Production"));
         r.Add(new Resource(r.Count, "Gold", Item.RarityTier.Unknown, "Specific Building Production .", Resource.ResourceType.Currency, "Sprites/Resource/Gold"));
         r.Add(new Resource(r.Count, "Diamond", Item.RarityTier.Unknown, "Specific Building Production .", Resource.ResourceType.Currency, "Sprites/Resource/Diamond"));
-       
 
+        r.Add(new Resource(r.Count, "Recipe:Bread", Item.RarityTier.Common, "Recipe.", Resource.ResourceType.Recipe, "Sprites/Resource/Recipe"));
+
+        r.Add(new Resource(r.Count, "Recipe:Burger", Item.RarityTier.Common, "Recipe.", Resource.ResourceType.Recipe, "Sprites/Resource/Recipe"));
 
         string resourceDatas = JsonHelper.ToJson(r.ToArray(), true);// Newtonsoft.Json.JsonConvert.SerializeObject(playerData, Newtonsoft.Json.Formatting.Indented); //JsonUtility.ToJson(playerData, true); 
         Debug.Log("Creating JSON data : " + resourceDatas);

@@ -1,14 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 
 [System.Serializable]
 public class Resource : Item
 {
-    public Resource()
+    public Resource(string name, int amount)
     {
+        Resource resourceData = LoadManager.Instance.allResourceData[name];
+
+        this.id = resourceData.id;
+        this.name = resourceData.name;
+        this.amount = amount;
+        this.rarity = resourceData.rarity;
+        this.description = resourceData.description;
+        this.type = resourceData.type;
+        this.spritePath = resourceData.spritePath;
     }
+
     public Resource(int id, string name, RarityTier rarity, string description, ResourceType type, string spritePath)
     {
         this.id = id;
@@ -27,11 +37,14 @@ public class Resource : Item
         Ingredient,
         Material,
         Special,
-        Currency
+        Currency,
+        Recipe
     }
 
     [SerializeField] public ResourceType type;
 
+    [SerializeField] private int amount;
+    public int Amount { get { return amount; } set { amount = value; } }
     public override string ToString()
     {
         return ($"ID : {id}, Name : {name}, Rarity : {rarity}, Description : {description}, Type : {type}. ");

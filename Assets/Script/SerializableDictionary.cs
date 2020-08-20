@@ -52,6 +52,7 @@ public class ResourceDictionary : SerializableDictionary<string, Resource>
 [System.Serializable]
 public class EquipmentDictionary : SerializableDictionary<string, Equipment>
 { }
+
 [System.Serializable]
 public class BuildingDictionary : SerializableDictionary<Building.BuildingType, Building>
 { }

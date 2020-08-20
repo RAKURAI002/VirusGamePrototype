@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class ItemManager : SingletonComponent<ItemManager>
 {
     /// Contains all of Player's Resources.
-    private DictionaryStringToInt allResources;
+    private ResourceDictionary allResources;
 
     /// Contains all of Player's Equipments.
     private EquipmentDictionary allEquipments;
@@ -16,7 +16,7 @@ public class ItemManager : SingletonComponent<ItemManager>
     /// 1 Resource update cycle's period.
     float RESOURCE_CICLE_TIME = 60f;
 
-    public DictionaryStringToInt AllResources { get { return allResources; } set { allResources = value; } }
+    public ResourceDictionary AllResources { get { return allResources; } set { allResources = value; } }
     public EquipmentDictionary AllEquipments { get { return allEquipments; } set { allEquipments = value; } }
 
     #region Unity Functions
@@ -27,7 +27,7 @@ public class ItemManager : SingletonComponent<ItemManager>
     }
     protected override void OnInitialize()
     {
-        allResources = new DictionaryStringToInt();
+        allResources = new ResourceDictionary();
         allEquipments = new EquipmentDictionary();
     }
     void OnEnable()
@@ -56,7 +56,7 @@ public class ItemManager : SingletonComponent<ItemManager>
 
     public int GetResourceAmount(string name)
     {
-        return allResources.ContainsKey(name) ? allResources[name] : 0;
+        return allResources.ContainsKey(name) ? allResources[name].Amount : 0;
     }
     /// <summary>
     /// Resource update cycle function. Called in Start.
@@ -158,15 +158,16 @@ public class ItemManager : SingletonComponent<ItemManager>
 
         if (allResources.ContainsKey(name))
         {
-            allResources[name] += amount;
+            allResources[name].Amount += amount;
         }
         else
         {
-            allResources.Add(name, amount);
+            allResources.Add(name, new Resource(name, amount));
         }
         Debug.Log($"Adding {LoadManager.Instance.allResourceData[name].Name} : {amount} unit(s) to Player . . .");
         EventManager.Instance.ResourceChanged(name);
         LoadManager.Instance.SavePlayerDataToJson();
+
         return true;
     }
     public bool TryConsumeResources(DictionaryStringToInt resources)
@@ -218,14 +219,14 @@ public class ItemManager : SingletonComponent<ItemManager>
             Debug.LogError($"There're NO {name} in Player Inventory");
             return false;
         }
-        else if(allResources[name] < amount)
+        else if(allResources[name].Amount < amount)
         {
             Debug.LogWarning($"There're ONLY {allResources[name]} {name} in Player Inventory");
             return false;
         }
         else
         {
-            allResources[name] -= amount;
+            allResources[name].Amount -= amount;
             EventManager.Instance.ResourceChanged(name);
             LoadManager.Instance.SavePlayerDataToJson();
         }
@@ -236,7 +237,7 @@ public class ItemManager : SingletonComponent<ItemManager>
     {
         foreach (KeyValuePair<string, int> resource in cost)
         {
-            if (resource.Value > (ItemManager.Instance.AllResources.ContainsKey(resource.Key) ? ItemManager.Instance.AllResources[resource.Key] : 0))
+            if (resource.Value > (ItemManager.Instance.AllResources.ContainsKey(resource.Key) ? ItemManager.Instance.AllResources[resource.Key].Amount : 0))
             {
                 Debug.Log($"Not enough Resource ({LoadManager.Instance.allResourceData[resource.Key].Name})");
                 return false;
@@ -246,7 +247,7 @@ public class ItemManager : SingletonComponent<ItemManager>
     }
     public bool IsAffordable(string name, int amount)
     {
-            if (amount > (ItemManager.Instance.AllResources.ContainsKey(name) ? ItemManager.Instance.AllResources[name] : 0))
+            if (amount > (ItemManager.Instance.AllResources.ContainsKey(name) ? ItemManager.Instance.AllResources[name].Amount : 0))
             {
                 Debug.Log($"Not enough Resource ({LoadManager.Instance.allResourceData[name].Name})");
                 return false;
@@ -258,7 +259,7 @@ public class ItemManager : SingletonComponent<ItemManager>
     /// Debug Functions.
     public void ShowResourceTest()
     {
-        foreach(KeyValuePair<string, int> resource in allResources)
+        foreach(KeyValuePair<string, Resource> resource in allResources)
         {
             Debug.Log($"{LoadManager.Instance.allResourceData[resource.Key].Name } : {resource.Value}");
         }
@@ -275,6 +276,8 @@ public class ItemManager : SingletonComponent<ItemManager>
         AddResource("Wood", 10);
         AddResource("Gold", 10);
         AddResource("Diamond", 10);
+
+        AddResource("Recipe:Bread", 10);
 
 
         AddEquipment(1, 1);

@@ -44,9 +44,8 @@ public class InventoryCanvas : MonoBehaviour
 
 
         itemImageGO.Clear();
-        foreach (KeyValuePair<string, int> resource in ItemManager.Instance.AllResources)
+        foreach (KeyValuePair<string, Resource> resource in ItemManager.Instance.AllResources)
         {
-            Debug.Log(resource.Key);
             Resource rData = LoadManager.Instance.allResourceData[resource.Key];
             itemImageGO.Add(new GameObject());
             itemImageGO[itemImageGO.Count -1].name = rData.Name;
@@ -58,7 +57,7 @@ public class InventoryCanvas : MonoBehaviour
             textGO.name = "Amount";
             textGO.transform.SetParent(itemImageGO[itemImageGO.Count - 1].transform);
             Text text = textGO.AddComponent<Text>();
-            text.text = resource.Value.ToString();
+            text.text = resource.Value.Amount.ToString();
             text.GetComponent<Text>().font = Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
             text.GetComponent<Text>().fontSize = 20;
             text.transform.position = text.transform.position + new Vector3(30,-110,0);
