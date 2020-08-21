@@ -108,7 +108,7 @@ public class ItemManager : SingletonComponent<ItemManager>
                 
                 Debug.Log($"{RESOURCE_CICLE_TIME} seconds passed. Base Production of {builder.Type}[ID : {builder.ID}] is {baseProduction.Value} and sum of Character's Speed in building is {characterStatsSum} resulting in INCREASE " +
                     $"{LoadManager.Instance.allResourceData[baseProduction.Key].Name} : {finalUpdatedAmount}");
-                AddResource(4, finalUpdatedAmount);
+                AddResource(baseProduction.Key , finalUpdatedAmount);
         }
         
         return;    

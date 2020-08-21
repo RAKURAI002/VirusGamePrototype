@@ -85,6 +85,11 @@ public class NotificationManager : SingletonComponent<NotificationManager>
                     }
                 case ActivityType.Craft:
                     {
+                        GameObject ActivityTimerGO = new GameObject();
+                        ActivityTimerGO.transform.SetParent(transform.Find("ActivitiesList"));
+                        ActivityTimerGO.name = activity.Value.activityID.ToString();
+                        CraftTimer craftTimer = ActivityTimerGO.AddComponent<CraftTimer>();
+                        craftTimer.activityInformation = activity.Value;
                         break;
                     }
                 case ActivityType.Build:
@@ -98,20 +103,20 @@ public class NotificationManager : SingletonComponent<NotificationManager>
     public void AddActivity(ActivityInformation activityInformation)
     {
         activityInformation.activityID = GetActivityID();
-        Debug.Log("ADD ***************************" + processingActivies.Count);
+
         processingActivies.Add(activityInformation.activityID, activityInformation);
-        Debug.Log("ADD ***************************"+processingActivies.Count);
+
         EventManager.Instance.ActivityAssigned(activityInformation);
     }
     public void RemoveActivity(ActivityInformation activityInformation)
     {
-        Debug.Log(activityInformation.activityID);
-        if(processingActivies.Remove(activityInformation.activityID))
+       // Debug.Log(activityInformation.activityID);
+        if(!processingActivies.Remove(activityInformation.activityID))
         {
-           // Debug.Log("Remove Succ");
+            Debug.LogError("Remove Activity Failed.");
             //EventManager.Instance.ActivityFinished(activityInformation);
         }
-        Debug.Log(processingActivies.Count);
+      //  Debug.Log(processingActivies.Count);
         
     }
     public void OnActivityAssigned(ActivityInformation activityInformation)
@@ -130,6 +135,11 @@ public class NotificationManager : SingletonComponent<NotificationManager>
                 }
             case ActivityType.Craft:
                 {
+                    GameObject ActivityTimerGO = new GameObject(activityInformation.activityID.ToString());
+                    ActivityTimerGO.transform.SetParent(NotificationManager.Instance.gameObject.transform.Find("ActivitiesList"));
+
+                    CraftTimer craftTimer = ActivityTimerGO.AddComponent<CraftTimer>();
+                    craftTimer.activityInformation = activityInformation;
                     break;
                 }
             case ActivityType.Build:
@@ -142,9 +152,24 @@ public class NotificationManager : SingletonComponent<NotificationManager>
     public void OnActivityFinished(ActivityInformation activityInformation)
     {
 
-        processingActivies.Single(pa => pa.Value.activityID == activityInformation.activityID).Value.isFinished = true;
-     //   Debug.Log(object.ReferenceEquals(activityInformation, processingActivies[processingActivies.Single(pa => pa.Value.activityID == activityInformation.activityID).Key]));
-    
+        switch (activityInformation.activityType)
+        {
+
+            case ActivityType.Quest:
+                {
+                 
+                    break;
+                }
+            case ActivityType.Craft:
+                {
+                    RemoveActivity(activityInformation);
+                    break;
+                }
+            case ActivityType.Build:
+                {
+                    break;
+                }
+        }
 
     }
     public void RefreshFinishedQuestNotification()

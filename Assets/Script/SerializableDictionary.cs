@@ -88,9 +88,11 @@ public class ActivityInformation
 
     public int InformationID;
     public int teamNumber;
+
     public bool isFinished;
-    public long startTime;
-    public long finishTime;
+    public long startPoint;
+    public float currentProgress;
+    public long finishPoint;
 }
 
 [System.Serializable]

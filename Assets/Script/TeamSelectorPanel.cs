@@ -45,6 +45,7 @@ public class TeamSelectorPanel : MonoBehaviour
         this._mode = mode;
         this._finishPoint = finishPoint;
 
+        gameObject.SetActive(true);
         ClearOldAssignUIData();
         switch (mode)
         {
@@ -56,7 +57,7 @@ public class TeamSelectorPanel : MonoBehaviour
                 }
             case Mode.Craft:
                 {
-                    CreateAssignBuildingContainer(builder, false);
+                    CreateAssignBuildingContainer(builder, true);
                     break;
                 }
             case Mode.Build:

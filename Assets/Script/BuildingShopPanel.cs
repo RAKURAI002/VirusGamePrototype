@@ -12,12 +12,13 @@ public class BuildingShopPanel : MonoBehaviour
 
     private void OnEnable()
     {
-
+        EventManager.Instance.OnResourceChanged += OnResourceChanged;
         RefreshPanel();
     }
     private void OnDisable()
     {
-
+        if (EventManager.Instance)
+            EventManager.Instance.OnResourceChanged -= OnResourceChanged;
     }
     private void Update()
     {
@@ -30,6 +31,10 @@ public class BuildingShopPanel : MonoBehaviour
         {
             MainCanvas.canvasActive = false;
         }
+    }
+    void OnResourceChanged(string name)
+    {
+        RefreshPanel();
     }
     public void TryPurchaseBuilding()
     {

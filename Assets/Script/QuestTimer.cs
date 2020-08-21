@@ -9,9 +9,7 @@ using UnityEngine.EventSystems;
 
 public class QuestTimer : MonoBehaviour
 {
-    QuestData questData { get; set; }
     public ActivityInformation activityInformation { get; set; }
-    PlayerData playerData;
     long timeFinish;
     long timeLeft;
     public bool isFinished;
@@ -22,13 +20,12 @@ public class QuestTimer : MonoBehaviour
     {
         slider = null;
     }
+
     // Start is called before the first frame update
     void Start()
     {
-        playerData = LoadManager.Instance.playerData;
 
      //   Debug.Log(activityInformation.activityName);
-        questData = LoadManager.Instance.allQuestData[activityInformation.InformationID];
 
         isFinished = false;
         Initiate();
@@ -39,7 +36,6 @@ public class QuestTimer : MonoBehaviour
     {
         if (isFinished)
         {
-
             return;
         }
 
@@ -55,8 +51,8 @@ public class QuestTimer : MonoBehaviour
             return;
         }
         GetSlider();
-        slider.GetComponent<Slider>().value = (((timeFinish - activityInformation.startTime) - timeLeft) / TimeSpan.TicksPerSecond) + 1;
-        long timer = ((timeFinish - activityInformation.startTime) / TimeSpan.TicksPerSecond) - (((timeFinish - activityInformation.startTime) - timeLeft) / TimeSpan.TicksPerSecond);
+        slider.GetComponent<Slider>().value = (((timeFinish - activityInformation.startPoint) - timeLeft) / TimeSpan.TicksPerSecond) + 1;
+        long timer = ((timeFinish - activityInformation.startPoint) / TimeSpan.TicksPerSecond) - (((timeFinish - activityInformation.startPoint) - timeLeft) / TimeSpan.TicksPerSecond);
         int hours = Mathf.FloorToInt(timer / 3600);
         int minutes = Mathf.FloorToInt(timer % 3600 / 60);
         int seconds = Mathf.FloorToInt(timer % 3600 % 60f);
@@ -79,12 +75,12 @@ public class QuestTimer : MonoBehaviour
       //  Debug.Log("Start Quest : " + questData.duration);
       //  gameObject.GetComponent<Image>().color = Color.red;
 
-        if (activityInformation.finishTime == 0)
+        if (activityInformation.finishPoint == 0)
         {
             //playerData.questInProgress[questData.questID] = new ActivityInformation() { startTime = DateTime.Now.Ticks, finishTime = DateTime.Now.Ticks + (questData.duration * TimeSpan.TicksPerSecond)}; // ********************
            // Debug.Log($"{questData.duration} : { playerData.questInProgress[questData.questID].finishTime / TimeSpan.TicksPerSecond}");
         }
-        timeFinish = activityInformation.finishTime;
+        timeFinish = activityInformation.finishPoint;
         timeLeft = timeFinish - DateTime.Now.Ticks;
         if (activityInformation.isFinished)
         {
@@ -113,8 +109,8 @@ public class QuestTimer : MonoBehaviour
         Debug.Log(areaButtonName);*/
   
        // slider.transform.localScale = Vector3.one * 1.2f;
-        slider.name = questData.questName + "Slider";
-        slider.GetComponent<Slider>().maxValue = ((timeFinish - activityInformation.startTime) / TimeSpan.TicksPerSecond);
+        slider.name = activityInformation.activityName + "Slider";
+        slider.GetComponent<Slider>().maxValue = ((timeFinish - activityInformation.startPoint) / TimeSpan.TicksPerSecond);
         slider.GetComponent<Slider>().value = timeLeft;
         slider.GetComponent<Slider>().interactable = false;
 
@@ -132,7 +128,8 @@ public class QuestTimer : MonoBehaviour
         
         
         isFinished = true;
-       // Debug.Log(isFinished);
+        // Debug.Log(isFinished);
+        activityInformation.isFinished = true;
         EventManager.Instance.ActivityFinished(activityInformation);
 
         return;

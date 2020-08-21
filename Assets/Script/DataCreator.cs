@@ -100,11 +100,11 @@ public class DataCreator : MonoBehaviour
         allCost.Add(new DictionaryStringToInt() { { "Food", 6 }, { "Water", 7 } });
 
         List<int> upgradePoint = new List<int>(){200,
-                                            600,
                                             300,
-                                            600,
-                                            600,
-                                            600,
+                                            300,
+                                            300,
+                                            300,
+                                            300,
                                             600,
                                             600,
                                             600,

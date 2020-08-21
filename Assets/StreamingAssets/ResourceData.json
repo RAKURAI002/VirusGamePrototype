@@ -148,7 +148,7 @@
             "id": 9,
             "name": "Bread",
             "rarity": 1,
-            "description": "qwerty",
+            "description": "Low-Grade Bread.",
             "spritePath": "Sprites/Resource/Bread",
             "craftingData": {
                 "craftingMaterials": {
@@ -180,7 +180,7 @@
             "id": 11,
             "name": "Burger",
             "rarity": 1,
-            "description": "Recipe.",
+            "description": "American SPIRIT.",
             "spritePath": "Sprites/Resource/Burger",
             "craftingData": {
                 "craftingMaterials": {

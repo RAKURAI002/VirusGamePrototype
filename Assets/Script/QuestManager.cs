@@ -97,8 +97,8 @@ public class QuestManager : SingletonComponent<QuestManager>
         {
             activityName = ("Quest:" + currentQuest.questName),
             activityType = ActivityType.Quest,
-            startTime = DateTime.Now.Ticks,
-            finishTime = DateTime.Now.Ticks + (questDuration * TimeSpan.TicksPerSecond),
+            startPoint = DateTime.Now.Ticks,
+            finishPoint = DateTime.Now.Ticks + (questDuration * TimeSpan.TicksPerSecond),
             teamNumber = _teamNumber,
             InformationID = currentQuest.questID
         });

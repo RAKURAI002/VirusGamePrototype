@@ -43,30 +43,10 @@ public class NotificationPanel : MonoBehaviour
     }
     public void OnActivityAssigned(ActivityInformation activityInformation)
     {
-        GameObject activitySliderGO = Instantiate(Resources.Load("Prefabs/ActivitySliderPrefab") as GameObject, transform);
-        allActivitiesGO.Add(activitySliderGO);
-        switch (activityInformation.activityType)
-        {
-            case ActivityType.Quest:
-                {
-                    activitySliderGO.AddComponent<QuestTimer>();
-                    break;
-                }
-            case ActivityType.Craft:
-                {
-                    break;
-                }
-            case ActivityType.Build:
-                {
-                    break;
-                }
-        }
-
 
     }
     public void OnActivityFinished(ActivityInformation activityInformation)
     {
-        Debug.Log("Flag");
         RefreshCanvas();
         switch (activityInformation.activityType)
         {
@@ -135,6 +115,9 @@ public class NotificationPanel : MonoBehaviour
                     }
                 case ActivityType.Craft:
                     {
+                        CraftTimer craftTimer = NotificationManager.Instance.gameObject.transform.Find("ActivitiesList/" + activity.Value.activityID).GetComponent<CraftTimer>();
+                        craftTimer.slider = activitySliderGO.GetComponentInChildren<Slider>().gameObject;
+                        Debug.Log("aSDDDDD   "+ activitySliderGO.GetComponentInChildren<Slider>().gameObject.name);
                         break;
                     }
                 case ActivityType.Build:

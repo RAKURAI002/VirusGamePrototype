@@ -18,8 +18,6 @@ public class BuildingInformationCanvas : MonoBehaviour
     }
     private void Start()
     {
-        
-        
         RefreshInformationCanvas();
     }
 

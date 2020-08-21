@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using System;
 
 public class CraftingPanel : MonoBehaviour
 {
@@ -24,8 +25,12 @@ public class CraftingPanel : MonoBehaviour
         }
 
         RefreshCraftingPanel();
-
-        Debug.Log("eeeeeeeee");
+        EventManager.Instance.OnResourceChanged += OnResourceChanged;
+    }
+    private void OnDisable()
+    {
+        if(EventManager.Instance)
+             EventManager.Instance.OnResourceChanged -= OnResourceChanged;
     }
 
     public void ShowCraftingPanel(Builder builder)
@@ -37,6 +42,10 @@ public class CraftingPanel : MonoBehaviour
     {
         RefreshCraftableList();
         RefreshItemInformation();
+    }
+    void OnResourceChanged(string name)
+    {
+        RefreshCraftableList();
     }
 
     void RefreshCraftableList()
@@ -52,8 +61,7 @@ public class CraftingPanel : MonoBehaviour
 
             Image image = craftableItemGO.GetComponent<Image>();
             image.sprite = Resources.Load<Sprite>(resource.spritePath);
-            Debug.Log(resourceRecipe.Key);
-
+         
             Button button = craftableItemGO.AddComponent<Button>();
             button.onClick.AddListener(() => { currentSelectedItemName = EventSystem.current.currentSelectedGameObject.name; RefreshItemInformation(); });
 
@@ -71,11 +79,43 @@ public class CraftingPanel : MonoBehaviour
         Resource resource = LoadManager.Instance.allResourceData[currentSelectedItemName.Replace("Recipe:", "")];
         if (ItemManager.Instance.IsAffordable(resourceRecipe.craftingData.craftingMaterials))
         {
+            TeamSelectorPanel teamSelectorPanel = Resources.FindObjectsOfTypeAll<TeamSelectorPanel>()[0];
+            teamSelectorPanel.CreateTeamSelectorPanel(TeamSelectorPanel.Mode.Craft,
+                   BuildManager.Instance.AllBuildings.SingleOrDefault(b => b.Type == Building.BuildingType.Kitchen),
+                   resourceRecipe.craftingData.point, (_teamNumber)=> {
+                       if (ItemManager.Instance.TryConsumeResources(resourceRecipe.craftingData.craftingMaterials))
+                       {
+                           // ItemManager.Instance.AddResource(resource.Name, 1);
+                           RefreshCraftingPanel();
+                       }
+                       NotificationManager.Instance.AddActivity(new ActivityInformation()
+                       {
+                           activityName = ("Craft:" + resource.Name),
+                           activityType = ActivityType.Craft,
+                           startPoint = 0,
+                           finishPoint = resourceRecipe.craftingData.point,
+                           teamNumber = _teamNumber,
+                           InformationID = resourceRecipe.ID
+                       });
+                       builder.TeamLockState.Add(_teamNumber);
+                   }, false);
+
+            /*
             if(ItemManager.Instance.TryConsumeResources(resourceRecipe.craftingData.craftingMaterials))
             {
-                ItemManager.Instance.AddResource(resource.Name, 1);
+               // ItemManager.Instance.AddResource(resource.Name, 1);
                 RefreshCraftingPanel();
             }
+            NotificationManager.Instance.AddActivity(new ActivityInformation()
+            {
+                activityName = ("Craft:" + resource.Name),
+                activityType = ActivityType.Craft,
+                startTime = DateTime.Now.Ticks,
+                finishTime = DateTime.Now.Ticks + (resourceRecipe.craftingData.point * TimeSpan.TicksPerSecond),
+            //    teamNumber = _teamNumber,
+             //   InformationID = currentQuest.questID
+            });
+            */
         }
         else
         {

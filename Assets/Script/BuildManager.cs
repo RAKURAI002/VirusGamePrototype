@@ -77,7 +77,7 @@ public class BuildManager : SingletonComponent<BuildManager>
     {
 
         Builder laborCenter = allBuildings.SingleOrDefault(b => b.Type == Building.BuildingType.LaborCenter);
-        if (laborCenter == null && gameObject.transform.Find("TimerCanvas").childCount == 1)
+        if ((laborCenter == null || laborCenter.Level == 0) && gameObject.transform.Find("TimerCanvas").childCount >= 1)
         {
             Debug.LogWarning("Please Create LaborCenter to perform more Building task !");
             return false;
@@ -110,8 +110,7 @@ public class BuildManager : SingletonComponent<BuildManager>
             laborCenter.TeamLockState.Add(teamNumber);
         }
 
-        builder.constructionStatus.teamNumber = teamNumber;
-        builder.representGameObject.AddComponent<Upgrading>();
+        builder.representGameObject.AddComponent<BuildTimer>();
         Debug.Log("Upgrade action complete.");
         LoadManager.Instance.SavePlayerDataToJson();
 
@@ -146,7 +145,7 @@ public class BuildManager : SingletonComponent<BuildManager>
 
         if (builder.constructionStatus.isConstructing == true)
         {
-            builderGO.AddComponent<Upgrading>();
+            builderGO.AddComponent<BuildTimer>();
         }
 
         Debug.Log("Loading Building From JSON : " + builder.ToString());
@@ -210,7 +209,7 @@ public class BuildManager : SingletonComponent<BuildManager>
         {
             
             builder.constructionStatus.teamNumber = teamNumber;
-            builder.representGameObject.AddComponent<Upgrading>();
+            builder.representGameObject.AddComponent<BuildTimer>();
             Debug.Log("Upgrade action complete.");
             LoadManager.Instance.SavePlayerDataToJson();
         }
@@ -246,7 +245,7 @@ public class BuildManager : SingletonComponent<BuildManager>
         destroyBuilding.CurrentActiveAmount--;
         if (destroyBuilding.constructionStatus.isConstructing)
         {
-            destroyBuilding.representGameObject.GetComponent<Upgrading>().CancelConstructing();
+            destroyBuilding.representGameObject.GetComponent<BuildTimer>().CancelConstructing();
         }
         Debug.Log($"Try removing {destroyBuilding.ToString()} . . ");
 
