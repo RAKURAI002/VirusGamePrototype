@@ -88,7 +88,7 @@ public class QuestTimer : MonoBehaviour
         timeLeft = timeFinish - DateTime.Now.Ticks;
         if (activityInformation.isFinished)
         {
-            Debug.Log("SDFsdfewfs3b");
+         //   Debug.Log("SDFsdfewfs3b");
 
             Destroy(slider);
         }
@@ -123,7 +123,7 @@ public class QuestTimer : MonoBehaviour
 
     public void FinishQuest()
     {
-        Debug.Log("Stopped QuestTimer");
+     //   Debug.Log("Stopped QuestTimer");
         // playerData.questInProgress[questData.questID] = new QuestTime() { startTime = 0, finishTime = 0 };
 
         //***********  BuildManager.Instance.AllBuildings.SingleOrDefault(b => b.Type == Building.BuildingType.TownBase).TeamLockState.Remove(teamNumber);
@@ -132,7 +132,7 @@ public class QuestTimer : MonoBehaviour
         
         
         isFinished = true;
-        Debug.Log(isFinished);
+       // Debug.Log(isFinished);
         EventManager.Instance.ActivityFinished(activityInformation);
 
         return;

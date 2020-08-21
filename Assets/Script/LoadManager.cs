@@ -10,7 +10,7 @@ using UnityEngine.SceneManagement;
 
 using UnityEngine.Tilemaps;
 using UnityEngine.Networking;
-
+using System.Runtime.Serialization.Formatters.Binary;
 
 /// <summary>
 /// Load all In-Game data and Player data to Runtime.
@@ -26,8 +26,6 @@ public class LoadManager : SingletonComponent<LoadManager>
     [SerializeField] public EquipmentDictionary allEquipmentData;
     [SerializeField] public List<Enemy> allEnemyData; /// ********************
     [SerializeField] public QuestDataDictionary allQuestData; /// ****************
-
-    bool[] loadDataFinished;
     
     #region Unity Functions
     protected override void Awake()

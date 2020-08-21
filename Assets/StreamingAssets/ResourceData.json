@@ -6,7 +6,15 @@
             "rarity": 1,
             "description": "Just a certain Wood.",
             "spritePath": "Sprites/Resource/Wood",
-            "type": 3
+            "craftingData": {
+                "craftingMaterials": {
+                    "keys": [],
+                    "values": []
+                },
+                "point": 0
+            },
+            "type": 3,
+            "amount": 0
         },
         {
             "id": 1,
@@ -14,7 +22,15 @@
             "rarity": 1,
             "description": "Just a certain Stone.",
             "spritePath": "Sprites/Resource/Stone",
-            "type": 3
+            "craftingData": {
+                "craftingMaterials": {
+                    "keys": [],
+                    "values": []
+                },
+                "point": 0
+            },
+            "type": 3,
+            "amount": 0
         },
         {
             "id": 2,
@@ -22,7 +38,15 @@
             "rarity": 1,
             "description": "No water No life.",
             "spritePath": "Sprites/Resource/Water",
-            "type": 3
+            "craftingData": {
+                "craftingMaterials": {
+                    "keys": [],
+                    "values": []
+                },
+                "point": 0
+            },
+            "type": 3,
+            "amount": 0
         },
         {
             "id": 3,
@@ -30,7 +54,15 @@
             "rarity": 1,
             "description": "Wanna starve to death?",
             "spritePath": "Sprites/Resource/Food",
-            "type": 3
+            "craftingData": {
+                "craftingMaterials": {
+                    "keys": [],
+                    "values": []
+                },
+                "point": 0
+            },
+            "type": 3,
+            "amount": 0
         },
         {
             "id": 4,
@@ -38,7 +70,15 @@
             "rarity": 1,
             "description": "I'm so cold.",
             "spritePath": "Sprites/Resource/Fabric",
-            "type": 3
+            "craftingData": {
+                "craftingMaterials": {
+                    "keys": [],
+                    "values": []
+                },
+                "point": 0
+            },
+            "type": 3,
+            "amount": 0
         },
         {
             "id": 5,
@@ -46,7 +86,15 @@
             "rarity": 1,
             "description": "Useless? who knows.",
             "spritePath": "Sprites/Resource/Rubber",
-            "type": 3
+            "craftingData": {
+                "craftingMaterials": {
+                    "keys": [],
+                    "values": []
+                },
+                "point": 0
+            },
+            "type": 3,
+            "amount": 0
         },
         {
             "id": 6,
@@ -54,7 +102,15 @@
             "rarity": 2,
             "description": "Just a certain Wood.",
             "spritePath": "Sprites/Resource/Steel",
-            "type": 3
+            "craftingData": {
+                "craftingMaterials": {
+                    "keys": [],
+                    "values": []
+                },
+                "point": 0
+            },
+            "type": 3,
+            "amount": 0
         },
         {
             "id": 7,
@@ -62,7 +118,15 @@
             "rarity": 5,
             "description": "BOOOOOM!!!",
             "spritePath": "Sprites/Resource/Meteorite",
-            "type": 3
+            "craftingData": {
+                "craftingMaterials": {
+                    "keys": [],
+                    "values": []
+                },
+                "point": 0
+            },
+            "type": 3,
+            "amount": 0
         },
         {
             "id": 8,
@@ -70,7 +134,15 @@
             "rarity": 1,
             "description": "CoCoCrunch !?",
             "spritePath": "Sprites/Resource/Wheat",
-            "type": 2
+            "craftingData": {
+                "craftingMaterials": {
+                    "keys": [],
+                    "values": []
+                },
+                "point": 0
+            },
+            "type": 2,
+            "amount": 0
         },
         {
             "id": 9,
@@ -78,7 +150,15 @@
             "rarity": 1,
             "description": "qwerty",
             "spritePath": "Sprites/Resource/Bread",
-            "type": 2
+            "craftingData": {
+                "craftingMaterials": {
+                    "keys": [],
+                    "values": []
+                },
+                "point": 0
+            },
+            "type": 2,
+            "amount": 0
         },
         {
             "id": 10,
@@ -86,7 +166,15 @@
             "rarity": 1,
             "description": "YumYum . . .",
             "spritePath": "Sprites/Resource/Meat",
-            "type": 2
+            "craftingData": {
+                "craftingMaterials": {
+                    "keys": [],
+                    "values": []
+                },
+                "point": 0
+            },
+            "type": 2,
+            "amount": 0
         },
         {
             "id": 11,
@@ -94,7 +182,15 @@
             "rarity": 1,
             "description": "Recipe.",
             "spritePath": "Sprites/Resource/Burger",
-            "type": 1
+            "craftingData": {
+                "craftingMaterials": {
+                    "keys": [],
+                    "values": []
+                },
+                "point": 0
+            },
+            "type": 1,
+            "amount": 0
         },
         {
             "id": 12,
@@ -102,7 +198,15 @@
             "rarity": 0,
             "description": "Specific Building Production .",
             "spritePath": "Sprites/Resource/Production",
-            "type": 4
+            "craftingData": {
+                "craftingMaterials": {
+                    "keys": [],
+                    "values": []
+                },
+                "point": 0
+            },
+            "type": 4,
+            "amount": 0
         },
         {
             "id": 13,
@@ -110,7 +214,15 @@
             "rarity": 0,
             "description": "Specific Building Production .",
             "spritePath": "Sprites/Resource/Gold",
-            "type": 5
+            "craftingData": {
+                "craftingMaterials": {
+                    "keys": [],
+                    "values": []
+                },
+                "point": 0
+            },
+            "type": 5,
+            "amount": 0
         },
         {
             "id": 14,
@@ -118,7 +230,15 @@
             "rarity": 0,
             "description": "Specific Building Production .",
             "spritePath": "Sprites/Resource/Diamond",
-            "type": 5
+            "craftingData": {
+                "craftingMaterials": {
+                    "keys": [],
+                    "values": []
+                },
+                "point": 0
+            },
+            "type": 5,
+            "amount": 0
         },
         {
             "id": 15,
@@ -126,7 +246,19 @@
             "rarity": 1,
             "description": "Recipe.",
             "spritePath": "Sprites/Resource/Recipe",
-            "type": 6
+            "craftingData": {
+                "craftingMaterials": {
+                    "keys": [
+                        "Wheat"
+                    ],
+                    "values": [
+                        3
+                    ]
+                },
+                "point": 200
+            },
+            "type": 6,
+            "amount": 0
         },
         {
             "id": 16,
@@ -134,7 +266,21 @@
             "rarity": 1,
             "description": "Recipe.",
             "spritePath": "Sprites/Resource/Recipe",
-            "type": 6
+            "craftingData": {
+                "craftingMaterials": {
+                    "keys": [
+                        "Bread",
+                        "Meat"
+                    ],
+                    "values": [
+                        2,
+                        1
+                    ]
+                },
+                "point": 400
+            },
+            "type": 6,
+            "amount": 0
         }
     ]
 }

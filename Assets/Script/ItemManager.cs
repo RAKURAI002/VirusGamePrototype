@@ -276,9 +276,12 @@ public class ItemManager : SingletonComponent<ItemManager>
         AddResource("Wood", 10);
         AddResource("Gold", 10);
         AddResource("Diamond", 10);
+        AddResource("Wheat", 10);
+        AddResource("Meat", 10);
+
 
         AddResource("Recipe:Bread", 10);
-
+        AddResource("Recipe:Burger", 10);
 
         AddEquipment(1, 1);
         AddEquipment(1, 1);

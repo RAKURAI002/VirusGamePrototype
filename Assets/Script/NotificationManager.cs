@@ -141,9 +141,9 @@ public class NotificationManager : SingletonComponent<NotificationManager>
     }
     public void OnActivityFinished(ActivityInformation activityInformation)
     {
-        Debug.Log("dsgfdsgr");
+
         processingActivies.Single(pa => pa.Value.activityID == activityInformation.activityID).Value.isFinished = true;
-        Debug.Log(object.ReferenceEquals(activityInformation, processingActivies[processingActivies.Single(pa => pa.Value.activityID == activityInformation.activityID).Key]));
+     //   Debug.Log(object.ReferenceEquals(activityInformation, processingActivies[processingActivies.Single(pa => pa.Value.activityID == activityInformation.activityID).Key]));
     
 
     }

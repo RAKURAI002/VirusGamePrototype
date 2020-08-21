@@ -120,7 +120,7 @@ public class BuildingInformationCanvas : MonoBehaviour
     void ShowCraftingPanelPanel()
     {
         GameObject craftingPanel = GameManager.FindInActiveObjectByName("CraftingPanel");
-        craftingPanel.SetActive(true);
+        craftingPanel.GetComponent<CraftingPanel>().ShowCraftingPanel(builder);
     }
 
     public void RefreshInformationCanvas()

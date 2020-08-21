@@ -29,6 +29,21 @@ public class Resource : Item
         this.spritePath = spritePath;
     }
 
+    public Resource(int id, string name, RarityTier rarity, string description, ResourceType type, string spritePath, CraftingData craftingMaterials)
+    {
+        if (type != ResourceType.Recipe)
+        {
+            Debug.LogError("Only Recipe type can contain CraftingMaterials. Otherwise may caused errors.");
+        }
+        this.id = id;
+        this.name = name;
+        this.rarity = rarity;
+        this.description = description;
+        this.type = type;
+        this.spritePath = spritePath;
+        this.craftingData = craftingMaterials;
+    }
+
     [System.Serializable]
     public enum ResourceType
     {
@@ -44,7 +59,20 @@ public class Resource : Item
     [SerializeField] public ResourceType type;
 
     [SerializeField] private int amount;
-    public int Amount { get { return amount; } set { amount = value; } }
+    public int Amount { get { return amount; } set { 
+            if (type == ResourceType.Recipe)
+            { 
+                if(amount > 1)
+                {
+                    amount = 1;
+                    return;
+                }
+            }
+            else
+            {
+                amount = value;
+            }
+            } }
     public override string ToString()
     {
         return ($"ID : {id}, Name : {name}, Rarity : {rarity}, Description : {description}, Type : {type}. ");

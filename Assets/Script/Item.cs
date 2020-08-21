@@ -23,11 +23,25 @@ public class Item
     [SerializeField] public string description = "Please assign something.";
     [SerializeField] public string spritePath = "Please assign something.";
 
+    [SerializeField] public CraftingData craftingData;
+
     public int ID { get { return id; } }
     public string Name { get { return name; } }
     public RarityTier Rarity { get { return rarity; } }
 
-   
+    [System.Serializable]
+    public class CraftingData
+    {
+        public CraftingData(DictionaryStringToInt craftingMaterials, int point)
+        {
+            this.craftingMaterials = craftingMaterials;
+            this.point = point;
+        }
+
+        [SerializeField] public DictionaryStringToInt craftingMaterials;
+        [SerializeField] public int point;
+
+    }
 
     public override string ToString()
     {

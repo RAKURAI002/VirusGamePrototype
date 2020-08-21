@@ -1,0 +1,28 @@
+fileFormatVersion: 2
+guid: 5a30bd2c23653a34caebd1d642fb6e51
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: TH Dan Vi Vek
+  fontNames:
+  - TH Dan Vi Vek
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: c1f12830a7e30284ea1632b255657200, type: 3}
+  - {fileID: 12800000, guid: 924039b33edab04408da65ed10d7c2d7, type: 3}
+  - {fileID: 12800000, guid: 14127ff8fdb55854d91c89ce75e4b43c, type: 3}
+  - {fileID: 12800000, guid: e5d9323bb814e2c4ea219d5cc6e78995, type: 3}
+  - {fileID: 12800000, guid: a593249b3744a6f4084e7eb7c9cad1b4, type: 3}
+  - {fileID: 12800000, guid: b3b7f23c14cb1754089adce8d4bf7538, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
