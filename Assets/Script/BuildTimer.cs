@@ -174,7 +174,7 @@ public class BuildTimer : MonoBehaviour
         {
 
             productionPointTemp += laborCenter.CharacterInBuilding[thisBuilding.constructionStatus.teamNumber].Characters.Sum(c => ((c.Stats.strength * 0.2f / 8) + (c.Stats.speed * 0.2f / 8) + (c.Stats.crafting * 0.8f / 3)));
-            Debug.Log(laborCenter.CharacterInBuilding[thisBuilding.constructionStatus.teamNumber].Characters.Sum(c => ((c.Stats.strength * 0.2f / 8) + (c.Stats.speed * 0.2f / 8) + (c.Stats.crafting * 0.8f / 3))));
+        //    Debug.Log(laborCenter.CharacterInBuilding[thisBuilding.constructionStatus.teamNumber].Characters.Sum(c => ((c.Stats.strength * 0.2f / 8) + (c.Stats.speed * 0.2f / 8) + (c.Stats.crafting * 0.8f / 3))));
         }
         productionPoint = productionPointTemp;
     }

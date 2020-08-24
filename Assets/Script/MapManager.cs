@@ -54,7 +54,7 @@ public class MapManager : SingletonComponent<MapManager>
 
     void Update()
     {
-        Debug.Log(tilemap.localBounds.ToString());
+       // Debug.Log(tilemap.localBounds.ToString());
         if (buildPermission && Input.GetMouseButtonUp(0))
         {
             

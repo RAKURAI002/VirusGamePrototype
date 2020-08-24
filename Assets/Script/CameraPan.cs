@@ -35,10 +35,15 @@ public class CameraPan : MonoBehaviour
         if (MainCanvas.canvasActive)
         {
             return;
-        }
 
+        }
         PanCamera();
         ZoomCamera();
+        ClampPosition();
+    }
+
+    void ClampPosition()
+    {
         Camera.main.transform.position = new Vector3(
                 Mathf.Clamp(Camera.main.transform.position.x, boundMin.x + (Camera.main.aspect * Camera.main.orthographicSize),
                 boundMax.x - (Camera.main.aspect * Camera.main.orthographicSize)),
@@ -58,9 +63,7 @@ public class CameraPan : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            //  Debug.Log("Start drag" + touchStart.ToString());
             touchStart = GetWorldPosition(groundZ);
-
             totalClickTime = 0f;
 
         }
@@ -69,26 +72,18 @@ public class CameraPan : MonoBehaviour
             totalClickTime += Time.deltaTime;
             if (totalClickTime >= 0.2f)
             {
-                //   Debug.Log("Long click : " + totalClickTime);
                 isPanning = true;
-
             }
             Vector3 direction = touchStart - GetWorldPosition(groundZ);
-            //Debug.Log($"end drag {touchStart.ToString()} - { GetWorldPosition(groundZ).ToString() } = { direction.ToString()}");
             Camera.main.transform.position += direction;
-
-
-
 
         }
         if (Input.GetMouseButtonUp(0))
         {
-            // Debug.Log("stoppan");
-
             StartCoroutine(DelaySetPanning());
-        }
 
-        
+        }
+  
     }
     private void ZoomCamera()
     {
@@ -110,8 +105,7 @@ public class CameraPan : MonoBehaviour
 #else
              scroll = Input.GetAxis("Mouse ScrollWheel");
 #endif
-        // Debug.Log(scroll);
-        Debug.Log(Camera.main.transform.position.x);
+
         if (Camera.main.transform.position.x > boundMax.x || Camera.main.transform.position.x < boundMin.x)
         {
             return;
@@ -120,14 +114,12 @@ public class CameraPan : MonoBehaviour
         Camera.main.orthographicSize -= scroll * MouseZoomSpeed;
         Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize, ZoomMinBound, ZoomMaxBound);
 
-        // set min and max value of Clamp function upon your requirementb
-        // Camera.main.fieldOfView = Mathf.Clamp(Camera.main.fieldOfView, ZoomMinBound, ZoomMaxBound);
-
     }
     IEnumerator DelaySetPanning()
     {
         yield return new WaitForEndOfFrame();
         isPanning = false;
+
     }
     private Vector3 GetWorldPosition(float z)
     {
@@ -136,5 +128,6 @@ public class CameraPan : MonoBehaviour
         float distance;
         ground.Raycast(mousePos, out distance);
         return mousePos.GetPoint(distance);
+
     }
 }

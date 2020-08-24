@@ -118,7 +118,7 @@ public class NotificationPanel : MonoBehaviour
                     {
                         CraftTimer craftTimer = NotificationManager.Instance.gameObject.transform.Find("ActivitiesList/" + activity.Value.activityID).GetComponent<CraftTimer>();
                         craftTimer.slider = activitySliderGO.GetComponentInChildren<Slider>().gameObject;
-                        Debug.Log("aSDDDDD   "+ activitySliderGO.GetComponentInChildren<Slider>().gameObject.name);
+
                         break;
                     }
                 case ActivityType.Build:
