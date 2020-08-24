@@ -23,21 +23,34 @@ public class BuildingInformationCanvas : MonoBehaviour
 
     void Update()
     {
-
+        UpdateSlider();
     }
     private void OnEnable()
     {
+        EventManager.Instance.OnActivityFinished += OnActivityFinished;
         EventManager.Instance.OnCharacterAssigned += RefreshAssignUI;
         transform.Find("UpgradeInformationPanel").gameObject.SetActive(false);
         transform.Find("InformationPanel").gameObject.SetActive(true);
         buildingData = buildingData = LoadManager.Instance.allBuildingData[builder.Type];
 
         RefreshInformationCanvas();
+
+       
     }
     private void OnDisable()
     {
         if(EventManager.Instance)
+        {
+            EventManager.Instance.OnActivityFinished -= OnActivityFinished;
             EventManager.Instance.OnCharacterAssigned -= RefreshAssignUI;
+        }
+           
+    }
+
+   void OnActivityFinished(ActivityInformation activity)
+    {
+        if(activity.activityType == ActivityType.Build)
+            RefreshInformationCanvas();
     }
     public void ShowThisCanvas(Builder builder)
     {
@@ -139,10 +152,40 @@ public class BuildingInformationCanvas : MonoBehaviour
         {
                 buildingStatus.text = LoadManager.Instance.allResourceData[resource.Key].Name + " : " + resource.Value.ToString() ; /// ********************************************
         }*/
+
         
         return;
     }
+    void UpdateSlider()
+    {
+        if (builder.constructionStatus.isConstructing)
+        {
+            Slider slider = transform.Find("TimerSlider").GetComponent<Slider>();
+            slider.gameObject.SetActive(true);
 
+            slider.maxValue = builder.constructionStatus.finishPoint;
+            slider.value = builder.constructionStatus.currentPoint;
+
+            long timer = GameObject.FindObjectOfType<BuildManager>().transform.Find("AllBuildings/" + builder.ID.ToString()).GetComponent<BuildTimer>().timer;
+            int hours = Mathf.FloorToInt(timer / 3600);
+            int minutes = Mathf.FloorToInt(timer % 3600 / 60);
+            int seconds = Mathf.FloorToInt(timer % 3600 % 60f);
+
+
+            Text text = slider.transform.GetComponentInChildren<Text>();
+            text.text = "Upgrading : " + (hours == 0 ? "" : hours.ToString() + " HR ") + (minutes == 0 ? "" : minutes.ToString() + " M ") + seconds + " S";
+
+            int speedUpCost = ItemManager.Instance.GetSpeedUpCost(builder.constructionStatus.finishPoint - builder.constructionStatus.currentPoint);
+            Button speedUpButton = transform.Find("TimerSlider").GetComponentInChildren<Button>();
+            speedUpButton.GetComponentInChildren<Text>().text = $"<color=blue>{speedUpCost.ToString()}</color>" + " Diamonds";
+        }
+        else
+        {
+            Slider slider = transform.Find("TimerSlider").GetComponent<Slider>();
+            slider.gameObject.SetActive(false);
+        }
+
+    }
     void RefreshUpgradePanel()
     {
         Text buildingProduction = transform.Find("UpgradeInformationPanel/InformationPanel/BaseProduction").gameObject.GetComponent<Text>();
@@ -274,7 +317,26 @@ public class BuildingInformationCanvas : MonoBehaviour
         }
 
     }
+    public void OnClickSpeedUpButton()
+    {
+        float pointLeft = builder.constructionStatus.finishPoint - builder.constructionStatus.currentPoint;
 
+        int speedUpCost = ItemManager.Instance.GetSpeedUpCost(pointLeft);
+        Button speedUpButton = transform.Find("TimerSlider").GetComponentInChildren<Button>();
+        speedUpButton.GetComponentInChildren<Text>().text = speedUpCost.ToString() + " Diamonds";
+
+        Debug.Log($"Point left : {pointLeft}, Need {speedUpCost} Diamonds to speed up this.");
+        if(ItemManager.Instance.TryConsumeResources("Diamond", speedUpCost))
+        {
+            builder.constructionStatus.currentPoint += pointLeft;
+        }
+        else
+        {
+            Debug.LogWarning($"You need {speedUpCost} Diamonds to purchase this speed up.");
+        }
+
+        
+    }
     void ClearAssignUIOldData()
     {
         GameObject assignContainer = gameObject.transform.Find("AssignPanel/TeamPanel/Container").gameObject;

@@ -14,6 +14,8 @@ public class BuildTimer : MonoBehaviour
     Builder laborCenter;
     GameObject timerCanvas;
     GameObject slider;
+
+    public long timer { get; set; }
     public Vector3 timerOffset;
 
     [SerializeField] float productionPoint;
@@ -54,7 +56,7 @@ public class BuildTimer : MonoBehaviour
         }
 
 
-        long timer = (long)((thisBuilding.constructionStatus.finishPoint - thisBuilding.constructionStatus.currentPoint) / productionPoint);
+        timer = (long)((thisBuilding.constructionStatus.finishPoint - thisBuilding.constructionStatus.currentPoint) / productionPoint);
         int hours = Mathf.FloorToInt(timer / 3600);
         int minutes = Mathf.FloorToInt(timer % 3600 / 60);
         int seconds = Mathf.FloorToInt(timer % 3600 % 60f);
@@ -99,9 +101,9 @@ public class BuildTimer : MonoBehaviour
         if (thisBuilding.constructionStatus.finishPoint <= thisBuilding.constructionStatus.currentPoint)
         {
             thisBuilding.Level++;
-            Debug.Log($"Upgrade Task is completed. Now {thisBuilding.representGameObject.name} level is {thisBuilding.Level}.");
+            Debug.Log($"Upgrade Task is completed. Now ID :{thisBuilding.representGameObject.name} level is {thisBuilding.Level}.");
             CancelConstructing();
-
+            EventManager.Instance.ActivityFinished(new ActivityInformation() { activityType = ActivityType.Build});
 
             gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(buildData.spritePath[thisBuilding.Level]);
             return true;

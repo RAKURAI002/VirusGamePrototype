@@ -255,7 +255,11 @@ public class ItemManager : SingletonComponent<ItemManager>
         
         return true;
     }
-
+    public int GetSpeedUpCost(float pointLeft)
+    {
+        int gemCost = Mathf.RoundToInt(pointLeft / 200);
+        return gemCost > 2 ? gemCost : 0;
+    }
     /// Debug Functions.
     public void ShowResourceTest()
     {

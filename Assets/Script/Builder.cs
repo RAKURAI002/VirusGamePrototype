@@ -20,7 +20,7 @@ public class Builder
     }
     public Builder(Building.BuildingType type)
     {
-        this.id = BuildManager.Instance.AllBuildings.Count;
+      //  this.id = BuildManager.Instance.AllBuildings.Count;
         this.type = type;
         InitializeData();
     }

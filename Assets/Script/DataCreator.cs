@@ -52,7 +52,6 @@ public class DataCreator : MonoBehaviour
         Debug.Log("Creating JSON data : " + equipmentDatas);
         System.IO.File.WriteAllText(Application.streamingAssetsPath + "/EquipmentData.json", equipmentDatas);
 
-
     }
 
     void CreateBuildingJsonData()
@@ -133,7 +132,7 @@ public class DataCreator : MonoBehaviour
         bu.Add(new Building(Building.BuildingType.Kitchen, allCost, allProduction, allConsuming, upgradePoint, 1, 9, maxCharacter, description, GetSpritePath("Kitchen")));
         bu.Add(new Building(Building.BuildingType.Laboratory, allCost, allProduction, allConsuming, upgradePoint, 1, 9, maxCharacter, description, GetSpritePath("Laboratory")));
         bu.Add(new Building(Building.BuildingType.LaborCenter, allCost, allProduction, allConsuming, upgradePoint, 1, 9, maxCharacter, description, GetSpritePath("LaborCenter")));//***
-        bu.Add(new Building(Building.BuildingType.MedicalCenter, allCost, allProduction, allConsuming, upgradePoint, 1, 9, maxCharacter, description, GetSpritePath("MedicalCenter")));
+        bu.Add(new Building(Building.BuildingType.MedicalCenter, allCost, allProduction, allConsuming, upgradePoint, 1, 9, maxCharacter, description, GetSpritePath("MedicalCenter")));//***
         bu.Add(new Building(Building.BuildingType.QuarantineSite, allCost, allProduction, allConsuming, upgradePoint, 1, 9, maxCharacter, description, GetSpritePath("QuarantineSite")));
         bu.Add(new Building(Building.BuildingType.Residence, allCost, allProduction, allConsuming, upgradePoint, 1, 9, maxCharacter, description, GetSpritePath("Residence")));
         bu.Add(new Building(Building.BuildingType.TownBase, allCost, allProduction, allConsuming, upgradePoint, 1, 9, maxCharacter, description, GetSpritePath("TownBase")));//****

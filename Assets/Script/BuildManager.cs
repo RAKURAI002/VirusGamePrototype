@@ -101,7 +101,7 @@ public class BuildManager : SingletonComponent<BuildManager>
         AddBuildingsToList(builder);
 
         builderGO.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(buildData.spritePath[builder.Level]);
-        builderGO.name = allBuildingPrefab[(int)builder.Type - 1].name + builder.CurrentActiveAmount;
+        builderGO.name = builder.ID.ToString();
         builderGO.AddComponent<BuildingBehavior>().builder = builder; /// UNUSED
         builder.representGameObject = builderGO;
 
@@ -111,7 +111,7 @@ public class BuildManager : SingletonComponent<BuildManager>
         }
 
         builder.representGameObject.AddComponent<BuildTimer>();
-        Debug.Log("Upgrade action complete.");
+        Debug.Log("Create action complete.");
         LoadManager.Instance.SavePlayerDataToJson();
 
         return true;
@@ -130,7 +130,7 @@ public class BuildManager : SingletonComponent<BuildManager>
 
 
         AddBuildingsToList(builder);
-        builderGO.name = allBuildingPrefab[(int)builder.Type - 1].name + builder.CurrentActiveAmount;
+        builderGO.name = builder.ID.ToString();
         builderGO.AddComponent<BuildingBehavior>().builder = builder;/// UNUSED
 
         /// Reconnect reference.
