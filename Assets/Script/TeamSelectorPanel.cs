@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Diagnostics;
 
 public class TeamSelectorPanel : MonoBehaviour
 {
@@ -44,7 +45,8 @@ public class TeamSelectorPanel : MonoBehaviour
         this._haveCharacterSlot = haveCharacterSlot;
         this._mode = mode;
         this._finishPoint = finishPoint;
-
+       // UnityEngine.Debug.Log(new StackFrame(1).GetMethod().Name);
+        MainCanvas.canvasActive = true;
         gameObject.SetActive(true);
         ClearOldAssignUIData();
         switch (mode)
@@ -71,7 +73,7 @@ public class TeamSelectorPanel : MonoBehaviour
                 }
             default:
                 {
-                    Debug.LogError($"No definition for {mode}");
+                    UnityEngine.Debug.LogError($"No definition for {mode}");
                     break;
                 }
 
@@ -91,7 +93,7 @@ public class TeamSelectorPanel : MonoBehaviour
         GameObject container = gameObject.transform.Find("TeamPanel/Container").gameObject;
         if (container == null)
         {
-            Debug.LogError("Can't find Scrollview container for BuildingPanel.");
+            UnityEngine.Debug.LogError("Can't find Scrollview container for BuildingPanel.");
             return;
         }
 
@@ -117,7 +119,7 @@ public class TeamSelectorPanel : MonoBehaviour
         GameObject container = gameObject.transform.Find("CharacterPanel/Container").gameObject;
         if (container == null)
         {
-            Debug.LogError("Can't find Scrollview container for Character.");
+            UnityEngine.Debug.LogError("Can't find Scrollview container for Character.");
             return;
         }
         // Debug.Log(CharacterManager.Instance.AllCharacters.Count);

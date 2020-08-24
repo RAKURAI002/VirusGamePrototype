@@ -41,11 +41,16 @@ public class ClosePanelHelper : MonoBehaviour, IPointerEnterHandler, IPointerExi
     IEnumerator ClosePanel()
     {
         yield return new WaitForEndOfFrame();
-
+        int length = GameObject.FindObjectsOfType<ClosePanelHelper>().Length;
         gameObject.SetActive(false);
-        GameObject.FindGameObjectsWithTag("ExtraUIPanel").ToList().ForEach((go) => { Debug.Log(go.name); go.SetActive(false); });
+        GameObject.FindGameObjectsWithTag("ExtraUIPanel").ToList().ForEach((go) => { go.SetActive(false); });
 
-        MainCanvas.canvasActive = false;
+        if (length <= 1)
+        {
+            MainCanvas.canvasActive = false;
+        }
+       
+      
 
     }
 }

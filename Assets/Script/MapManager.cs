@@ -49,11 +49,12 @@ public class MapManager : SingletonComponent<MapManager>
     }
      void Start()    
     {
-       
+       tilemap.CompressBounds();
     }
 
     void Update()
     {
+        Debug.Log(tilemap.localBounds.ToString());
         if (buildPermission && Input.GetMouseButtonUp(0))
         {
             

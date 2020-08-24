@@ -2,22 +2,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class CameraPan : MonoBehaviour
 {
-    
-    float MouseZoomSpeed = 15.0f;
-    float ZoomMinBound = 30f;
-    float ZoomMaxBound = 130f;
+
+    public float MouseZoomSpeed = 15.0f;
+    public float ZoomMinBound = 30f;
+    public float ZoomMaxBound = 130f;
+
+    public Tilemap tilemap;
+    public GameObject boundRendererGO;
 
     private Vector3 touchStart;
     public float groundZ = 0;
     float totalClickTime = 0;
 
+
+    Vector3 boundMin;
+    Vector3 boundMax;
+
     public static bool isPanning { get; set; }
     private void Start()
     {
         transform.position = new Vector3(-35f, 40f, -10);
+        boundMin = boundRendererGO.GetComponent<SpriteRenderer>().bounds.min;
+        boundMax = boundRendererGO.GetComponent<SpriteRenderer>().bounds.max;
     }
     // Update is called once per frame
     void Update()
@@ -29,42 +39,62 @@ public class CameraPan : MonoBehaviour
 
         PanCamera();
         ZoomCamera();
+        Camera.main.transform.position = new Vector3(
+                Mathf.Clamp(Camera.main.transform.position.x, boundMin.x + (Camera.main.aspect * Camera.main.orthographicSize),
+                boundMax.x - (Camera.main.aspect * Camera.main.orthographicSize)),
+               Mathf.Clamp(Camera.main.transform.position.y, boundMin.y + (Camera.main.orthographicSize),
+               boundMax.y - (Camera.main.orthographicSize)),
+               Camera.main.transform.position.z);
+    }
+    void OnDrawGizmos()
+    {
+        float verticalHeightSeen = Camera.main.orthographicSize * 2.0f;
+
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireCube(transform.position, new Vector3((verticalHeightSeen * Camera.main.aspect), verticalHeightSeen, 0));
     }
     private void PanCamera()
     {
-        
+
         if (Input.GetMouseButtonDown(0))
         {
-          //  Debug.Log("Start drag" + touchStart.ToString());
+            //  Debug.Log("Start drag" + touchStart.ToString());
             touchStart = GetWorldPosition(groundZ);
-            
+
             totalClickTime = 0f;
-            
+
         }
-        if (Input.GetMouseButton(0) )
+        if (Input.GetMouseButton(0))
         {
             totalClickTime += Time.deltaTime;
-            if(totalClickTime >= 0.2f)
+            if (totalClickTime >= 0.2f)
             {
-             //   Debug.Log("Long click : " + totalClickTime);
+                //   Debug.Log("Long click : " + totalClickTime);
                 isPanning = true;
 
             }
             Vector3 direction = touchStart - GetWorldPosition(groundZ);
             //Debug.Log($"end drag {touchStart.ToString()} - { GetWorldPosition(groundZ).ToString() } = { direction.ToString()}");
             Camera.main.transform.position += direction;
+
+
+
+
         }
-        if (Input.GetMouseButtonUp(0) )
+        if (Input.GetMouseButtonUp(0))
         {
-           // Debug.Log("stoppan");
+            // Debug.Log("stoppan");
 
             StartCoroutine(DelaySetPanning());
         }
+
+        
     }
     private void ZoomCamera()
     {
-        float scroll =0;
-        #if UNITY_ANDROID
+        float scroll = 0;
+
+#if UNITY_ANDROID
         {
             if (Input.touchCount >= 2)
             {
@@ -74,16 +104,24 @@ public class CameraPan : MonoBehaviour
                 scroll = Vector2.Distance(touch0, touch1);
             }
             scroll = Input.GetAxis("Mouse ScrollWheel");
-          
+
         }
 
-        #else
+#else
              scroll = Input.GetAxis("Mouse ScrollWheel");
-        #endif
-       // Debug.Log(scroll);
-        Camera.main.fieldOfView -= scroll * MouseZoomSpeed;
+#endif
+        // Debug.Log(scroll);
+        Debug.Log(Camera.main.transform.position.x);
+        if (Camera.main.transform.position.x > boundMax.x || Camera.main.transform.position.x < boundMin.x)
+        {
+            return;
+        }
+       
+        Camera.main.orthographicSize -= scroll * MouseZoomSpeed;
+        Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize, ZoomMinBound, ZoomMaxBound);
+
         // set min and max value of Clamp function upon your requirementb
-        Camera.main.fieldOfView = Mathf.Clamp(Camera.main.fieldOfView, ZoomMinBound, ZoomMaxBound);
+        // Camera.main.fieldOfView = Mathf.Clamp(Camera.main.fieldOfView, ZoomMinBound, ZoomMaxBound);
 
     }
     IEnumerator DelaySetPanning()

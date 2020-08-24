@@ -162,6 +162,8 @@ public class NotificationManager : SingletonComponent<NotificationManager>
                 }
             case ActivityType.Craft:
                 {
+                    CraftTimer craftTimer = NotificationManager.Instance.gameObject.transform.Find("ActivitiesList/" + activityInformation.activityID).GetComponent<CraftTimer>();
+                    Destroy(craftTimer.gameObject);
                     RemoveActivity(activityInformation);
                     break;
                 }

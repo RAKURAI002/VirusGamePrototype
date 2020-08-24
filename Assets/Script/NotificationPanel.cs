@@ -57,6 +57,7 @@ public class NotificationPanel : MonoBehaviour
                 }
             case ActivityType.Craft:
                 {
+                    
                     break;
                 }
             case ActivityType.Build:
