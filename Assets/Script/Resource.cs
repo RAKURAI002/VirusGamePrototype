@@ -28,6 +28,21 @@ public class Resource : Item
         this.type = type;
         this.spritePath = spritePath;
     }
+    public Resource(int id, string name, RarityTier rarity, string description, ResourceType type, string spritePath, Effect effect)
+    {
+        if (type != ResourceType.Consumable)
+        {
+            Debug.LogError("Only Consumable type can contain Effect. Otherwise may caused errors.");
+        }
+
+        this.id = id;
+        this.name = name;
+        this.rarity = rarity;
+        this.description = description;
+        this.type = type;
+        this.spritePath = spritePath;
+        this.effect = effect;
+    }
 
     public Resource(int id, string name, RarityTier rarity, string description, ResourceType type, string spritePath, CraftingData craftingMaterials)
     {
@@ -35,6 +50,7 @@ public class Resource : Item
         {
             Debug.LogError("Only Recipe type can contain CraftingMaterials. Otherwise may caused errors.");
         }
+
         this.id = id;
         this.name = name;
         this.rarity = rarity;
@@ -56,13 +72,21 @@ public class Resource : Item
         Recipe
     }
 
-    [SerializeField] public ResourceType type;
+    [System.Serializable]
+    public class Effect
+    {
+        [SerializeField] public Character.AllStats stat;
+        [SerializeField] public int duration;
 
-    [SerializeField] private int amount;
-    public int Amount { get { return amount; } set { 
+    }
+
+    [SerializeField] public ResourceType type;
+    [SerializeField] public Effect effect;
+    [SerializeField] private float amount;
+    public float Amount { get { return amount; } set { 
             if (type == ResourceType.Recipe)
             { 
-                if(amount > 1)
+                if(value > 1)
                 {
                     amount = 1;
                     return;

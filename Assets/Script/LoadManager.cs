@@ -109,7 +109,10 @@ public class LoadManager : SingletonComponent<LoadManager>
         {
             Debug.Log("There no file in directory. Creating new PlayerData.json on " + file_path);
             File.Create(file_path);
+            playerData.completeTutorial = true;
+
         }
+
         return;
     }
 
@@ -221,18 +224,25 @@ public class LoadManager : SingletonComponent<LoadManager>
 
         yield return c5;
 
-        Debug.Log("Initialize Player Data to Scene . . .");
+        Debug.Log("Initializing Player Data to Scene . . .");
         CharacterManager.Instance.AllCharacters = playerData.characterInPossession;
         ItemManager.Instance.AllResources = playerData.resourceInPossession;
         ItemManager.Instance.AllEquipments = playerData.equipmentInPossession;
         NotificationManager.Instance.ProcessingActivies = playerData.currentActivities;
-     //   GameManager.Instance.expandedArea = playerData.expandedArea;
 
-        /// Load Player's data to Map.
+        /// Load Player's progress to Map.
         MapManager.Instance.SetExpandedArea();
         MapManager.Instance.LoadBuildingToScene();
 
         Debug.Log("Load GameData Complete.");
+
+        if(playerData.completeTutorial)
+        {
+            Debug.Log("First login detected, Starting Tutorial . . . ");
+            GameManager.Instance.StartTutorial();
+
+        }
+
     }
     
     IEnumerator GetRequest(string path, Action<UnityWebRequest> callback)

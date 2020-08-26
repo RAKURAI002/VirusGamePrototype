@@ -15,14 +15,13 @@ public class GameManager : SingletonComponent<GameManager>
     }
     protected override void OnInitialize()
     {
-      
-
         dontDestroyManager = GameObject.FindGameObjectWithTag("DontDestroyManager");
         if (dontDestroyManager == null)
         {
             Debug.LogError("Can't find dontDestroyManager");
         }
         DontDestroyOnLoad(dontDestroyManager);
+
     }
     void OnEnable()
     {
@@ -103,6 +102,24 @@ public class GameManager : SingletonComponent<GameManager>
     }
 
     #endregion
+    public void StartTutorial()
+    {
+        CharacterManager.Instance.CreateNewCharacter();
+
+        LoadManager.Instance.playerData.completeTutorial = false;
+    }
+
+
+    public static string GetGameObjectPath(GameObject obj)
+    {
+        string path = "/" + obj.name;
+        while (obj.transform.parent != null)
+        {
+            obj = obj.transform.parent.gameObject;
+            path = "/" + obj.name + path;
+        }
+        return path;
+    }
     public static Transform FindDeepChild(Transform aParent, string aName)
     {
         Queue<Transform> queue = new Queue<Transform>();

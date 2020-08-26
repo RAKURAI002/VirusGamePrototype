@@ -25,7 +25,7 @@ public class ClosePanelHelper : MonoBehaviour, IPointerEnterHandler, IPointerExi
     {
         if (Input.GetMouseButtonUp(0) && !isPointerOverUI)
         {
-            Debug.Log("ClosePanelHelper : Close Panel by " + gameObject.name);
+       //     Debug.Log("ClosePanelHelper : Close Panel by " + gameObject.name);
             StartCoroutine(ClosePanel());
         }
 
@@ -42,9 +42,9 @@ public class ClosePanelHelper : MonoBehaviour, IPointerEnterHandler, IPointerExi
     {
         yield return new WaitForEndOfFrame();
         int length = GameObject.FindObjectsOfType<ClosePanelHelper>().Length;
+        Debug.Log("ClosePanelHelper : Close Panel by " + gameObject.name);
+        GameObject.FindGameObjectsWithTag("ExtraUIPanel").ToList().ForEach((go) => {Debug.Log(go.name); go.SetActive(false); });
         gameObject.SetActive(false);
-        GameObject.FindGameObjectsWithTag("ExtraUIPanel").ToList().ForEach((go) => { go.SetActive(false); });
-
         if (length <= 1)
         {
             MainCanvas.canvasActive = false;

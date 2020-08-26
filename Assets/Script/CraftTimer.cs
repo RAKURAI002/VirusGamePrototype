@@ -15,7 +15,7 @@ public class CraftTimer : MonoBehaviour
     Resource resourceRecipe;
     Builder builder;
 
-
+    long timer { get; set; }
     float productionPoint;
     long finishPoint;
 
@@ -51,7 +51,7 @@ public class CraftTimer : MonoBehaviour
         }
         GetSlider();
 
-        long timer = (long)((activityInformation.finishPoint - activityInformation.currentProgress) / productionPoint);
+        timer = (long)((activityInformation.finishPoint - activityInformation.currentPoint) / productionPoint);
         int hours = Mathf.FloorToInt(timer / 3600);
         int minutes = Mathf.FloorToInt(timer % 3600 / 60);
         int seconds = Mathf.FloorToInt(timer % 3600 % 60f);
@@ -69,7 +69,7 @@ public class CraftTimer : MonoBehaviour
     }
     void IncreaseCurrentPoint()
     {
-        activityInformation.currentProgress += productionPoint;
+        activityInformation.currentPoint += productionPoint;
     }
     void GetProductionPoint()
     {
@@ -86,7 +86,7 @@ public class CraftTimer : MonoBehaviour
     {
         slider.name = activityInformation.activityName + "Slider";
         slider.GetComponent<Slider>().maxValue = activityInformation.finishPoint;
-        slider.GetComponent<Slider>().value = activityInformation.currentProgress;
+        slider.GetComponent<Slider>().value = activityInformation.currentPoint;
         slider.GetComponent<Slider>().interactable = false;
 
         return;
@@ -94,7 +94,7 @@ public class CraftTimer : MonoBehaviour
 
     bool CheckCompleteTimer()
     {
-        if (activityInformation.currentProgress >= finishPoint)
+        if (activityInformation.currentPoint >= finishPoint)
         {
             CancelInvoke("IncreaseCurrentPoint");
             isFinished = true;
@@ -112,4 +112,8 @@ public class CraftTimer : MonoBehaviour
         return false;
     }
 
+    public void ForceFinish()
+    {
+        activityInformation.currentPoint = finishPoint;
+    }
 }

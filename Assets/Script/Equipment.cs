@@ -40,8 +40,7 @@ public class Equipment : Item
     }
 
     [SerializeField] private EquipmentPosition position;
-    [SerializeField] private Character.AllStats stats;
-
+    [SerializeField] public Character.AllStats stats;
     [SerializeField] private int allAmount;
     [SerializeField] private int usingAmount;
 

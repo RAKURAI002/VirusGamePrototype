@@ -14,7 +14,22 @@
                 "point": 0
             },
             "type": 3,
-            "amount": 0
+            "effect": {
+                "stat": {
+                    "speed": 0,
+                    "crafting": 0,
+                    "intelligence": 0,
+                    "strength": 0,
+                    "observing": 0,
+                    "luck": 0,
+                    "healthy": 0,
+                    "hitPoint": 0,
+                    "attack": 0,
+                    "defense": 0
+                },
+                "duration": 0
+            },
+            "amount": 0.0
         },
         {
             "id": 1,
@@ -30,7 +45,22 @@
                 "point": 0
             },
             "type": 3,
-            "amount": 0
+            "effect": {
+                "stat": {
+                    "speed": 0,
+                    "crafting": 0,
+                    "intelligence": 0,
+                    "strength": 0,
+                    "observing": 0,
+                    "luck": 0,
+                    "healthy": 0,
+                    "hitPoint": 0,
+                    "attack": 0,
+                    "defense": 0
+                },
+                "duration": 0
+            },
+            "amount": 0.0
         },
         {
             "id": 2,
@@ -46,7 +76,22 @@
                 "point": 0
             },
             "type": 3,
-            "amount": 0
+            "effect": {
+                "stat": {
+                    "speed": 0,
+                    "crafting": 0,
+                    "intelligence": 0,
+                    "strength": 0,
+                    "observing": 0,
+                    "luck": 0,
+                    "healthy": 0,
+                    "hitPoint": 0,
+                    "attack": 0,
+                    "defense": 0
+                },
+                "duration": 0
+            },
+            "amount": 0.0
         },
         {
             "id": 3,
@@ -62,7 +107,22 @@
                 "point": 0
             },
             "type": 3,
-            "amount": 0
+            "effect": {
+                "stat": {
+                    "speed": 0,
+                    "crafting": 0,
+                    "intelligence": 0,
+                    "strength": 0,
+                    "observing": 0,
+                    "luck": 0,
+                    "healthy": 0,
+                    "hitPoint": 0,
+                    "attack": 0,
+                    "defense": 0
+                },
+                "duration": 0
+            },
+            "amount": 0.0
         },
         {
             "id": 4,
@@ -78,7 +138,22 @@
                 "point": 0
             },
             "type": 3,
-            "amount": 0
+            "effect": {
+                "stat": {
+                    "speed": 0,
+                    "crafting": 0,
+                    "intelligence": 0,
+                    "strength": 0,
+                    "observing": 0,
+                    "luck": 0,
+                    "healthy": 0,
+                    "hitPoint": 0,
+                    "attack": 0,
+                    "defense": 0
+                },
+                "duration": 0
+            },
+            "amount": 0.0
         },
         {
             "id": 5,
@@ -94,7 +169,22 @@
                 "point": 0
             },
             "type": 3,
-            "amount": 0
+            "effect": {
+                "stat": {
+                    "speed": 0,
+                    "crafting": 0,
+                    "intelligence": 0,
+                    "strength": 0,
+                    "observing": 0,
+                    "luck": 0,
+                    "healthy": 0,
+                    "hitPoint": 0,
+                    "attack": 0,
+                    "defense": 0
+                },
+                "duration": 0
+            },
+            "amount": 0.0
         },
         {
             "id": 6,
@@ -110,7 +200,22 @@
                 "point": 0
             },
             "type": 3,
-            "amount": 0
+            "effect": {
+                "stat": {
+                    "speed": 0,
+                    "crafting": 0,
+                    "intelligence": 0,
+                    "strength": 0,
+                    "observing": 0,
+                    "luck": 0,
+                    "healthy": 0,
+                    "hitPoint": 0,
+                    "attack": 0,
+                    "defense": 0
+                },
+                "duration": 0
+            },
+            "amount": 0.0
         },
         {
             "id": 7,
@@ -126,7 +231,22 @@
                 "point": 0
             },
             "type": 3,
-            "amount": 0
+            "effect": {
+                "stat": {
+                    "speed": 0,
+                    "crafting": 0,
+                    "intelligence": 0,
+                    "strength": 0,
+                    "observing": 0,
+                    "luck": 0,
+                    "healthy": 0,
+                    "hitPoint": 0,
+                    "attack": 0,
+                    "defense": 0
+                },
+                "duration": 0
+            },
+            "amount": 0.0
         },
         {
             "id": 8,
@@ -142,7 +262,22 @@
                 "point": 0
             },
             "type": 2,
-            "amount": 0
+            "effect": {
+                "stat": {
+                    "speed": 0,
+                    "crafting": 0,
+                    "intelligence": 0,
+                    "strength": 0,
+                    "observing": 0,
+                    "luck": 0,
+                    "healthy": 0,
+                    "hitPoint": 0,
+                    "attack": 0,
+                    "defense": 0
+                },
+                "duration": 0
+            },
+            "amount": 0.0
         },
         {
             "id": 9,
@@ -158,7 +293,22 @@
                 "point": 0
             },
             "type": 2,
-            "amount": 0
+            "effect": {
+                "stat": {
+                    "speed": 0,
+                    "crafting": 0,
+                    "intelligence": 0,
+                    "strength": 0,
+                    "observing": 0,
+                    "luck": 0,
+                    "healthy": 0,
+                    "hitPoint": 0,
+                    "attack": 0,
+                    "defense": 0
+                },
+                "duration": 0
+            },
+            "amount": 0.0
         },
         {
             "id": 10,
@@ -174,7 +324,22 @@
                 "point": 0
             },
             "type": 2,
-            "amount": 0
+            "effect": {
+                "stat": {
+                    "speed": 0,
+                    "crafting": 0,
+                    "intelligence": 0,
+                    "strength": 0,
+                    "observing": 0,
+                    "luck": 0,
+                    "healthy": 0,
+                    "hitPoint": 0,
+                    "attack": 0,
+                    "defense": 0
+                },
+                "duration": 0
+            },
+            "amount": 0.0
         },
         {
             "id": 11,
@@ -190,10 +355,56 @@
                 "point": 0
             },
             "type": 1,
-            "amount": 0
+            "effect": {
+                "stat": {
+                    "speed": 0,
+                    "crafting": 0,
+                    "intelligence": 0,
+                    "strength": 20,
+                    "observing": 0,
+                    "luck": 0,
+                    "healthy": 0,
+                    "hitPoint": 0,
+                    "attack": 0,
+                    "defense": 0
+                },
+                "duration": 300
+            },
+            "amount": 0.0
         },
         {
             "id": 12,
+            "name": "Golden Burger",
+            "rarity": 2,
+            "description": "GOLDEN American SPIRIT.",
+            "spritePath": "Sprites/Resource/GoldenBurger",
+            "craftingData": {
+                "craftingMaterials": {
+                    "keys": [],
+                    "values": []
+                },
+                "point": 0
+            },
+            "type": 1,
+            "effect": {
+                "stat": {
+                    "speed": 50,
+                    "crafting": 0,
+                    "intelligence": 0,
+                    "strength": 50,
+                    "observing": 50,
+                    "luck": 0,
+                    "healthy": 0,
+                    "hitPoint": 0,
+                    "attack": 50,
+                    "defense": 50
+                },
+                "duration": 3600
+            },
+            "amount": 0.0
+        },
+        {
+            "id": 13,
             "name": "Production",
             "rarity": 0,
             "description": "Specific Building Production .",
@@ -206,10 +417,25 @@
                 "point": 0
             },
             "type": 4,
-            "amount": 0
+            "effect": {
+                "stat": {
+                    "speed": 0,
+                    "crafting": 0,
+                    "intelligence": 0,
+                    "strength": 0,
+                    "observing": 0,
+                    "luck": 0,
+                    "healthy": 0,
+                    "hitPoint": 0,
+                    "attack": 0,
+                    "defense": 0
+                },
+                "duration": 0
+            },
+            "amount": 0.0
         },
         {
-            "id": 13,
+            "id": 14,
             "name": "Gold",
             "rarity": 0,
             "description": "Specific Building Production .",
@@ -222,10 +448,25 @@
                 "point": 0
             },
             "type": 5,
-            "amount": 0
+            "effect": {
+                "stat": {
+                    "speed": 0,
+                    "crafting": 0,
+                    "intelligence": 0,
+                    "strength": 0,
+                    "observing": 0,
+                    "luck": 0,
+                    "healthy": 0,
+                    "hitPoint": 0,
+                    "attack": 0,
+                    "defense": 0
+                },
+                "duration": 0
+            },
+            "amount": 0.0
         },
         {
-            "id": 14,
+            "id": 15,
             "name": "Diamond",
             "rarity": 0,
             "description": "Specific Building Production .",
@@ -238,10 +479,25 @@
                 "point": 0
             },
             "type": 5,
-            "amount": 0
+            "effect": {
+                "stat": {
+                    "speed": 0,
+                    "crafting": 0,
+                    "intelligence": 0,
+                    "strength": 0,
+                    "observing": 0,
+                    "luck": 0,
+                    "healthy": 0,
+                    "hitPoint": 0,
+                    "attack": 0,
+                    "defense": 0
+                },
+                "duration": 0
+            },
+            "amount": 0.0
         },
         {
-            "id": 15,
+            "id": 16,
             "name": "Recipe:Bread",
             "rarity": 1,
             "description": "Recipe.",
@@ -258,10 +514,25 @@
                 "point": 200
             },
             "type": 6,
-            "amount": 0
+            "effect": {
+                "stat": {
+                    "speed": 0,
+                    "crafting": 0,
+                    "intelligence": 0,
+                    "strength": 0,
+                    "observing": 0,
+                    "luck": 0,
+                    "healthy": 0,
+                    "hitPoint": 0,
+                    "attack": 0,
+                    "defense": 0
+                },
+                "duration": 0
+            },
+            "amount": 0.0
         },
         {
-            "id": 16,
+            "id": 17,
             "name": "Recipe:Burger",
             "rarity": 1,
             "description": "Recipe.",
@@ -280,7 +551,59 @@
                 "point": 400
             },
             "type": 6,
-            "amount": 0
+            "effect": {
+                "stat": {
+                    "speed": 0,
+                    "crafting": 0,
+                    "intelligence": 0,
+                    "strength": 0,
+                    "observing": 0,
+                    "luck": 0,
+                    "healthy": 0,
+                    "hitPoint": 0,
+                    "attack": 0,
+                    "defense": 0
+                },
+                "duration": 0
+            },
+            "amount": 0.0
+        },
+        {
+            "id": 18,
+            "name": "Recipe:Golden Burger",
+            "rarity": 2,
+            "description": "Recipe.",
+            "spritePath": "Sprites/Resource/Recipe",
+            "craftingData": {
+                "craftingMaterials": {
+                    "keys": [
+                        "Burger",
+                        "Gold"
+                    ],
+                    "values": [
+                        1,
+                        9
+                    ]
+                },
+                "point": 1600
+            },
+            "type": 6,
+            "effect": {
+                "stat": {
+                    "speed": 0,
+                    "crafting": 0,
+                    "intelligence": 0,
+                    "strength": 0,
+                    "observing": 0,
+                    "luck": 0,
+                    "healthy": 0,
+                    "hitPoint": 0,
+                    "attack": 0,
+                    "defense": 0
+                },
+                "duration": 0
+            },
+            "amount": 0.0
         }
     ]
 }

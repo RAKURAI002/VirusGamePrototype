@@ -56,7 +56,8 @@ public class ItemManager : SingletonComponent<ItemManager>
 
     public int GetResourceAmount(string name)
     {
-        return allResources.ContainsKey(name) ? allResources[name].Amount : 0;
+        return allResources.ContainsKey(name) ? Mathf.FloorToInt(allResources[name].Amount) : 0;
+    
     }
     /// <summary>
     /// Resource update cycle function. Called in Start.
@@ -66,10 +67,12 @@ public class ItemManager : SingletonComponent<ItemManager>
         foreach(Builder builder in BuildManager.Instance.AllBuildings)
         {
             UpdateBuildingResource(builder);
+
         }
 
         CharacterResourceConsuming();
         return;
+
     }
 
     void CharacterResourceConsuming()
@@ -83,6 +86,7 @@ public class ItemManager : SingletonComponent<ItemManager>
         ConsumeResource("Water", decreaseAmount);
         LoadManager.Instance.SavePlayerDataToJson();
         return;
+
     }
 
     void UpdateBuildingResource(Builder builder)
@@ -93,6 +97,7 @@ public class ItemManager : SingletonComponent<ItemManager>
         {
             Debug.LogWarning($"There're NO production available for {builder.Type} level {builder.Level}.");
             return;
+
         }
 
         foreach(KeyValuePair<string, int> baseProduction in buildingData.production[builder.Level])
@@ -109,15 +114,17 @@ public class ItemManager : SingletonComponent<ItemManager>
                 Debug.Log($"{RESOURCE_CICLE_TIME} seconds passed. Base Production of {builder.Type}[ID : {builder.ID}] is {baseProduction.Value} and sum of Character's Speed in building is {characterStatsSum} resulting in INCREASE " +
                     $"{LoadManager.Instance.allResourceData[baseProduction.Key].Name} : {finalUpdatedAmount}");
                 AddResource(baseProduction.Key , finalUpdatedAmount);
+
         }
+        return; 
         
-        return;    
     }
 
     public void AddEquipment(int id, int amount)
     {
         AddEquipment(LoadManager.Instance.allEquipmentData.SingleOrDefault( e => e.Value.ID == id).Key, amount);
         return;
+
     }
     public void AddEquipment(string name, int amount)
     {
@@ -132,21 +139,23 @@ public class ItemManager : SingletonComponent<ItemManager>
             catch(KeyNotFoundException e)
             {
                 Debug.LogError($"Can't find {name}'s data ::" + e.ToString());
+
             }
-          
-          
+
         }
 
         allEquipments[name].AllAmount += amount;
         Debug.Log($"Adding {allEquipments[name].Name} : {amount} unit(s) to Player. Now Player have {allEquipments[name].AllAmount}.");
         LoadManager.Instance.SavePlayerDataToJson();
         return;
+
     }
     public void AddResource(int id, int amount)
     {
         string name = LoadManager.Instance.allResourceData.SingleOrDefault(r => r.Value.ID == id).Key;
         AddResource(name, amount);
         return;
+
     }
     public bool AddResource(string name, int amount)
     {
@@ -154,15 +163,18 @@ public class ItemManager : SingletonComponent<ItemManager>
         {
             Debug.LogWarning($"There're no {name} data in game.");
             return false;
+
         }
 
         if (allResources.ContainsKey(name))
         {
             allResources[name].Amount += amount;
+
         }
         else
         {
             allResources.Add(name, new Resource(name, amount));
+
         }
         Debug.Log($"Adding {LoadManager.Instance.allResourceData[name].Name} : {amount} unit(s) to Player . . .");
         EventManager.Instance.ResourceChanged(name);
@@ -170,6 +182,7 @@ public class ItemManager : SingletonComponent<ItemManager>
 
         return true;
     }
+
     public bool TryConsumeResources(DictionaryStringToInt resources)
     {
         if(IsAffordable(resources))
@@ -177,11 +190,14 @@ public class ItemManager : SingletonComponent<ItemManager>
             foreach (KeyValuePair<string, int> resource in resources)
             {
                 ConsumeResource(resource);
+
             }
+
         }
         else
         {
             return false;
+
         }
 
         return true;  
@@ -191,12 +207,13 @@ public class ItemManager : SingletonComponent<ItemManager>
         if (IsAffordable(name, amount))
         {
                 ConsumeResource(name, amount);
+
         }
         else
         {
             return false;
-        }
 
+        }
         return true;
     }
     bool ConsumeResource(KeyValuePair<string, int> resource)
@@ -277,15 +294,18 @@ public class ItemManager : SingletonComponent<ItemManager>
         AddResource(4, 10);
         AddResource(3, 10);
         AddResource(5, 10);
+        AddResource("Stone", 10);
         AddResource("Wood", 10);
         AddResource("Gold", 10);
         AddResource("Diamond", 10);
         AddResource("Wheat", 10);
         AddResource("Meat", 10);
-
-
+        AddResource("Burger", 5);
+        AddResource("Golden Burger", 5);
+        AddResource("Bread", 10);
         AddResource("Recipe:Bread", 10);
         AddResource("Recipe:Burger", 10);
+        AddResource("Recipe:Golden Burger", 10);
 
         AddEquipment(1, 1);
         AddEquipment(1, 1);

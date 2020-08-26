@@ -91,7 +91,7 @@ public class ActivityInformation
 
     public bool isFinished;
     public long startPoint;
-    public float currentProgress;
+    public float currentPoint;
     public long finishPoint;
 }
 

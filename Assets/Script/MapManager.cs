@@ -25,31 +25,21 @@ public class MapManager : SingletonComponent<MapManager>
     }
     void OnEnable()
     {
-        SceneManager.sceneLoaded += OnLevelFinishedLoading;
         EventManager.Instance.OnPlayerLevelUp += OnPlayerLevelUp;
     }
 
     void OnDisable()
     {
-        SceneManager.sceneLoaded -= OnLevelFinishedLoading;
+
         if(EventManager.Instance)
         {
             EventManager.Instance.OnPlayerLevelUp -= OnPlayerLevelUp;
         }
     }
 
-    void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
+    void Start()    
     {
-        if (scene.name == "MainScene" && secondCalled)
-        {
-            Awake();
-            Start();
-        }
-        secondCalled = true;
-    }
-     void Start()    
-    {
-       tilemap.CompressBounds();
+        SetExpandedArea();
     }
 
     void Update()
@@ -89,13 +79,16 @@ public class MapManager : SingletonComponent<MapManager>
 
     bool buildPermission;
 
+    /// <summary>
+    /// Destroy expanded area(Trees) and open FogArea.
+    /// </summary>
     public void SetExpandedArea()
     {
+        Debug.Log("Seting expanded Area.");
         foreach(int treeID in LoadManager.Instance.playerData.expandedArea)
         {
-            Debug.Log(treeID);
             GameObject treeGO = GameManager.FindDeepChild(GameObject.Find("Map/Trees").transform, treeID.ToString()).gameObject;
-            Debug.Log(treeGO.name);
+
             if (treeGO)
             {
                 Destroy(treeGO);
@@ -127,9 +120,12 @@ public class MapManager : SingletonComponent<MapManager>
     }
     public string SelectedBuildingName { get; set; }
 
+    /// <summary>
+    /// Select where to Create Building.
+    /// </summary>
+    /// <param name="position"> Building Position </param>
     public void ClickTile(Vector3Int position)
     {
-      //  Debug.Log(position.ToString());
         for (int i = 0; i < constructableGrid.Count; i++)
         {
             if (constructableGrid[i].Contains(position))

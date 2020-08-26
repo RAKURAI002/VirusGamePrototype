@@ -18,7 +18,6 @@ public class CameraPan : MonoBehaviour
     public float groundZ = 0;
     float totalClickTime = 0;
 
-
     Vector3 boundMin;
     Vector3 boundMax;
 

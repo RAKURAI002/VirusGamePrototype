@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.ComTypes;
 using UnityEngine;
 
 [System.Serializable]
@@ -14,6 +15,7 @@ public class Item
         SuperRare,
         UltraRare,
         MythologicalRare
+
     }
 
     [SerializeField] protected int id = -1;
@@ -24,6 +26,7 @@ public class Item
     [SerializeField] public string spritePath = "Please assign something.";
 
     [SerializeField] public CraftingData craftingData;
+
 
     public int ID { get { return id; } }
     public string Name { get { return name; } }

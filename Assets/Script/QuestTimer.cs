@@ -13,7 +13,7 @@ public class QuestTimer : MonoBehaviour
     long timeFinish;
     long timeLeft;
     public bool isFinished;
-
+    int speedUpCost;
     public GameObject slider { get; set; }
 
     private void Awake()
@@ -39,6 +39,7 @@ public class QuestTimer : MonoBehaviour
             return;
         }
 
+        
 
         timeLeft = timeFinish - DateTime.Now.Ticks;
        // Debug.Log($"Time Left : {timeLeft} : {timeLeft / TimeSpan.TicksPerSecond }");
@@ -56,6 +57,15 @@ public class QuestTimer : MonoBehaviour
         int hours = Mathf.FloorToInt(timer / 3600);
         int minutes = Mathf.FloorToInt(timer % 3600 / 60);
         int seconds = Mathf.FloorToInt(timer % 3600 % 60f);
+
+        int speedUpCostTemp = speedUpCost;
+        activityInformation.currentPoint = timer;
+        speedUpCost = ItemManager.Instance.GetSpeedUpCost(timer * 20);
+        if (speedUpCostTemp != speedUpCost)
+        {
+            Resources.FindObjectsOfTypeAll<NotificationPanel>()[0].ChangeSpeedUpCost(activityInformation, speedUpCost);
+        }
+        
 
         slider.GetComponentInChildren<Text>().text = String.Format("{0:00}:{1:00}:{2:00}", hours, minutes, seconds);
     }
@@ -89,6 +99,11 @@ public class QuestTimer : MonoBehaviour
             Destroy(slider);
         }
         return;
+    }
+
+    public void ForceFinish()
+    {
+        FinishQuest();
     }
     void GetSlider()
     {/*

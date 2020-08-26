@@ -14,6 +14,7 @@ public class Builder
         public int teamNumber;
         public float currentPoint;
         public float finishPoint;
+
     }
     public Builder()
     {     
@@ -23,6 +24,7 @@ public class Builder
       //  this.id = BuildManager.Instance.AllBuildings.Count;
         this.type = type;
         InitializeData();
+
     }
     public Builder(Building.BuildingType type, Vector3 pos, GameObject representGameObject)
     {
@@ -34,6 +36,7 @@ public class Builder
         this.constructionStatus = new Construction { isConstructing = true, constructPointRequired = 10 };
 
         InitializeData();
+
     }
     public Builder(Building.BuildingType type, Vector3 pos, int level, GameObject representGameObject, Construction constructionStatus)
     {
@@ -45,6 +48,7 @@ public class Builder
         this.constructionStatus = constructionStatus;
 
         InitializeData();
+
     }
 
     [SerializeField] private int id;
@@ -64,6 +68,7 @@ public class Builder
     public List<int> TeamLockState {
         get { return teamLockState ?? (teamLockState = new List<int>()); }
         set { teamLockState = value; }
+
     }
 
     public List<CharacterWrapper> CharacterInBuilding
@@ -81,19 +86,21 @@ public class Builder
                     if (characterInBuilding.ElementAtOrDefault(i) == null)
                     {
                             characterInBuilding.Add(new CharacterWrapper());
-                    }
-            }
-            
-            
 
-            
+                    }
+
+            }
+
             return characterInBuilding ;
+
         }
         
         set
         {
             characterInBuilding = value;
+
         }
+
     }
 
     public int ID { get { return id; } }
@@ -109,11 +116,11 @@ public class Builder
         {
             Debug.LogError("Can't Find Building data of " + this.type);
             return;
+
         }
         
         this.maxActiveAmount = buildingData.maxActiveAmount;
         this.maxLevel = buildingData.maxLevel;
-
 
     }
 
@@ -121,6 +128,7 @@ public class Builder
     {
         return ($"Type : {type.ToString()}, Position {position}, Level : {level}, CurrentActiveAmount : {currentActiveAmount}, Constructing Status : {constructionStatus.isConstructing} " +
             $" Current active amount : {CurrentActiveAmount}/{maxActiveAmount}, Represent GO : {representGameObject.name}");
+
     }
 
 

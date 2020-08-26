@@ -27,6 +27,7 @@ public class AssignSlotCreator : MonoBehaviour
             slot.teamNumber = teamNumber;
             slotGO.name = "Character" + (i).ToString() + "Team" + (teamNumber);
             slotGO.tag = "DropSlot";
+            slotGO.transform.localScale = Vector3.one * 0.8f;
 
             slotListGO.Add(slotGO);
         }

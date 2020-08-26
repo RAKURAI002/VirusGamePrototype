@@ -14,23 +14,30 @@ public class EventManager : SingletonComponent<EventManager>
         base.Awake();
 
     }
+
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnLevelFinishedLoading;
+
     }
 
     void OnDisable()
     {
         SceneManager.sceneLoaded -= OnLevelFinishedLoading;
+
     }
+
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     {
         if (scene.name == "MainScene" && secondCalled)
         {
             Awake();
+
         }
         secondCalled = true;
+
     }
+
     #endregion
 
     public delegate void QuestFinishedDelegate(KeyValuePair<int, ActivityInformation> questData);
@@ -44,26 +51,37 @@ public class EventManager : SingletonComponent<EventManager>
     public void ResourceChanged(string resourceName)
     {
         OnResourceChanged?.Invoke(resourceName);
+
     }
+
     public void PlayerLevelUp(int level)
     {
         OnPlayerLevelUp?.Invoke(level);
+
     }
+
     public void ActivityAssigned(ActivityInformation activityInformation)
     {  
         OnActivityAssigned?.Invoke(activityInformation);
+
     }
+
     public void ActivityFinished(ActivityInformation activityInformation)
     {
         OnActivityFinished?.Invoke(activityInformation);
+
     }
+
     public void CharacterAssigned()
     {
         OnCharacterAssigned?.Invoke();
+
     }
+
     public void QuestFinished(KeyValuePair<int, ActivityInformation> questData)
     {
         OnQuestFinished?.Invoke(questData);
+
     }
 
 }

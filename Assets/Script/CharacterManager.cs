@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class CharacterManager : SingletonComponent<CharacterManager>
 {
-    /// Contains all of Player's Characters.
     [SerializeField]private List<Character> allCharacters;
     public List<Character> AllCharacters { get { return allCharacters; } set { allCharacters = value; } }
 
@@ -115,6 +114,14 @@ public class CharacterManager : SingletonComponent<CharacterManager>
         EventManager.Instance.CharacterAssigned();
         LoadManager.Instance.SavePlayerDataToJson();
         return true;
+    }
+
+    public void ConsumeItem(Character character, Resource item)
+    {
+        if(ItemManager.Instance.TryConsumeResources(item.Name, 1))
+        {
+            Debug.Log(character.Name);
+        }
     }
 
 }

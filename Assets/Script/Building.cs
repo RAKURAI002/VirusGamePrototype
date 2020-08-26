@@ -8,7 +8,6 @@ public class Building
 {
     public Building()
     {
-
     }
 
     public Building(BuildingType type, List<DictionaryStringToInt> buildingCost, List<DictionaryStringToInt> production, List<DictionaryStringToInt> consuming, List<int> upgradePoint,
@@ -25,6 +24,7 @@ public class Building
         this.spritePath = spritePath;
         this.maxCharacterStored = maxExtraCharacterStored;
         this.description = description;
+
     }
     [System.Serializable]
     public enum BuildingType
@@ -39,11 +39,15 @@ public class Building
         TownBase,
         WaterTreatmentCenter,
         WareHouse,
-       
         FishingPond,
         LaborCenter,
-
+        Armory,
+        TradingCenter,
+        /*
+        Mine,
+        Lumber*/
     }
+
     [SerializeField] public BuildingType type;
     [SerializeField] public List<DictionaryStringToInt> buildingCost;
     [SerializeField] public List<DictionaryStringToInt> production;

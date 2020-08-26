@@ -295,12 +295,12 @@ public class MainCanvas : MonoBehaviour
     {
         toWorkCanvas.SetActive(true);
         canvasActive = true;
+
     }
     public void ExitButton()
     {
-
         EventSystem.current.currentSelectedGameObject.transform.parent.gameObject.SetActive(false);
-        StartCoroutine(DelaySetCanvasActive(false));
+
     }
     public void OpenMenu()
     {

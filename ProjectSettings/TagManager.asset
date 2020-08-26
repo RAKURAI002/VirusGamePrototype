@@ -10,7 +10,6 @@ TagManager:
   - ExtraUIPanel
   - Mist
   - Tree
-  - Panel
   - Fog
   layers:
   - Default

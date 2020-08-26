@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -35,6 +36,7 @@ public class BuildingShopPanel : MonoBehaviour
     void OnResourceChanged(string name)
     {
         RefreshPanel();
+
     }
     public void TryPurchaseBuilding()
     {
@@ -44,7 +46,6 @@ public class BuildingShopPanel : MonoBehaviour
         currentSelectedButton.interactable = false;
         cancelButton.gameObject.SetActive(true);
 
-        //  Debug.Log(MapManager.Instance.SelectedBuildingName);
         MapManager.Instance.SelectedBuildingName = currentSelectedButton.name.Replace("ShopButton", "");
         MapManager.Instance.ShowAvailableTiles();
     }
@@ -56,6 +57,7 @@ public class BuildingShopPanel : MonoBehaviour
         }
 
         MapManager.Instance.CancleShowAvailableTiles();
+
     }
     public void RefreshPanel()
     {
@@ -64,47 +66,51 @@ public class BuildingShopPanel : MonoBehaviour
 
         Debug.Log("Refreshing Building Shop Panel . . .");
 
-        for (int i = 0; i < 11; i++)
+        for (int i = 0; i < Enum.GetNames(typeof(Building.BuildingType)).Length - 1; i++)
         {
             Button button = GameObject.Find("ShopButton" + (i + 1).ToString()).GetComponent<Button>();
-
             Builder bu = null;
+
             if (button != null)
             {
                 button.interactable = true;
-                
 
                 bu = BuildManager.Instance.AllBuildings.FirstOrDefault(b => ((int)b.Type) == int.Parse(button.name.Replace("ShopButton", "")));
 
                 if (bu != null)
                 {
                     button.GetComponentInChildren<Text>().text = bu.CurrentActiveAmount.ToString() + "/" + bu.maxActiveAmount;
+
                 }
                 else
                 {
                     bu = new Builder((Building.BuildingType)(i + 1));
-                    // Debug.Log(bu.maxActiveAmount);
                     button.GetComponentInChildren<Text>().text = "0 /" + bu.maxActiveAmount;
+
                 }
+
             }
             else
             {
                 Debug.LogWarning("Can't find Building button !");
+
             }
 
             Building buildingData = LoadManager.Instance.allBuildingData[bu.Type];
-            if(!ItemManager.Instance.IsAffordable(buildingData.buildingCost[0]))
+            if (!ItemManager.Instance.IsAffordable(buildingData.buildingCost[0]))
             {
                 button.image.color = new Color(1f, 0.5f, 0.5f, 1f);
                 button.interactable = false;
+
             }
             else
             {
                 button.image.color = Color.white;
+
             }
 
-
         }
+
         for (int i = 0; i < BuildManager.Instance.AllBuildings.Count; i++)
         {
             if (BuildManager.Instance.AllBuildings[i].CurrentActiveAmount == BuildManager.Instance.AllBuildings[i].maxActiveAmount)
@@ -113,14 +119,15 @@ public class BuildingShopPanel : MonoBehaviour
                 if (button != null)
                 {
                     button.interactable = false;
+
                 }
                 else
                 {
                     Debug.LogWarning($"Can't find Building button : {BuildManager.Instance.AllBuildings[i].Type} !");
+
                 }
 
             }
-
 
         }
 

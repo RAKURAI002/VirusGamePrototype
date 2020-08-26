@@ -17,46 +17,37 @@ public class BuildManager : SingletonComponent<BuildManager>
     protected override void Awake()
     {
         base.Awake();
+
     }
     protected override void OnInitialize()
     {
         allBuildings = new List<Builder>();
 
-        GameObject farmPrefab = Resources.Load("Prefabs/FarmPrefab") as GameObject;
-        GameObject kitchenPrefab = Resources.Load("Prefabs/KitchenPrefab") as GameObject;
-        GameObject laboratoryPrefab = Resources.Load("Prefabs/LaboratoryPrefab") as GameObject;
-        GameObject medicalCenterPrefab = Resources.Load("Prefabs/MedicalCenterPrefab") as GameObject;
-        GameObject quarantineSiterefab = Resources.Load("Prefabs/QuarantineSitePrefab") as GameObject;
-        GameObject residencePrefab = Resources.Load("Prefabs/ResidencePrefab") as GameObject;
-        GameObject townBasePrefab = Resources.Load("Prefabs/TownBasePrefab") as GameObject;
-        GameObject waterTreatmentCenterPrefab = Resources.Load("Prefabs/WaterTreatmentCenterPrefab") as GameObject;
-        GameObject warehousePrefab = Resources.Load("Prefabs/WarehousePrefab") as GameObject;
-        GameObject fishingPondPrefab = Resources.Load("Prefabs/FishingPondPrefab") as GameObject;
-        GameObject laborCenterPrefab = Resources.Load("Prefabs/LaborCenterPrefab") as GameObject;
-
-
-
         allBuildingPrefab = new List<GameObject>();
+        allBuildingPrefab.Add(Resources.Load("Prefabs/FarmPrefab") as GameObject);
+        allBuildingPrefab.Add(Resources.Load("Prefabs/KitchenPrefab") as GameObject);
+        allBuildingPrefab.Add(Resources.Load("Prefabs/LaboratoryPrefab") as GameObject);
+        allBuildingPrefab.Add(Resources.Load("Prefabs/MedicalCenterPrefab") as GameObject);
+        allBuildingPrefab.Add(Resources.Load("Prefabs/QuarantineSitePrefab") as GameObject);
+        allBuildingPrefab.Add(Resources.Load("Prefabs/ResidencePrefab") as GameObject);
+        allBuildingPrefab.Add(Resources.Load("Prefabs/TownBasePrefab") as GameObject);
+        allBuildingPrefab.Add(Resources.Load("Prefabs/WaterTreatmentCenterPrefab") as GameObject);
+        allBuildingPrefab.Add(Resources.Load("Prefabs/WarehousePrefab") as GameObject);
+        allBuildingPrefab.Add(Resources.Load("Prefabs/FishingPondPrefab") as GameObject);
+        allBuildingPrefab.Add(Resources.Load("Prefabs/LaborCenterPrefab") as GameObject);
+        allBuildingPrefab.Add(Resources.Load("Prefabs/ArmoryPrefab") as GameObject);
+        allBuildingPrefab.Add(Resources.Load("Prefabs/TradingCenterPrefab") as GameObject);
 
-        allBuildingPrefab.Add(farmPrefab);
-        allBuildingPrefab.Add(kitchenPrefab);
-        allBuildingPrefab.Add(laboratoryPrefab);
-        allBuildingPrefab.Add(medicalCenterPrefab);
-        allBuildingPrefab.Add(quarantineSiterefab);
-        allBuildingPrefab.Add(residencePrefab);
-        allBuildingPrefab.Add(townBasePrefab);
-        allBuildingPrefab.Add(waterTreatmentCenterPrefab);
-        allBuildingPrefab.Add(warehousePrefab);
-        allBuildingPrefab.Add(fishingPondPrefab);
-        allBuildingPrefab.Add(laborCenterPrefab);
     }
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnLevelFinishedLoading;
+
     }
     void OnDisable()
     {
         SceneManager.sceneLoaded -= OnLevelFinishedLoading;
+
     }
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     {
@@ -66,6 +57,7 @@ public class BuildManager : SingletonComponent<BuildManager>
             Start();
         }
         secondCalled = true;
+
     }
     void Start()
     {
@@ -75,7 +67,6 @@ public class BuildManager : SingletonComponent<BuildManager>
 
     public bool CreateNewBuilding(Building.BuildingType type, int teamNumber, Vector3 position)
     {
-
         Builder laborCenter = allBuildings.SingleOrDefault(b => b.Type == Building.BuildingType.LaborCenter);
         if ((laborCenter == null || laborCenter.Level == 0) && gameObject.transform.Find("TimerCanvas").childCount >= 1)
         {
@@ -115,6 +106,7 @@ public class BuildManager : SingletonComponent<BuildManager>
         LoadManager.Instance.SavePlayerDataToJson();
 
         return true;
+
     }
 
     public void LoadBuilding(Builder builder)
@@ -128,33 +120,35 @@ public class BuildManager : SingletonComponent<BuildManager>
 
         builderGO.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(buildData.spritePath[builder.Level]);
 
-
         AddBuildingsToList(builder);
         builderGO.name = builder.ID.ToString();
         builderGO.AddComponent<BuildingBehavior>().builder = builder;/// UNUSED
 
-        /// Reconnect reference.
+        /// Reconnect reference. -----------------
         for (int i = builder.CharacterInBuilding.Count - 1; i >= 0; i--)
         {
             for (int j = builder.CharacterInBuilding[i].Characters.Count - 1; j >= 0; j--)
             {
                 builder.CharacterInBuilding[i].Characters[j] = CharacterManager.Instance.AllCharacters.Single(c => c.ID == builder.CharacterInBuilding[i].Characters[j].ID);
+            
             }
-        }
 
+        }
+        /// --------------------------------------
 
         if (builder.constructionStatus.isConstructing == true)
         {
             builderGO.AddComponent<BuildTimer>();
+
         }
 
         Debug.Log("Loading Building From JSON : " + builder.ToString());
         return;
+
     }
 
     void AddBuildingsToList(Builder builder)
     {
-
         allBuildings.Add(builder);
 
         Builder[] sameTypeBuilding = allBuildings.Where(b1 => b1.Type == builder.Type).ToArray();
@@ -164,11 +158,14 @@ public class BuildManager : SingletonComponent<BuildManager>
             foreach (Builder sameBuilder in sameTypeBuilding)
             {
                 sameBuilder.CurrentActiveAmount = sameTypeBuilding.Length;
+
             }
+
         }
         else
         {
             Debug.LogError("Something happened on AddBuildingsToList !");
+
         }
         /// Debug
         //Debug.Log(sameTypeBuilding.Length);
@@ -184,11 +181,13 @@ public class BuildManager : SingletonComponent<BuildManager>
         {
             Debug.LogWarning("You can't perform 2 constructing task on same Building!");
             return false;
+
         }
         if (builder.maxLevel == builder.Level)
         {
             Debug.LogWarning($"This building({builder.Type}) is on MAX LEVEL {builder.Level}/{builder.maxLevel}");
             return false;
+
         }
         Builder laborCenter = allBuildings.SingleOrDefault(b => b.Type == Building.BuildingType.LaborCenter);
         if (laborCenter == null)
@@ -197,12 +196,14 @@ public class BuildManager : SingletonComponent<BuildManager>
             {
                 Debug.LogWarning("Please Create LaborCenter to perform more Building task !");
                 return false;
+
             }
            
         }
         else
         {
             allBuildings.SingleOrDefault(b => b.Type == Building.BuildingType.LaborCenter).TeamLockState.Add(teamNumber);
+       
         }
 
         if (ConsumeBuildingCost(builder))
@@ -212,14 +213,17 @@ public class BuildManager : SingletonComponent<BuildManager>
             builder.representGameObject.AddComponent<BuildTimer>();
             Debug.Log("Upgrade action complete.");
             LoadManager.Instance.SavePlayerDataToJson();
+        
         }
         else
         {
             Debug.LogWarning("Upgrade failed : Not enough Resources for upgrading");
             return false;
+
         }
 
         return true;
+
     }
 
     bool ConsumeBuildingCost(Builder builder)
@@ -230,14 +234,15 @@ public class BuildManager : SingletonComponent<BuildManager>
         if (ItemManager.Instance.TryConsumeResources(buildingData.buildingCost[builder.Level]))
         {
             return true;
+
         }
         else
         {
             return false;
+
         }
+
     }
-
-
 
     public void RemoveBuilding(Builder destroyBuilding)
     {
@@ -246,6 +251,7 @@ public class BuildManager : SingletonComponent<BuildManager>
         if (destroyBuilding.constructionStatus.isConstructing)
         {
             destroyBuilding.representGameObject.GetComponent<BuildTimer>().CancelConstructing();
+        
         }
         Debug.Log($"Try removing {destroyBuilding.ToString()} . . ");
 
@@ -254,21 +260,21 @@ public class BuildManager : SingletonComponent<BuildManager>
             foreach (Character character in cw.Characters)
             {
                 CharacterManager.Instance.CancleAssignWork(character, destroyBuilding);
+
             }
+
         }
 
         MapManager.Instance.ReclaimConstructableGrid(destroyBuilding);
-
         RemoveBuildingFromList(destroyBuilding);
-
-
-
         Destroy(destroyBuilding.representGameObject, 0.1f);
+
         LoadManager.Instance.SavePlayerDataToJson();
 
         Resources.FindObjectsOfTypeAll<BuildingShopPanel>()[0].RefreshPanel();
 
         return;
+
     }
     public void RemoveBuildingFromList(Builder b)
     {
@@ -281,17 +287,14 @@ public class BuildManager : SingletonComponent<BuildManager>
                 builder.CurrentActiveAmount = sameTypeBuildings.Length;
 
             }
+
         }
         else
         {
             Debug.LogError("Something happened on RemoveBuildingFromList !");
+
         }
-        /// Debug
-        //Debug.Log(sameTypeBuilding.Length);
-        //foreach (Building builder in sameTypeBuilding)
-        //{
-        //    Debug.Log(builder.ToString());
-        //}
+
     }
 
 }
