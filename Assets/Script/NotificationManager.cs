@@ -89,7 +89,7 @@ public class NotificationManager : SingletonComponent<NotificationManager>
                         ActivityTimerGO.transform.SetParent(transform.Find("ActivitiesList"));
                         ActivityTimerGO.name = activity.Value.activityID.ToString();
                         CraftTimer craftTimer = ActivityTimerGO.AddComponent<CraftTimer>();
-                        craftTimer.activityInformation = activity.Value;
+                        craftTimer.InitializeData(activity.Value);
                         break;
                     }
                 case ActivityType.Build:
@@ -139,7 +139,7 @@ public class NotificationManager : SingletonComponent<NotificationManager>
                     ActivityTimerGO.transform.SetParent(NotificationManager.Instance.gameObject.transform.Find("ActivitiesList"));
 
                     CraftTimer craftTimer = ActivityTimerGO.AddComponent<CraftTimer>();
-                    craftTimer.activityInformation = activityInformation;
+                    craftTimer.InitializeData(activityInformation);
                     break;
                 }
             case ActivityType.Build:

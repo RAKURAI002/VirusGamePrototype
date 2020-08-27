@@ -86,7 +86,8 @@ public class ActivityInformation
     public string activityName;
     public ActivityType activityType;
 
-    public int InformationID;
+    public int informationID;
+    public Builder builderReference;
     public int teamNumber;
 
     public bool isFinished;

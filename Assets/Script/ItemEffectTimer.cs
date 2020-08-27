@@ -74,7 +74,7 @@ public class ItemEffectTimer : MonoBehaviour
 
         if (effect.finishTime == 0)
         {
-            Debug.Log("INITIATE");
+
             effect.startTime = DateTime.Now.Ticks;
             effect.finishTime = DateTime.Now.Ticks + (effect.duration * TimeSpan.TicksPerSecond);
             character.IncreaseStats(effect.stats);

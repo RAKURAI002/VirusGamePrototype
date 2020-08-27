@@ -107,7 +107,7 @@ public class QuestManager : SingletonComponent<QuestManager>
             startPoint = DateTime.Now.Ticks,
             finishPoint = DateTime.Now.Ticks + (questDuration * TimeSpan.TicksPerSecond),
             teamNumber = _teamNumber,
-            InformationID = currentQuest.questID
+            informationID = currentQuest.questID
 
         });
 
@@ -120,7 +120,7 @@ public class QuestManager : SingletonComponent<QuestManager>
     public void FinishQuest(ActivityInformation quest)
     {
       //  Debug.Log(quest.activityID);
-        QuestData questData = LoadManager.Instance.allQuestData[quest.InformationID];
+        QuestData questData = LoadManager.Instance.allQuestData[quest.informationID];
         List<Character> characters = new List<Character>();
         characters.AddRange(townBase.CharacterInBuilding[quest.teamNumber].Characters);
 

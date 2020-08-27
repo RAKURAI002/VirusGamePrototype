@@ -38,11 +38,11 @@ public class Item
         public CraftingData(DictionaryStringToInt craftingMaterials, int point)
         {
             this.craftingMaterials = craftingMaterials;
-            this.point = point;
+            this.pointRequired = point;
         }
 
         [SerializeField] public DictionaryStringToInt craftingMaterials;
-        [SerializeField] public int point;
+        [SerializeField] public int pointRequired;
 
     }
 

@@ -151,7 +151,7 @@ public class CharacterManager : SingletonComponent<CharacterManager>
            
             
 
-            Debug.Log(character.Name + $"  {item.effect.name}");
+       //     Debug.Log(character.Name + $"  {item.effect.name}");
             
 
         }
@@ -162,7 +162,7 @@ public class CharacterManager : SingletonComponent<CharacterManager>
     {
         if(!isAlreadySameEffectActive)
         {
-            Debug.Log("Applying Effect" + effect.name);
+          //  Debug.Log("Applying Effect" + effect.name);
             GameObject effectTimerGO = new GameObject(character.Name + ":" + effect.name);
             effectTimerGO.transform.SetParent(CharacterManager.Instance.gameObject.transform.Find("ItemEffectTimer"));
             effectTimerGO.AddComponent<ItemEffectTimer>().StartEffect(character, effect);
@@ -173,7 +173,7 @@ public class CharacterManager : SingletonComponent<CharacterManager>
             
             GameObject effectTimerGO = CharacterManager.Instance.gameObject.transform.Find("ItemEffectTimer/" + effect.instanceID).gameObject;
             effectTimerGO.GetComponent<ItemEffectTimer>().IncreaseDuration(effect.duration);
-            Debug.Log(effectTimerGO.name);
+          //  Debug.Log(effectTimerGO.name);
 
         }
 

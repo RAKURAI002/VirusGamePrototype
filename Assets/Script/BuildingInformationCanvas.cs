@@ -57,7 +57,7 @@ public class BuildingInformationCanvas : MonoBehaviour
         this.builder = builder;
 
         GameObject craftButtonGO = transform.Find("InformationPanel/BuildingOption/Craft").gameObject;
-        if (builder.Type == Building.BuildingType.Kitchen || builder.Type == Building.BuildingType.MedicalCenter)
+        if (builder.Type == Building.BuildingType.Kitchen || builder.Type == Building.BuildingType.MedicalCenter || builder.Type == Building.BuildingType.Armory)
         {
             craftButtonGO.SetActive(true);
         }

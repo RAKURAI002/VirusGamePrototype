@@ -11,9 +11,9 @@
                     "keys": [],
                     "values": []
                 },
-                "point": 0
+                "pointRequired": 0
             },
-            "type": 3,
+            "type": 5,
             "effect": {
                 "name": "",
                 "spritePath": "",
@@ -30,6 +30,7 @@
                     "defense": 0
                 },
                 "duration": 0,
+                "instanceID": "",
                 "startTime": 0,
                 "finishTime": 0
             },
@@ -46,9 +47,9 @@
                     "keys": [],
                     "values": []
                 },
-                "point": 0
+                "pointRequired": 0
             },
-            "type": 3,
+            "type": 5,
             "effect": {
                 "name": "",
                 "spritePath": "",
@@ -65,6 +66,7 @@
                     "defense": 0
                 },
                 "duration": 0,
+                "instanceID": "",
                 "startTime": 0,
                 "finishTime": 0
             },
@@ -81,9 +83,9 @@
                     "keys": [],
                     "values": []
                 },
-                "point": 0
+                "pointRequired": 0
             },
-            "type": 3,
+            "type": 5,
             "effect": {
                 "name": "",
                 "spritePath": "",
@@ -100,6 +102,7 @@
                     "defense": 0
                 },
                 "duration": 0,
+                "instanceID": "",
                 "startTime": 0,
                 "finishTime": 0
             },
@@ -116,9 +119,9 @@
                     "keys": [],
                     "values": []
                 },
-                "point": 0
+                "pointRequired": 0
             },
-            "type": 3,
+            "type": 5,
             "effect": {
                 "name": "",
                 "spritePath": "",
@@ -135,6 +138,7 @@
                     "defense": 0
                 },
                 "duration": 0,
+                "instanceID": "",
                 "startTime": 0,
                 "finishTime": 0
             },
@@ -151,9 +155,9 @@
                     "keys": [],
                     "values": []
                 },
-                "point": 0
+                "pointRequired": 0
             },
-            "type": 3,
+            "type": 5,
             "effect": {
                 "name": "",
                 "spritePath": "",
@@ -170,6 +174,7 @@
                     "defense": 0
                 },
                 "duration": 0,
+                "instanceID": "",
                 "startTime": 0,
                 "finishTime": 0
             },
@@ -186,9 +191,9 @@
                     "keys": [],
                     "values": []
                 },
-                "point": 0
+                "pointRequired": 0
             },
-            "type": 3,
+            "type": 5,
             "effect": {
                 "name": "",
                 "spritePath": "",
@@ -205,6 +210,7 @@
                     "defense": 0
                 },
                 "duration": 0,
+                "instanceID": "",
                 "startTime": 0,
                 "finishTime": 0
             },
@@ -221,9 +227,9 @@
                     "keys": [],
                     "values": []
                 },
-                "point": 0
+                "pointRequired": 0
             },
-            "type": 3,
+            "type": 5,
             "effect": {
                 "name": "",
                 "spritePath": "",
@@ -240,6 +246,7 @@
                     "defense": 0
                 },
                 "duration": 0,
+                "instanceID": "",
                 "startTime": 0,
                 "finishTime": 0
             },
@@ -256,9 +263,9 @@
                     "keys": [],
                     "values": []
                 },
-                "point": 0
+                "pointRequired": 0
             },
-            "type": 3,
+            "type": 5,
             "effect": {
                 "name": "",
                 "spritePath": "",
@@ -275,6 +282,7 @@
                     "defense": 0
                 },
                 "duration": 0,
+                "instanceID": "",
                 "startTime": 0,
                 "finishTime": 0
             },
@@ -291,182 +299,7 @@
                     "keys": [],
                     "values": []
                 },
-                "point": 0
-            },
-            "type": 2,
-            "effect": {
-                "name": "",
-                "spritePath": "",
-                "stats": {
-                    "speed": 0,
-                    "crafting": 0,
-                    "intelligence": 0,
-                    "strength": 0,
-                    "observing": 0,
-                    "luck": 0,
-                    "healthy": 0,
-                    "hitPoint": 0,
-                    "attack": 0,
-                    "defense": 0
-                },
-                "duration": 0,
-                "startTime": 0,
-                "finishTime": 0
-            },
-            "amount": 0.0
-        },
-        {
-            "id": 9,
-            "name": "Bread",
-            "rarity": 1,
-            "description": "Low-Grade Bread.",
-            "spritePath": "Sprites/Resource/Bread",
-            "craftingData": {
-                "craftingMaterials": {
-                    "keys": [],
-                    "values": []
-                },
-                "point": 0
-            },
-            "type": 2,
-            "effect": {
-                "name": "",
-                "spritePath": "",
-                "stats": {
-                    "speed": 0,
-                    "crafting": 0,
-                    "intelligence": 0,
-                    "strength": 0,
-                    "observing": 0,
-                    "luck": 0,
-                    "healthy": 0,
-                    "hitPoint": 0,
-                    "attack": 0,
-                    "defense": 0
-                },
-                "duration": 0,
-                "startTime": 0,
-                "finishTime": 0
-            },
-            "amount": 0.0
-        },
-        {
-            "id": 10,
-            "name": "Meat",
-            "rarity": 1,
-            "description": "YumYum . . .",
-            "spritePath": "Sprites/Resource/Meat",
-            "craftingData": {
-                "craftingMaterials": {
-                    "keys": [],
-                    "values": []
-                },
-                "point": 0
-            },
-            "type": 2,
-            "effect": {
-                "name": "",
-                "spritePath": "",
-                "stats": {
-                    "speed": 0,
-                    "crafting": 0,
-                    "intelligence": 0,
-                    "strength": 0,
-                    "observing": 0,
-                    "luck": 0,
-                    "healthy": 0,
-                    "hitPoint": 0,
-                    "attack": 0,
-                    "defense": 0
-                },
-                "duration": 0,
-                "startTime": 0,
-                "finishTime": 0
-            },
-            "amount": 0.0
-        },
-        {
-            "id": 11,
-            "name": "Burger",
-            "rarity": 1,
-            "description": "American SPIRIT.",
-            "spritePath": "Sprites/Resource/Burger",
-            "craftingData": {
-                "craftingMaterials": {
-                    "keys": [],
-                    "values": []
-                },
-                "point": 0
-            },
-            "type": 1,
-            "effect": {
-                "name": "Burger Power",
-                "spritePath": "Sprites/Resource/Burger",
-                "stats": {
-                    "speed": 0,
-                    "crafting": 0,
-                    "intelligence": 0,
-                    "strength": 20,
-                    "observing": 0,
-                    "luck": 0,
-                    "healthy": 0,
-                    "hitPoint": 0,
-                    "attack": 0,
-                    "defense": 0
-                },
-                "duration": 300,
-                "startTime": 0,
-                "finishTime": 0
-            },
-            "amount": 0.0
-        },
-        {
-            "id": 12,
-            "name": "Golden Burger",
-            "rarity": 2,
-            "description": "GOLDEN American SPIRIT.",
-            "spritePath": "Sprites/Resource/GoldenBurger",
-            "craftingData": {
-                "craftingMaterials": {
-                    "keys": [],
-                    "values": []
-                },
-                "point": 0
-            },
-            "type": 1,
-            "effect": {
-                "name": "Golden Burger Power",
-                "spritePath": "Sprites/Resource/GoldenBurger",
-                "stats": {
-                    "speed": 50,
-                    "crafting": 0,
-                    "intelligence": 0,
-                    "strength": 50,
-                    "observing": 50,
-                    "luck": 0,
-                    "healthy": 0,
-                    "hitPoint": 0,
-                    "attack": 50,
-                    "defense": 50
-                },
-                "duration": 3600,
-                "startTime": 0,
-                "finishTime": 0
-            },
-            "amount": 0.0
-        },
-        {
-            "id": 13,
-            "name": "Production",
-            "rarity": 0,
-            "description": "Specific Building Production .",
-            "spritePath": "Sprites/Resource/Production",
-            "craftingData": {
-                "craftingMaterials": {
-                    "keys": [],
-                    "values": []
-                },
-                "point": 0
+                "pointRequired": 0
             },
             "type": 4,
             "effect": {
@@ -485,6 +318,187 @@
                     "defense": 0
                 },
                 "duration": 0,
+                "instanceID": "",
+                "startTime": 0,
+                "finishTime": 0
+            },
+            "amount": 0.0
+        },
+        {
+            "id": 9,
+            "name": "Bread",
+            "rarity": 1,
+            "description": "Low-Grade Bread.",
+            "spritePath": "Sprites/Resource/Bread",
+            "craftingData": {
+                "craftingMaterials": {
+                    "keys": [],
+                    "values": []
+                },
+                "pointRequired": 0
+            },
+            "type": 4,
+            "effect": {
+                "name": "",
+                "spritePath": "",
+                "stats": {
+                    "speed": 0,
+                    "crafting": 0,
+                    "intelligence": 0,
+                    "strength": 0,
+                    "observing": 0,
+                    "luck": 0,
+                    "healthy": 0,
+                    "hitPoint": 0,
+                    "attack": 0,
+                    "defense": 0
+                },
+                "duration": 0,
+                "instanceID": "",
+                "startTime": 0,
+                "finishTime": 0
+            },
+            "amount": 0.0
+        },
+        {
+            "id": 10,
+            "name": "Meat",
+            "rarity": 1,
+            "description": "YumYum . . .",
+            "spritePath": "Sprites/Resource/Meat",
+            "craftingData": {
+                "craftingMaterials": {
+                    "keys": [],
+                    "values": []
+                },
+                "pointRequired": 0
+            },
+            "type": 4,
+            "effect": {
+                "name": "",
+                "spritePath": "",
+                "stats": {
+                    "speed": 0,
+                    "crafting": 0,
+                    "intelligence": 0,
+                    "strength": 0,
+                    "observing": 0,
+                    "luck": 0,
+                    "healthy": 0,
+                    "hitPoint": 0,
+                    "attack": 0,
+                    "defense": 0
+                },
+                "duration": 0,
+                "instanceID": "",
+                "startTime": 0,
+                "finishTime": 0
+            },
+            "amount": 0.0
+        },
+        {
+            "id": 11,
+            "name": "Burger",
+            "rarity": 1,
+            "description": "American SPIRIT.",
+            "spritePath": "Sprites/Resource/Burger",
+            "craftingData": {
+                "craftingMaterials": {
+                    "keys": [],
+                    "values": []
+                },
+                "pointRequired": 0
+            },
+            "type": 1,
+            "effect": {
+                "name": "Burger Power",
+                "spritePath": "Sprites/Resource/Burger",
+                "stats": {
+                    "speed": 0,
+                    "crafting": 0,
+                    "intelligence": 0,
+                    "strength": 20,
+                    "observing": 0,
+                    "luck": 0,
+                    "healthy": 0,
+                    "hitPoint": 0,
+                    "attack": 0,
+                    "defense": 0
+                },
+                "duration": 300,
+                "instanceID": "",
+                "startTime": 0,
+                "finishTime": 0
+            },
+            "amount": 0.0
+        },
+        {
+            "id": 12,
+            "name": "Golden Burger",
+            "rarity": 2,
+            "description": "GOLDEN American SPIRIT.",
+            "spritePath": "Sprites/Resource/Golden Burger",
+            "craftingData": {
+                "craftingMaterials": {
+                    "keys": [],
+                    "values": []
+                },
+                "pointRequired": 0
+            },
+            "type": 1,
+            "effect": {
+                "name": "Golden Burger Power",
+                "spritePath": "Sprites/Resource/GoldenBurger",
+                "stats": {
+                    "speed": 50,
+                    "crafting": 0,
+                    "intelligence": 0,
+                    "strength": 50,
+                    "observing": 50,
+                    "luck": 0,
+                    "healthy": 0,
+                    "hitPoint": 0,
+                    "attack": 50,
+                    "defense": 50
+                },
+                "duration": 3600,
+                "instanceID": "",
+                "startTime": 0,
+                "finishTime": 0
+            },
+            "amount": 0.0
+        },
+        {
+            "id": 13,
+            "name": "Common Face Mask",
+            "rarity": 1,
+            "description": "COUGH COUGH . . .",
+            "spritePath": "Sprites/Resource/Common Face Mask",
+            "craftingData": {
+                "craftingMaterials": {
+                    "keys": [],
+                    "values": []
+                },
+                "pointRequired": 0
+            },
+            "type": 3,
+            "effect": {
+                "name": "",
+                "spritePath": "",
+                "stats": {
+                    "speed": 0,
+                    "crafting": 0,
+                    "intelligence": 0,
+                    "strength": 0,
+                    "observing": 0,
+                    "luck": 0,
+                    "healthy": 0,
+                    "hitPoint": 0,
+                    "attack": 0,
+                    "defense": 0
+                },
+                "duration": 0,
+                "instanceID": "",
                 "startTime": 0,
                 "finishTime": 0
             },
@@ -492,18 +506,18 @@
         },
         {
             "id": 14,
-            "name": "Gold",
-            "rarity": 0,
-            "description": "Specific Building Production .",
-            "spritePath": "Sprites/Resource/Gold",
+            "name": "Ultra Instinct Face Mask",
+            "rarity": 5,
+            "description": "COUGH!! COUGH!! It's over 9000 !!!?? ",
+            "spritePath": "Sprites/Resource/Ultra Instinct Face Mask",
             "craftingData": {
                 "craftingMaterials": {
                     "keys": [],
                     "values": []
                 },
-                "point": 0
+                "pointRequired": 0
             },
-            "type": 5,
+            "type": 3,
             "effect": {
                 "name": "",
                 "spritePath": "",
@@ -520,6 +534,7 @@
                     "defense": 0
                 },
                 "duration": 0,
+                "instanceID": "",
                 "startTime": 0,
                 "finishTime": 0
             },
@@ -527,18 +542,18 @@
         },
         {
             "id": 15,
-            "name": "Diamond",
-            "rarity": 0,
-            "description": "Specific Building Production .",
-            "spritePath": "Sprites/Resource/Diamond",
+            "name": "Medicine(maybe)",
+            "rarity": 2,
+            "description": "Everyone love this.",
+            "spritePath": "Sprites/Resource/Medicine(maybe)",
             "craftingData": {
                 "craftingMaterials": {
                     "keys": [],
                     "values": []
                 },
-                "point": 0
+                "pointRequired": 0
             },
-            "type": 5,
+            "type": 2,
             "effect": {
                 "name": "",
                 "spritePath": "",
@@ -555,6 +570,7 @@
                     "defense": 0
                 },
                 "duration": 0,
+                "instanceID": "",
                 "startTime": 0,
                 "finishTime": 0
             },
@@ -562,20 +578,52 @@
         },
         {
             "id": 16,
-            "name": "Recipe:Bread",
-            "rarity": 1,
-            "description": "Recipe.",
-            "spritePath": "Sprites/Resource/Recipe",
+            "name": "Leaf(maybe)",
+            "rarity": 2,
+            "description": "A certain leaf.",
+            "spritePath": "Sprites/Resource/Leaf(maybe)",
             "craftingData": {
                 "craftingMaterials": {
-                    "keys": [
-                        "Wheat"
-                    ],
-                    "values": [
-                        3
-                    ]
+                    "keys": [],
+                    "values": []
                 },
-                "point": 200
+                "pointRequired": 0
+            },
+            "type": 4,
+            "effect": {
+                "name": "",
+                "spritePath": "",
+                "stats": {
+                    "speed": 0,
+                    "crafting": 0,
+                    "intelligence": 0,
+                    "strength": 0,
+                    "observing": 0,
+                    "luck": 0,
+                    "healthy": 0,
+                    "hitPoint": 0,
+                    "attack": 0,
+                    "defense": 0
+                },
+                "duration": 0,
+                "instanceID": "",
+                "startTime": 0,
+                "finishTime": 0
+            },
+            "amount": 0.0
+        },
+        {
+            "id": 17,
+            "name": "Production",
+            "rarity": 0,
+            "description": "Specific Building Production .",
+            "spritePath": "Sprites/Resource/Production",
+            "craftingData": {
+                "craftingMaterials": {
+                    "keys": [],
+                    "values": []
+                },
+                "pointRequired": 0
             },
             "type": 6,
             "effect": {
@@ -594,13 +642,126 @@
                     "defense": 0
                 },
                 "duration": 0,
+                "instanceID": "",
                 "startTime": 0,
                 "finishTime": 0
             },
             "amount": 0.0
         },
         {
-            "id": 17,
+            "id": 18,
+            "name": "Gold",
+            "rarity": 0,
+            "description": "Specific Building Production .",
+            "spritePath": "Sprites/Resource/Gold",
+            "craftingData": {
+                "craftingMaterials": {
+                    "keys": [],
+                    "values": []
+                },
+                "pointRequired": 0
+            },
+            "type": 7,
+            "effect": {
+                "name": "",
+                "spritePath": "",
+                "stats": {
+                    "speed": 0,
+                    "crafting": 0,
+                    "intelligence": 0,
+                    "strength": 0,
+                    "observing": 0,
+                    "luck": 0,
+                    "healthy": 0,
+                    "hitPoint": 0,
+                    "attack": 0,
+                    "defense": 0
+                },
+                "duration": 0,
+                "instanceID": "",
+                "startTime": 0,
+                "finishTime": 0
+            },
+            "amount": 0.0
+        },
+        {
+            "id": 19,
+            "name": "Diamond",
+            "rarity": 0,
+            "description": "Specific Building Production .",
+            "spritePath": "Sprites/Resource/Diamond",
+            "craftingData": {
+                "craftingMaterials": {
+                    "keys": [],
+                    "values": []
+                },
+                "pointRequired": 0
+            },
+            "type": 7,
+            "effect": {
+                "name": "",
+                "spritePath": "",
+                "stats": {
+                    "speed": 0,
+                    "crafting": 0,
+                    "intelligence": 0,
+                    "strength": 0,
+                    "observing": 0,
+                    "luck": 0,
+                    "healthy": 0,
+                    "hitPoint": 0,
+                    "attack": 0,
+                    "defense": 0
+                },
+                "duration": 0,
+                "instanceID": "",
+                "startTime": 0,
+                "finishTime": 0
+            },
+            "amount": 0.0
+        },
+        {
+            "id": 20,
+            "name": "Recipe:Bread",
+            "rarity": 1,
+            "description": "Recipe.",
+            "spritePath": "Sprites/Resource/Recipe",
+            "craftingData": {
+                "craftingMaterials": {
+                    "keys": [
+                        "Wheat"
+                    ],
+                    "values": [
+                        3
+                    ]
+                },
+                "pointRequired": 200
+            },
+            "type": 8,
+            "effect": {
+                "name": "",
+                "spritePath": "",
+                "stats": {
+                    "speed": 0,
+                    "crafting": 0,
+                    "intelligence": 0,
+                    "strength": 0,
+                    "observing": 0,
+                    "luck": 0,
+                    "healthy": 0,
+                    "hitPoint": 0,
+                    "attack": 0,
+                    "defense": 0
+                },
+                "duration": 0,
+                "instanceID": "",
+                "startTime": 0,
+                "finishTime": 0
+            },
+            "amount": 0.0
+        },
+        {
+            "id": 21,
             "name": "Recipe:Burger",
             "rarity": 1,
             "description": "Recipe.",
@@ -616,9 +777,9 @@
                         1
                     ]
                 },
-                "point": 400
+                "pointRequired": 400
             },
-            "type": 6,
+            "type": 8,
             "effect": {
                 "name": "",
                 "spritePath": "",
@@ -635,13 +796,14 @@
                     "defense": 0
                 },
                 "duration": 0,
+                "instanceID": "",
                 "startTime": 0,
                 "finishTime": 0
             },
             "amount": 0.0
         },
         {
-            "id": 18,
+            "id": 22,
             "name": "Recipe:Golden Burger",
             "rarity": 2,
             "description": "Recipe.",
@@ -657,9 +819,9 @@
                         9
                     ]
                 },
-                "point": 1600
+                "pointRequired": 1600
             },
-            "type": 6,
+            "type": 8,
             "effect": {
                 "name": "",
                 "spritePath": "",
@@ -676,6 +838,133 @@
                     "defense": 0
                 },
                 "duration": 0,
+                "instanceID": "",
+                "startTime": 0,
+                "finishTime": 0
+            },
+            "amount": 0.0
+        },
+        {
+            "id": 23,
+            "name": "Recipe:Ultra Instinct Face Mask",
+            "rarity": 5,
+            "description": "Recipe.",
+            "spritePath": "Sprites/Resource/Recipe",
+            "craftingData": {
+                "craftingMaterials": {
+                    "keys": [
+                        "Common Face Mask",
+                        "Fabric",
+                        "Rubber"
+                    ],
+                    "values": [
+                        5,
+                        5,
+                        5
+                    ]
+                },
+                "pointRequired": 50000
+            },
+            "type": 9,
+            "effect": {
+                "name": "",
+                "spritePath": "",
+                "stats": {
+                    "speed": 0,
+                    "crafting": 0,
+                    "intelligence": 0,
+                    "strength": 0,
+                    "observing": 0,
+                    "luck": 0,
+                    "healthy": 0,
+                    "hitPoint": 0,
+                    "attack": 0,
+                    "defense": 0
+                },
+                "duration": 0,
+                "instanceID": "",
+                "startTime": 0,
+                "finishTime": 0
+            },
+            "amount": 0.0
+        },
+        {
+            "id": 24,
+            "name": "Recipe:Common Face Mask",
+            "rarity": 1,
+            "description": "Recipe.",
+            "spritePath": "Sprites/Resource/Recipe",
+            "craftingData": {
+                "craftingMaterials": {
+                    "keys": [
+                        "Fabric",
+                        "Rubber"
+                    ],
+                    "values": [
+                        3,
+                        4
+                    ]
+                },
+                "pointRequired": 1000
+            },
+            "type": 9,
+            "effect": {
+                "name": "",
+                "spritePath": "",
+                "stats": {
+                    "speed": 0,
+                    "crafting": 0,
+                    "intelligence": 0,
+                    "strength": 0,
+                    "observing": 0,
+                    "luck": 0,
+                    "healthy": 0,
+                    "hitPoint": 0,
+                    "attack": 0,
+                    "defense": 0
+                },
+                "duration": 0,
+                "instanceID": "",
+                "startTime": 0,
+                "finishTime": 0
+            },
+            "amount": 0.0
+        },
+        {
+            "id": 25,
+            "name": "Recipe:Medicine(maybe)",
+            "rarity": 1,
+            "description": "Recipe.",
+            "spritePath": "Sprites/Resource/Recipe",
+            "craftingData": {
+                "craftingMaterials": {
+                    "keys": [
+                        "Leaf(maybe)"
+                    ],
+                    "values": [
+                        4
+                    ]
+                },
+                "pointRequired": 1000
+            },
+            "type": 10,
+            "effect": {
+                "name": "",
+                "spritePath": "",
+                "stats": {
+                    "speed": 0,
+                    "crafting": 0,
+                    "intelligence": 0,
+                    "strength": 0,
+                    "observing": 0,
+                    "luck": 0,
+                    "healthy": 0,
+                    "hitPoint": 0,
+                    "attack": 0,
+                    "defense": 0
+                },
+                "duration": 0,
+                "instanceID": "",
                 "startTime": 0,
                 "finishTime": 0
             },

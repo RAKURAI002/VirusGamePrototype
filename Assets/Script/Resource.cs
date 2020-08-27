@@ -23,7 +23,7 @@ public class Resource : Item
             this.effect = resourceData.effect;
 
         }
-        else if(type == ResourceType.Recipe)
+        else if(type == ResourceType.ConsumableRecipe || type == ResourceType.GadgetRecipe || type == ResourceType.MedicineRecipe)
         {
             this.craftingData = resourceData.craftingData;
         }
@@ -37,12 +37,14 @@ public class Resource : Item
         this.description = description;
         this.type = type;
         this.spritePath = spritePath;
+
     }
     public Resource(int id, string name, RarityTier rarity, string description, ResourceType type, string spritePath, Effect effect)
     {
-        if (type != ResourceType.Consumable)
+        if (!(type == ResourceType.Consumable || type == ResourceType.Gadget || type == ResourceType.Medicine))
         {
             Debug.LogError("Only Consumable type can contain Effect. Otherwise may caused errors.");
+
         }
 
         this.id = id;
@@ -56,7 +58,7 @@ public class Resource : Item
 
     public Resource(int id, string name, RarityTier rarity, string description, ResourceType type, string spritePath, CraftingData craftingMaterials)
     {
-        if (type != ResourceType.Recipe)
+        if (!IsRecipeType(type))
         {
             Debug.LogError("Only Recipe type can contain CraftingMaterials. Otherwise may caused errors.");
         }
@@ -74,12 +76,27 @@ public class Resource : Item
     public enum ResourceType
     {
         Unknown,
-        Consumable,
+        Consumable, /// Crafting Item from Kitchen
+        Medicine,
+        Gadget,
         Ingredient,
         Material,
-        Special,
+        Special, /// Building Production Point
         Currency,
-        Recipe
+
+
+        ConsumableRecipe,
+        GadgetRecipe,
+        MedicineRecipe
+
+    }
+    public bool IsRecipe()
+    {
+        return (type == ResourceType.MedicineRecipe || type == ResourceType.GadgetRecipe || type == ResourceType.ConsumableRecipe);
+    }
+    public static bool IsRecipeType(ResourceType type)
+    {
+        return (type == ResourceType.MedicineRecipe || type == ResourceType.GadgetRecipe || type == ResourceType.ConsumableRecipe);
     }
 
     [System.Serializable]
@@ -122,17 +139,20 @@ public class Resource : Item
     [SerializeField] private float amount;
 
     public float Amount { get { return amount; } set { 
-            if (type == ResourceType.Recipe)
+            if (IsRecipeType(type))
             { 
                 if(value > 1)
                 {
                     amount = 1;
                     return;
+
                 }
+
             }
             else
             {
                 amount = value;
+
             }
             } }
     public override string ToString()

@@ -64,6 +64,7 @@ public class AssignSlotCreator : MonoBehaviour
             if (builder.CharacterInBuilding != null)
             {
                 productionPoint += builder.CharacterInBuilding[teamNumber].Characters.Sum(c => ((c.Stats.strength * 0.2f / 8) + (c.Stats.speed * 0.2f / 8) + (c.Stats.crafting * 0.8f / 3)));
+           
             }
 
             assignPanelGO.transform.Find("Duration").GetComponent<Text>().text = $"{(int)(point / productionPoint)} s";
@@ -71,11 +72,24 @@ public class AssignSlotCreator : MonoBehaviour
         else if (builder.Type == Building.BuildingType.TownBase)
         {
             assignPanelGO.transform.Find("Duration").GetComponent<Text>().text = $"{(int)(point)} s";
+
+        }
+        else if (builder.Type == Building.BuildingType.MedicalCenter || builder.Type == Building.BuildingType.Armory || builder.Type == Building.BuildingType.Kitchen)
+        {
+            float productionPoint = (float)(LoadManager.Instance.allBuildingData[builder.Type].production[builder.Level]["Production"]);
+            if (builder.CharacterInBuilding != null)
+            {
+                productionPoint += builder.CharacterInBuilding[teamNumber].Characters.Sum(c => ((c.Stats.strength * 0.2f / 8) + (c.Stats.speed * 0.2f / 8) + (c.Stats.crafting * 0.8f / 3)));
+
+            }
+
+            assignPanelGO.transform.Find("Duration").GetComponent<Text>().text = $"{(int)(point / productionPoint)} s";
+
         }
 
 
 
-            // Debug.Log($"{point} / {productionPoint} ");
+        // Debug.Log($"{point} / {productionPoint} ");
         List<GameObject> slotListGO = new List<GameObject>();
         for (int i = 1; i <= buildData.maxCharacterStored[builder.Level].amount[teamNumber]; i++)
         {

@@ -80,12 +80,11 @@ public class LoadManager : SingletonComponent<LoadManager>
         playerData.buildingInPossession = BuildManager.Instance.AllBuildings;
         playerData.equipmentInPossession = ItemManager.Instance.AllEquipments;
         playerData.currentActivities = NotificationManager.Instance.ProcessingActivies;
- //       playerData.expandedArea = GameManager.Instance.expandedArea;
 
         string playerDatas = JsonUtility.ToJson(playerData, true);
        // Debug.Log("Saving Data to JSON to " + Application.persistentDataPath + playerDatas);
         System.IO.File.WriteAllText(Application.persistentDataPath + "/PlayerData.json", playerDatas);
-
+        
     }
 
     void LoadPlayerDataFromJson(string file_path)

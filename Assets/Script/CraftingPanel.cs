@@ -14,7 +14,9 @@ public class CraftingPanel : MonoBehaviour
 
     private void OnEnable()
     {
-        KeyValuePair<string, Resource> defaultCrafting = ItemManager.Instance.AllResources.FirstOrDefault(r => r.Value.type == Resource.ResourceType.Recipe);
+        Resource.ResourceType type = (builder.Type == Building.BuildingType.Kitchen ? Resource.ResourceType.ConsumableRecipe : (builder.Type == Building.BuildingType.Armory ? Resource.ResourceType.GadgetRecipe : Resource.ResourceType.MedicineRecipe));
+
+        KeyValuePair<string, Resource> defaultCrafting = ItemManager.Instance.AllResources.FirstOrDefault(r => r.Value.type == type);
         if (defaultCrafting.Value != null)
         {
             currentSelectedItemName = defaultCrafting.Value.Name;
@@ -29,8 +31,8 @@ public class CraftingPanel : MonoBehaviour
     }
     private void OnDisable()
     {
-        if(EventManager.Instance)
-             EventManager.Instance.OnResourceChanged -= OnResourceChanged;
+        if (EventManager.Instance)
+            EventManager.Instance.OnResourceChanged -= OnResourceChanged;
     }
 
     public void ShowCraftingPanel(Builder builder)
@@ -52,7 +54,11 @@ public class CraftingPanel : MonoBehaviour
     {
         ClearCraftableListOldData();
         GameObject container = transform.Find("CraftableListPanel/Container").gameObject;
-        foreach (KeyValuePair<string, Resource> resourceRecipe in ItemManager.Instance.AllResources.Where(r => r.Value.type == Resource.ResourceType.Recipe))
+
+        Resource.ResourceType type = (builder.Type == Building.BuildingType.Kitchen ? Resource.ResourceType.ConsumableRecipe : (builder.Type == Building.BuildingType.Armory ? Resource.ResourceType.GadgetRecipe : Resource.ResourceType.MedicineRecipe));
+
+
+        foreach (KeyValuePair<string, Resource> resourceRecipe in ItemManager.Instance.AllResources.Where(r => r.Value.type == type))
         {
             Resource resource = LoadManager.Instance.allResourceData[resourceRecipe.Key.Replace("Recipe:", "")];
 
@@ -61,7 +67,7 @@ public class CraftingPanel : MonoBehaviour
 
             Image image = craftableItemGO.GetComponent<Image>();
             image.sprite = Resources.Load<Sprite>(resource.spritePath);
-         
+
             Button button = craftableItemGO.AddComponent<Button>();
             button.onClick.AddListener(() => { currentSelectedItemName = EventSystem.current.currentSelectedGameObject.name; RefreshItemInformation(); });
 
@@ -81,8 +87,9 @@ public class CraftingPanel : MonoBehaviour
         {
             TeamSelectorPanel teamSelectorPanel = Resources.FindObjectsOfTypeAll<TeamSelectorPanel>()[0];
             teamSelectorPanel.CreateTeamSelectorPanel(TeamSelectorPanel.Mode.Craft,
-                   BuildManager.Instance.AllBuildings.SingleOrDefault(b => b.Type == Building.BuildingType.Kitchen),
-                   resourceRecipe.craftingData.point, (_teamNumber)=> {
+                   builder,
+                   resourceRecipe.craftingData.pointRequired, (_teamNumber) =>
+                   {
                        if (ItemManager.Instance.TryConsumeResources(resourceRecipe.craftingData.craftingMaterials))
                        {
                            RefreshCraftingPanel();
@@ -94,10 +101,12 @@ public class CraftingPanel : MonoBehaviour
                            activityName = ("Craft:" + resource.Name),
                            activityType = ActivityType.Craft,
                            startPoint = 0,
-                           finishPoint = resourceRecipe.craftingData.point,
+                           finishPoint = resourceRecipe.craftingData.pointRequired,
                            teamNumber = _teamNumber,
-                           InformationID = resourceRecipe.ID
-                       });
+                           informationID = resourceRecipe.ID,
+                           builderReference = builder
+
+                       }) ;
 
                        builder.TeamLockState.Add(_teamNumber);
 
@@ -139,8 +148,49 @@ public class CraftingPanel : MonoBehaviour
         Resource resource = LoadManager.Instance.allResourceData[currentSelectedItemName.Replace("Recipe:", "")];
         Resource resourceRecipe = LoadManager.Instance.allResourceData[currentSelectedItemName];
         GameObject informationPanel = transform.Find("ItemInformationPanel/ItemInformation").gameObject;
+        switch (resource.Rarity)
+        {
+            case Item.RarityTier.Common: {
+                    informationPanel.transform.Find("ItemRarity").GetComponent<Text>().text = $"<color=white>{resource.Rarity}</color>";
+                    break; 
+                
+                }
+            case Item.RarityTier.Uncommon:
+                {
+                    informationPanel.transform.Find("ItemRarity").GetComponent<Text>().text = $"<color=white>{resource.Rarity}</color>";
+                    break;
+
+                }
+            case Item.RarityTier.Rare:
+                {
+                    informationPanel.transform.Find("ItemRarity").GetComponent<Text>().text = $"<color=grey>{resource.Rarity}</color>";
+                    break;
+
+                }
+            case Item.RarityTier.SuperRare:
+                {
+                    informationPanel.transform.Find("ItemRarity").GetComponent<Text>().text = $"<color=yellow>{resource.Rarity}</color>";
+                    break;
+
+                }
+            case Item.RarityTier.UltraRare:
+                {
+                    informationPanel.transform.Find("ItemRarity").GetComponent<Text>().text = $"<color=red>{resource.Rarity}</color>";
+                    break;
+
+                }
+            case Item.RarityTier.MythologicalRare:
+                {
+                    informationPanel.transform.Find("ItemRarity").GetComponent<Text>().text = $"<color=purple>{resource.Rarity}</color>";
+                    break;
+
+                }
+            default: break;
+        }
+
+
         informationPanel.transform.Find("ItemName").GetComponent<Text>().text = resource.Name;
-        informationPanel.transform.Find("ItemRarity").GetComponent<Text>().text = resource.Rarity.ToString();
+        
         informationPanel.transform.Find("ItemDescription").GetComponent<Text>().text = resource.description;
         informationPanel.transform.Find("ItemImage").GetComponent<Image>().sprite = Resources.Load<Sprite>(resource.spritePath);
 
@@ -157,8 +207,13 @@ public class CraftingPanel : MonoBehaviour
 
         Building buildingData = LoadManager.Instance.allBuildingData[builder.Type];
         GameObject craftingTimePanel = transform.Find("ItemInformationPanel/ItemCraftingTimePanel").gameObject;
-        craftingTimePanel.transform.Find("CookPoint").GetComponent<Text>().text = resourceRecipe.craftingData.point.ToString() + " Cookpoint";
-        craftingTimePanel.transform.Find("CookTime").GetComponent<Text>().text = (resourceRecipe.craftingData.point / buildingData.production[builder.Level]["Production"]).ToString() + " s";
+        craftingTimePanel.transform.Find("Point").GetComponent<Text>().text = resourceRecipe.craftingData.pointRequired.ToString() + " Point";
+        int duration = (resourceRecipe.craftingData.pointRequired / buildingData.production[builder.Level]["Production"]);
+        int hours = Mathf.FloorToInt(duration / 3600);
+        int minutes = Mathf.FloorToInt(duration % 3600 / 60);
+        int seconds = Mathf.FloorToInt(duration % 3600 % 60f);
+        craftingTimePanel.transform.Find("Time").GetComponent<Text>().text = 
+            $"{(hours != 0 ? hours.ToString() + " H " : "")}{((minutes != 0) ? (minutes).ToString() + " M " : "")}{((seconds != 0) ? seconds.ToString() + " S" : "")}";
 
         Button confirmButton = transform.Find("ConfirmButton").GetComponent<Button>();
         if (!ItemManager.Instance.IsAffordable(resourceRecipe.craftingData.craftingMaterials))

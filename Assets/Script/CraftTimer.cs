@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class CraftTimer : MonoBehaviour
 {
-    public ActivityInformation activityInformation { get; set; }
+    ActivityInformation activityInformation;
     public GameObject slider { get; set; }
     public bool isFinished;
 
@@ -59,12 +59,16 @@ public class CraftTimer : MonoBehaviour
         slider.GetComponentInChildren<Text>().text = String.Format("{0:00}:{1:00}:{2:00}", hours, minutes, seconds);
     }
 
+    public void InitializeData(ActivityInformation information)
+    {
+        this.builder = information.builderReference;
+        this.activityInformation = information;
+    }
     void Initiate()
     {
-        builder = BuildManager.Instance.AllBuildings.SingleOrDefault(b => b.Type == Building.BuildingType.Kitchen);
-        resourceRecipe = LoadManager.Instance.allResourceData.SingleOrDefault(r => r.Value.ID == activityInformation.InformationID).Value;
+        resourceRecipe = LoadManager.Instance.allResourceData.SingleOrDefault(r => r.Value.ID == activityInformation.informationID).Value;
 
-        finishPoint = resourceRecipe.craftingData.point;
+        finishPoint = resourceRecipe.craftingData.pointRequired;
 
     }
     void IncreaseCurrentPoint()

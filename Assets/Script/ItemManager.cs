@@ -307,6 +307,14 @@ public class ItemManager : SingletonComponent<ItemManager>
         AddResource("Recipe:Burger", 10);
         AddResource("Recipe:Golden Burger", 10);
 
+        AddResource("Leaf(maybe)", 10);
+        AddResource("Fabric", 10);
+        AddResource("Rubber", 10);
+        AddResource("Recipe:Common Face Mask", 10);
+        AddResource("Recipe:Ultra Instinct Face Mask", 10);
+        AddResource("Recipe:Medicine(maybe)", 10);
+
+
         AddEquipment(1, 1);
         AddEquipment(1, 1);
         AddEquipment(2, 1);

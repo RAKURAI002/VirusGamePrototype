@@ -70,7 +70,7 @@ public class CharacterCanvas : MonoBehaviour
         statusPanel.transform.Find("Luck").GetComponent<Text>().text = $"Luck :\t{character.Stats.luck} + <color=red>{character.equipments.Sum(e => e.Stats.luck)}</color>";
         statusPanel.transform.Find("Speed").GetComponent<Text>().text = $"Speed :\t{character.Stats.speed} + <color=red>{character.equipments.Sum(e => e.Stats.speed)}</color>";
 
-        Text statsPoint = statusPanel.transform.Find("StatsPoint").GetComponent<Text>();
+        Text statsPointText = statusPanel.transform.Find("StatsPoint").GetComponent<Text>();
 
         List<Transform> plusButtons = new List<Transform>();
 
@@ -84,7 +84,7 @@ public class CharacterCanvas : MonoBehaviour
 
         foreach(Resource.Effect effect in character.effects)
         {
-            Debug.Log(effect.spritePath);
+
             GameObject buffIconGO = Instantiate(Resources.Load("Prefabs/UI/BuffIconPrefab") as GameObject, buffIconContainer.transform);
             buffIconGO.transform.Find("BuffIcon").GetComponent<Image>().sprite = Resources.Load<Sprite>(effect.spritePath);
             buffIconGO.GetComponent<BuffIcon>().StartBuffIcon(effect);
@@ -100,15 +100,15 @@ public class CharacterCanvas : MonoBehaviour
 
         if (character.statsUpPoint > 0)
         {
-            statsPoint.gameObject.SetActive(true);
-            statsPoint.text = $"Stats Point Left : {character.statsUpPoint}";
+            statsPointText.gameObject.SetActive(true);
+            statsPointText.text = $"Stats Point Left : {character.statsUpPoint}";
 
             plusButtons.ForEach((t) => { t.gameObject.SetActive(true); });
 
         }
         else
         {
-            statsPoint.gameObject.SetActive(false);
+            statsPointText.gameObject.SetActive(false);
             plusButtons.ForEach((t) => { t.gameObject.SetActive(false); });
 
         }

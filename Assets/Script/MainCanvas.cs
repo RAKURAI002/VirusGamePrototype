@@ -206,11 +206,11 @@ public class MainCanvas : MonoBehaviour
             Debug.LogError("Can't find EditBuilding Component.");
         }
         Builder selectedBuilding = BuildManager.Instance.AllBuildings.Single(b => b.representGameObject == selectedGameObject);
-      
+      /*
        if(selectedBuilding.Level == 0)
         {
             return;
-        }
+        }*/
         editBuilding.ShowThisCanvas(selectedBuilding);
         canvasActive = true;
     }
