@@ -26,20 +26,28 @@ public class GameManager : SingletonComponent<GameManager>
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnLevelFinishedLoading;
+
+        EventManager.Instance.OnGameDataLoadFinished += OnGameDataLoadFinished;
     }
     void OnDisable()
     {
         SceneManager.sceneLoaded -= OnLevelFinishedLoading;
+        if(EventManager.Instance)
+            EventManager.Instance.OnGameDataLoadFinished -= OnGameDataLoadFinished;
+    }
+    void OnGameDataLoadFinished()
+    {
+        isGameDataLoaded = true;
     }
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     {
         Debug.Log($"Loading {scene.name} . . .");
-        if(scene.name == "MainScene" && secondCalled)
+        if (scene.name == "MainScene" && secondCalled)
         {
             Awake();
             Start();
             timerCanvas.SetActive(true);
-            allBuildings.SetActive(true); 
+            allBuildings.SetActive(true);
 
         }
         if (scene.name == "WorldMap")
@@ -47,7 +55,7 @@ public class GameManager : SingletonComponent<GameManager>
             timerCanvas.SetActive(false);
             allBuildings.SetActive(false);
         }
-        
+
     }
 
     GameObject timerCanvas;
@@ -55,9 +63,9 @@ public class GameManager : SingletonComponent<GameManager>
     GameObject editBuildingPanel;
     GameObject dontDestroyManager;
 
+    public bool isGameDataLoaded;
 
-   
-   
+
 
     void Start()
     {

@@ -40,14 +40,24 @@ public class EventManager : SingletonComponent<EventManager>
 
     #endregion
 
-    public delegate void QuestFinishedDelegate(KeyValuePair<int, ActivityInformation> questData);
+    /// Event for Update UI ----------------------------
     public event Action OnCharacterAssigned;
-    public event QuestFinishedDelegate OnQuestFinished;
+    public event Action<string> OnResourceChanged;
+
+    /// ------------------------------------------------
+
+
     public event Action<ActivityInformation> OnActivityAssigned;
     public event Action<ActivityInformation> OnActivityFinished;
     public event Action<int> OnPlayerLevelUp;
-    public event Action<string> OnResourceChanged;
 
+    public event Action OnGameDataLoadFinished;
+
+    public void GameDataLoadFinished()
+    {
+        OnGameDataLoadFinished?.Invoke();
+
+    }
     public void ResourceChanged(string resourceName)
     {
         OnResourceChanged?.Invoke(resourceName);
@@ -75,12 +85,6 @@ public class EventManager : SingletonComponent<EventManager>
     public void CharacterAssigned()
     {
         OnCharacterAssigned?.Invoke();
-
-    }
-
-    public void QuestFinished(KeyValuePair<int, ActivityInformation> questData)
-    {
-        OnQuestFinished?.Invoke(questData);
 
     }
 

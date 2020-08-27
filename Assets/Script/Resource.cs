@@ -17,6 +17,16 @@ public class Resource : Item
         this.description = resourceData.description;
         this.type = resourceData.type;
         this.spritePath = resourceData.spritePath;
+
+        if(type == ResourceType.Consumable)
+        {
+            this.effect = resourceData.effect;
+
+        }
+        else if(type == ResourceType.Recipe)
+        {
+            this.craftingData = resourceData.craftingData;
+        }
     }
 
     public Resource(int id, string name, RarityTier rarity, string description, ResourceType type, string spritePath)
@@ -75,14 +85,42 @@ public class Resource : Item
     [System.Serializable]
     public class Effect
     {
-        [SerializeField] public Character.AllStats stat;
+        public Effect()
+        {
+        }
+
+        public Effect(Effect effect)
+        {
+            this.duration = effect.duration;
+        } 
+
+        [SerializeField] public string name;
+        [SerializeField] public string spritePath;
+        [SerializeField] public Character.AllStats stats;
         [SerializeField] public int duration;
+
+        [SerializeField] public string instanceID;
+        [SerializeField] public long startTime;
+        [SerializeField] public long finishTime;
+
+        public Effect SetInstanceID(string id)
+        {
+            instanceID = id;
+            return this;
+        }
+
+        public static string GenerateInstanceID(Character character, Effect effect)
+        {
+            return character.ID + ":" + effect.name + DateTime.Now.Ticks;
+
+        }
 
     }
 
     [SerializeField] public ResourceType type;
     [SerializeField] public Effect effect;
     [SerializeField] private float amount;
+
     public float Amount { get { return amount; } set { 
             if (type == ResourceType.Recipe)
             { 

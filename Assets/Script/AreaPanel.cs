@@ -42,7 +42,9 @@ public class AreaPanel : MonoBehaviour
     {
         bgPanel.GetComponent<Image>().color = Color.red;
         QuestManager.Instance.selectingLevel = areaName + "Hard";
+
     }
+
     public void OnClickReady()
     {
          TeamSelectorPanel teamSelectorPanel = Resources.FindObjectsOfTypeAll<TeamSelectorPanel>()[0];
@@ -51,5 +53,6 @@ public class AreaPanel : MonoBehaviour
          teamSelectorPanel.CreateTeamSelectorPanel(TeamSelectorPanel.Mode.Quest, 
                 BuildManager.Instance.AllBuildings.SingleOrDefault(b => b.Type == Building.BuildingType.TownBase),
                 LoadManager.Instance.allQuestData.SingleOrDefault(q => q.Value.questName == QuestManager.Instance.selectingLevel).Value.duration, QuestManager.Instance.StartQuest , true);
+    
     }
 }

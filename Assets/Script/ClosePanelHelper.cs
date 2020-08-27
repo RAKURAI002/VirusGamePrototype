@@ -45,12 +45,12 @@ public class ClosePanelHelper : MonoBehaviour, IPointerEnterHandler, IPointerExi
         Debug.Log("ClosePanelHelper : Close Panel by " + gameObject.name);
         GameObject.FindGameObjectsWithTag("ExtraUIPanel").ToList().ForEach((go) => {Debug.Log(go.name); go.SetActive(false); });
         gameObject.SetActive(false);
+
         if (length <= 1)
         {
             MainCanvas.canvasActive = false;
+
         }
        
-      
-
     }
 }

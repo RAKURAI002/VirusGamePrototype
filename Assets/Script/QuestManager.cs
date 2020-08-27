@@ -14,7 +14,7 @@ public class QuestManager : SingletonComponent<QuestManager>
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnLevelFinishedLoading;
-        EventManager.Instance.OnQuestFinished += OnQuestFinished;
+
 
     }
 
@@ -23,7 +23,7 @@ public class QuestManager : SingletonComponent<QuestManager>
         SceneManager.sceneLoaded -= OnLevelFinishedLoading;
         if(EventManager.Instance)
         {
-            EventManager.Instance.OnQuestFinished -= OnQuestFinished;
+
 
         }
            

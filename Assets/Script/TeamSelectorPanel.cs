@@ -36,7 +36,7 @@ public class TeamSelectorPanel : MonoBehaviour
     public void OnClickConfirmTeam(int currentSelectedTeam)
     {
         _callback?.Invoke(currentSelectedTeam);
-        gameObject.SetActive(false);
+        GetComponent<ClosePanelHelper>().ForceClosePanel();
     }
     public void CreateTeamSelectorPanel(Mode mode, Builder builder, int finishPoint, Action<int> callback, bool haveCharacterSlot)
     {
@@ -45,7 +45,7 @@ public class TeamSelectorPanel : MonoBehaviour
         this._haveCharacterSlot = haveCharacterSlot;
         this._mode = mode;
         this._finishPoint = finishPoint;
-       // UnityEngine.Debug.Log(new StackFrame(1).GetMethod().Name);
+        // UnityEngine.Debug.Log(new StackFrame(1).GetMethod().Name);
         MainCanvas.canvasActive = true;
         gameObject.SetActive(true);
         ClearOldAssignUIData();
@@ -66,9 +66,9 @@ public class TeamSelectorPanel : MonoBehaviour
                 {
 
                     _finishPoint = LoadManager.Instance.allBuildingData[builder.Type].upgradePoint[builder.Level];
-                   // Debug.Log($"Crate Build {builder.Type}({builder.Level}) : {_finishPoint}");
+                    // Debug.Log($"Crate Build {builder.Type}({builder.Level}) : {_finishPoint}");
                     CreateAssignBuildingContainer(BuildManager.Instance.AllBuildings.SingleOrDefault(b => b.Type == Building.BuildingType.LaborCenter), false);
-                    
+
                     break;
                 }
             default:
@@ -79,15 +79,15 @@ public class TeamSelectorPanel : MonoBehaviour
 
 
         }
-        if(haveCharacterSlot)
+        if (haveCharacterSlot)
         {
             CreateCharacterSlot();
         }
 
-        
+
     }
 
-  
+
     void CreateAssignBuildingContainer(Builder builder, bool isInteractable)
     {
         GameObject container = gameObject.transform.Find("TeamPanel/Container").gameObject;
@@ -97,21 +97,22 @@ public class TeamSelectorPanel : MonoBehaviour
             return;
         }
 
-            Building buildData = LoadManager.Instance.allBuildingData[builder.Type];
+        Building buildData = LoadManager.Instance.allBuildingData[builder.Type];
 
-          //  Debug.Log("Try Creating " + builder.Type.ToString());
+        //  Debug.Log("Try Creating " + builder.Type.ToString());
 
-            GameObject assignPanelContainerGO = Instantiate(Resources.Load("Prefabs/UI/AssignPanelContainerPrefab") as GameObject, container.transform);
-            assignPanelContainerGO.transform.Find("BuildingImage").GetComponent<Image>().sprite = Resources.Load<Sprite>(buildData.spritePath[builder.Level]);
-            assignPanelContainerGO.transform.Find("BuildingImage/BuildingName").GetComponent<Text>().text = builder.Type.ToString();
-            assignPanelContainerGO.name = builder.ID.ToString();
+        GameObject assignPanelContainerGO = Instantiate(Resources.Load("Prefabs/UI/AssignPanelContainerPrefab") as GameObject, container.transform);
+        assignPanelContainerGO.transform.Find("BuildingImage").GetComponent<Image>().sprite = Resources.Load<Sprite>(buildData.spritePath[builder.Level]);
+        assignPanelContainerGO.transform.Find("BuildingImage/BuildingName").GetComponent<Text>().text = builder.Type.ToString();
+        assignPanelContainerGO.name = builder.ID.ToString();
 
-            for (int i = 0; i < buildData.maxCharacterStored[builder.Level].amount.Count; i++)
-            {
-                assignPanelContainerGO.GetComponent<AssignSlotCreator>().
-                CreateTeamSelectableAssignSlot(assignPanelContainerGO.transform.Find("Container").gameObject, builder, i, _finishPoint, isInteractable);
-            }
-        
+        for (int i = 0; i < buildData.maxCharacterStored[builder.Level].amount.Count; i++)
+        {
+            assignPanelContainerGO.GetComponent<AssignSlotCreator>().
+            CreateTeamSelectableAssignSlot(assignPanelContainerGO.transform.Find("Container").gameObject, builder, i, _finishPoint, isInteractable);
+
+        }
+
     }
     void CreateCharacterSlot()
     {
@@ -165,7 +166,7 @@ public class TeamSelectorPanel : MonoBehaviour
         {
             Destroy(transform.gameObject);
         }
-        if(_haveCharacterSlot)
+        if (_haveCharacterSlot)
         {
             GameObject characterContainer = gameObject.transform.Find("CharacterPanel/Container").gameObject;
 
@@ -174,7 +175,7 @@ public class TeamSelectorPanel : MonoBehaviour
                 Destroy(transform.gameObject);
             }
         }
-       
+
 
     }
 

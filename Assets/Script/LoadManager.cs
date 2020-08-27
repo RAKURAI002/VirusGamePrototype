@@ -236,7 +236,9 @@ public class LoadManager : SingletonComponent<LoadManager>
 
         Debug.Log("Load GameData Complete.");
 
-        if(playerData.completeTutorial)
+        EventManager.Instance.GameDataLoadFinished();
+
+        if (playerData.completeTutorial)
         {
             Debug.Log("First login detected, Starting Tutorial . . . ");
             GameManager.Instance.StartTutorial();

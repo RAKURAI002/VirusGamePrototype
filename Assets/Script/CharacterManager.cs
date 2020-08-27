@@ -5,14 +5,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class CharacterManager : SingletonComponent<CharacterManager>
 {
-    [SerializeField]private List<Character> allCharacters;
+    [SerializeField] private List<Character> allCharacters;
     public List<Character> AllCharacters { get { return allCharacters; } set { allCharacters = value; } }
 
     #region Unity Functions
     protected override void Awake()
     {
         base.Awake();
-       
+
     }
     protected override void OnInitialize()
     {
@@ -22,17 +22,22 @@ public class CharacterManager : SingletonComponent<CharacterManager>
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnLevelFinishedLoading;
+
+        EventManager.Instance.OnGameDataLoadFinished += OnGameDataLoadFinished;
     }
 
     void OnDisable()
     {
         SceneManager.sceneLoaded -= OnLevelFinishedLoading;
+
+        if (EventManager.Instance)
+            EventManager.Instance.OnGameDataLoadFinished -= OnGameDataLoadFinished;
     }
 
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     {
         if (scene.name == "MainScene" && secondCalled)
-        { 
+        {
             Awake();
             Start();
         }
@@ -44,14 +49,15 @@ public class CharacterManager : SingletonComponent<CharacterManager>
     }
 
     #endregion
-    
+
     public void CreateNewCharacter()
     {
-        Character character = new Character("John " + Random.Range(0,10000));
+        Character character = new Character("John " + Random.Range(0, 10000));
         Debug.Log("Creating New Character : " + character.ToString());
         AddCharacterToList(character);
         LoadManager.Instance.SavePlayerDataToJson();
         return;
+
     }
 
     void AddCharacterToList(Character character)
@@ -60,6 +66,16 @@ public class CharacterManager : SingletonComponent<CharacterManager>
         return;
     }
 
+    void OnGameDataLoadFinished()
+    {
+        allCharacters.Where((c) => c.effects.Count > 0).ToList().ForEach(c =>
+        {
+            c.effects.ForEach(e => { Debug.Log($"Applying {e.name} to {c.Name}"); ApplyItemEffect(c, e, false); });
+        });
+
+    }
+
+
     public bool AssignWork(Character character, Builder builder, int team)
     {
         if (builder.Type == Building.BuildingType.TownBase && builder.CharacterInBuilding[team].Characters.Count > 0 && builder.CharacterInBuilding[team].Characters[0].workStatus == Character.WorkStatus.Quest)
@@ -67,7 +83,7 @@ public class CharacterManager : SingletonComponent<CharacterManager>
             Debug.LogWarning("Can't assign character to TownBase while doing Quest.");
             return false;
         }
-        if(character.workStatus == Character.WorkStatus.Quest)
+        if (character.workStatus == Character.WorkStatus.Quest)
         {
             Debug.LogWarning("Questing Character can't be Assign.");
             return false;
@@ -87,8 +103,8 @@ public class CharacterManager : SingletonComponent<CharacterManager>
         builder.CharacterInBuilding[team].Characters.Add(character);
         character.workStatus = Character.WorkStatus.Working;
         character.WorkingPlaceID = builder.ID;
-       // Debug.Log(Object.ReferenceEquals(builder, BuildManager.Instance.AllBuildings.Single(b => b.ID == builder.ID)));
-       // Debug.Log($"Now {builder.Type} has {builder.CharacterInBuilding.Count} Character(s) assigned.");
+        // Debug.Log(Object.ReferenceEquals(builder, BuildManager.Instance.AllBuildings.Single(b => b.ID == builder.ID)));
+        // Debug.Log($"Now {builder.Type} has {builder.CharacterInBuilding.Count} Character(s) assigned.");
         LoadManager.Instance.SavePlayerDataToJson();
         EventManager.Instance.CharacterAssigned();
 
@@ -96,12 +112,12 @@ public class CharacterManager : SingletonComponent<CharacterManager>
     }
     public bool CancleAssignWork(Character character, Builder builder)
     {
-        if(character.workStatus == Character.WorkStatus.Quest)
+        if (character.workStatus == Character.WorkStatus.Quest)
         {
             Debug.LogWarning("Questing Character can't be Unassign.");
             return false;
         }
-      //  Debug.Log(builder.CharacterInBuilding.Find(cw => cw.Characters.Contains(character)).Characters.Count);
+        //  Debug.Log(builder.CharacterInBuilding.Find(cw => cw.Characters.Contains(character)).Characters.Count);
         if (!builder.CharacterInBuilding.Find(cw => cw.Characters.Contains(character)).Characters.Remove(character))  //(ec => ec.Characters.Single(c=> c.WorkingPlaceID == builder.ID)).Remove(character))
         {
             Debug.LogError("Remove Character in Building FAILED.");
@@ -109,7 +125,7 @@ public class CharacterManager : SingletonComponent<CharacterManager>
         }
         character.workStatus = Character.WorkStatus.Idle;
         character.WorkingPlaceID = -1;
-       // Debug.Log(Object.ReferenceEquals(character, CharacterManager.Instance.AllCharacters.Single(c => c.Name == character.Name)));
+        // Debug.Log(Object.ReferenceEquals(character, CharacterManager.Instance.AllCharacters.Single(c => c.Name == character.Name)));
         Debug.Log($"Stop {character.Name} from working at {builder.Type}. Now {character.Name} is {character.workStatus}");
         EventManager.Instance.CharacterAssigned();
         LoadManager.Instance.SavePlayerDataToJson();
@@ -118,10 +134,49 @@ public class CharacterManager : SingletonComponent<CharacterManager>
 
     public void ConsumeItem(Character character, Resource item)
     {
-        if(ItemManager.Instance.TryConsumeResources(item.Name, 1))
+        if (ItemManager.Instance.TryConsumeResources(item.Name, 1))
         {
-            Debug.Log(character.Name);
+            if(character.effects.Exists(e => e.name == item.effect.name))
+            {
+                Debug.Log("Same");
+                ApplyItemEffect(character, character.effects.Single(e => e.name == item.effect.name), true);
+            
+            }
+            else
+            {
+                character.effects.Add(ObjectCopier.Clone(item.effect));
+                ApplyItemEffect(character, character.effects[character.effects.Count - 1], false);
+
+            }
+           
+            
+
+            Debug.Log(character.Name + $"  {item.effect.name}");
+            
+
         }
+
+    }
+
+    void ApplyItemEffect(Character character, Resource.Effect effect, bool isAlreadySameEffectActive)
+    {
+        if(!isAlreadySameEffectActive)
+        {
+            Debug.Log("Applying Effect" + effect.name);
+            GameObject effectTimerGO = new GameObject(character.Name + ":" + effect.name);
+            effectTimerGO.transform.SetParent(CharacterManager.Instance.gameObject.transform.Find("ItemEffectTimer"));
+            effectTimerGO.AddComponent<ItemEffectTimer>().StartEffect(character, effect);
+
+        }
+        else
+        {
+            
+            GameObject effectTimerGO = CharacterManager.Instance.gameObject.transform.Find("ItemEffectTimer/" + effect.instanceID).gameObject;
+            effectTimerGO.GetComponent<ItemEffectTimer>().IncreaseDuration(effect.duration);
+            Debug.Log(effectTimerGO.name);
+
+        }
+
     }
 
 }

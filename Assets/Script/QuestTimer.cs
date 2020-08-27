@@ -14,6 +14,7 @@ public class QuestTimer : MonoBehaviour
     long timeLeft;
     public bool isFinished;
     int speedUpCost;
+
     public GameObject slider { get; set; }
 
     private void Awake()

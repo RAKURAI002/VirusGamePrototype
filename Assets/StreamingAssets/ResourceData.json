@@ -15,7 +15,9 @@
             },
             "type": 3,
             "effect": {
-                "stat": {
+                "name": "",
+                "spritePath": "",
+                "stats": {
                     "speed": 0,
                     "crafting": 0,
                     "intelligence": 0,
@@ -27,7 +29,9 @@
                     "attack": 0,
                     "defense": 0
                 },
-                "duration": 0
+                "duration": 0,
+                "startTime": 0,
+                "finishTime": 0
             },
             "amount": 0.0
         },
@@ -46,7 +50,9 @@
             },
             "type": 3,
             "effect": {
-                "stat": {
+                "name": "",
+                "spritePath": "",
+                "stats": {
                     "speed": 0,
                     "crafting": 0,
                     "intelligence": 0,
@@ -58,7 +64,9 @@
                     "attack": 0,
                     "defense": 0
                 },
-                "duration": 0
+                "duration": 0,
+                "startTime": 0,
+                "finishTime": 0
             },
             "amount": 0.0
         },
@@ -77,7 +85,9 @@
             },
             "type": 3,
             "effect": {
-                "stat": {
+                "name": "",
+                "spritePath": "",
+                "stats": {
                     "speed": 0,
                     "crafting": 0,
                     "intelligence": 0,
@@ -89,7 +99,9 @@
                     "attack": 0,
                     "defense": 0
                 },
-                "duration": 0
+                "duration": 0,
+                "startTime": 0,
+                "finishTime": 0
             },
             "amount": 0.0
         },
@@ -108,7 +120,9 @@
             },
             "type": 3,
             "effect": {
-                "stat": {
+                "name": "",
+                "spritePath": "",
+                "stats": {
                     "speed": 0,
                     "crafting": 0,
                     "intelligence": 0,
@@ -120,7 +134,9 @@
                     "attack": 0,
                     "defense": 0
                 },
-                "duration": 0
+                "duration": 0,
+                "startTime": 0,
+                "finishTime": 0
             },
             "amount": 0.0
         },
@@ -139,7 +155,9 @@
             },
             "type": 3,
             "effect": {
-                "stat": {
+                "name": "",
+                "spritePath": "",
+                "stats": {
                     "speed": 0,
                     "crafting": 0,
                     "intelligence": 0,
@@ -151,7 +169,9 @@
                     "attack": 0,
                     "defense": 0
                 },
-                "duration": 0
+                "duration": 0,
+                "startTime": 0,
+                "finishTime": 0
             },
             "amount": 0.0
         },
@@ -170,7 +190,9 @@
             },
             "type": 3,
             "effect": {
-                "stat": {
+                "name": "",
+                "spritePath": "",
+                "stats": {
                     "speed": 0,
                     "crafting": 0,
                     "intelligence": 0,
@@ -182,7 +204,9 @@
                     "attack": 0,
                     "defense": 0
                 },
-                "duration": 0
+                "duration": 0,
+                "startTime": 0,
+                "finishTime": 0
             },
             "amount": 0.0
         },
@@ -201,7 +225,9 @@
             },
             "type": 3,
             "effect": {
-                "stat": {
+                "name": "",
+                "spritePath": "",
+                "stats": {
                     "speed": 0,
                     "crafting": 0,
                     "intelligence": 0,
@@ -213,7 +239,9 @@
                     "attack": 0,
                     "defense": 0
                 },
-                "duration": 0
+                "duration": 0,
+                "startTime": 0,
+                "finishTime": 0
             },
             "amount": 0.0
         },
@@ -232,7 +260,9 @@
             },
             "type": 3,
             "effect": {
-                "stat": {
+                "name": "",
+                "spritePath": "",
+                "stats": {
                     "speed": 0,
                     "crafting": 0,
                     "intelligence": 0,
@@ -244,7 +274,9 @@
                     "attack": 0,
                     "defense": 0
                 },
-                "duration": 0
+                "duration": 0,
+                "startTime": 0,
+                "finishTime": 0
             },
             "amount": 0.0
         },
@@ -263,7 +295,9 @@
             },
             "type": 2,
             "effect": {
-                "stat": {
+                "name": "",
+                "spritePath": "",
+                "stats": {
                     "speed": 0,
                     "crafting": 0,
                     "intelligence": 0,
@@ -275,7 +309,9 @@
                     "attack": 0,
                     "defense": 0
                 },
-                "duration": 0
+                "duration": 0,
+                "startTime": 0,
+                "finishTime": 0
             },
             "amount": 0.0
         },
@@ -294,7 +330,9 @@
             },
             "type": 2,
             "effect": {
-                "stat": {
+                "name": "",
+                "spritePath": "",
+                "stats": {
                     "speed": 0,
                     "crafting": 0,
                     "intelligence": 0,
@@ -306,7 +344,9 @@
                     "attack": 0,
                     "defense": 0
                 },
-                "duration": 0
+                "duration": 0,
+                "startTime": 0,
+                "finishTime": 0
             },
             "amount": 0.0
         },
@@ -325,7 +365,9 @@
             },
             "type": 2,
             "effect": {
-                "stat": {
+                "name": "",
+                "spritePath": "",
+                "stats": {
                     "speed": 0,
                     "crafting": 0,
                     "intelligence": 0,
@@ -337,7 +379,9 @@
                     "attack": 0,
                     "defense": 0
                 },
-                "duration": 0
+                "duration": 0,
+                "startTime": 0,
+                "finishTime": 0
             },
             "amount": 0.0
         },
@@ -356,7 +400,9 @@
             },
             "type": 1,
             "effect": {
-                "stat": {
+                "name": "Burger Power",
+                "spritePath": "Sprites/Resource/Burger",
+                "stats": {
                     "speed": 0,
                     "crafting": 0,
                     "intelligence": 0,
@@ -368,7 +414,9 @@
                     "attack": 0,
                     "defense": 0
                 },
-                "duration": 300
+                "duration": 300,
+                "startTime": 0,
+                "finishTime": 0
             },
             "amount": 0.0
         },
@@ -387,7 +435,9 @@
             },
             "type": 1,
             "effect": {
-                "stat": {
+                "name": "Golden Burger Power",
+                "spritePath": "Sprites/Resource/GoldenBurger",
+                "stats": {
                     "speed": 50,
                     "crafting": 0,
                     "intelligence": 0,
@@ -399,7 +449,9 @@
                     "attack": 50,
                     "defense": 50
                 },
-                "duration": 3600
+                "duration": 3600,
+                "startTime": 0,
+                "finishTime": 0
             },
             "amount": 0.0
         },
@@ -418,7 +470,9 @@
             },
             "type": 4,
             "effect": {
-                "stat": {
+                "name": "",
+                "spritePath": "",
+                "stats": {
                     "speed": 0,
                     "crafting": 0,
                     "intelligence": 0,
@@ -430,7 +484,9 @@
                     "attack": 0,
                     "defense": 0
                 },
-                "duration": 0
+                "duration": 0,
+                "startTime": 0,
+                "finishTime": 0
             },
             "amount": 0.0
         },
@@ -449,7 +505,9 @@
             },
             "type": 5,
             "effect": {
-                "stat": {
+                "name": "",
+                "spritePath": "",
+                "stats": {
                     "speed": 0,
                     "crafting": 0,
                     "intelligence": 0,
@@ -461,7 +519,9 @@
                     "attack": 0,
                     "defense": 0
                 },
-                "duration": 0
+                "duration": 0,
+                "startTime": 0,
+                "finishTime": 0
             },
             "amount": 0.0
         },
@@ -480,7 +540,9 @@
             },
             "type": 5,
             "effect": {
-                "stat": {
+                "name": "",
+                "spritePath": "",
+                "stats": {
                     "speed": 0,
                     "crafting": 0,
                     "intelligence": 0,
@@ -492,7 +554,9 @@
                     "attack": 0,
                     "defense": 0
                 },
-                "duration": 0
+                "duration": 0,
+                "startTime": 0,
+                "finishTime": 0
             },
             "amount": 0.0
         },
@@ -515,7 +579,9 @@
             },
             "type": 6,
             "effect": {
-                "stat": {
+                "name": "",
+                "spritePath": "",
+                "stats": {
                     "speed": 0,
                     "crafting": 0,
                     "intelligence": 0,
@@ -527,7 +593,9 @@
                     "attack": 0,
                     "defense": 0
                 },
-                "duration": 0
+                "duration": 0,
+                "startTime": 0,
+                "finishTime": 0
             },
             "amount": 0.0
         },
@@ -552,7 +620,9 @@
             },
             "type": 6,
             "effect": {
-                "stat": {
+                "name": "",
+                "spritePath": "",
+                "stats": {
                     "speed": 0,
                     "crafting": 0,
                     "intelligence": 0,
@@ -564,7 +634,9 @@
                     "attack": 0,
                     "defense": 0
                 },
-                "duration": 0
+                "duration": 0,
+                "startTime": 0,
+                "finishTime": 0
             },
             "amount": 0.0
         },
@@ -589,7 +661,9 @@
             },
             "type": 6,
             "effect": {
-                "stat": {
+                "name": "",
+                "spritePath": "",
+                "stats": {
                     "speed": 0,
                     "crafting": 0,
                     "intelligence": 0,
@@ -601,7 +675,9 @@
                     "attack": 0,
                     "defense": 0
                 },
-                "duration": 0
+                "duration": 0,
+                "startTime": 0,
+                "finishTime": 0
             },
             "amount": 0.0
         }

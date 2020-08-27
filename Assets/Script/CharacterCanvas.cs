@@ -23,7 +23,7 @@ public class CharacterCanvas : MonoBehaviour
     private void OnEnable()
     {
         CreateCharacterSlot();
-
+        EventManager.Instance.OnCharacterAssigned += UpdateInformation;
         EventManager.Instance.OnResourceChanged += OnResourceChanged;
     }
     private void OnDisable()
@@ -31,6 +31,7 @@ public class CharacterCanvas : MonoBehaviour
         if (EventManager.Instance)
         {
             EventManager.Instance.OnResourceChanged -= OnResourceChanged;
+            EventManager.Instance.OnCharacterAssigned -= UpdateInformation;
         }
     }
 
@@ -42,8 +43,8 @@ public class CharacterCanvas : MonoBehaviour
 
     void Update()
     {
-       // UpdateInformation();
     }
+
     void OnResourceChanged(string name)
     {
         GameObject consumableItemPanelGO = transform.Find("MainPanel/ConsumableItemPanel").gameObject;
@@ -52,7 +53,7 @@ public class CharacterCanvas : MonoBehaviour
             RefreshConsumableItemList();
 
         }
-
+        UpdateInformation();
     }
     void UpdateInformation()
     {
@@ -72,7 +73,25 @@ public class CharacterCanvas : MonoBehaviour
         Text statsPoint = statusPanel.transform.Find("StatsPoint").GetComponent<Text>();
 
         List<Transform> plusButtons = new List<Transform>();
-       
+
+
+        GameObject buffIconContainer = transform.Find("MainPanel/InformationPanel/BuffIconContainer").gameObject;
+        foreach(Transform transform in buffIconContainer.transform)
+        {
+            Destroy(transform.gameObject);
+
+        }
+
+        foreach(Resource.Effect effect in character.effects)
+        {
+            Debug.Log(effect.spritePath);
+            GameObject buffIconGO = Instantiate(Resources.Load("Prefabs/UI/BuffIconPrefab") as GameObject, buffIconContainer.transform);
+            buffIconGO.transform.Find("BuffIcon").GetComponent<Image>().sprite = Resources.Load<Sprite>(effect.spritePath);
+            buffIconGO.GetComponent<BuffIcon>().StartBuffIcon(effect);
+
+        }
+
+
         foreach (Transform transform in statusPanel.transform.Cast<Transform>().Select(t => t.Find("PlusButton")).OfType<Transform>())
         {
             plusButtons.Add(transform);
@@ -93,10 +112,10 @@ public class CharacterCanvas : MonoBehaviour
             plusButtons.ForEach((t) => { t.gameObject.SetActive(false); });
 
         }
-       
+
 
         Slider expSlider = transform.Find("MainPanel/InformationPanel/EXPSlider").GetComponent<Slider>();
-        
+
         expSlider.value = character.level * 10 - ((character.level * 5 * (character.level + 1)) - character.Experience);
         expSlider.maxValue = character.level * 10;
         expSlider.GetComponentInChildren<Text>().text = ((character.level * 5 * (character.level + 1)) - character.Experience).ToString() + " EXP left";
@@ -245,7 +264,7 @@ public class CharacterCanvas : MonoBehaviour
             itemGO.GetComponent<Image>().sprite = Resources.Load<Sprite>(item.Value.spritePath);
 
             Button button = itemGO.AddComponent<Button>();
-            button.onClick.AddListener(() => { CharacterManager.Instance.ConsumeItem(character, item.Value); });
+            button.onClick.AddListener(() => { CharacterManager.Instance.ConsumeItem(character, item.Value); transform.Find("MainPanel/ConsumableItemPanel").gameObject.SetActive(false); });
 
             Text amount = itemGO.GetComponentInChildren<Text>();
             amount.text = ItemManager.Instance.GetResourceAmount(item.Value.Name).ToString();
@@ -258,7 +277,7 @@ public class CharacterCanvas : MonoBehaviour
         Equipment.EquipmentPosition position = (Equipment.EquipmentPosition)Enum.Parse(typeof(Equipment.EquipmentPosition), _position);
         GameObject container = transform.Find("MainPanel/WearingItemSlotPanel/EquipmentPanel/EquipmentListPanel/Scrollview/Container").gameObject;
 
-        foreach(Transform transform in container.transform)
+        foreach (Transform transform in container.transform)
         {
             Destroy(transform.gameObject);
 

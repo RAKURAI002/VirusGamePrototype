@@ -85,9 +85,10 @@ public class CraftingPanel : MonoBehaviour
                    resourceRecipe.craftingData.point, (_teamNumber)=> {
                        if (ItemManager.Instance.TryConsumeResources(resourceRecipe.craftingData.craftingMaterials))
                        {
-                           // ItemManager.Instance.AddResource(resource.Name, 1);
                            RefreshCraftingPanel();
+
                        }
+
                        NotificationManager.Instance.AddActivity(new ActivityInformation()
                        {
                            activityName = ("Craft:" + resource.Name),
@@ -97,7 +98,9 @@ public class CraftingPanel : MonoBehaviour
                            teamNumber = _teamNumber,
                            InformationID = resourceRecipe.ID
                        });
+
                        builder.TeamLockState.Add(_teamNumber);
+
                    }, false);
 
             /*

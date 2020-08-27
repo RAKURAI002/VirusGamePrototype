@@ -671,9 +671,9 @@ public class DataCreator : MonoBehaviour
         r.Add(new Resource(r.Count, "Bread", Item.RarityTier.Common, "Low-Grade Bread.", Resource.ResourceType.Ingredient, "Sprites/Resource/Bread"));
         r.Add(new Resource(r.Count, "Meat", Item.RarityTier.Common, "YumYum . . .", Resource.ResourceType.Ingredient, "Sprites/Resource/Meat"));
         r.Add(new Resource(r.Count, "Burger", Item.RarityTier.Common, "American SPIRIT.", Resource.ResourceType.Consumable, "Sprites/Resource/Burger", 
-            new Resource.Effect() { stat = new Character.AllStats() { strength = 20 }, duration = 300})) ;
+            new Resource.Effect() { name = "Burger Power", spritePath = "Sprites/Resource/Burger", stats = new Character.AllStats() { strength = 20 }, duration = 300})) ;
         r.Add(new Resource(r.Count, "Golden Burger", Item.RarityTier.Uncommon, "GOLDEN American SPIRIT.", Resource.ResourceType.Consumable, "Sprites/Resource/GoldenBurger",
-            new Resource.Effect() { stat = new Character.AllStats() { strength = 50, speed = 50, attack = 50, defense = 50, observing = 50 }, duration = 3600 }));
+            new Resource.Effect() { name = "Golden Burger Power", spritePath = "Sprites/Resource/GoldenBurger", stats = new Character.AllStats() { strength = 50, speed = 50, attack = 50, defense = 50, observing = 50 }, duration = 3600 }));
 
         r.Add(new Resource(r.Count, "Production", Item.RarityTier.Unknown, "Specific Building Production .", Resource.ResourceType.Special, "Sprites/Resource/Production"));
         r.Add(new Resource(r.Count, "Gold", Item.RarityTier.Unknown, "Specific Building Production .", Resource.ResourceType.Currency, "Sprites/Resource/Gold"));

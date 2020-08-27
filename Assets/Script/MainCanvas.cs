@@ -232,21 +232,26 @@ public class MainCanvas : MonoBehaviour
 
         canvasActive = false;
         SceneManager.LoadScene("WorldMap");
+
     }
 
     public void OnClickBase()
     {
         SceneManager.LoadScene("BaseScene");
+
     }
+
     public void OnBuildingShop()
     {
         buildingShopCanvas.SetActive(true);
+
     }
 
     public void OnClickInventory()
     {
         inventoryCanvas.SetActive(true);
         canvasActive = true;
+
     }
 
     public void OnClickCharacter()
@@ -255,6 +260,7 @@ public class MainCanvas : MonoBehaviour
         characterCanvas[1].SetActive(false);
         characterCanvas[2].SetActive(false);
         canvasActive = true;
+
     }
 
     public void OnClickNotification()
@@ -263,6 +269,7 @@ public class MainCanvas : MonoBehaviour
         {
             GameObject.Destroy(child.gameObject);
         }
+
         questNotificationButtonContainer.transform.parent.transform.parent.gameObject.SetActive(true);
         canvasActive = true;
 
@@ -297,7 +304,7 @@ public class MainCanvas : MonoBehaviour
         canvasActive = true;
 
     }
-    public void ExitButton()
+    public void OnClickExitButton()
     {
         EventSystem.current.currentSelectedGameObject.transform.parent.gameObject.SetActive(false);
 

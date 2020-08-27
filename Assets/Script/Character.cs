@@ -2,11 +2,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using UnityEngine;
 
 [System.Serializable]
 public class Character
 {
+
+    [System.Serializable]
+    public class CharacterData
+    {
+        [SerializeField] public string name;
+        [SerializeField] public GenderType gender;
+        [SerializeField] public string spritePath;
+
+    }
+
     [System.Serializable]
     public class AllStats
     {
@@ -64,20 +75,16 @@ public class Character
         id = CharacterManager.Instance.AllCharacters.Count;
         this.name = name;
         gender = Convert.ToBoolean(UnityEngine.Random.Range(0, 2)) ? GenderType.Male : GenderType.Female;
-        stats = new AllStats
-        {
-            speed = UnityEngine.Random.Range(1, 11),
-            crafting = UnityEngine.Random.Range(1, 11),
-            intelligence = UnityEngine.Random.Range(1, 11),
-            healthy = UnityEngine.Random.Range(1, 11),
-            luck = UnityEngine.Random.Range(1, 11),
-            observing = UnityEngine.Random.Range(1, 11),
-            strength = UnityEngine.Random.Range(1, 11),
-            hitPoint = UnityEngine.Random.Range(20, 31),
-            attack = UnityEngine.Random.Range(20, 31),
-            defense = UnityEngine.Random.Range(20, 31)
 
-        };
+        stats = new AllStats();
+
+        for (int i = 0; i < 50; i++)
+        {
+            FieldInfo fInfo = stats.GetType().GetFields()[UnityEngine.Random.Range(0, 7)];
+            fInfo.SetValue(this.stats, (int)fInfo.GetValue(this.stats) + 1);
+
+        }
+
         level = 1;
         birthMarks = new List<BirthMark>();
         birthMarks.Add(BirthMark.Arm);
@@ -124,28 +131,45 @@ public class Character
     {
         this.experience += exp;
 
-        if(experience >= level * 5 * (level + 1))
+        if (experience >= level * 5 * (level + 1))
         {
             level++;
             statsUpPoint += 3;
         }
-        
+
     }
     public void IncreaseStats(AllStats _stats)
-    {     
-        stats.crafting = stats.crafting + _stats.crafting;
-        stats.healthy = stats.healthy + _stats.healthy;
-        stats.intelligence = stats.intelligence + _stats.intelligence;
-        stats.luck = stats.luck + _stats.luck;
-        stats.observing = stats.observing + _stats.observing;
-        stats.speed = stats.speed + _stats.speed;
-        stats.strength = stats.strength + _stats.strength;
+    {
+        stats.crafting += _stats.crafting;
+        stats.healthy += _stats.healthy;
+        stats.intelligence += _stats.intelligence;
+        stats.luck += _stats.luck;
+        stats.observing += _stats.observing;
+        stats.speed += _stats.speed;
+        stats.strength += _stats.strength;
 
-        stats.attack = stats.attack + _stats.attack;
-        stats.defense = stats.defense + _stats.defense;
-        stats.hitPoint = stats.hitPoint + _stats.hitPoint;
+        stats.attack += _stats.attack;
+        stats.defense += _stats.defense;
+        stats.hitPoint += _stats.hitPoint;
 
     }
+
+    public void DecreaseStats(AllStats _stats)
+    {
+        stats.crafting -= _stats.crafting;
+        stats.healthy -= _stats.healthy;
+        stats.intelligence -= _stats.intelligence;
+        stats.luck -= _stats.luck;
+        stats.observing -= _stats.observing;
+        stats.speed -= _stats.speed;
+        stats.strength -= _stats.strength;
+
+        stats.attack -= _stats.attack;
+        stats.defense -= _stats.defense;
+        stats.hitPoint -= _stats.hitPoint;
+
+    }
+
 
     public override string ToString()
     {

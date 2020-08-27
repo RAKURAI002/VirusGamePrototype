@@ -18,6 +18,7 @@ public class BuildingShopPanel : MonoBehaviour
     }
     private void OnDisable()
     {
+        MainCanvas.canvasActive = false;
         if (EventManager.Instance)
             EventManager.Instance.OnResourceChanged -= OnResourceChanged;
     }
