@@ -8,13 +8,11 @@ using System.Diagnostics;
 
 public class TeamSelectorPanel : MonoBehaviour
 {
-    [SerializeField] Builder builder;
-
-    Mode _mode;
-    Builder _builder;
-    int _finishPoint;
-    Action<int> _callback;
-    bool _haveCharacterSlot;
+    Mode mode;
+    Builder builder;
+    int finishPoint;
+    Action<int> callback;
+    bool haveCharacterSlot;
 
     public enum Mode
     {
@@ -35,17 +33,17 @@ public class TeamSelectorPanel : MonoBehaviour
     }
     public void OnClickConfirmTeam(int currentSelectedTeam)
     {
-        _callback?.Invoke(currentSelectedTeam);
+        callback?.Invoke(currentSelectedTeam);
         GetComponent<ClosePanelHelper>().ForceClosePanel();
     }
-    public void CreateTeamSelectorPanel(Mode mode, Builder builder, int finishPoint, Action<int> callback, bool haveCharacterSlot)
+    public void CreateTeamSelectorPanel(Mode _mode, Builder _builder, int _finishPoint, Action<int> _callback, bool _haveCharacterSlot)
     {
-        this._builder = builder;
-        this._callback = callback;
-        this._haveCharacterSlot = haveCharacterSlot;
-        this._mode = mode;
-        this._finishPoint = finishPoint;
-        // UnityEngine.Debug.Log(new StackFrame(1).GetMethod().Name);
+        this.builder = _builder;
+        this.callback = _callback;
+        this.haveCharacterSlot = _haveCharacterSlot;
+        this.mode = _mode;
+        this.finishPoint = _finishPoint;
+       
         MainCanvas.canvasActive = true;
         gameObject.SetActive(true);
         ClearOldAssignUIData();
@@ -65,8 +63,7 @@ public class TeamSelectorPanel : MonoBehaviour
             case Mode.Build:
                 {
 
-                    _finishPoint = LoadManager.Instance.allBuildingData[builder.Type].upgradePoint[builder.Level];
-                    // Debug.Log($"Crate Build {builder.Type}({builder.Level}) : {_finishPoint}");
+                    this.finishPoint = LoadManager.Instance.allBuildingData[builder.Type].upgradePoint[builder.Level];
                     CreateAssignBuildingContainer(BuildManager.Instance.AllBuildings.SingleOrDefault(b => b.Type == Building.BuildingType.LaborCenter), false);
 
                     break;
@@ -109,7 +106,7 @@ public class TeamSelectorPanel : MonoBehaviour
         for (int i = 0; i < buildData.maxCharacterStored[builder.Level].amount.Count; i++)
         {
             assignPanelContainerGO.GetComponent<AssignSlotCreator>().
-            CreateTeamSelectableAssignSlot(assignPanelContainerGO.transform.Find("Container").gameObject, builder, i, _finishPoint, isInteractable);
+            CreateTeamSelectableAssignSlot(assignPanelContainerGO.transform.Find("Container").gameObject, builder, i, finishPoint, isInteractable);
 
         }
 
@@ -153,11 +150,11 @@ public class TeamSelectorPanel : MonoBehaviour
     public void RefreshAssignUI()
     {
         ClearOldAssignUIData();
-        if (_haveCharacterSlot)
+        if (haveCharacterSlot)
         {
             CreateCharacterSlot();
         }
-        CreateTeamSelectorPanel(_mode, _builder, _finishPoint, _callback, _haveCharacterSlot);
+        CreateTeamSelectorPanel(mode, builder, finishPoint, callback, haveCharacterSlot);
     }
     void ClearOldAssignUIData()
     {
@@ -166,7 +163,7 @@ public class TeamSelectorPanel : MonoBehaviour
         {
             Destroy(transform.gameObject);
         }
-        if (_haveCharacterSlot)
+        if (haveCharacterSlot)
         {
             GameObject characterContainer = gameObject.transform.Find("CharacterPanel/Container").gameObject;
 

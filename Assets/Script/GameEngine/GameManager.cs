@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using System.Text;
 
 public class GameManager : SingletonComponent<GameManager>
 {
@@ -21,6 +22,8 @@ public class GameManager : SingletonComponent<GameManager>
             Debug.LogError("Can't find dontDestroyManager");
         }
         DontDestroyOnLoad(dontDestroyManager);
+
+        StartCoroutine(LoadManager.Instance.InitializeGameData());
 
     }
     void OnEnable()
@@ -110,11 +113,14 @@ public class GameManager : SingletonComponent<GameManager>
     }
 
     #endregion
+
+    public StringBuilder gameLog;
+    
     public void StartTutorial()
     {
         CharacterManager.Instance.CreateNewCharacter();
 
-        LoadManager.Instance.playerData.completeTutorial = false;
+        LoadManager.Instance.playerData.completeTutorial = true;
     }
 
 

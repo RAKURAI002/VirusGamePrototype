@@ -210,9 +210,11 @@ public class MainCanvas : MonoBehaviour
        if(selectedBuilding.Level == 0)
         {
             return;
+
         }*/
         editBuilding.ShowThisCanvas(selectedBuilding);
         canvasActive = true;
+
     }
 
     public void OnClickWorldMap()

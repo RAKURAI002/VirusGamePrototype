@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using System.Threading.Tasks;
 using System.IO;
 using System;
-
+using UnityEngine.Assertions;
 using UnityEngine.SceneManagement;
 
 using UnityEngine.Tilemaps;
@@ -21,12 +21,12 @@ public class LoadManager : SingletonComponent<LoadManager>
     [SerializeField] public PlayerData playerData { get; set; }
 
     [SerializeField] public BuildingDictionary allBuildingData;
-    
+
     [SerializeField] public ResourceDictionary allResourceData;
     [SerializeField] public EquipmentDictionary allEquipmentData;
     [SerializeField] public List<Enemy> allEnemyData; /// ********************
     [SerializeField] public QuestDataDictionary allQuestData; /// ****************
-    
+
     #region Unity Functions
     protected override void Awake()
     {
@@ -34,11 +34,7 @@ public class LoadManager : SingletonComponent<LoadManager>
     }
     protected override void OnInitialize()
     {
-        
-        LoadPlayerDataFromJson(Application.persistentDataPath + "/PlayerData.json");
-        Debug.Log("Loading Game Data . . .");
-        StartCoroutine(LoadInGameData());
-        
+
     }
 
     void OnEnable()
@@ -63,7 +59,7 @@ public class LoadManager : SingletonComponent<LoadManager>
         }
         secondCalled = true;
     }
-  
+
     void Start()
     {
     }
@@ -72,6 +68,21 @@ public class LoadManager : SingletonComponent<LoadManager>
     {
     }
     #endregion
+    public IEnumerator InitializeGameData()
+    {
+        Debug.Log("Loading Player Data . . .");
+        LoadPlayerDataFromJson(Application.persistentDataPath + "/PlayerData.json");
+
+        Debug.Log("Loading Game Data . . .");
+        Coroutine LoadGameDataCoroutine = StartCoroutine(LoadInGameData());
+
+        yield return LoadGameDataCoroutine;
+
+        LoadPlayerDataToScene();
+
+        CheckFirstLogin();
+
+    }
 
     public void SavePlayerDataToJson()
     {
@@ -82,9 +93,9 @@ public class LoadManager : SingletonComponent<LoadManager>
         playerData.currentActivities = NotificationManager.Instance.ProcessingActivies;
 
         string playerDatas = JsonUtility.ToJson(playerData, true);
-       // Debug.Log("Saving Data to JSON to " + Application.persistentDataPath + playerDatas);
+        // Debug.Log("Saving Data to JSON to " + Application.persistentDataPath + playerDatas);
         System.IO.File.WriteAllText(Application.persistentDataPath + "/PlayerData.json", playerDatas);
-        
+
     }
 
     void LoadPlayerDataFromJson(string file_path)
@@ -94,7 +105,7 @@ public class LoadManager : SingletonComponent<LoadManager>
         playerData = new PlayerData();
 
         string file = null;
-        
+
         if (File.Exists(file_path))
         {
             file = File.ReadAllText(file_path);
@@ -102,25 +113,21 @@ public class LoadManager : SingletonComponent<LoadManager>
             {
                 playerData = JsonUtility.FromJson<PlayerData>(file);
                 Debug.Log(file);
-            }  
+            }
         }
         else
         {
             Debug.Log("There no file in directory. Creating new PlayerData.json on " + file_path);
             File.Create(file_path);
-            playerData.completeTutorial = true;
+            playerData.completeTutorial = false;
 
         }
 
         return;
     }
 
-    IEnumerator LoadInGameData()
+    public IEnumerator LoadInGameData()
     {
-        List<string> gameData = new List<string>(){ "/BuildingData.json", "/QuestData.json", "/ResourceData.json", "/EquipmentData.json" };
-
-
-
         Debug.Log("Fetching Building Data . . .");
         Coroutine c1 = StartCoroutine(GetRequest("/BuildingData.json", (UnityWebRequest req) =>
         {
@@ -131,16 +138,18 @@ public class LoadManager : SingletonComponent<LoadManager>
             else
             {
                 allBuildingData = new BuildingDictionary();
-               
+
                 Building[] buildings = JsonHelper.FromJson<Building>(req.downloadHandler.text);
-                foreach(Building building in buildings)
+                foreach (Building building in buildings)
                 {
                     allBuildingData.Add(building.type, building);
                 }
 
                 Debug.Log("Fetching Building Data completed.\n" + req.downloadHandler.text);
+
             }
         }));
+
         Debug.Log("Fetching Quest Data  . . .");
         Coroutine c2 = StartCoroutine(GetRequest("/QuestData.json", (UnityWebRequest req) =>
         {
@@ -188,7 +197,7 @@ public class LoadManager : SingletonComponent<LoadManager>
             {
                 allEquipmentData = new EquipmentDictionary();
                 Equipment[] equipments = JsonHelper.FromJson<Equipment>(req.downloadHandler.text);
-                foreach(Equipment equipment in equipments)
+                foreach (Equipment equipment in equipments)
                 {
                     allEquipmentData.Add(equipment.Name, equipment);
                 }
@@ -223,6 +232,13 @@ public class LoadManager : SingletonComponent<LoadManager>
 
         yield return c5;
 
+        Debug.Log("Load GameData Complete.");
+
+
+    }
+
+    void LoadPlayerDataToScene()
+    {
         Debug.Log("Initializing Player Data to Scene . . .");
         CharacterManager.Instance.AllCharacters = playerData.characterInPossession;
         ItemManager.Instance.AllResources = playerData.resourceInPossession;
@@ -233,19 +249,20 @@ public class LoadManager : SingletonComponent<LoadManager>
         MapManager.Instance.SetExpandedArea();
         MapManager.Instance.LoadBuildingToScene();
 
-        Debug.Log("Load GameData Complete.");
-
         EventManager.Instance.GameDataLoadFinished();
 
-        if (playerData.completeTutorial)
+    }
+
+    void CheckFirstLogin()
+    {
+        if (!playerData.completeTutorial)
         {
             Debug.Log("First login detected, Starting Tutorial . . . ");
             GameManager.Instance.StartTutorial();
 
         }
-
     }
-    
+
     IEnumerator GetRequest(string path, Action<UnityWebRequest> callback)
     {
         string finalPath = System.IO.Path.Combine(Application.streamingAssetsPath + path);

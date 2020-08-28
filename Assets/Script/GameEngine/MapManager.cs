@@ -15,13 +15,13 @@ public class MapManager : SingletonComponent<MapManager>
 
 
         AddConstructableGrid();
-       
+
         gridLayout = transform.parent.GetComponentInParent<GridLayout>();
         tilemap = gameObject.GetComponent<Tilemap>();
     }
     protected override void OnInitialize()
     {
-        
+
     }
     void OnEnable()
     {
@@ -31,23 +31,23 @@ public class MapManager : SingletonComponent<MapManager>
     void OnDisable()
     {
 
-        if(EventManager.Instance)
+        if (EventManager.Instance)
         {
             EventManager.Instance.OnPlayerLevelUp -= OnPlayerLevelUp;
         }
     }
 
-    void Start()    
+    void Start()
     {
         SetExpandedArea();
     }
 
     void Update()
     {
-       // Debug.Log(tilemap.localBounds.ToString());
+        // Debug.Log(tilemap.localBounds.ToString());
         if (buildPermission && Input.GetMouseButtonUp(0))
         {
-            
+
             Vector3 mousePos = Input.mousePosition;
             mousePos.z = -Camera.main.transform.position.z;
             Vector3 mouseToWorldPoint = Camera.main.ScreenToWorldPoint(mousePos);
@@ -59,16 +59,16 @@ public class MapManager : SingletonComponent<MapManager>
                 return;
             }
 
-          //  Debug.Log("world : " + mouseToWorldPoint.ToString());
+            //  Debug.Log("world : " + mouseToWorldPoint.ToString());
             Vector3Int clickedCellPosition = gridLayout.WorldToCell(mouseToWorldPoint);
-          //  Debug.Log("cell " + clickedCellPosition.ToString());
+            //  Debug.Log("cell " + clickedCellPosition.ToString());
             ClickTile(clickedCellPosition);
 
         }
 
     }
     #endregion
-   
+
     Tilemap tilemap;
     GridLayout gridLayout;
 
@@ -85,7 +85,7 @@ public class MapManager : SingletonComponent<MapManager>
     public void SetExpandedArea()
     {
         Debug.Log("Seting expanded Area.");
-        foreach(int treeID in LoadManager.Instance.playerData.expandedArea)
+        foreach (int treeID in LoadManager.Instance.playerData.expandedArea)
         {
             GameObject treeGO = GameManager.FindDeepChild(GameObject.Find("Map/Trees").transform, treeID.ToString()).gameObject;
 
@@ -93,13 +93,13 @@ public class MapManager : SingletonComponent<MapManager>
             {
                 Destroy(treeGO);
             }
-            
+
         }
 
-        for(int i = 1; i <= LoadManager.Instance.playerData.level/5; i++)
+        for (int i = 1; i <= LoadManager.Instance.playerData.level / 5; i++)
         {
             GameObject fogGO = GameObject.Find("Map/FogArea/" + i);
-            if(fogGO)
+            if (fogGO)
             {
                 Destroy(fogGO);
             }
@@ -109,9 +109,9 @@ public class MapManager : SingletonComponent<MapManager>
     }
     void OnPlayerLevelUp(int level)
     {
-        if(level % 5 == 0)
+        if (level % 5 == 0)
         {
-            GameObject fogGO = GameObject.Find("Map/FogArea/" + level/5);
+            GameObject fogGO = GameObject.Find("Map/FogArea/" + level / 5);
             if (fogGO)
             {
                 Destroy(fogGO);
@@ -130,25 +130,24 @@ public class MapManager : SingletonComponent<MapManager>
         {
             if (constructableGrid[i].Contains(position))
             {
-
-               
-
-                    /// Prevent from immediately showing Building Information Panel after build. 
-                    MainCanvas.canvasActive = true;
-                    Resources.FindObjectsOfTypeAll<BuildingShopPanel>()[0].gameObject.SetActive(false);
-                    StartCoroutine(DelaySetCanvasActive(false));
+                /// Prevent from immediately showing Building Information Panel after build. 
+                Resources.FindObjectsOfTypeAll<BuildingShopPanel>()[0].gameObject.SetActive(false);
+                MainCanvas.canvasActive = true;
+                StartCoroutine(DelaySetCanvasActive(false));
                 /// -------------------------------------------------------------------------------
-               
-                Action<int> callback = (teamNumber) => {
+
+                Action<int> callback = (teamNumber) =>
+                {
                     TeamSelectorCallback((Building.BuildingType)int.Parse(SelectedBuildingName),
-                    teamNumber, position, i); };
-                   
+                    teamNumber, position, i);
+                };
+
                 Builder builder = new Builder((Building.BuildingType)int.Parse(SelectedBuildingName));
                 ShowTeamSelectorPanel(builder, callback);
 
                 return;
             }
-        }      
+        }
     }
 
 
@@ -157,7 +156,7 @@ public class MapManager : SingletonComponent<MapManager>
         for (int i = 0; i < constructableGrid.Count; i++)
         {
             if (constructableGrid[i].Contains(gridLayout.WorldToCell(builder.Position)))
-            { 
+            {
                 BuildManager.Instance.LoadBuilding(builder);
                 constructableGrid.RemoveAt(i);
                 return;
@@ -175,7 +174,7 @@ public class MapManager : SingletonComponent<MapManager>
         buildPermission = true;
 
         Tile[] t = new Tile[4];
-        for(int i = 0; i < t.Length; i ++)
+        for (int i = 0; i < t.Length; i++)
         {
             t[i] = selectedTile;
         }
@@ -184,14 +183,14 @@ public class MapManager : SingletonComponent<MapManager>
         {
             tilemap.SetTiles(constructableGrid[i], t);
         }
-       
+
         tilemap.RefreshAllTiles();
     }
 
     public void CancleShowAvailableTiles()
     {
         buildPermission = false;
-      //  Debug.Log("Clearing Available Tiles . . .");
+        //  Debug.Log("Clearing Available Tiles . . .");
         Tile[] t = new Tile[4];
         for (int i = 0; i < t.Length; i++)
         {
@@ -199,9 +198,9 @@ public class MapManager : SingletonComponent<MapManager>
         }
         for (int i = 0; i < constructableGrid.Count; i++)
         {
-            tilemap.SetTiles(constructableGrid[i], t); 
+            tilemap.SetTiles(constructableGrid[i], t);
         }
-        
+
         tilemap.RefreshAllTiles();
     }
 
@@ -229,7 +228,7 @@ public class MapManager : SingletonComponent<MapManager>
     void AddConstructableGrid()
     {
         constructableGridDictionary = new Dictionary<int, List<Vector3Int[]>>();
-      //  constructableGridDictionary.Add();
+        //  constructableGridDictionary.Add();
 
         constructableGrid = new List<Vector3Int[]>();
         for (int i = 0; i < 60; i++)
@@ -558,7 +557,8 @@ public class MapManager : SingletonComponent<MapManager>
             teamSelectorPanel.gameObject.SetActive(true);
             teamSelectorPanel.CreateTeamSelectorPanel(TeamSelectorPanel.Mode.Build, builder,
                 LoadManager.Instance.allBuildingData[builder.Type].upgradePoint[builder.Level], callback, false);
-            teamSelectorPanel.gameObject.GetComponent<ClosePanelHelper>().SetOnExitCallback(()=> {
+            teamSelectorPanel.gameObject.GetComponent<ClosePanelHelper>().SetOnExitCallback(() =>
+            {
                 buildPermission = false;
                 CancleShowAvailableTiles();
             });
@@ -571,7 +571,7 @@ public class MapManager : SingletonComponent<MapManager>
     }
     void TeamSelectorCallback(Building.BuildingType type, int teamNumber, Vector3Int position, int removingTileIndex)
     {
-        if(BuildManager.Instance.CreateNewBuilding(type, teamNumber, gridLayout.CellToWorld(position)))
+        if (BuildManager.Instance.CreateNewBuilding(type, teamNumber, gridLayout.CellToWorld(position)))
         {
             constructableGrid.RemoveAt(removingTileIndex);
         }
@@ -611,7 +611,7 @@ public class MapManager : SingletonComponent<MapManager>
     }
     IEnumerator DelaySetCanvasActive(bool active)
     {
-        yield return new WaitForEndOfFrame();
+        yield return new WaitForSeconds(1f);
         MainCanvas.canvasActive = active;
     }
 }

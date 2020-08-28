@@ -87,7 +87,8 @@ public class BuildingInformationCanvas : MonoBehaviour
     public void OnClickDestroyButton()
     {
         BuildManager.Instance.RemoveBuilding(builder);
-        gameObject.SetActive(false);
+        GetComponent<ClosePanelHelper>().ForceClosePanel();
+
     }
 
     public void OnClickConfirmUpgrade()
