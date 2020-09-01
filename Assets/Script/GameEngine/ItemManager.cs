@@ -14,7 +14,7 @@ public class ItemManager : SingletonComponent<ItemManager>
     private EquipmentDictionary allEquipments;
 
     /// 1 Resource update cycle's period.
-    float RESOURCE_CICLE_TIME = 60f;
+    float RESOURCE_CICLE_TIME = 5f;
 
     public ResourceDictionary AllResources { get { return allResources; } set { allResources = value; } }
     public EquipmentDictionary AllEquipments { get { return allEquipments; } set { allEquipments = value; } }
@@ -23,7 +23,7 @@ public class ItemManager : SingletonComponent<ItemManager>
     protected override void Awake()
     {
         base.Awake();
-       
+
     }
     protected override void OnInitialize()
     {
@@ -50,27 +50,27 @@ public class ItemManager : SingletonComponent<ItemManager>
     }
     void Start()
     {
-       // InvokeRepeating("UpdateResourceEveryMinute", RESOURCE_CICLE_TIME, RESOURCE_CICLE_TIME);
+        InvokeRepeating("UpdateResourceEveryMinute", RESOURCE_CICLE_TIME, RESOURCE_CICLE_TIME);
     }
     #endregion
 
     public int GetResourceAmount(string name)
     {
         return allResources.ContainsKey(name) ? Mathf.FloorToInt(allResources[name].Amount) : 0;
-    
+
     }
     /// <summary>
     /// Resource update cycle function. Called in Start.
     /// </summary>
     void UpdateResourceEveryMinute()
     {
-        foreach(Builder builder in BuildManager.Instance.AllBuildings)
+        foreach (Builder builder in BuildManager.Instance.AllBuildings)
         {
             UpdateBuildingResource(builder);
 
         }
 
-        CharacterResourceConsuming();
+        //CharacterResourceConsuming();
         return;
 
     }
@@ -100,29 +100,38 @@ public class ItemManager : SingletonComponent<ItemManager>
 
         }
 
-        foreach(KeyValuePair<string, int> baseProduction in buildingData.production[builder.Level])
+        foreach (KeyValuePair<string, int> baseProduction in buildingData.production[builder.Level])
         {
-                int finalUpdatedAmount = baseProduction.Value;
-                int characterStatsSum = 0;
+            Resource resource = LoadManager.Instance.allResourceData[baseProduction.Key];
+            if(resource.type != Resource.ResourceType.Material)
+            {
+                return;
 
-                if(builder.CharacterInBuilding != null)
-                {
-                    characterStatsSum = builder.CharacterInBuilding.Sum(c => c.Characters.Sum( ch => ch.Stats.speed));
-                    finalUpdatedAmount += characterStatsSum;
-                }
-                
-                Debug.Log($"{RESOURCE_CICLE_TIME} seconds passed. Base Production of {builder.Type}[ID : {builder.ID}] is {baseProduction.Value} and sum of Character's Speed in building is {characterStatsSum} resulting in INCREASE " +
-                    $"{LoadManager.Instance.allResourceData[baseProduction.Key].Name} : {finalUpdatedAmount}");
-                AddResource(baseProduction.Key , finalUpdatedAmount);
+            }
+
+            int finalUpdatedAmount = baseProduction.Value;
+            int characterStatsSum = 0;
+
+            if (builder.CharacterInBuilding != null)
+            {
+                // characterStatsSum = builder.CharacterInBuilding.Sum(c => c.Characters.Sum( ch => ch.Stats.speed));
+                finalUpdatedAmount += characterStatsSum;
+            }
+
+            Debug.Log($"{RESOURCE_CICLE_TIME} seconds passed. Base Production of {builder.Type}[ID : {builder.ID}] is {baseProduction.Value} and sum of Character's Speed in building is {characterStatsSum} resulting in INCREASE " +
+                $"{LoadManager.Instance.allResourceData[baseProduction.Key].Name} : {finalUpdatedAmount}");
+           
+            builder.currentProductionAmount += finalUpdatedAmount * 5;
+            EventManager.Instance.ResourceChanged(baseProduction.Key);
 
         }
-        return; 
-        
+        return;
+
     }
 
     public void AddEquipment(int id, int amount)
     {
-        AddEquipment(LoadManager.Instance.allEquipmentData.SingleOrDefault( e => e.Value.ID == id).Key, amount);
+        AddEquipment(LoadManager.Instance.allEquipmentData.SingleOrDefault(e => e.Value.ID == id).Key, amount);
         return;
 
     }
@@ -136,7 +145,7 @@ public class ItemManager : SingletonComponent<ItemManager>
                 Debug.Log($"No current Equipment data in player. Trying to Create new one . . .");
 
             }
-            catch(KeyNotFoundException e)
+            catch (KeyNotFoundException e)
             {
                 Debug.LogError($"Can't find {name}'s data ::" + e.ToString());
 
@@ -159,7 +168,7 @@ public class ItemManager : SingletonComponent<ItemManager>
     }
     public bool AddResource(string name, int amount)
     {
-        if( !LoadManager.Instance.allResourceData.ContainsKey(name))
+        if (!LoadManager.Instance.allResourceData.ContainsKey(name))
         {
             Debug.LogWarning($"There're no {name} data in game.");
             return false;
@@ -185,7 +194,7 @@ public class ItemManager : SingletonComponent<ItemManager>
 
     public bool TryConsumeResources(DictionaryStringToInt resources)
     {
-        if(IsAffordable(resources))
+        if (IsAffordable(resources))
         {
             foreach (KeyValuePair<string, int> resource in resources)
             {
@@ -200,13 +209,13 @@ public class ItemManager : SingletonComponent<ItemManager>
 
         }
 
-        return true;  
+        return true;
     }
     public bool TryConsumeResources(string name, int amount)
     {
         if (IsAffordable(name, amount))
         {
-                ConsumeResource(name, amount);
+            ConsumeResource(name, amount);
 
         }
         else
@@ -218,7 +227,7 @@ public class ItemManager : SingletonComponent<ItemManager>
     }
     bool ConsumeResource(KeyValuePair<string, int> resource)
     {
-        if(ConsumeResource(resource.Key, resource.Value))
+        if (ConsumeResource(resource.Key, resource.Value))
         {
             return true;
         }
@@ -236,7 +245,7 @@ public class ItemManager : SingletonComponent<ItemManager>
             Debug.LogError($"There're NO {name} in Player Inventory");
             return false;
         }
-        else if(allResources[name].Amount < amount)
+        else if (allResources[name].Amount < amount)
         {
             Debug.LogWarning($"There're ONLY {allResources[name]} {name} in Player Inventory");
             return false;
@@ -264,12 +273,12 @@ public class ItemManager : SingletonComponent<ItemManager>
     }
     public bool IsAffordable(string name, int amount)
     {
-            if (amount > (ItemManager.Instance.AllResources.ContainsKey(name) ? ItemManager.Instance.AllResources[name].Amount : 0))
-            {
-                Debug.Log($"Not enough Resource ({LoadManager.Instance.allResourceData[name].Name})");
-                return false;
-            }
-        
+        if (amount > (ItemManager.Instance.AllResources.ContainsKey(name) ? ItemManager.Instance.AllResources[name].Amount : 0))
+        {
+            Debug.Log($"Not enough Resource ({LoadManager.Instance.allResourceData[name].Name})");
+            return false;
+        }
+
         return true;
     }
     public int GetSpeedUpCost(float pointLeft)
@@ -280,11 +289,11 @@ public class ItemManager : SingletonComponent<ItemManager>
     /// Debug Functions.
     public void ShowResourceTest()
     {
-        foreach(KeyValuePair<string, Resource> resource in allResources)
+        foreach (KeyValuePair<string, Resource> resource in allResources)
         {
             Debug.Log($"{LoadManager.Instance.allResourceData[resource.Key].Name } : {resource.Value}");
         }
-        
+
     }
     public void AddTest()
     {

@@ -40,7 +40,7 @@ public class EventManager : SingletonComponent<EventManager>
 
     #endregion
 
-    /// Event for Update UI ----------------------------
+    /// Events for Update UI ---------------------------
     public event Action OnCharacterAssigned;
     public event Action<string> OnResourceChanged;
 

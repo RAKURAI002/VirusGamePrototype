@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 using System.Threading.Tasks;
 using System.IO;
 using System;
+using System.Linq;
 using UnityEngine.Assertions;
 using UnityEngine.SceneManagement;
 
@@ -26,6 +27,7 @@ public class LoadManager : SingletonComponent<LoadManager>
     [SerializeField] public EquipmentDictionary allEquipmentData;
     [SerializeField] public List<Enemy> allEnemyData; /// ********************
     [SerializeField] public QuestDataDictionary allQuestData; /// ****************
+    [SerializeField] public List<Character.CharacterData> allCharacterData;
 
     #region Unity Functions
     protected override void Awake()
@@ -75,6 +77,7 @@ public class LoadManager : SingletonComponent<LoadManager>
 
         Debug.Log("Loading Game Data . . .");
         Coroutine LoadGameDataCoroutine = StartCoroutine(LoadInGameData());
+        
 
         yield return LoadGameDataCoroutine;
 
@@ -91,6 +94,7 @@ public class LoadManager : SingletonComponent<LoadManager>
         playerData.buildingInPossession = BuildManager.Instance.AllBuildings;
         playerData.equipmentInPossession = ItemManager.Instance.AllEquipments;
         playerData.currentActivities = NotificationManager.Instance.ProcessingActivies;
+        playerData.characterWaitingInLine = CharacterManager.Instance.characterWaitingInLine;
 
         string playerDatas = JsonUtility.ToJson(playerData, true);
         // Debug.Log("Saving Data to JSON to " + Application.persistentDataPath + playerDatas);
@@ -219,6 +223,19 @@ public class LoadManager : SingletonComponent<LoadManager>
                 allEnemyData.AddRange(JsonHelper.FromJson<Enemy>(req.downloadHandler.text));
             }
         }));
+        Coroutine c6 = StartCoroutine(LoadManager.Instance.GetRequest("/CharacterData.json", (UnityWebRequest req) =>
+        {
+            if (req.isNetworkError || req.isHttpError)
+            {
+                Debug.Log($"{req.error}: {req.downloadHandler.text}");
+            }
+            else
+            {
+                allCharacterData = new List<Character.CharacterData>();
+                Debug.Log("Fetching Character Data completed.\n" + req.downloadHandler.text);
+                allCharacterData.AddRange(JsonHelper.FromJson<Character.CharacterData>(req.downloadHandler.text));
+            }
+        }));
 
         Debug.Log("Now Waiting . . .");
 
@@ -231,6 +248,8 @@ public class LoadManager : SingletonComponent<LoadManager>
         yield return c4;
 
         yield return c5;
+
+        yield return c6;
 
         Debug.Log("Load GameData Complete.");
 
@@ -245,12 +264,42 @@ public class LoadManager : SingletonComponent<LoadManager>
         ItemManager.Instance.AllEquipments = playerData.equipmentInPossession;
         NotificationManager.Instance.ProcessingActivies = playerData.currentActivities;
 
+        CharacterManager.Instance.characterWaitingInLine = playerData.characterWaitingInLine;
+
         /// Load Player's progress to Map.
         MapManager.Instance.SetExpandedArea();
         MapManager.Instance.LoadBuildingToScene();
+        RemoveDuplicateCharacterData();
+
+
 
         EventManager.Instance.GameDataLoadFinished();
 
+    }
+    void RemoveDuplicateCharacterData()
+    {
+        foreach (Character character in CharacterManager.Instance.AllCharacters)
+        {
+            Character.CharacterData cData = LoadManager.Instance.allCharacterData.SingleOrDefault(c => c.name == character.Name);
+            if (cData != null)
+            {
+                LoadManager.Instance.allCharacterData.Remove(cData);
+
+            }
+
+        }
+        foreach (Character character in CharacterManager.Instance.characterWaitingInLine)
+        {
+
+            Character.CharacterData[] cData = LoadManager.Instance.allCharacterData.Where(c => c.name == character.Name).ToArray();
+   
+            if (cData.Length != 0)
+            {
+                LoadManager.Instance.allCharacterData.Remove(cData[0]);
+
+            }
+
+        }
     }
 
     void CheckFirstLogin()
@@ -262,8 +311,8 @@ public class LoadManager : SingletonComponent<LoadManager>
 
         }
     }
-
-    IEnumerator GetRequest(string path, Action<UnityWebRequest> callback)
+   
+    public IEnumerator GetRequest(string path, Action<UnityWebRequest> callback)
     {
         string finalPath = System.IO.Path.Combine(Application.streamingAssetsPath + path);
         using (UnityWebRequest request = UnityWebRequest.Get(finalPath))
@@ -272,6 +321,7 @@ public class LoadManager : SingletonComponent<LoadManager>
             yield return request.SendWebRequest();
             callback(request);
         }
+
     }
     IEnumerator WaitAllCoroutine(List<IEnumerator> coroutineList, Action OnComplete)
     {

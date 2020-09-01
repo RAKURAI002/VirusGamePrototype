@@ -61,6 +61,8 @@ public class Builder
 
     [SerializeField] private List<CharacterWrapper> characterInBuilding;
 
+    [SerializeField] public float currentProductionAmount;
+
     [NonSerialized] public GameObject representGameObject;
     [NonSerialized] public int maxActiveAmount;
     [NonSerialized] public int maxLevel;

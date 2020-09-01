@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using System.Text;
+using System.Linq;
 
 public class GameManager : SingletonComponent<GameManager>
 {
@@ -121,6 +122,7 @@ public class GameManager : SingletonComponent<GameManager>
         CharacterManager.Instance.CreateNewCharacter();
 
         LoadManager.Instance.playerData.completeTutorial = true;
+
     }
 
 

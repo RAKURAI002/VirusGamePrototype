@@ -9,7 +9,6 @@ public class BuildManager : SingletonComponent<BuildManager>
 {
     /// Contains all of Player's Buildings.
     [SerializeField] List<Builder> allBuildings;
-    [SerializeField] List<GameObject> allBuildingPrefab;
 
     public List<Builder> AllBuildings { get { return allBuildings; } }
 
@@ -21,23 +20,6 @@ public class BuildManager : SingletonComponent<BuildManager>
     }
     protected override void OnInitialize()
     {
-        allBuildings = new List<Builder>();
-
-        allBuildingPrefab = new List<GameObject>();
-        allBuildingPrefab.Add(Resources.Load("Prefabs/FarmPrefab") as GameObject);
-        allBuildingPrefab.Add(Resources.Load("Prefabs/KitchenPrefab") as GameObject);
-        allBuildingPrefab.Add(Resources.Load("Prefabs/LaboratoryPrefab") as GameObject);
-        allBuildingPrefab.Add(Resources.Load("Prefabs/MedicalCenterPrefab") as GameObject);
-        allBuildingPrefab.Add(Resources.Load("Prefabs/QuarantineSitePrefab") as GameObject);
-        allBuildingPrefab.Add(Resources.Load("Prefabs/ResidencePrefab") as GameObject);
-        allBuildingPrefab.Add(Resources.Load("Prefabs/TownBasePrefab") as GameObject);
-        allBuildingPrefab.Add(Resources.Load("Prefabs/WaterTreatmentCenterPrefab") as GameObject);
-        allBuildingPrefab.Add(Resources.Load("Prefabs/WarehousePrefab") as GameObject);
-        allBuildingPrefab.Add(Resources.Load("Prefabs/FishingPondPrefab") as GameObject);
-        allBuildingPrefab.Add(Resources.Load("Prefabs/LaborCenterPrefab") as GameObject);
-        allBuildingPrefab.Add(Resources.Load("Prefabs/ArmoryPrefab") as GameObject);
-        allBuildingPrefab.Add(Resources.Load("Prefabs/TradingCenterPrefab") as GameObject);
-
     }
     void OnEnable()
     {
@@ -81,7 +63,8 @@ public class BuildManager : SingletonComponent<BuildManager>
             return false;
         }
 
-        GameObject builderGO = Instantiate(allBuildingPrefab[(int)type - 1], position, Quaternion.identity);
+        GameObject builderGO = Instantiate(Resources.Load<GameObject>("Prefabs/BuildingPrefab"), position, Quaternion.identity);
+        builderGO.SetActive(false);
         builderGO.transform.SetParent(this.gameObject.transform.Find("AllBuildings"));
 
         Builder builder = new Builder(type, position, builderGO);
@@ -93,15 +76,17 @@ public class BuildManager : SingletonComponent<BuildManager>
 
         builderGO.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(buildData.spritePath[builder.Level]);
         builderGO.name = builder.ID.ToString();
-        builderGO.AddComponent<BuildingBehavior>().builder = builder; /// UNUSED
+        builderGO.AddComponent<BuildingBehavior>().SetBuilder(builder);
         builder.representGameObject = builderGO;
 
         if (laborCenter != null)
         {
             laborCenter.TeamLockState.Add(teamNumber);
+
         }
 
         builder.representGameObject.AddComponent<BuildTimer>();
+        builderGO.SetActive(true);
         Debug.Log("Create action complete.");
         LoadManager.Instance.SavePlayerDataToJson();
 
@@ -113,7 +98,8 @@ public class BuildManager : SingletonComponent<BuildManager>
     {
         Building buildData = LoadManager.Instance.allBuildingData[builder.Type];
 
-        GameObject builderGO = Instantiate(allBuildingPrefab[(int)builder.Type - 1], builder.Position, Quaternion.identity);
+        GameObject builderGO = Instantiate( Resources.Load<GameObject>("Prefabs/BuildingPrefab"), builder.Position, Quaternion.identity);
+        builderGO.SetActive(false);
         builder.InitializeData();
         builderGO.transform.SetParent(this.gameObject.transform.GetChild(0).transform);
         builder.representGameObject = builderGO;
@@ -122,7 +108,7 @@ public class BuildManager : SingletonComponent<BuildManager>
 
         AddBuildingsToList(builder);
         builderGO.name = builder.ID.ToString();
-        builderGO.AddComponent<BuildingBehavior>().builder = builder;/// UNUSED
+        builderGO.AddComponent<BuildingBehavior>().SetBuilder(builder);
 
         /// Reconnect reference. -----------------
         for (int i = builder.CharacterInBuilding.Count - 1; i >= 0; i--)
@@ -141,7 +127,7 @@ public class BuildManager : SingletonComponent<BuildManager>
             builderGO.AddComponent<BuildTimer>();
 
         }
-
+        builderGO.SetActive(true);
         Debug.Log("Loading Building From JSON : " + builder.ToString());
         return;
 

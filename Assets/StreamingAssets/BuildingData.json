@@ -226,47 +226,39 @@
                 {
                     "keys": [
                         "Food",
-                        "Water",
                         "Production"
                     ],
                     "values": [
-                        2,
-                        3,
+                        1,
                         20
                     ]
                 },
                 {
                     "keys": [
                         "Food",
-                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        2,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
                         "Production"
                     ],
                     "values": [
                         3,
-                        3,
                         30
                     ]
                 },
                 {
                     "keys": [
                         "Food",
-                        "Water",
                         "Production"
                     ],
                     "values": [
-                        3,
-                        4,
-                        30
-                    ]
-                },
-                {
-                    "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        4,
                         4,
                         30
                     ]
@@ -274,11 +266,9 @@
                 {
                     "keys": [
                         "Food",
-                        "Water",
                         "Production"
                     ],
                     "values": [
-                        4,
                         5,
                         30
                     ]
@@ -286,23 +276,9 @@
                 {
                     "keys": [
                         "Food",
-                        "Water",
                         "Production"
                     ],
                     "values": [
-                        5,
-                        5,
-                        30
-                    ]
-                },
-                {
-                    "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        5,
                         6,
                         30
                     ]
@@ -310,23 +286,9 @@
                 {
                     "keys": [
                         "Food",
-                        "Water",
                         "Production"
                     ],
                     "values": [
-                        6,
-                        6,
-                        30
-                    ]
-                },
-                {
-                    "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        6,
                         7,
                         30
                     ]
@@ -334,12 +296,30 @@
                 {
                     "keys": [
                         "Food",
-                        "Water",
                         "Production"
                     ],
                     "values": [
-                        6,
-                        7,
+                        8,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Production"
+                    ],
+                    "values": [
+                        9,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Food",
+                        "Production"
+                    ],
+                    "values": [
+                        10,
                         30
                     ]
                 }
@@ -451,7 +431,21 @@
                 "Sprites/Building/Farm1",
                 "Sprites/Building/Farm1"
             ],
-            "description": "NO !!!"
+            "description": "NO !!!",
+            "maxProductionStored": [
+                0,
+                100,
+                300,
+                500,
+                700,
+                900,
+                1100,
+                1300,
+                1500,
+                1700,
+                1900
+            ],
+            "productionSpritePath": "Sprites/UI/FoodIcon"
         },
         {
             "type": 10,
@@ -904,7 +898,9 @@
                 "Sprites/Building/FishingPond1",
                 "Sprites/Building/FishingPond1"
             ],
-            "description": "NO !!!"
+            "description": "NO !!!",
+            "maxProductionStored": [],
+            "productionSpritePath": ""
         },
         {
             "type": 2,
@@ -1357,7 +1353,9 @@
                 "Sprites/Building/Kitchen1",
                 "Sprites/Building/Kitchen1"
             ],
-            "description": "NO !!!"
+            "description": "NO !!!",
+            "maxProductionStored": [],
+            "productionSpritePath": ""
         },
         {
             "type": 3,
@@ -1810,7 +1808,9 @@
                 "Sprites/Building/Laboratory1",
                 "Sprites/Building/Laboratory1"
             ],
-            "description": "NO !!!"
+            "description": "NO !!!",
+            "maxProductionStored": [],
+            "productionSpritePath": ""
         },
         {
             "type": 11,
@@ -2263,7 +2263,9 @@
                 "Sprites/Building/LaborCenter1",
                 "Sprites/Building/LaborCenter1"
             ],
-            "description": "NO !!!"
+            "description": "NO !!!",
+            "maxProductionStored": [],
+            "productionSpritePath": ""
         },
         {
             "type": 4,
@@ -2716,7 +2718,9 @@
                 "Sprites/Building/MedicalCenter1",
                 "Sprites/Building/MedicalCenter1"
             ],
-            "description": "NO !!!"
+            "description": "NO !!!",
+            "maxProductionStored": [],
+            "productionSpritePath": ""
         },
         {
             "type": 5,
@@ -3169,7 +3173,9 @@
                 "Sprites/Building/QuarantineSite1",
                 "Sprites/Building/QuarantineSite1"
             ],
-            "description": "NO !!!"
+            "description": "NO !!!",
+            "maxProductionStored": [],
+            "productionSpritePath": ""
         },
         {
             "type": 6,
@@ -3622,7 +3628,9 @@
                 "Sprites/Building/Residence1",
                 "Sprites/Building/Residence1"
             ],
-            "description": "NO !!!"
+            "description": "NO !!!",
+            "maxProductionStored": [],
+            "productionSpritePath": ""
         },
         {
             "type": 7,
@@ -4075,7 +4083,9 @@
                 "Sprites/Building/TownBase1",
                 "Sprites/Building/TownBase1"
             ],
-            "description": "NO !!!"
+            "description": "NO !!!",
+            "maxProductionStored": [],
+            "productionSpritePath": ""
         },
         {
             "type": 9,
@@ -4528,7 +4538,9 @@
                 "Sprites/Building/WareHouse1",
                 "Sprites/Building/WareHouse1"
             ],
-            "description": "NO !!!"
+            "description": "NO !!!",
+            "maxProductionStored": [],
+            "productionSpritePath": ""
         },
         {
             "type": 8,
@@ -4755,121 +4767,101 @@
                 },
                 {
                     "keys": [
-                        "Food",
                         "Water",
                         "Production"
                     ],
                     "values": [
-                        2,
-                        3,
+                        1,
                         20
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        2,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
                         "Water",
                         "Production"
                     ],
                     "values": [
                         3,
-                        3,
                         30
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
                         "Water",
                         "Production"
                     ],
                     "values": [
-                        3,
-                        4,
-                        30
-                    ]
-                },
-                {
-                    "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        4,
                         4,
                         30
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
                         "Water",
                         "Production"
                     ],
                     "values": [
-                        4,
                         5,
                         30
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
                         "Water",
                         "Production"
                     ],
                     "values": [
-                        5,
-                        5,
-                        30
-                    ]
-                },
-                {
-                    "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        5,
                         6,
                         30
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
                         "Water",
                         "Production"
                     ],
                     "values": [
-                        6,
-                        6,
-                        30
-                    ]
-                },
-                {
-                    "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        6,
                         7,
                         30
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
                         "Water",
                         "Production"
                     ],
                     "values": [
-                        6,
-                        7,
+                        8,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        9,
+                        30
+                    ]
+                },
+                {
+                    "keys": [
+                        "Water",
+                        "Production"
+                    ],
+                    "values": [
+                        10,
                         30
                     ]
                 }
@@ -4981,7 +4973,21 @@
                 "Sprites/Building/WaterTreatmentCenter1",
                 "Sprites/Building/WaterTreatmentCenter1"
             ],
-            "description": "NO !!!"
+            "description": "NO !!!",
+            "maxProductionStored": [
+                0,
+                100,
+                300,
+                500,
+                700,
+                900,
+                1100,
+                1300,
+                1500,
+                1700,
+                1900
+            ],
+            "productionSpritePath": "Sprites/UI/WaterIcon"
         },
         {
             "type": 12,
@@ -5434,7 +5440,9 @@
                 "Sprites/Building/Armory1",
                 "Sprites/Building/Armory1"
             ],
-            "description": "NO !!!"
+            "description": "NO !!!",
+            "maxProductionStored": [],
+            "productionSpritePath": ""
         },
         {
             "type": 13,
@@ -5887,7 +5895,9 @@
                 "Sprites/Building/TradingCenter1",
                 "Sprites/Building/TradingCenter1"
             ],
-            "description": "NO !!!"
+            "description": "NO !!!",
+            "maxProductionStored": [],
+            "productionSpritePath": ""
         }
     ]
 }

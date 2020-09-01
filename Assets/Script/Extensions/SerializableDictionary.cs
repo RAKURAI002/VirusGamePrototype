@@ -94,6 +94,8 @@ public class ActivityInformation
     public long startPoint;
     public float currentPoint;
     public long finishPoint;
+
+
 }
 
 [System.Serializable]

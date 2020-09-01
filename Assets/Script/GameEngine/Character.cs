@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Remoting.Messaging;
 using UnityEngine;
 
 [System.Serializable]
@@ -52,6 +53,7 @@ public class Character
         Leg,
         Foot
 
+            
     }
     public enum HealthStatus
     {
@@ -72,7 +74,7 @@ public class Character
 
     public Character(string name)
     {
-        id = CharacterManager.Instance.AllCharacters.Count;
+        id = GenerateID();
         this.name = name;
         gender = Convert.ToBoolean(UnityEngine.Random.Range(0, 2)) ? GenderType.Male : GenderType.Female;
 
@@ -93,6 +95,53 @@ public class Character
         workStatus = WorkStatus.Idle;
         healthStatus = HealthStatus.Healthly;
         spritePath = "Sprites/Character/Character" + UnityEngine.Random.Range(1, 10).ToString();
+        effects = new List<Resource.Effect>();
+        currentHp = stats.hitPoint;
+
+    }
+    public int GenerateID()
+    {
+        if (CharacterManager.Instance.AllCharacters.Count == 0)
+        {
+            return 1;
+
+        }
+
+        int maxIDCandidate1 = CharacterManager.Instance.AllCharacters.Select(c => c.id).Max();
+        int maxIDCandidate2 = 0;
+        if(CharacterManager.Instance.characterWaitingInLine.Count > 0)
+        {
+            maxIDCandidate2 = CharacterManager.Instance.characterWaitingInLine.Select(c => c.id).Max();
+        }
+       
+
+        return Mathf.Max(maxIDCandidate1, maxIDCandidate2) + 1;
+
+    }
+
+    public Character(string name, GenderType gender, string spritePath)
+    {
+        id = GenerateID();
+        this.name = name;
+        this.gender = gender;
+
+        stats = new AllStats();
+
+        for (int i = 0; i < 50; i++)
+        {
+            FieldInfo fInfo = stats.GetType().GetFields()[UnityEngine.Random.Range(0, 7)];
+            fInfo.SetValue(this.stats, (int)fInfo.GetValue(this.stats) + 1);
+
+        }
+
+        level = 1;
+        birthMarks = new List<BirthMark>();
+        birthMarks.Add(BirthMark.Arm);
+
+        equipments = new List<Equipment>();
+        workStatus = WorkStatus.Idle;
+        healthStatus = HealthStatus.Healthly;
+        this.spritePath = spritePath;
         effects = new List<Resource.Effect>();
         currentHp = stats.hitPoint;
 
@@ -126,6 +175,7 @@ public class Character
     public AllStats Stats { get { return stats; } set { stats = value; } }
     public List<BirthMark> BirthMarks { get { return birthMarks; } }
     public int WorkingPlaceID { get; set; }
+
 
     public void AddEXP(int exp)
     {

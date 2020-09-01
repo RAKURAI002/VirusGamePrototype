@@ -3,10 +3,15 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Networking;
+
 public class CharacterManager : SingletonComponent<CharacterManager>
 {
     [SerializeField] private List<Character> allCharacters;
+    [SerializeField] public List<Character> characterWaitingInLine;
     public List<Character> AllCharacters { get { return allCharacters; } set { allCharacters = value; } }
+
+    float CHARACTER_ADDING_EVENT_CYCLE = 1f;
 
     #region Unity Functions
     protected override void Awake()
@@ -17,6 +22,8 @@ public class CharacterManager : SingletonComponent<CharacterManager>
     protected override void OnInitialize()
     {
         allCharacters = new List<Character>();
+        characterWaitingInLine = new List<Character>();
+
     }
 
     void OnEnable()
@@ -24,6 +31,7 @@ public class CharacterManager : SingletonComponent<CharacterManager>
         SceneManager.sceneLoaded += OnLevelFinishedLoading;
 
         EventManager.Instance.OnGameDataLoadFinished += OnGameDataLoadFinished;
+
     }
 
     void OnDisable()
@@ -32,6 +40,7 @@ public class CharacterManager : SingletonComponent<CharacterManager>
 
         if (EventManager.Instance)
             EventManager.Instance.OnGameDataLoadFinished -= OnGameDataLoadFinished;
+
     }
 
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
@@ -42,14 +51,39 @@ public class CharacterManager : SingletonComponent<CharacterManager>
             Start();
         }
         secondCalled = true;
+
     }
 
     void Start()
     {
+        InvokeRepeating("CharacterJoiningEvent", CHARACTER_ADDING_EVENT_CYCLE, CHARACTER_ADDING_EVENT_CYCLE);
+
     }
 
     #endregion
 
+    void CharacterJoiningEvent()
+    {
+        if(LoadManager.Instance.allCharacterData.Count <= 0)
+        {
+            return;
+
+        }
+
+        int index = UnityEngine.Random.Range(0, LoadManager.Instance.allCharacterData.Count);
+
+        Debug.Log(index);
+        Character.CharacterData characterData = LoadManager.Instance.allCharacterData[index];
+        Character character = new Character(characterData.name, characterData.gender, characterData.spritePath); ;
+        characterWaitingInLine.Add(character);
+        LoadManager.Instance.allCharacterData.Remove(characterData);
+        EventManager.Instance.CharacterAssigned();
+
+
+      
+    }
+
+    
     public void CreateNewCharacter()
     {
         Character character = new Character("John " + Random.Range(0, 10000));
@@ -60,7 +94,8 @@ public class CharacterManager : SingletonComponent<CharacterManager>
 
     }
 
-    void AddCharacterToList(Character character)
+
+    public void AddCharacterToList(Character character)
     {
         allCharacters.Add(character);
         return;

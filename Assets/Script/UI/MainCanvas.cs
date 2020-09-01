@@ -12,7 +12,7 @@ using System;
 public class MainCanvas : MonoBehaviour
 {
     /// Assign in Inspector
-    public Button btnMap;
+    public Button mapButton;
     public GameObject inventoryCanvas;
     public GameObject buildingShopCanvas;
     public GameObject toWorkCanvas;
@@ -22,17 +22,18 @@ public class MainCanvas : MonoBehaviour
 
     public GameObject confirmationPanel;
     public GameObject warningPanel;
-    public GameObject questNotificationButtonContainer;
+    public GameObject notificationButtonContainer;
     public Text playerName;
     public Text playerLevel;
 
     public Animator selectButtonAnimator;
     /// --------------------------------------------------
-    
+    GameObject uiCanvas;
 
     bool selectButtonToggle;
     GameObject editBuildingPanel;
-    GameObject finishedQuestAmountGO;
+    GameObject finishedActivityAmountGO;
+    GameObject waitingCharacterAmountGO;
 
     public static bool canvasActive { get; set; } /// Freeze action with Camera while Panel is opening.
 
@@ -42,8 +43,12 @@ public class MainCanvas : MonoBehaviour
         EventManager.Instance.OnActivityFinished += OnActivityFinished;
         EventManager.Instance.OnPlayerLevelUp += OnPlayerLevelUp;
         EventManager.Instance.OnResourceChanged += OnResourceChanged;
+        EventManager.Instance.OnCharacterAssigned += OnCharacterAddEvent;
     }
-    
+    void OnCharacterAddEvent()
+    {
+        RefreshWaitingCharacterAmount();
+    }
     void OnResourceChanged(string name)
     {
         Transform resourceGO = resourcePanel.transform.Find(name + "Panel");
@@ -76,22 +81,28 @@ public class MainCanvas : MonoBehaviour
             EventManager.Instance.OnActivityFinished -= OnActivityFinished;
             EventManager.Instance.OnPlayerLevelUp -= OnPlayerLevelUp;
             EventManager.Instance.OnResourceChanged -= OnResourceChanged;
+            EventManager.Instance.OnCharacterAssigned -= OnCharacterAddEvent;
         }
     }
 
     private void Start()
     {
-        finishedQuestAmountGO = GameManager.FindInActiveObjectByName("FinishedQuestAmount");
+        finishedActivityAmountGO = GameManager.FindInActiveObjectByName("FinishedActivityAmount");
+        waitingCharacterAmountGO = GameManager.FindInActiveObjectByName("WaitingCharacterAmount");
         playerName.text += $"<color=red>{LoadManager.Instance.playerData.name}</color>";
         playerLevel.text += LoadManager.Instance.playerData.level.ToString();
         selectButtonToggle = false;;
         editBuildingPanel = Resources.FindObjectsOfTypeAll<BuildingInformationCanvas>()[0].gameObject;
+
+        uiCanvas = GameObject.Find("UICanvas");
+
+
         if (editBuildingPanel == null)
         {
             Debug.LogError("Can't find EditBuildingPanel");
         }
         RefreshNotificationAmount();
-
+        RefreshWaitingCharacterAmount();
         UpdateResourcePanel();
     }
     void UpdateResourcePanel()
@@ -101,6 +112,7 @@ public class MainCanvas : MonoBehaviour
 
         resourcePanel.transform.Find("WoodPanel").gameObject.GetComponentInChildren<Text>().text = ItemManager.Instance.GetResourceAmount("Wood").ToString();
         resourcePanel.transform.Find("FoodPanel").gameObject.GetComponentInChildren<Text>().text = ItemManager.Instance.GetResourceAmount("Food").ToString();
+    
     }
     private void Update()
     {
@@ -178,28 +190,49 @@ public class MainCanvas : MonoBehaviour
 
         if (notiAmount == 0)
         {
-            finishedQuestAmountGO.SetActive(false);
+            finishedActivityAmountGO.SetActive(false);
+
         }
         else
         {
-            finishedQuestAmountGO.SetActive(true);
-            finishedQuestAmountGO.GetComponentInChildren<Text>().text = notiAmount.ToString();
+            finishedActivityAmountGO.SetActive(true);
+            finishedActivityAmountGO.GetComponentInChildren<Text>().text = notiAmount.ToString();
+
         }
+
+    }
+    public void RefreshWaitingCharacterAmount()
+    {
+        int characterAmount = CharacterManager.Instance.characterWaitingInLine.Count;
+
+        if (characterAmount == 0)
+        {
+            waitingCharacterAmountGO.transform.parent.gameObject.SetActive(false);
+
+        }
+        else
+        {
+            waitingCharacterAmountGO.transform.parent.gameObject.SetActive(true);
+            waitingCharacterAmountGO.GetComponentInChildren<Text>().text = characterAmount.ToString();
+
+        }
+
     }
     void ShowExpandAreaPanel(GameObject selectedGameObject)
     {
         confirmationPanel.GetComponent<ExpandConfirmationPanel>().expandingAreaID = int.Parse(selectedGameObject.name);
         confirmationPanel.SetActive(true);
         canvasActive = true;
+
     }
     void ShowWarningPanel(GameObject selectedGameObject)
     {
         warningPanel.SetActive(true);
         warningPanel.GetComponentInChildren<WarningText>().SetWarningMessage($"You need to be Level {int.Parse(selectedGameObject.name) * 5} to unlock this.", 2);
+    
     }
     void ShowEditBuildingPanel(GameObject selectedGameObject)
-    {
-       
+    {  
         BuildingInformationCanvas editBuilding = editBuildingPanel.GetComponent<BuildingInformationCanvas>();
         if (editBuilding == null)
         {
@@ -267,34 +300,48 @@ public class MainCanvas : MonoBehaviour
 
     public void OnClickNotification()
     {
-        foreach (Transform child in questNotificationButtonContainer.transform)
+        foreach (Transform child in notificationButtonContainer.transform)
         {
             GameObject.Destroy(child.gameObject);
         }
 
-        questNotificationButtonContainer.transform.parent.transform.parent.gameObject.SetActive(true);
+        notificationButtonContainer.transform.parent.parent.gameObject.SetActive(true);
         canvasActive = true;
 
         int notiAmount = NotificationManager.Instance.ProcessingActivies.Where(pa => pa.Value.isFinished).ToList().Count;
 
-        
+        /*
         if (notiAmount == 0)
         {
             finishedQuestAmountGO.SetActive(false);
+
         }
         else
         {
             finishedQuestAmountGO.GetComponentInChildren<Text>().text = notiAmount.ToString();
-        }
 
-        /* foreach (var questData in QuestManager.Instance.finishedQuest)
-         {
-                 GameObject finishQuestButtonGO = Instantiate(Resources.Load("Prefabs/UI/SimpleButton") as GameObject);
-                 finishQuestButtonGO.transform.SetParent(questNotificationButtonContainer.transform);
-                 finishQuestButtonGO.name = questData.Key.ToString();
-                 finishQuestButtonGO.GetComponentInChildren<Text>().text = LoadManager.Instance.allQuestData[questData.Key].questName;
-                 finishQuestButtonGO.GetComponent<Button>().onClick.AddListener(() => { QuestManager.Instance.OnClickConfirmFinishQuest(questData); });
-         }*/
+        }*/
+
+    }
+
+    public void OnClickCharacterNotification()
+    {
+        GameObject characterNotification = transform.Find("AddCharacterPanel").gameObject;
+        characterNotification.SetActive(true);
+        canvasActive = true;
+
+      //  int notiAmount = CharacterManager.Instance.characterWaitingInLine.ToList().Count;
+/*
+        if (notiAmount == 0)
+        {
+            characterNotification.SetActive(false);
+        
+        }
+        else
+        {
+            characterNotificationButtonContainer.GetComponentInChildren<Text>().text = notiAmount.ToString();
+        
+        }*/
 
 
 

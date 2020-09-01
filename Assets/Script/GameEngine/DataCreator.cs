@@ -74,8 +74,8 @@ public class DataCreator : MonoBehaviour
 
         List<DictionaryStringToInt> allProduction = new List<DictionaryStringToInt>();
         allProduction.Add(new DictionaryStringToInt());
-        allProduction.Add(new DictionaryStringToInt() { { "Food", 2 }, { "Water", 3 }, { "Production", 20 } });
-        allProduction.Add(new DictionaryStringToInt() { { "Food", 3 }, { "Water", 3 }, { "Production", 30 } });
+        allProduction.Add(new DictionaryStringToInt() { { "Food", 2 }});
+        allProduction.Add(new DictionaryStringToInt() { { "Food", 3 }});
         allProduction.Add(new DictionaryStringToInt() { { "Food", 3 }, { "Water", 4 }, { "Production", 30 } });
         allProduction.Add(new DictionaryStringToInt() { { "Food", 4 }, { "Water", 4 }, { "Production", 30 } });
         allProduction.Add(new DictionaryStringToInt() { { "Food", 4 }, { "Water", 5 }, { "Production", 30 } });
@@ -86,17 +86,7 @@ public class DataCreator : MonoBehaviour
         allProduction.Add(new DictionaryStringToInt() { { "Food", 6 }, { "Water", 7 }, { "Production", 30 } });
 
         List<DictionaryStringToInt> allConsuming = new List<DictionaryStringToInt>();
-        allCost.Add(new DictionaryStringToInt());
-        allCost.Add(new DictionaryStringToInt() { { "Food", 2 }, { "Water", 2 } });
-        allCost.Add(new DictionaryStringToInt() { { "Food", 2 }, { "Water", 3 } });
-        allCost.Add(new DictionaryStringToInt() { { "Food", 3 }, { "Water", 3 } });
-        allCost.Add(new DictionaryStringToInt() { { "Food", 3 }, { "Water", 4 } });
-        allCost.Add(new DictionaryStringToInt() { { "Food", 4 }, { "Water", 4 } });
-        allCost.Add(new DictionaryStringToInt() { { "Food", 4 }, { "Water", 5 } });
-        allCost.Add(new DictionaryStringToInt() { { "Food", 5 }, { "Water", 5 } });
-        allCost.Add(new DictionaryStringToInt() { { "Food", 5 }, { "Water", 6 } });
-        allCost.Add(new DictionaryStringToInt() { { "Food", 6 }, { "Water", 6 } });
-        allCost.Add(new DictionaryStringToInt() { { "Food", 6 }, { "Water", 7 } });
+       
 
         List<int> upgradePoint = new List<int>(){200,
                                             300,
@@ -125,19 +115,61 @@ public class DataCreator : MonoBehaviour
         maxCharacter.Add(9, new MaxCharacterStored { amount = new List<int>() { 3, 3 } });
         maxCharacter.Add(10, new MaxCharacterStored { amount = new List<int>() { 3, 3 } });
 
+        List<int> productionStored = new List<int>(){0,
+                                            100,
+                                            300,
+                                            500,
+                                            700,
+                                            900,
+                                            1100,
+                                            1300,
+                                            1500,
+                                            1700,
+                                            1900 };
+
+
+        List<DictionaryStringToInt> FarmResourceProduction = new List<DictionaryStringToInt>();
+        FarmResourceProduction.Add(new DictionaryStringToInt());
+        FarmResourceProduction.Add(new DictionaryStringToInt() { { "Food", 1 }});
+        FarmResourceProduction.Add(new DictionaryStringToInt() { { "Food", 2 }});
+        FarmResourceProduction.Add(new DictionaryStringToInt() { { "Food", 3 }});
+        FarmResourceProduction.Add(new DictionaryStringToInt() { { "Food", 4 }});
+        FarmResourceProduction.Add(new DictionaryStringToInt() { { "Food", 5 }});
+        FarmResourceProduction.Add(new DictionaryStringToInt() { { "Food", 6 }});
+        FarmResourceProduction.Add(new DictionaryStringToInt() { { "Food", 7 }, { "Production", 30 } });
+        FarmResourceProduction.Add(new DictionaryStringToInt() { { "Food", 8 }, { "Production", 30 } });
+        FarmResourceProduction.Add(new DictionaryStringToInt() { { "Food", 9 }, { "Production", 30 } });
+        FarmResourceProduction.Add(new DictionaryStringToInt() { { "Food", 10 }, { "Production", 30 } });
+
+
+
+        List<DictionaryStringToInt> WaterResourceProduction = new List<DictionaryStringToInt>();
+        WaterResourceProduction.Add(new DictionaryStringToInt());
+        WaterResourceProduction.Add(new DictionaryStringToInt() { { "Gold", 1 }, { "Production", 20 } });
+        WaterResourceProduction.Add(new DictionaryStringToInt() { { "Water", 2 }, { "Production", 30 } });
+        WaterResourceProduction.Add(new DictionaryStringToInt() { { "Water", 3 }, { "Production", 30 } });
+        WaterResourceProduction.Add(new DictionaryStringToInt() { { "Water", 4 }, { "Production", 30 } });
+        WaterResourceProduction.Add(new DictionaryStringToInt() { { "Water", 5 }, { "Production", 30 } });
+        WaterResourceProduction.Add(new DictionaryStringToInt() { { "Water", 6 }, { "Production", 30 } });
+        WaterResourceProduction.Add(new DictionaryStringToInt() { { "Water", 7 }, { "Production", 30 } });
+        WaterResourceProduction.Add(new DictionaryStringToInt() { { "Water", 8 }, { "Production", 30 } });
+        WaterResourceProduction.Add(new DictionaryStringToInt() { { "Water", 9 }, { "Production", 30 } });
+        WaterResourceProduction.Add(new DictionaryStringToInt() { { "Water", 10 }, { "Production", 30 } });
+
+
         string description = "NO !!!";
 
-        bu.Add(new Building(Building.BuildingType.Farm, allCost, allProduction, allConsuming, upgradePoint, 2, 9, maxCharacter, description, GetSpritePath("Farm")));
+        bu.Add(new Building(Building.BuildingType.Farm, allCost, FarmResourceProduction, allConsuming, upgradePoint, 2, 9, maxCharacter, description, GetSpritePath("Farm"), productionStored, "Sprites/UI/FoodIcon"));
         bu.Add(new Building(Building.BuildingType.FishingPond, allCost, allProduction, allConsuming, upgradePoint, 1, 9, maxCharacter, description, GetSpritePath("FishingPond")));
         bu.Add(new Building(Building.BuildingType.Kitchen, allCost, allProduction, allConsuming, upgradePoint, 1, 9, maxCharacter, description, GetSpritePath("Kitchen")));
         bu.Add(new Building(Building.BuildingType.Laboratory, allCost, allProduction, allConsuming, upgradePoint, 1, 9, maxCharacter, description, GetSpritePath("Laboratory")));
         bu.Add(new Building(Building.BuildingType.LaborCenter, allCost, allProduction, allConsuming, upgradePoint, 1, 9, maxCharacter, description, GetSpritePath("LaborCenter")));//***
-        bu.Add(new Building(Building.BuildingType.MedicalCenter, allCost, allProduction, allConsuming, upgradePoint, 1, 9, maxCharacter, description, GetSpritePath("MedicalCenter")));//***
+        bu.Add(new Building(Building.BuildingType.MedicalCenter, allCost, allProduction, allConsuming, upgradePoint, 1, 9, maxCharacter, description, GetSpritePath("MedicalCenter")));
         bu.Add(new Building(Building.BuildingType.QuarantineSite, allCost, allProduction, allConsuming, upgradePoint, 1, 9, maxCharacter, description, GetSpritePath("QuarantineSite")));
         bu.Add(new Building(Building.BuildingType.Residence, allCost, allProduction, allConsuming, upgradePoint, 1, 9, maxCharacter, description, GetSpritePath("Residence")));
         bu.Add(new Building(Building.BuildingType.TownBase, allCost, allProduction, allConsuming, upgradePoint, 1, 9, maxCharacter, description, GetSpritePath("TownBase")));//****
         bu.Add(new Building(Building.BuildingType.WareHouse, allCost, allProduction, allConsuming, upgradePoint, 1, 9, maxCharacter, description, GetSpritePath("WareHouse")));
-        bu.Add(new Building(Building.BuildingType.WaterTreatmentCenter, allCost, allProduction, allConsuming, upgradePoint, 2, 9, maxCharacter, description, GetSpritePath("WaterTreatmentCenter")));
+        bu.Add(new Building(Building.BuildingType.WaterTreatmentCenter, allCost, WaterResourceProduction, allConsuming, upgradePoint, 2, 9, maxCharacter, description, GetSpritePath("WaterTreatmentCenter"), productionStored, "Sprites/UI/WaterIcon"));
         bu.Add(new Building(Building.BuildingType.Armory, allCost, allProduction, allConsuming, upgradePoint, 1, 9, maxCharacter, description, GetSpritePath("Armory")));
         bu.Add(new Building(Building.BuildingType.TradingCenter, allCost, allProduction, allConsuming, upgradePoint, 1, 9, maxCharacter, description, GetSpritePath("TradingCenter")));
 

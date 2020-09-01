@@ -69,6 +69,7 @@ public class BuildingShopPanel : MonoBehaviour
 
         for (int i = 0; i < Enum.GetNames(typeof(Building.BuildingType)).Length - 1; i++)
         {
+
             Button button = GameObject.Find("ShopButton" + (i + 1).ToString()).GetComponent<Button>();
             Builder bu = null;
 

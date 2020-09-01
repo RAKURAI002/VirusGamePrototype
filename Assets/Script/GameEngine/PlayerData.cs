@@ -11,10 +11,11 @@ public class PlayerData
         characterInPossession = new List<Character>();
         resourceInPossession = new ResourceDictionary();
         equipmentInPossession = new EquipmentDictionary();
-        //questInProgress = new QuestDictionary();
         currentActivities = new ActivityProgressDictionary();
         expandedArea = new List<int>();
         level = 1;
+
+        characterWaitingInLine = new List<Character>();
 
     }
 
@@ -23,6 +24,7 @@ public class PlayerData
     [SerializeField] public int level;
     [SerializeField] public List<Builder> buildingInPossession;
     [SerializeField] public List<Character> characterInPossession;
+    [SerializeField] public List<Character> characterWaitingInLine;
     [SerializeField] public ResourceDictionary resourceInPossession;
     [SerializeField] public EquipmentDictionary equipmentInPossession;
 

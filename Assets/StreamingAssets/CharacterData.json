@@ -1,0 +1,504 @@
+{
+    "Items": [
+        {
+            "name": "Liam",
+            "gender": 1,
+            "spritePath": "Sprites/Character/Character2"
+        },
+        {
+            "name": "Noah",
+            "gender": 1,
+            "spritePath": "Sprites/Character/Character3"
+        },
+        {
+            "name": "William",
+            "gender": 1,
+            "spritePath": "Sprites/Character/Character4"
+        },
+        {
+            "name": "James",
+            "gender": 1,
+            "spritePath": "Sprites/Character/Character5"
+        },
+        {
+            "name": "Oliver",
+            "gender": 1,
+            "spritePath": "Sprites/Character/Character9"
+        },
+        {
+            "name": "Benjamin",
+            "gender": 1,
+            "spritePath": "Sprites/Character/Character10"
+        },
+        {
+            "name": "Elijah",
+            "gender": 1,
+            "spritePath": "Sprites/Character/Character11"
+        },
+        {
+            "name": "Lucas",
+            "gender": 1,
+            "spritePath": "Sprites/Character/Character12"
+        },
+        {
+            "name": "Mason",
+            "gender": 1,
+            "spritePath": "Sprites/Character/Character13"
+        },
+        {
+            "name": "Logan",
+            "gender": 1,
+            "spritePath": "Sprites/Character/Character14"
+        },
+        {
+            "name": "Alexander",
+            "gender": 1,
+            "spritePath": "Sprites/Character/Character2"
+        },
+        {
+            "name": "Ethan",
+            "gender": 1,
+            "spritePath": "Sprites/Character/Character3"
+        },
+        {
+            "name": "Jacob",
+            "gender": 1,
+            "spritePath": "Sprites/Character/Character4"
+        },
+        {
+            "name": "Michael",
+            "gender": 1,
+            "spritePath": "Sprites/Character/Character5"
+        },
+        {
+            "name": "Daniel",
+            "gender": 1,
+            "spritePath": "Sprites/Character/Character9"
+        },
+        {
+            "name": "Henry",
+            "gender": 1,
+            "spritePath": "Sprites/Character/Character10"
+        },
+        {
+            "name": "Jackson",
+            "gender": 1,
+            "spritePath": "Sprites/Character/Character11"
+        },
+        {
+            "name": "Sebastian",
+            "gender": 1,
+            "spritePath": "Sprites/Character/Character12"
+        },
+        {
+            "name": "Aiden",
+            "gender": 1,
+            "spritePath": "Sprites/Character/Character13"
+        },
+        {
+            "name": "Matthew",
+            "gender": 1,
+            "spritePath": "Sprites/Character/Character14"
+        },
+        {
+            "name": "Samuel",
+            "gender": 1,
+            "spritePath": "Sprites/Character/Character2"
+        },
+        {
+            "name": "David",
+            "gender": 1,
+            "spritePath": "Sprites/Character/Character3"
+        },
+        {
+            "name": "Joseph",
+            "gender": 1,
+            "spritePath": "Sprites/Character/Character4"
+        },
+        {
+            "name": "Carter",
+            "gender": 1,
+            "spritePath": "Sprites/Character/Character5"
+        },
+        {
+            "name": "Owen",
+            "gender": 1,
+            "spritePath": "Sprites/Character/Character9"
+        },
+        {
+            "name": "Wyatt",
+            "gender": 1,
+            "spritePath": "Sprites/Character/Character10"
+        },
+        {
+            "name": "John",
+            "gender": 1,
+            "spritePath": "Sprites/Character/Character11"
+        },
+        {
+            "name": "Jack",
+            "gender": 1,
+            "spritePath": "Sprites/Character/Character12"
+        },
+        {
+            "name": "Luke",
+            "gender": 1,
+            "spritePath": "Sprites/Character/Character13"
+        },
+        {
+            "name": "Jayden",
+            "gender": 1,
+            "spritePath": "Sprites/Character/Character14"
+        },
+        {
+            "name": "Dylan",
+            "gender": 1,
+            "spritePath": "Sprites/Character/Character2"
+        },
+        {
+            "name": "Grayson",
+            "gender": 1,
+            "spritePath": "Sprites/Character/Character3"
+        },
+        {
+            "name": "Levi",
+            "gender": 1,
+            "spritePath": "Sprites/Character/Character4"
+        },
+        {
+            "name": "Isaac",
+            "gender": 1,
+            "spritePath": "Sprites/Character/Character5"
+        },
+        {
+            "name": "Gabriel",
+            "gender": 1,
+            "spritePath": "Sprites/Character/Character9"
+        },
+        {
+            "name": "Julian",
+            "gender": 1,
+            "spritePath": "Sprites/Character/Character10"
+        },
+        {
+            "name": "Mateo",
+            "gender": 1,
+            "spritePath": "Sprites/Character/Character11"
+        },
+        {
+            "name": "Anthony",
+            "gender": 1,
+            "spritePath": "Sprites/Character/Character12"
+        },
+        {
+            "name": "Jaxon",
+            "gender": 1,
+            "spritePath": "Sprites/Character/Character13"
+        },
+        {
+            "name": "Lincoln",
+            "gender": 1,
+            "spritePath": "Sprites/Character/Character14"
+        },
+        {
+            "name": "Joshua",
+            "gender": 1,
+            "spritePath": "Sprites/Character/Character2"
+        },
+        {
+            "name": "Christopher",
+            "gender": 1,
+            "spritePath": "Sprites/Character/Character3"
+        },
+        {
+            "name": "Andrew",
+            "gender": 1,
+            "spritePath": "Sprites/Character/Character4"
+        },
+        {
+            "name": "Theodore",
+            "gender": 1,
+            "spritePath": "Sprites/Character/Character5"
+        },
+        {
+            "name": "Caleb",
+            "gender": 1,
+            "spritePath": "Sprites/Character/Character9"
+        },
+        {
+            "name": "Ryan",
+            "gender": 1,
+            "spritePath": "Sprites/Character/Character10"
+        },
+        {
+            "name": "Asher",
+            "gender": 1,
+            "spritePath": "Sprites/Character/Character11"
+        },
+        {
+            "name": "Nathan",
+            "gender": 1,
+            "spritePath": "Sprites/Character/Character12"
+        },
+        {
+            "name": "Thomas",
+            "gender": 1,
+            "spritePath": "Sprites/Character/Character13"
+        },
+        {
+            "name": "Leo",
+            "gender": 1,
+            "spritePath": "Sprites/Character/Character14"
+        },
+        {
+            "name": "Emma",
+            "gender": 2,
+            "spritePath": "Sprites/Character/Character1"
+        },
+        {
+            "name": "Olivia",
+            "gender": 2,
+            "spritePath": "Sprites/Character/Character6"
+        },
+        {
+            "name": "Ava",
+            "gender": 2,
+            "spritePath": "Sprites/Character/Character7"
+        },
+        {
+            "name": "Isabella",
+            "gender": 2,
+            "spritePath": "Sprites/Character/Character8"
+        },
+        {
+            "name": "Sophia",
+            "gender": 2,
+            "spritePath": "Sprites/Character/Character1"
+        },
+        {
+            "name": "Charlotte",
+            "gender": 2,
+            "spritePath": "Sprites/Character/Character6"
+        },
+        {
+            "name": "Mia",
+            "gender": 2,
+            "spritePath": "Sprites/Character/Character7"
+        },
+        {
+            "name": "Amelia",
+            "gender": 2,
+            "spritePath": "Sprites/Character/Character8"
+        },
+        {
+            "name": "Harper",
+            "gender": 2,
+            "spritePath": "Sprites/Character/Character1"
+        },
+        {
+            "name": "Evelyn",
+            "gender": 2,
+            "spritePath": "Sprites/Character/Character6"
+        },
+        {
+            "name": "Abigail",
+            "gender": 2,
+            "spritePath": "Sprites/Character/Character7"
+        },
+        {
+            "name": "Emily",
+            "gender": 2,
+            "spritePath": "Sprites/Character/Character8"
+        },
+        {
+            "name": "Elizabeth",
+            "gender": 2,
+            "spritePath": "Sprites/Character/Character1"
+        },
+        {
+            "name": "Mila",
+            "gender": 2,
+            "spritePath": "Sprites/Character/Character6"
+        },
+        {
+            "name": "Ella",
+            "gender": 2,
+            "spritePath": "Sprites/Character/Character7"
+        },
+        {
+            "name": "Avery",
+            "gender": 2,
+            "spritePath": "Sprites/Character/Character8"
+        },
+        {
+            "name": "Sofia",
+            "gender": 2,
+            "spritePath": "Sprites/Character/Character1"
+        },
+        {
+            "name": "Camila",
+            "gender": 2,
+            "spritePath": "Sprites/Character/Character6"
+        },
+        {
+            "name": "Aria",
+            "gender": 2,
+            "spritePath": "Sprites/Character/Character7"
+        },
+        {
+            "name": "Scarlett",
+            "gender": 2,
+            "spritePath": "Sprites/Character/Character8"
+        },
+        {
+            "name": "Victoria",
+            "gender": 2,
+            "spritePath": "Sprites/Character/Character1"
+        },
+        {
+            "name": "Madison",
+            "gender": 2,
+            "spritePath": "Sprites/Character/Character6"
+        },
+        {
+            "name": "Luna",
+            "gender": 2,
+            "spritePath": "Sprites/Character/Character7"
+        },
+        {
+            "name": "Grace",
+            "gender": 2,
+            "spritePath": "Sprites/Character/Character8"
+        },
+        {
+            "name": "Chloe",
+            "gender": 2,
+            "spritePath": "Sprites/Character/Character1"
+        },
+        {
+            "name": "Penelope",
+            "gender": 2,
+            "spritePath": "Sprites/Character/Character6"
+        },
+        {
+            "name": "Layla",
+            "gender": 2,
+            "spritePath": "Sprites/Character/Character7"
+        },
+        {
+            "name": "Riley",
+            "gender": 2,
+            "spritePath": "Sprites/Character/Character8"
+        },
+        {
+            "name": "Zoey",
+            "gender": 2,
+            "spritePath": "Sprites/Character/Character1"
+        },
+        {
+            "name": "Nora",
+            "gender": 2,
+            "spritePath": "Sprites/Character/Character6"
+        },
+        {
+            "name": "Lily",
+            "gender": 2,
+            "spritePath": "Sprites/Character/Character7"
+        },
+        {
+            "name": "Noah",
+            "gender": 2,
+            "spritePath": "Sprites/Character/Character8"
+        },
+        {
+            "name": "Eleanor",
+            "gender": 2,
+            "spritePath": "Sprites/Character/Character1"
+        },
+        {
+            "name": "Hannah",
+            "gender": 2,
+            "spritePath": "Sprites/Character/Character6"
+        },
+        {
+            "name": "Lillian",
+            "gender": 2,
+            "spritePath": "Sprites/Character/Character7"
+        },
+        {
+            "name": "Addison",
+            "gender": 2,
+            "spritePath": "Sprites/Character/Character8"
+        },
+        {
+            "name": "Ellie",
+            "gender": 2,
+            "spritePath": "Sprites/Character/Character1"
+        },
+        {
+            "name": "Stella",
+            "gender": 2,
+            "spritePath": "Sprites/Character/Character6"
+        },
+        {
+            "name": "Natalie",
+            "gender": 2,
+            "spritePath": "Sprites/Character/Character7"
+        },
+        {
+            "name": "Zoe",
+            "gender": 2,
+            "spritePath": "Sprites/Character/Character8"
+        },
+        {
+            "name": "Leah",
+            "gender": 2,
+            "spritePath": "Sprites/Character/Character1"
+        },
+        {
+            "name": "Hazel",
+            "gender": 2,
+            "spritePath": "Sprites/Character/Character6"
+        },
+        {
+            "name": "Violet",
+            "gender": 2,
+            "spritePath": "Sprites/Character/Character7"
+        },
+        {
+            "name": "Aurora",
+            "gender": 2,
+            "spritePath": "Sprites/Character/Character8"
+        },
+        {
+            "name": "Savannah",
+            "gender": 2,
+            "spritePath": "Sprites/Character/Character1"
+        },
+        {
+            "name": "Audrey",
+            "gender": 2,
+            "spritePath": "Sprites/Character/Character6"
+        },
+        {
+            "name": "Brooklyn",
+            "gender": 2,
+            "spritePath": "Sprites/Character/Character7"
+        },
+        {
+            "name": "Bella",
+            "gender": 2,
+            "spritePath": "Sprites/Character/Character8"
+        },
+        {
+            "name": "Claire",
+            "gender": 2,
+            "spritePath": "Sprites/Character/Character1"
+        },
+        {
+            "name": "Skylar",
+            "gender": 2,
+            "spritePath": "Sprites/Character/Character6"
+        }
+    ]
+}
