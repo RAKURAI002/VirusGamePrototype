@@ -60,9 +60,10 @@ public class Building
         LaborCenter,
         Armory,
         TradingCenter,
-        /*
+
         Mine,
-        Lumber*/
+        LumberYard
+
     }
 
     [SerializeField] public BuildingType type;

@@ -76,7 +76,7 @@ public class DataCreator : MonoBehaviour
         allProduction.Add(new DictionaryStringToInt());
         allProduction.Add(new DictionaryStringToInt() { { "Food", 2 }});
         allProduction.Add(new DictionaryStringToInt() { { "Food", 3 }});
-        allProduction.Add(new DictionaryStringToInt() { { "Food", 3 }, { "Water", 4 }, { "Production", 30 } });
+        allProduction.Add(new DictionaryStringToInt() { { "Food", 3 }});
         allProduction.Add(new DictionaryStringToInt() { { "Food", 4 }, { "Water", 4 }, { "Production", 30 } });
         allProduction.Add(new DictionaryStringToInt() { { "Food", 4 }, { "Water", 5 }, { "Production", 30 } });
         allProduction.Add(new DictionaryStringToInt() { { "Food", 5 }, { "Water", 5 }, { "Production", 30 } });
@@ -172,473 +172,476 @@ public class DataCreator : MonoBehaviour
         bu.Add(new Building(Building.BuildingType.WaterTreatmentCenter, allCost, WaterResourceProduction, allConsuming, upgradePoint, 2, 9, maxCharacter, description, GetSpritePath("WaterTreatmentCenter"), productionStored, "Sprites/UI/WaterIcon"));
         bu.Add(new Building(Building.BuildingType.Armory, allCost, allProduction, allConsuming, upgradePoint, 1, 9, maxCharacter, description, GetSpritePath("Armory")));
         bu.Add(new Building(Building.BuildingType.TradingCenter, allCost, allProduction, allConsuming, upgradePoint, 1, 9, maxCharacter, description, GetSpritePath("TradingCenter")));
+        bu.Add(new Building(Building.BuildingType.Mine, allCost, allProduction, allConsuming, upgradePoint, 1, 9, maxCharacter, description, GetSpritePath("Mine")));
 
-        { 
-        /*Building[] b = new Building[12];
-        b[0] = new Building();
-        b[0].type = Building.BuildingType.Farm;
-        b[0].buildingCost = new List<ResourceDictionary>();
-        b[0].buildingCost.Add(new ResourceDictionary() { { 1, 5 }, { 2, 5 } });
-        b[0].buildingCost.Add(new ResourceDictionary() { { 1, 2 }, { 2, 6 } });
-        b[0].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } }); b[0].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } }); b[0].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } }); b[0].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } }); b[0].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } }); b[0].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } }); b[0].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } }); b[0].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } });
-        b[0].consuming = new List<ResourceDictionary>();
-        b[0].consuming.Add(new ResourceDictionary() { { 3, 1 } });
-        b[0].consuming.Add(new ResourceDictionary() { { 3, 1 } });
-        b[0].consuming.Add(new ResourceDictionary() { { 3, 1 } }); b[0].consuming.Add(new ResourceDictionary() { { 3, 1 } }); b[0].consuming.Add(new ResourceDictionary() { { 3, 1 } }); b[0].consuming.Add(new ResourceDictionary() { { 3, 1 } }); b[0].consuming.Add(new ResourceDictionary() { { 3, 1 } }); b[0].consuming.Add(new ResourceDictionary() { { 3, 1 } }); b[0].consuming.Add(new ResourceDictionary() { { 3, 1 } }); b[0].consuming.Add(new ResourceDictionary() { { 3, 1 } });
-        b[0].production = new List<ResourceDictionary>();
-        b[0].production.Add(new ResourceDictionary() { { 4, 5 } });
-        b[0].production.Add(new ResourceDictionary() { { 4, 6 } });
-        b[0].production.Add(new ResourceDictionary() { { 4, 7 } }); b[0].production.Add(new ResourceDictionary() { { 4, 7 } }); b[0].production.Add(new ResourceDictionary() { { 4, 7 } }); b[0].production.Add(new ResourceDictionary() { { 4, 7 } }); b[0].production.Add(new ResourceDictionary() { { 4, 7 } }); b[0].production.Add(new ResourceDictionary() { { 4, 7 } }); b[0].production.Add(new ResourceDictionary() { { 4, 7 } }); b[0].production.Add(new ResourceDictionary() { { 4, 7 } });
-        b[0].maxActiveAmount = 2;
-        b[0].upgradePoint = new List<int>(){200,
-                                            600,
-                                            1200,
-                                            2600,
-                                            3600,
-                                            9000,
-                                            5400,
-                                            45000,
-                                            81000,
-                                            135000 };
+        bu.Add(new Building(Building.BuildingType.LumberYard, allCost, allProduction, allConsuming, upgradePoint, 1, 9, maxCharacter, description, GetSpritePath("LumberYard")));
 
-        b[0].spritePath = new List<string>();
-        b[0].spritePath.Add("Sprites/Building/Farm0");
-        b[0].spritePath.Add("Sprites/Building/Farm1");
-        b[0].spritePath.Add("Sprites/Building/Farm2"); b[0].spritePath.Add("Sprites/Building/Farm2"); b[0].spritePath.Add("Sprites/Building/Farm2"); b[0].spritePath.Add("Sprites/Building/Farm2"); b[0].spritePath.Add("Sprites/Building/Farm2"); b[0].spritePath.Add("Sprites/Building/Farm2"); b[0].spritePath.Add("Sprites/Building/Farm2"); b[0].spritePath.Add("Sprites/Building/Farm2"); b[0].spritePath.Add("Sprites/Building/Farm2");
-        b[0].spritePath.Add("Sprites/Building/Farm2"); b[0].spritePath.Add("Sprites/Building/Farm2"); b[0].spritePath.Add("Sprites/Building/Farm2"); b[0].spritePath.Add("Sprites/Building/Farm2"); b[0].spritePath.Add("Sprites/Building/Farm2"); b[0].spritePath.Add("Sprites/Building/Farm2");
-        b[0].maxCharacterStored = new List<int>();
-        b[0].maxCharacterStored.Add(3);
-        b[0].maxCharacterStored.Add(4);
-        b[0].maxCharacterStored.Add(5); b[0].maxCharacterStored.Add(5); b[0].maxCharacterStored.Add(5); b[0].maxCharacterStored.Add(5); b[0].maxCharacterStored.Add(5); b[0].maxCharacterStored.Add(5); b[0].maxCharacterStored.Add(5); b[0].maxCharacterStored.Add(5); b[0].maxCharacterStored.Add(5);
+        {
+            /*Building[] b = new Building[12];
+            b[0] = new Building();
+            b[0].type = Building.BuildingType.Farm;
+            b[0].buildingCost = new List<ResourceDictionary>();
+            b[0].buildingCost.Add(new ResourceDictionary() { { 1, 5 }, { 2, 5 } });
+            b[0].buildingCost.Add(new ResourceDictionary() { { 1, 2 }, { 2, 6 } });
+            b[0].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } }); b[0].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } }); b[0].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } }); b[0].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } }); b[0].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } }); b[0].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } }); b[0].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } }); b[0].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } });
+            b[0].consuming = new List<ResourceDictionary>();
+            b[0].consuming.Add(new ResourceDictionary() { { 3, 1 } });
+            b[0].consuming.Add(new ResourceDictionary() { { 3, 1 } });
+            b[0].consuming.Add(new ResourceDictionary() { { 3, 1 } }); b[0].consuming.Add(new ResourceDictionary() { { 3, 1 } }); b[0].consuming.Add(new ResourceDictionary() { { 3, 1 } }); b[0].consuming.Add(new ResourceDictionary() { { 3, 1 } }); b[0].consuming.Add(new ResourceDictionary() { { 3, 1 } }); b[0].consuming.Add(new ResourceDictionary() { { 3, 1 } }); b[0].consuming.Add(new ResourceDictionary() { { 3, 1 } }); b[0].consuming.Add(new ResourceDictionary() { { 3, 1 } });
+            b[0].production = new List<ResourceDictionary>();
+            b[0].production.Add(new ResourceDictionary() { { 4, 5 } });
+            b[0].production.Add(new ResourceDictionary() { { 4, 6 } });
+            b[0].production.Add(new ResourceDictionary() { { 4, 7 } }); b[0].production.Add(new ResourceDictionary() { { 4, 7 } }); b[0].production.Add(new ResourceDictionary() { { 4, 7 } }); b[0].production.Add(new ResourceDictionary() { { 4, 7 } }); b[0].production.Add(new ResourceDictionary() { { 4, 7 } }); b[0].production.Add(new ResourceDictionary() { { 4, 7 } }); b[0].production.Add(new ResourceDictionary() { { 4, 7 } }); b[0].production.Add(new ResourceDictionary() { { 4, 7 } });
+            b[0].maxActiveAmount = 2;
+            b[0].upgradePoint = new List<int>(){200,
+                                                600,
+                                                1200,
+                                                2600,
+                                                3600,
+                                                9000,
+                                                5400,
+                                                45000,
+                                                81000,
+                                                135000 };
 
-
-        b[0].maxLevel = 10;
-
-        b[1] = new Building();
-        b[1].type = Building.BuildingType.Kitchen;
-        b[1].buildingCost = new List<ResourceDictionary>();
-        b[1].buildingCost.Add(new ResourceDictionary() { { 1, 5 }, { 2, 5 } });
-        b[1].buildingCost.Add(new ResourceDictionary() { { 1, 2 }, { 2, 6 } });
-        b[1].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } });
-        b[1].consuming = new List<ResourceDictionary>();
-        b[1].consuming.Add(new ResourceDictionary() { { 3, 1 } });
-        b[1].consuming.Add(new ResourceDictionary() { { 3, 1 } });
-        b[1].consuming.Add(new ResourceDictionary() { { 3, 1 } });
-        b[1].production = new List<ResourceDictionary>();
-        b[1].production.Add(new ResourceDictionary() { { 4, 5 } });
-        b[1].production.Add(new ResourceDictionary() { { 4, 6 } });
-        b[1].production.Add(new ResourceDictionary() { { 4, 7 } });
-        b[1].maxActiveAmount = 1;
-        b[1].upgradePoint = new List<int>(){200,
-                                            600,
-                                            1200,
-                                            2600,
-                                            3600,
-                                            9000,
-                                            5400,
-                                            45000,
-                                            81000,
-                                            135000 };
-        b[1].spritePath = new List<string>();
-        b[1].spritePath.Add("Sprites/Building/Kitchen0");
-        b[1].spritePath.Add("Sprites/Building/Kitchen1");
-        b[1].spritePath.Add("Sprites/Building/Kitchen2");
-
-        b[1].maxCharacterStored = new List<int>();
-        b[1].maxCharacterStored.Add(3);
-        b[1].maxCharacterStored.Add(4);
-        b[1].maxCharacterStored.Add(5);
-
-        b[1].maxLevel = 10;
-
-        b[2] = new Building();
-        b[2].type = Building.BuildingType.Laboratory;
-        b[2].buildingCost = new List<ResourceDictionary>();
-        b[2].buildingCost.Add(new ResourceDictionary() { { 1, 5 }, { 2, 5 } });
-        b[2].buildingCost.Add(new ResourceDictionary() { { 1, 2 }, { 2, 6 } });
-        b[2].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } });
-        b[2].consuming = new List<ResourceDictionary>();
-        b[2].consuming.Add(new ResourceDictionary() { { 3, 1 } });
-        b[2].consuming.Add(new ResourceDictionary() { { 3, 1 } });
-        b[2].consuming.Add(new ResourceDictionary() { { 3, 1 } });
-        b[2].production = new List<ResourceDictionary>();
-        b[2].production.Add(new ResourceDictionary() { { 4, 5 } });
-        b[2].production.Add(new ResourceDictionary() { { 4, 6 } });
-        b[2].production.Add(new ResourceDictionary() { { 4, 7 } });
-        b[2].maxActiveAmount = 1;
-        b[2].upgradePoint = new List<int>(){200,
-                                            600,
-                                            1200,
-                                            2600,
-                                            3600,
-                                            9000,
-                                            5400,
-                                            45000,
-                                            81000,
-                                            135000 };
-        b[2].spritePath = new List<string>();
-        b[2].spritePath.Add("Sprites/Building/Laboratory0");
-        b[2].spritePath.Add("Sprites/Building/Laboratory1");
-        b[2].spritePath.Add("Sprites/Building/Laboratory2");
-
-        b[2].maxCharacterStored = new List<int>();
-        b[2].maxCharacterStored.Add(3);
-        b[2].maxCharacterStored.Add(4);
-        b[2].maxCharacterStored.Add(5);
-
-        b[2].maxLevel = 10;
-
-        b[3] = new Building();
-        b[3].type = Building.BuildingType.MedicalCenter;
-        b[3].buildingCost = new List<ResourceDictionary>();
-        b[3].buildingCost.Add(new ResourceDictionary() { { 1, 5 }, { 2, 5 } });
-        b[3].buildingCost.Add(new ResourceDictionary() { { 1, 2 }, { 2, 6 } });
-        b[3].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } });
-        b[3].consuming = new List<ResourceDictionary>();
-        b[3].consuming.Add(new ResourceDictionary() { { 3, 1 } });
-        b[3].consuming.Add(new ResourceDictionary() { { 3, 1 } });
-        b[3].consuming.Add(new ResourceDictionary() { { 3, 1 } });
-        b[3].production = new List<ResourceDictionary>();
-        b[3].production.Add(new ResourceDictionary() { { 4, 5 } });
-        b[3].production.Add(new ResourceDictionary() { { 4, 6 } });
-        b[3].production.Add(new ResourceDictionary() { { 4, 7 } });
-        b[3].maxActiveAmount = 1;
-
-        b[3].spritePath = new List<string>();
-        b[3].spritePath.Add("Sprites/Building/MedicalCenter0");
-        b[3].spritePath.Add("Sprites/Building/MedicalCenter1");
-        b[3].spritePath.Add("Sprites/Building/MedicalCenter2");
-        b[3].upgradePoint = new List<int>(){200,
-                                            600,
-                                            1200,
-                                            2600,
-                                            3600,
-                                            9000,
-                                            5400,
-                                            45000,
-                                            81000,
-                                            135000 };
-        b[3].maxCharacterStored = new List<int>();
-        b[3].maxCharacterStored.Add(3);
-        b[3].maxCharacterStored.Add(4);
-        b[3].maxCharacterStored.Add(5);
-
-        b[3].maxLevel = 10;
-
-        b[4] = new Building();
-        b[4].type = Building.BuildingType.QuarantineSite;
-        b[4].buildingCost = new List<ResourceDictionary>();
-        b[4].buildingCost.Add(new ResourceDictionary() { { 1, 5 }, { 2, 5 } });
-        b[4].buildingCost.Add(new ResourceDictionary() { { 1, 2 }, { 2, 6 } });
-        b[4].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } });
-        b[4].consuming = new List<ResourceDictionary>();
-        b[4].consuming.Add(new ResourceDictionary() { { 3, 1 } });
-        b[4].consuming.Add(new ResourceDictionary() { { 3, 1 } });
-        b[4].consuming.Add(new ResourceDictionary() { { 3, 1 } });
-        b[4].production = new List<ResourceDictionary>();
-        b[4].production.Add(new ResourceDictionary() { { 4, 5 } });
-        b[4].production.Add(new ResourceDictionary() { { 4, 6 } });
-        b[4].production.Add(new ResourceDictionary() { { 4, 7 } });
-        b[4].maxActiveAmount = 1;
-
-        b[4].spritePath = new List<string>();
-        b[4].spritePath.Add("Sprites/Building/QuarantineSite0");
-        b[4].spritePath.Add("Sprites/Building/QuarantineSite1");
-        b[4].spritePath.Add("Sprites/Building/QuarantineSite2");
-
-        b[4].maxCharacterStored = new List<int>();
-        b[4].maxCharacterStored.Add(3);
-        b[4].maxCharacterStored.Add(4);
-        b[4].maxCharacterStored.Add(5);
-        b[4].upgradePoint = new List<int>(){200,
-                                            600,
-                                            1200,
-                                            2600,
-                                            3600,
-                                            9000,
-                                            5400,
-                                            45000,
-                                            81000,
-                                            135000 };
-        b[4].maxLevel = 10;
-
-        b[5] = new Building();
-        b[5].type = Building.BuildingType.Residence;
-        b[5].buildingCost = new List<ResourceDictionary>();
-        b[5].buildingCost.Add(new ResourceDictionary() { { 1, 5 }, { 2, 5 } });
-        b[5].buildingCost.Add(new ResourceDictionary() { { 1, 2 }, { 2, 6 } });
-        b[5].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } });
-        b[5].consuming = new List<ResourceDictionary>();
-        b[5].consuming.Add(new ResourceDictionary() { { 3, 1 } });
-        b[5].consuming.Add(new ResourceDictionary() { { 3, 1 } });
-        b[5].consuming.Add(new ResourceDictionary() { { 3, 1 } });
-        b[5].production = new List<ResourceDictionary>();
-        b[5].production.Add(new ResourceDictionary() { { 4, 5 } });
-        b[5].production.Add(new ResourceDictionary() { { 4, 6 } });
-        b[5].production.Add(new ResourceDictionary() { { 4, 7 } });
-        b[5].maxActiveAmount = 2;
-
-        b[5].spritePath = new List<string>();
-        b[5].spritePath.Add("Sprites/Building/Residence0");
-        b[5].spritePath.Add("Sprites/Building/Residence1");
-        b[5].spritePath.Add("Sprites/Building/Residence2");
-
-        b[5].maxCharacterStored = new List<int>();
-        b[5].maxCharacterStored.Add(3);
-        b[5].maxCharacterStored.Add(4);
-        b[5].maxCharacterStored.Add(5);
-        b[5].upgradePoint = new List<int>(){200,
-                                            600,
-                                            1200,
-                                            2600,
-                                            3600,
-                                            9000,
-                                            5400,
-                                            45000,
-                                            81000,
-                                            135000 };
-        b[5].maxLevel = 10;
-
-        b[6] = new Building();
-        b[6].type = Building.BuildingType.TownBase;
-        b[6].buildingCost = new List<ResourceDictionary>();
-        b[6].buildingCost.Add(new ResourceDictionary() { { 1, 5 }, { 2, 5 } });
-        b[6].buildingCost.Add(new ResourceDictionary() { { 1, 2 }, { 2, 6 } });
-        b[6].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } });
-        b[6].consuming = new List<ResourceDictionary>();
-        b[6].consuming.Add(new ResourceDictionary() { { 3, 1 } });
-        b[6].consuming.Add(new ResourceDictionary() { { 3, 1 } });
-        b[6].consuming.Add(new ResourceDictionary() { { 3, 1 } });
-        b[6].production = new List<ResourceDictionary>();
-        b[6].production.Add(new ResourceDictionary() { { 4, 5 } });
-        b[6].production.Add(new ResourceDictionary() { { 4, 6 } });
-        b[6].production.Add(new ResourceDictionary() { { 4, 7 } });
-        b[6].maxActiveAmount = 1;
-
-        b[6].spritePath = new List<string>();
-        b[6].spritePath.Add("Sprites/Building/TownBase0");
-        b[6].spritePath.Add("Sprites/Building/TownBase1");
-        b[6].spritePath.Add("Sprites/Building/TownBase2");
-
-        b[6].maxCharacterStored = new List<int>();
-        b[6].maxCharacterStored.Add(3);
-        b[6].maxCharacterStored.Add(4);
-        b[6].maxCharacterStored.Add(5);
-        b[6].upgradePoint = new List<int>(){200,
-                                            600,
-                                            1200,
-                                            2600,
-                                            3600,
-                                            9000,
-                                            5400,
-                                            45000,
-                                            81000,
-                                            135000 };
-        b[6].maxLevel = 10;
-
-        b[7] = new Building();
-        b[7].type = Building.BuildingType.WareHouse;
-        b[7].buildingCost = new List<ResourceDictionary>();
-        b[7].buildingCost.Add(new ResourceDictionary() { { 1, 5 }, { 2, 5 } });
-        b[7].buildingCost.Add(new ResourceDictionary() { { 1, 2 }, { 2, 6 } });
-        b[7].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } });
-        b[7].consuming = new List<ResourceDictionary>();
-        b[7].consuming.Add(new ResourceDictionary() { { 3, 1 } });
-        b[7].consuming.Add(new ResourceDictionary() { { 3, 1 } });
-        b[7].consuming.Add(new ResourceDictionary() { { 3, 1 } });
-        b[7].production = new List<ResourceDictionary>();
-        b[7].production.Add(new ResourceDictionary() { { 4, 5 } });
-        b[7].production.Add(new ResourceDictionary() { { 4, 6 } });
-        b[7].production.Add(new ResourceDictionary() { { 4, 7 } });
-        b[7].maxActiveAmount = 1;
-
-        b[7].spritePath = new List<string>();
-        b[7].spritePath.Add("Sprites/Building/WareHouse0");
-        b[7].spritePath.Add("Sprites/Building/WareHouse1");
-        b[7].spritePath.Add("Sprites/Building/WareHouse2");
-
-        b[7].maxCharacterStored = new List<int>();
-        b[7].maxCharacterStored.Add(3);
-        b[7].maxCharacterStored.Add(4);
-        b[7].maxCharacterStored.Add(5);
-        b[7].upgradePoint = new List<int>(){200,
-                                            600,
-                                            1200,
-                                            2600,
-                                            3600,
-                                            9000,
-                                            5400,
-                                            45000,
-                                            81000,
-                                            135000 };
-        b[7].maxLevel = 10;
-
-        b[8] = new Building();
-        b[8].type = Building.BuildingType.WaterTreatmentCenter;
-        b[8].buildingCost = new List<ResourceDictionary>();
-        b[8].buildingCost.Add(new ResourceDictionary() { { 1, 5 }, { 2, 5 } });
-        b[8].buildingCost.Add(new ResourceDictionary() { { 1, 2 }, { 2, 6 } });
-        b[8].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } });
-        b[8].consuming = new List<ResourceDictionary>();
-        b[8].consuming.Add(new ResourceDictionary() { { 3, 1 } });
-        b[8].consuming.Add(new ResourceDictionary() { { 3, 1 } });
-        b[8].consuming.Add(new ResourceDictionary() { { 3, 1 } });
-        b[8].production = new List<ResourceDictionary>();
-        b[8].production.Add(new ResourceDictionary() { { 4, 5 } });
-        b[8].production.Add(new ResourceDictionary() { { 4, 6 } });
-        b[8].production.Add(new ResourceDictionary() { { 4, 7 } });
-        b[8].maxActiveAmount = 1;
-
-        b[8].spritePath = new List<string>();
-        b[8].spritePath.Add("Sprites/Building/WaterTreatmentCenter0");
-        b[8].spritePath.Add("Sprites/Building/WaterTreatmentCenter1");
-        b[8].spritePath.Add("Sprites/Building/WaterTreatmentCenter2");
-
-        b[8].maxCharacterStored = new List<int>();
-        b[8].maxCharacterStored.Add(3);
-        b[8].maxCharacterStored.Add(4);
-        b[8].maxCharacterStored.Add(5);
-        b[8].upgradePoint = new List<int>(){200,
-                                            600,
-                                            1200,
-                                            2600,
-                                            3600,
-                                            9000,
-                                            5400,
-                                            45000,
-                                            81000,
-                                            135000 };
-        b[8].maxLevel = 10;
-
-        b[9] = new Building();
-        b[9].type = Building.BuildingType.FishingPond;
-        b[9].buildingCost = new List<ResourceDictionary>();
-        b[9].buildingCost.Add(new ResourceDictionary() { { 1, 5 }, { 2, 5 } });
-        b[9].buildingCost.Add(new ResourceDictionary() { { 1, 2 }, { 2, 6 } });
-        b[9].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } });
-        b[9].buildingCost.Add(new ResourceDictionary() { { 1, 5 }, { 2, 5 } });
-        b[9].buildingCost.Add(new ResourceDictionary() { { 1, 2 }, { 2, 6 } });
-        b[9].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } });
-        b[9].buildingCost.Add(new ResourceDictionary() { { 1, 5 }, { 2, 5 } });
-        b[9].buildingCost.Add(new ResourceDictionary() { { 1, 2 }, { 2, 6 } });
-        b[9].buildingCost.Add(new ResourceDictionary() { { 1, 5 }, { 2, 5 } });
-        b[9].buildingCost.Add(new ResourceDictionary() { { 1, 2 }, { 2, 6 } });
-        b[9].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } });
-        b[9].buildingCost.Add(new ResourceDictionary() { { 1, 5 }, { 2, 5 } });
-        b[9].buildingCost.Add(new ResourceDictionary() { { 1, 2 }, { 2, 6 } });
-        b[9].buildingCost.Add(new ResourceDictionary() { { 1, 5 }, { 2, 5 } });
-        b[9].buildingCost.Add(new ResourceDictionary() { { 1, 2 }, { 2, 6 } });
-        b[9].buildingCost.Add(new ResourceDictionary() { { 1, 5 }, { 2, 5 } });
-        b[9].buildingCost.Add(new ResourceDictionary() { { 1, 2 }, { 2, 6 } });
-        b[9].buildingCost.Add(new ResourceDictionary() { { 1, 5 }, { 2, 5 } });
-        b[9].buildingCost.Add(new ResourceDictionary() { { 1, 2 }, { 2, 6 } });
-        b[9].buildingCost.Add(new ResourceDictionary() { { 1, 5 }, { 2, 5 } });
-        b[9].buildingCost.Add(new ResourceDictionary() { { 1, 2 }, { 2, 6 } });
-        b[9].buildingCost.Add(new ResourceDictionary() { { 1, 5 }, { 2, 5 } });
-        b[9].buildingCost.Add(new ResourceDictionary() { { 1, 2 }, { 2, 6 } });
-        b[9].buildingCost.Add(new ResourceDictionary() { { 1, 5 }, { 2, 5 } });
-        b[9].buildingCost.Add(new ResourceDictionary() { { 1, 2 }, { 2, 6 } });
-        b[9].buildingCost.Add(new ResourceDictionary() { { 1, 5 }, { 2, 5 } });
-        b[9].buildingCost.Add(new ResourceDictionary() { { 1, 2 }, { 2, 6 } });
-        b[9].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } });
-
-        b[9].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } });
-        b[9].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } });
-        b[9].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } });
-
-        b[9].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } });
-        b[9].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } });
-        b[9].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } });
-        b[9].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } });
-        b[9].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } });
-        b[9].consuming = new List<ResourceDictionary>();
-        b[9].consuming.Add(new ResourceDictionary() { { 3, 1 } });
-        b[9].consuming.Add(new ResourceDictionary() { { 3, 1 } });
-        b[9].consuming.Add(new ResourceDictionary() { { 3, 1 } });
-        b[9].production = new List<ResourceDictionary>();
-        b[9].production.Add(new ResourceDictionary() { { 4, 5 } });
-        b[9].production.Add(new ResourceDictionary() { { 4, 6 } });
-        b[9].production.Add(new ResourceDictionary() { { 4, 7 } });
-        b[9].maxActiveAmount = 1;
-
-        b[9].spritePath = new List<string>();
-        b[9].spritePath.Add("Sprites/Building/WaterTreatmentCenter0");
-        b[9].spritePath.Add("Sprites/Building/WaterTreatmentCenter1");
-        b[9].spritePath.Add("Sprites/Building/WaterTreatmentCenter2");
-
-        b[9].maxCharacterStored = new List<int>();
-        b[9].maxCharacterStored.Add(3);
-        b[9].maxCharacterStored.Add(4);
-        b[9].maxCharacterStored.Add(5);
-        b[9].upgradePoint = new List<int>(){200,
-                                            600,
-                                            1200,
-                                            2600,
-                                            3600,
-                                            9000,
-                                            5400,
-                                            45000,
-                                            81000,
-                                            135000 };
-        b[9].maxLevel = 10;
+            b[0].spritePath = new List<string>();
+            b[0].spritePath.Add("Sprites/Building/Farm0");
+            b[0].spritePath.Add("Sprites/Building/Farm1");
+            b[0].spritePath.Add("Sprites/Building/Farm2"); b[0].spritePath.Add("Sprites/Building/Farm2"); b[0].spritePath.Add("Sprites/Building/Farm2"); b[0].spritePath.Add("Sprites/Building/Farm2"); b[0].spritePath.Add("Sprites/Building/Farm2"); b[0].spritePath.Add("Sprites/Building/Farm2"); b[0].spritePath.Add("Sprites/Building/Farm2"); b[0].spritePath.Add("Sprites/Building/Farm2"); b[0].spritePath.Add("Sprites/Building/Farm2");
+            b[0].spritePath.Add("Sprites/Building/Farm2"); b[0].spritePath.Add("Sprites/Building/Farm2"); b[0].spritePath.Add("Sprites/Building/Farm2"); b[0].spritePath.Add("Sprites/Building/Farm2"); b[0].spritePath.Add("Sprites/Building/Farm2"); b[0].spritePath.Add("Sprites/Building/Farm2");
+            b[0].maxCharacterStored = new List<int>();
+            b[0].maxCharacterStored.Add(3);
+            b[0].maxCharacterStored.Add(4);
+            b[0].maxCharacterStored.Add(5); b[0].maxCharacterStored.Add(5); b[0].maxCharacterStored.Add(5); b[0].maxCharacterStored.Add(5); b[0].maxCharacterStored.Add(5); b[0].maxCharacterStored.Add(5); b[0].maxCharacterStored.Add(5); b[0].maxCharacterStored.Add(5); b[0].maxCharacterStored.Add(5);
 
 
-        b[10] = new Building();
-        b[10].type = Building.BuildingType.LaborCenter;
-        b[10].buildingCost = new List<ResourceDictionary>();
-        b[10].buildingCost.Add(new ResourceDictionary() { { 1, 5 }, { 2, 5 } });
-        b[10].buildingCost.Add(new ResourceDictionary() { { 1, 2 }, { 2, 6 } });
-        b[10].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } });
-        b[10].consuming = new List<ResourceDictionary>();
-        b[10].consuming.Add(new ResourceDictionary() { { 3, 1 } });
-        b[10].consuming.Add(new ResourceDictionary() { { 3, 1 } });
-        b[10].consuming.Add(new ResourceDictionary() { { 3, 1 } });
-        b[10].consuming.Add(new ResourceDictionary() { { 3, 1 } });
-        b[10].consuming.Add(new ResourceDictionary() { { 3, 1 } });
-        b[10].consuming.Add(new ResourceDictionary() { { 3, 1 } });
-        b[10].consuming.Add(new ResourceDictionary() { { 3, 1 } });
-        b[10].consuming.Add(new ResourceDictionary() { { 3, 1 } });
-        b[10].consuming.Add(new ResourceDictionary() { { 3, 1 } });
-        b[10].consuming.Add(new ResourceDictionary() { { 3, 1 } });
-        b[10].consuming.Add(new ResourceDictionary() { { 3, 1 } });
+            b[0].maxLevel = 10;
 
-        b[10].production = new List<ResourceDictionary>();
-        b[10].production.Add(new ResourceDictionary() { { -1, 20 } });
-        b[10].production.Add(new ResourceDictionary() { { -1,20 } });
-        b[10].production.Add(new ResourceDictionary() { { -1, 20 } }); 
-        b[10].production.Add(new ResourceDictionary() { { -1, 20 } });
-        b[10].production.Add(new ResourceDictionary() { { -1, 20 } });
+            b[1] = new Building();
+            b[1].type = Building.BuildingType.Kitchen;
+            b[1].buildingCost = new List<ResourceDictionary>();
+            b[1].buildingCost.Add(new ResourceDictionary() { { 1, 5 }, { 2, 5 } });
+            b[1].buildingCost.Add(new ResourceDictionary() { { 1, 2 }, { 2, 6 } });
+            b[1].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } });
+            b[1].consuming = new List<ResourceDictionary>();
+            b[1].consuming.Add(new ResourceDictionary() { { 3, 1 } });
+            b[1].consuming.Add(new ResourceDictionary() { { 3, 1 } });
+            b[1].consuming.Add(new ResourceDictionary() { { 3, 1 } });
+            b[1].production = new List<ResourceDictionary>();
+            b[1].production.Add(new ResourceDictionary() { { 4, 5 } });
+            b[1].production.Add(new ResourceDictionary() { { 4, 6 } });
+            b[1].production.Add(new ResourceDictionary() { { 4, 7 } });
+            b[1].maxActiveAmount = 1;
+            b[1].upgradePoint = new List<int>(){200,
+                                                600,
+                                                1200,
+                                                2600,
+                                                3600,
+                                                9000,
+                                                5400,
+                                                45000,
+                                                81000,
+                                                135000 };
+            b[1].spritePath = new List<string>();
+            b[1].spritePath.Add("Sprites/Building/Kitchen0");
+            b[1].spritePath.Add("Sprites/Building/Kitchen1");
+            b[1].spritePath.Add("Sprites/Building/Kitchen2");
 
-        b[10].production.Add(new ResourceDictionary() { { -1, 30 } });
-        b[10].production.Add(new ResourceDictionary() { { -1, 30 } });
-        b[10].production.Add(new ResourceDictionary() { { -1, 30 } });
-        b[10].production.Add(new ResourceDictionary() { { -1, 30 } });
-        b[10].production.Add(new ResourceDictionary() { { -1, 30 } });
-        b[10].production.Add(new ResourceDictionary() { { -1, 30 } });
+            b[1].maxCharacterStored = new List<int>();
+            b[1].maxCharacterStored.Add(3);
+            b[1].maxCharacterStored.Add(4);
+            b[1].maxCharacterStored.Add(5);
 
-        b[10].maxActiveAmount = 1;
-        b[10].upgradePoint = new List<int>(){200,
-                                            600,
-                                            1200,
-                                            2600,
-                                            3600,
-                                            9000,
-                                            5400,
-                                            45000,
-                                            81000,
-                                            135000 };
-        b[10].spritePath = new List<string>();
-        b[10].spritePath.Add("Sprites/Building/Kitchen0");
-        b[10].spritePath.Add("Sprites/Building/Kitchen1");
-        b[10].spritePath.Add("Sprites/Building/Kitchen2");
+            b[1].maxLevel = 10;
 
-        b[10].maxCharacterStored = new List<int>();
-        b[10].maxCharacterStored.Add(3);
-        b[10].maxCharacterStored.Add(4);
-        b[10].maxCharacterStored.Add(5);
+            b[2] = new Building();
+            b[2].type = Building.BuildingType.Laboratory;
+            b[2].buildingCost = new List<ResourceDictionary>();
+            b[2].buildingCost.Add(new ResourceDictionary() { { 1, 5 }, { 2, 5 } });
+            b[2].buildingCost.Add(new ResourceDictionary() { { 1, 2 }, { 2, 6 } });
+            b[2].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } });
+            b[2].consuming = new List<ResourceDictionary>();
+            b[2].consuming.Add(new ResourceDictionary() { { 3, 1 } });
+            b[2].consuming.Add(new ResourceDictionary() { { 3, 1 } });
+            b[2].consuming.Add(new ResourceDictionary() { { 3, 1 } });
+            b[2].production = new List<ResourceDictionary>();
+            b[2].production.Add(new ResourceDictionary() { { 4, 5 } });
+            b[2].production.Add(new ResourceDictionary() { { 4, 6 } });
+            b[2].production.Add(new ResourceDictionary() { { 4, 7 } });
+            b[2].maxActiveAmount = 1;
+            b[2].upgradePoint = new List<int>(){200,
+                                                600,
+                                                1200,
+                                                2600,
+                                                3600,
+                                                9000,
+                                                5400,
+                                                45000,
+                                                81000,
+                                                135000 };
+            b[2].spritePath = new List<string>();
+            b[2].spritePath.Add("Sprites/Building/Laboratory0");
+            b[2].spritePath.Add("Sprites/Building/Laboratory1");
+            b[2].spritePath.Add("Sprites/Building/Laboratory2");
 
-        b[10].maxLevel = 10;*/
-    }
+            b[2].maxCharacterStored = new List<int>();
+            b[2].maxCharacterStored.Add(3);
+            b[2].maxCharacterStored.Add(4);
+            b[2].maxCharacterStored.Add(5);
+
+            b[2].maxLevel = 10;
+
+            b[3] = new Building();
+            b[3].type = Building.BuildingType.MedicalCenter;
+            b[3].buildingCost = new List<ResourceDictionary>();
+            b[3].buildingCost.Add(new ResourceDictionary() { { 1, 5 }, { 2, 5 } });
+            b[3].buildingCost.Add(new ResourceDictionary() { { 1, 2 }, { 2, 6 } });
+            b[3].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } });
+            b[3].consuming = new List<ResourceDictionary>();
+            b[3].consuming.Add(new ResourceDictionary() { { 3, 1 } });
+            b[3].consuming.Add(new ResourceDictionary() { { 3, 1 } });
+            b[3].consuming.Add(new ResourceDictionary() { { 3, 1 } });
+            b[3].production = new List<ResourceDictionary>();
+            b[3].production.Add(new ResourceDictionary() { { 4, 5 } });
+            b[3].production.Add(new ResourceDictionary() { { 4, 6 } });
+            b[3].production.Add(new ResourceDictionary() { { 4, 7 } });
+            b[3].maxActiveAmount = 1;
+
+            b[3].spritePath = new List<string>();
+            b[3].spritePath.Add("Sprites/Building/MedicalCenter0");
+            b[3].spritePath.Add("Sprites/Building/MedicalCenter1");
+            b[3].spritePath.Add("Sprites/Building/MedicalCenter2");
+            b[3].upgradePoint = new List<int>(){200,
+                                                600,
+                                                1200,
+                                                2600,
+                                                3600,
+                                                9000,
+                                                5400,
+                                                45000,
+                                                81000,
+                                                135000 };
+            b[3].maxCharacterStored = new List<int>();
+            b[3].maxCharacterStored.Add(3);
+            b[3].maxCharacterStored.Add(4);
+            b[3].maxCharacterStored.Add(5);
+
+            b[3].maxLevel = 10;
+
+            b[4] = new Building();
+            b[4].type = Building.BuildingType.QuarantineSite;
+            b[4].buildingCost = new List<ResourceDictionary>();
+            b[4].buildingCost.Add(new ResourceDictionary() { { 1, 5 }, { 2, 5 } });
+            b[4].buildingCost.Add(new ResourceDictionary() { { 1, 2 }, { 2, 6 } });
+            b[4].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } });
+            b[4].consuming = new List<ResourceDictionary>();
+            b[4].consuming.Add(new ResourceDictionary() { { 3, 1 } });
+            b[4].consuming.Add(new ResourceDictionary() { { 3, 1 } });
+            b[4].consuming.Add(new ResourceDictionary() { { 3, 1 } });
+            b[4].production = new List<ResourceDictionary>();
+            b[4].production.Add(new ResourceDictionary() { { 4, 5 } });
+            b[4].production.Add(new ResourceDictionary() { { 4, 6 } });
+            b[4].production.Add(new ResourceDictionary() { { 4, 7 } });
+            b[4].maxActiveAmount = 1;
+
+            b[4].spritePath = new List<string>();
+            b[4].spritePath.Add("Sprites/Building/QuarantineSite0");
+            b[4].spritePath.Add("Sprites/Building/QuarantineSite1");
+            b[4].spritePath.Add("Sprites/Building/QuarantineSite2");
+
+            b[4].maxCharacterStored = new List<int>();
+            b[4].maxCharacterStored.Add(3);
+            b[4].maxCharacterStored.Add(4);
+            b[4].maxCharacterStored.Add(5);
+            b[4].upgradePoint = new List<int>(){200,
+                                                600,
+                                                1200,
+                                                2600,
+                                                3600,
+                                                9000,
+                                                5400,
+                                                45000,
+                                                81000,
+                                                135000 };
+            b[4].maxLevel = 10;
+
+            b[5] = new Building();
+            b[5].type = Building.BuildingType.Residence;
+            b[5].buildingCost = new List<ResourceDictionary>();
+            b[5].buildingCost.Add(new ResourceDictionary() { { 1, 5 }, { 2, 5 } });
+            b[5].buildingCost.Add(new ResourceDictionary() { { 1, 2 }, { 2, 6 } });
+            b[5].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } });
+            b[5].consuming = new List<ResourceDictionary>();
+            b[5].consuming.Add(new ResourceDictionary() { { 3, 1 } });
+            b[5].consuming.Add(new ResourceDictionary() { { 3, 1 } });
+            b[5].consuming.Add(new ResourceDictionary() { { 3, 1 } });
+            b[5].production = new List<ResourceDictionary>();
+            b[5].production.Add(new ResourceDictionary() { { 4, 5 } });
+            b[5].production.Add(new ResourceDictionary() { { 4, 6 } });
+            b[5].production.Add(new ResourceDictionary() { { 4, 7 } });
+            b[5].maxActiveAmount = 2;
+
+            b[5].spritePath = new List<string>();
+            b[5].spritePath.Add("Sprites/Building/Residence0");
+            b[5].spritePath.Add("Sprites/Building/Residence1");
+            b[5].spritePath.Add("Sprites/Building/Residence2");
+
+            b[5].maxCharacterStored = new List<int>();
+            b[5].maxCharacterStored.Add(3);
+            b[5].maxCharacterStored.Add(4);
+            b[5].maxCharacterStored.Add(5);
+            b[5].upgradePoint = new List<int>(){200,
+                                                600,
+                                                1200,
+                                                2600,
+                                                3600,
+                                                9000,
+                                                5400,
+                                                45000,
+                                                81000,
+                                                135000 };
+            b[5].maxLevel = 10;
+
+            b[6] = new Building();
+            b[6].type = Building.BuildingType.TownBase;
+            b[6].buildingCost = new List<ResourceDictionary>();
+            b[6].buildingCost.Add(new ResourceDictionary() { { 1, 5 }, { 2, 5 } });
+            b[6].buildingCost.Add(new ResourceDictionary() { { 1, 2 }, { 2, 6 } });
+            b[6].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } });
+            b[6].consuming = new List<ResourceDictionary>();
+            b[6].consuming.Add(new ResourceDictionary() { { 3, 1 } });
+            b[6].consuming.Add(new ResourceDictionary() { { 3, 1 } });
+            b[6].consuming.Add(new ResourceDictionary() { { 3, 1 } });
+            b[6].production = new List<ResourceDictionary>();
+            b[6].production.Add(new ResourceDictionary() { { 4, 5 } });
+            b[6].production.Add(new ResourceDictionary() { { 4, 6 } });
+            b[6].production.Add(new ResourceDictionary() { { 4, 7 } });
+            b[6].maxActiveAmount = 1;
+
+            b[6].spritePath = new List<string>();
+            b[6].spritePath.Add("Sprites/Building/TownBase0");
+            b[6].spritePath.Add("Sprites/Building/TownBase1");
+            b[6].spritePath.Add("Sprites/Building/TownBase2");
+
+            b[6].maxCharacterStored = new List<int>();
+            b[6].maxCharacterStored.Add(3);
+            b[6].maxCharacterStored.Add(4);
+            b[6].maxCharacterStored.Add(5);
+            b[6].upgradePoint = new List<int>(){200,
+                                                600,
+                                                1200,
+                                                2600,
+                                                3600,
+                                                9000,
+                                                5400,
+                                                45000,
+                                                81000,
+                                                135000 };
+            b[6].maxLevel = 10;
+
+            b[7] = new Building();
+            b[7].type = Building.BuildingType.WareHouse;
+            b[7].buildingCost = new List<ResourceDictionary>();
+            b[7].buildingCost.Add(new ResourceDictionary() { { 1, 5 }, { 2, 5 } });
+            b[7].buildingCost.Add(new ResourceDictionary() { { 1, 2 }, { 2, 6 } });
+            b[7].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } });
+            b[7].consuming = new List<ResourceDictionary>();
+            b[7].consuming.Add(new ResourceDictionary() { { 3, 1 } });
+            b[7].consuming.Add(new ResourceDictionary() { { 3, 1 } });
+            b[7].consuming.Add(new ResourceDictionary() { { 3, 1 } });
+            b[7].production = new List<ResourceDictionary>();
+            b[7].production.Add(new ResourceDictionary() { { 4, 5 } });
+            b[7].production.Add(new ResourceDictionary() { { 4, 6 } });
+            b[7].production.Add(new ResourceDictionary() { { 4, 7 } });
+            b[7].maxActiveAmount = 1;
+
+            b[7].spritePath = new List<string>();
+            b[7].spritePath.Add("Sprites/Building/WareHouse0");
+            b[7].spritePath.Add("Sprites/Building/WareHouse1");
+            b[7].spritePath.Add("Sprites/Building/WareHouse2");
+
+            b[7].maxCharacterStored = new List<int>();
+            b[7].maxCharacterStored.Add(3);
+            b[7].maxCharacterStored.Add(4);
+            b[7].maxCharacterStored.Add(5);
+            b[7].upgradePoint = new List<int>(){200,
+                                                600,
+                                                1200,
+                                                2600,
+                                                3600,
+                                                9000,
+                                                5400,
+                                                45000,
+                                                81000,
+                                                135000 };
+            b[7].maxLevel = 10;
+
+            b[8] = new Building();
+            b[8].type = Building.BuildingType.WaterTreatmentCenter;
+            b[8].buildingCost = new List<ResourceDictionary>();
+            b[8].buildingCost.Add(new ResourceDictionary() { { 1, 5 }, { 2, 5 } });
+            b[8].buildingCost.Add(new ResourceDictionary() { { 1, 2 }, { 2, 6 } });
+            b[8].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } });
+            b[8].consuming = new List<ResourceDictionary>();
+            b[8].consuming.Add(new ResourceDictionary() { { 3, 1 } });
+            b[8].consuming.Add(new ResourceDictionary() { { 3, 1 } });
+            b[8].consuming.Add(new ResourceDictionary() { { 3, 1 } });
+            b[8].production = new List<ResourceDictionary>();
+            b[8].production.Add(new ResourceDictionary() { { 4, 5 } });
+            b[8].production.Add(new ResourceDictionary() { { 4, 6 } });
+            b[8].production.Add(new ResourceDictionary() { { 4, 7 } });
+            b[8].maxActiveAmount = 1;
+
+            b[8].spritePath = new List<string>();
+            b[8].spritePath.Add("Sprites/Building/WaterTreatmentCenter0");
+            b[8].spritePath.Add("Sprites/Building/WaterTreatmentCenter1");
+            b[8].spritePath.Add("Sprites/Building/WaterTreatmentCenter2");
+
+            b[8].maxCharacterStored = new List<int>();
+            b[8].maxCharacterStored.Add(3);
+            b[8].maxCharacterStored.Add(4);
+            b[8].maxCharacterStored.Add(5);
+            b[8].upgradePoint = new List<int>(){200,
+                                                600,
+                                                1200,
+                                                2600,
+                                                3600,
+                                                9000,
+                                                5400,
+                                                45000,
+                                                81000,
+                                                135000 };
+            b[8].maxLevel = 10;
+
+            b[9] = new Building();
+            b[9].type = Building.BuildingType.FishingPond;
+            b[9].buildingCost = new List<ResourceDictionary>();
+            b[9].buildingCost.Add(new ResourceDictionary() { { 1, 5 }, { 2, 5 } });
+            b[9].buildingCost.Add(new ResourceDictionary() { { 1, 2 }, { 2, 6 } });
+            b[9].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } });
+            b[9].buildingCost.Add(new ResourceDictionary() { { 1, 5 }, { 2, 5 } });
+            b[9].buildingCost.Add(new ResourceDictionary() { { 1, 2 }, { 2, 6 } });
+            b[9].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } });
+            b[9].buildingCost.Add(new ResourceDictionary() { { 1, 5 }, { 2, 5 } });
+            b[9].buildingCost.Add(new ResourceDictionary() { { 1, 2 }, { 2, 6 } });
+            b[9].buildingCost.Add(new ResourceDictionary() { { 1, 5 }, { 2, 5 } });
+            b[9].buildingCost.Add(new ResourceDictionary() { { 1, 2 }, { 2, 6 } });
+            b[9].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } });
+            b[9].buildingCost.Add(new ResourceDictionary() { { 1, 5 }, { 2, 5 } });
+            b[9].buildingCost.Add(new ResourceDictionary() { { 1, 2 }, { 2, 6 } });
+            b[9].buildingCost.Add(new ResourceDictionary() { { 1, 5 }, { 2, 5 } });
+            b[9].buildingCost.Add(new ResourceDictionary() { { 1, 2 }, { 2, 6 } });
+            b[9].buildingCost.Add(new ResourceDictionary() { { 1, 5 }, { 2, 5 } });
+            b[9].buildingCost.Add(new ResourceDictionary() { { 1, 2 }, { 2, 6 } });
+            b[9].buildingCost.Add(new ResourceDictionary() { { 1, 5 }, { 2, 5 } });
+            b[9].buildingCost.Add(new ResourceDictionary() { { 1, 2 }, { 2, 6 } });
+            b[9].buildingCost.Add(new ResourceDictionary() { { 1, 5 }, { 2, 5 } });
+            b[9].buildingCost.Add(new ResourceDictionary() { { 1, 2 }, { 2, 6 } });
+            b[9].buildingCost.Add(new ResourceDictionary() { { 1, 5 }, { 2, 5 } });
+            b[9].buildingCost.Add(new ResourceDictionary() { { 1, 2 }, { 2, 6 } });
+            b[9].buildingCost.Add(new ResourceDictionary() { { 1, 5 }, { 2, 5 } });
+            b[9].buildingCost.Add(new ResourceDictionary() { { 1, 2 }, { 2, 6 } });
+            b[9].buildingCost.Add(new ResourceDictionary() { { 1, 5 }, { 2, 5 } });
+            b[9].buildingCost.Add(new ResourceDictionary() { { 1, 2 }, { 2, 6 } });
+            b[9].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } });
+
+            b[9].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } });
+            b[9].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } });
+            b[9].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } });
+
+            b[9].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } });
+            b[9].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } });
+            b[9].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } });
+            b[9].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } });
+            b[9].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } });
+            b[9].consuming = new List<ResourceDictionary>();
+            b[9].consuming.Add(new ResourceDictionary() { { 3, 1 } });
+            b[9].consuming.Add(new ResourceDictionary() { { 3, 1 } });
+            b[9].consuming.Add(new ResourceDictionary() { { 3, 1 } });
+            b[9].production = new List<ResourceDictionary>();
+            b[9].production.Add(new ResourceDictionary() { { 4, 5 } });
+            b[9].production.Add(new ResourceDictionary() { { 4, 6 } });
+            b[9].production.Add(new ResourceDictionary() { { 4, 7 } });
+            b[9].maxActiveAmount = 1;
+
+            b[9].spritePath = new List<string>();
+            b[9].spritePath.Add("Sprites/Building/WaterTreatmentCenter0");
+            b[9].spritePath.Add("Sprites/Building/WaterTreatmentCenter1");
+            b[9].spritePath.Add("Sprites/Building/WaterTreatmentCenter2");
+
+            b[9].maxCharacterStored = new List<int>();
+            b[9].maxCharacterStored.Add(3);
+            b[9].maxCharacterStored.Add(4);
+            b[9].maxCharacterStored.Add(5);
+            b[9].upgradePoint = new List<int>(){200,
+                                                600,
+                                                1200,
+                                                2600,
+                                                3600,
+                                                9000,
+                                                5400,
+                                                45000,
+                                                81000,
+                                                135000 };
+            b[9].maxLevel = 10;
+
+
+            b[10] = new Building();
+            b[10].type = Building.BuildingType.LaborCenter;
+            b[10].buildingCost = new List<ResourceDictionary>();
+            b[10].buildingCost.Add(new ResourceDictionary() { { 1, 5 }, { 2, 5 } });
+            b[10].buildingCost.Add(new ResourceDictionary() { { 1, 2 }, { 2, 6 } });
+            b[10].buildingCost.Add(new ResourceDictionary() { { 1, 7 }, { 2, 7 } });
+            b[10].consuming = new List<ResourceDictionary>();
+            b[10].consuming.Add(new ResourceDictionary() { { 3, 1 } });
+            b[10].consuming.Add(new ResourceDictionary() { { 3, 1 } });
+            b[10].consuming.Add(new ResourceDictionary() { { 3, 1 } });
+            b[10].consuming.Add(new ResourceDictionary() { { 3, 1 } });
+            b[10].consuming.Add(new ResourceDictionary() { { 3, 1 } });
+            b[10].consuming.Add(new ResourceDictionary() { { 3, 1 } });
+            b[10].consuming.Add(new ResourceDictionary() { { 3, 1 } });
+            b[10].consuming.Add(new ResourceDictionary() { { 3, 1 } });
+            b[10].consuming.Add(new ResourceDictionary() { { 3, 1 } });
+            b[10].consuming.Add(new ResourceDictionary() { { 3, 1 } });
+            b[10].consuming.Add(new ResourceDictionary() { { 3, 1 } });
+
+            b[10].production = new List<ResourceDictionary>();
+            b[10].production.Add(new ResourceDictionary() { { -1, 20 } });
+            b[10].production.Add(new ResourceDictionary() { { -1,20 } });
+            b[10].production.Add(new ResourceDictionary() { { -1, 20 } }); 
+            b[10].production.Add(new ResourceDictionary() { { -1, 20 } });
+            b[10].production.Add(new ResourceDictionary() { { -1, 20 } });
+
+            b[10].production.Add(new ResourceDictionary() { { -1, 30 } });
+            b[10].production.Add(new ResourceDictionary() { { -1, 30 } });
+            b[10].production.Add(new ResourceDictionary() { { -1, 30 } });
+            b[10].production.Add(new ResourceDictionary() { { -1, 30 } });
+            b[10].production.Add(new ResourceDictionary() { { -1, 30 } });
+            b[10].production.Add(new ResourceDictionary() { { -1, 30 } });
+
+            b[10].maxActiveAmount = 1;
+            b[10].upgradePoint = new List<int>(){200,
+                                                600,
+                                                1200,
+                                                2600,
+                                                3600,
+                                                9000,
+                                                5400,
+                                                45000,
+                                                81000,
+                                                135000 };
+            b[10].spritePath = new List<string>();
+            b[10].spritePath.Add("Sprites/Building/Kitchen0");
+            b[10].spritePath.Add("Sprites/Building/Kitchen1");
+            b[10].spritePath.Add("Sprites/Building/Kitchen2");
+
+            b[10].maxCharacterStored = new List<int>();
+            b[10].maxCharacterStored.Add(3);
+            b[10].maxCharacterStored.Add(4);
+            b[10].maxCharacterStored.Add(5);
+
+            b[10].maxLevel = 10;*/
+        }
 
         string buildingDatas = JsonHelper.ToJson(bu.ToArray(), true);// Newtonsoft.Json.JsonConvert.SerializeObject(playerData, Newtonsoft.Json.Formatting.Indented); //JsonUtility.ToJson(playerData, true); 
         Debug.Log("Creating JSON data : " + buildingDatas);

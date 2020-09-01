@@ -81,13 +81,13 @@ public class BuildingShopPanel : MonoBehaviour
 
                 if (bu != null)
                 {
-                    button.GetComponentInChildren<Text>().text = bu.CurrentActiveAmount.ToString() + "/" + bu.maxActiveAmount;
+                    button.transform.Find("BGPanel/ActiveAmount").GetComponent<Text>().text = bu.CurrentActiveAmount.ToString() + "/" + bu.maxActiveAmount;
 
                 }
                 else
                 {
                     bu = new Builder((Building.BuildingType)(i + 1));
-                    button.GetComponentInChildren<Text>().text = "0 /" + bu.maxActiveAmount;
+                    button.transform.Find("BGPanel/ActiveAmount").GetComponent<Text>().text = "0 /" + bu.maxActiveAmount;
 
                 }
 

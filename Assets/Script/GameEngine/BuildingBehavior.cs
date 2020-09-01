@@ -185,7 +185,7 @@ public class BuildingBehavior : MonoBehaviour
 
             RectTransform fillRect = production.Find("FillSprite").GetComponent<RectTransform>();
             RectTransform parentRect = production.GetComponent<RectTransform>();
-            Debug.Log($"{fillScale} {origin.y} {parentRect.sizeDelta.y}");
+
             float newY = origin.y + (parentRect.sizeDelta.y * fillScale);
             // (fillRect.rect.height / 2 - parentRect.rect.height /2) + parentRect.localPosition.y + (parentRect.rect.height * fillScale);// (parentRect.rect.height * fillScale) + ((parentRect.rect.height / 2f) + (fillRect.rect.height / 2f));
 
