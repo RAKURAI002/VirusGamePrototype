@@ -27,6 +27,7 @@ public class BuildingBehavior : MonoBehaviour
         if (buildingData.productionSpritePath != "")
         {
             EventManager.Instance.OnResourceChanged += OnResourceChanged;
+
         }
 
     }
