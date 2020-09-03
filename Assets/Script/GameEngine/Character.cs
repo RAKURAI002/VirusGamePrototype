@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -22,12 +21,12 @@ public class Character
     public class AllStats
     {
         public int speed;
-        public int crafting;
+        public int craftsmanship;
         public int intelligence;
         public int strength;
-        public int observing;
+        public int perception;
         public int luck;
-        public int healthy;
+        public int immunity;
 
         public int hitPoint;
         public int attack;
@@ -42,7 +41,20 @@ public class Character
         Female
 
     }
-    public enum BirthMark
+    [System.Serializable]
+    public class BirthMark
+    {
+        [SerializeField] string name;
+        [SerializeField] string spritePath;
+        [SerializeField] int tier;
+        [SerializeField] int level;
+        [SerializeField] string effectName;
+
+        
+
+    }
+
+    public enum BirthMarkPosition
     {
         Unknown,
         Head,
@@ -51,9 +63,9 @@ public class Character
         Arm,
         Leg,
         Foot
-
-            
+      
     }
+    
     public enum HealthStatus
     {
         Unknown,
@@ -87,8 +99,8 @@ public class Character
         }
 
         level = 1;
-        birthMarks = new List<BirthMark>();
-        birthMarks.Add(BirthMark.Arm);
+        birthMarks = new List<BirthMarkPosition>();
+        birthMarks.Add(BirthMarkPosition.Arm);
 
         equipments = new List<Equipment>();
         workStatus = WorkStatus.Idle;
@@ -102,7 +114,7 @@ public class Character
     {
         if (CharacterManager.Instance.AllCharacters.Count == 0)
         {
-            return 1;
+            return IDMask.CHARACTER_ID_MASK + 1;
 
         }
 
@@ -134,8 +146,8 @@ public class Character
         }
 
         level = 1;
-        birthMarks = new List<BirthMark>();
-        birthMarks.Add(BirthMark.Arm);
+        birthMarks = new List<BirthMarkPosition>();
+        birthMarks.Add(BirthMarkPosition.Arm);
 
         equipments = new List<Equipment>();
         workStatus = WorkStatus.Idle;
@@ -152,7 +164,7 @@ public class Character
     [SerializeField] private int experience;
     [SerializeField] private GenderType gender;
     [SerializeField] private AllStats stats;
-    [SerializeField] private List<BirthMark> birthMarks;
+    [SerializeField] private List<BirthMarkPosition> birthMarks;
 
     [SerializeField] public List<Equipment> equipments;
     [SerializeField] public WorkStatus workStatus;
@@ -172,7 +184,7 @@ public class Character
     public int Experience { get { return experience; } }
     public GenderType Gender { get { return gender; } }
     public AllStats Stats { get { return stats; } set { stats = value; } }
-    public List<BirthMark> BirthMarks { get { return birthMarks; } }
+    public List<BirthMarkPosition> BirthMarks { get { return birthMarks; } }
     public int WorkingPlaceID { get; set; }
 
 
@@ -189,11 +201,11 @@ public class Character
     }
     public void IncreaseStats(AllStats _stats)
     {
-        stats.crafting += _stats.crafting;
-        stats.healthy += _stats.healthy;
+        stats.craftsmanship += _stats.craftsmanship;
+        stats.immunity += _stats.immunity;
         stats.intelligence += _stats.intelligence;
         stats.luck += _stats.luck;
-        stats.observing += _stats.observing;
+        stats.perception += _stats.perception;
         stats.speed += _stats.speed;
         stats.strength += _stats.strength;
 
@@ -205,11 +217,11 @@ public class Character
 
     public void DecreaseStats(AllStats _stats)
     {
-        stats.crafting -= _stats.crafting;
-        stats.healthy -= _stats.healthy;
+        stats.craftsmanship -= _stats.craftsmanship;
+        stats.immunity -= _stats.immunity;
         stats.intelligence -= _stats.intelligence;
         stats.luck -= _stats.luck;
-        stats.observing -= _stats.observing;
+        stats.perception -= _stats.perception;
         stats.speed -= _stats.speed;
         stats.strength -= _stats.strength;
 

@@ -9,6 +9,7 @@ using System.Linq;
 public class BuildingBehavior : MonoBehaviour
 {
     [SerializeField] public Builder builder;
+    [SerializeField] bool isCollectable;
     Building buildingData;
     Vector2 origin;
 
@@ -20,31 +21,29 @@ public class BuildingBehavior : MonoBehaviour
         buildingData = LoadManager.Instance.allBuildingData[builder.Type];
         Initialize();
         
+
     }
 
     private void OnEnable()
     {
-        if (buildingData.productionSpritePath != "")
+        if (isCollectable)
         {
             EventManager.Instance.OnResourceChanged += OnResourceChanged;
-
-        }
-
-    }
-    private void OnDisable()
-    {
-        if (EventManager.Instance && buildingData.productionSpritePath != "")
-        {
-            EventManager.Instance.OnResourceChanged -= OnResourceChanged;
             EventManager.Instance.OnActivityAssigned += OnActivityAssigned;
             EventManager.Instance.OnActivityFinished += OnActivityFinished;
 
         }
 
     }
-
-    private void Awake()
+    private void OnDisable()
     {
+        if (EventManager.Instance && isCollectable)
+        {
+            EventManager.Instance.OnResourceChanged -= OnResourceChanged;
+            EventManager.Instance.OnActivityAssigned -= OnActivityAssigned;
+            EventManager.Instance.OnActivityFinished -= OnActivityFinished;
+
+        }
 
     }
 
@@ -62,7 +61,9 @@ public class BuildingBehavior : MonoBehaviour
         if (activityInformation.activityType == ActivityType.Build)
         {
             RefreshProductionAmount();
+
         }
+
     }
     void OnClickCollectResource()
     {
@@ -70,16 +71,6 @@ public class BuildingBehavior : MonoBehaviour
         ItemManager.Instance.AddResource(buildingData.production[builder.Level].First().Key , Mathf.FloorToInt(builder.currentProductionAmount));
         builder.currentProductionAmount -= Mathf.FloorToInt(builder.currentProductionAmount);
         RefreshProductionAmount();
-
-    }
-    private void OnMouseOver()
-    {
-
-
-    }
-
-    private void OnMouseExit()
-    {
 
     }
 
@@ -96,21 +87,18 @@ public class BuildingBehavior : MonoBehaviour
             return;
 
         }
-        
-        ChangePrefab();
 
-       
-        
-        
+        isCollectable = !string.IsNullOrEmpty(buildingData.productionSpritePath);
+        UpdatePrefab();
 
-        AdjustNewCollider();
-
-        if (buildingData.productionSpritePath != "")
+        if (isCollectable)
         {
-            onMouseOverHelper = transform.Find("Production").GetComponent<OnMouseOverHelper>();
+            Transform production = transform.Find("Production");
+
+            onMouseOverHelper = production.GetComponent<OnMouseOverHelper>();
             onMouseOverHelper.SetOnClickCallBack(OnClickCollectResource);
 
-            Transform production = transform.Find("Production");
+           
 
             Sprite productionSprite = Resources.Load<Sprite>(buildingData.productionSpritePath);
            // Color color = productionSprite.texture.GetPixel(productionSprite.texture.width / 2, productionSprite.texture.height / 2);
@@ -128,7 +116,6 @@ public class BuildingBehavior : MonoBehaviour
             SpriteRenderer parentSpriteRenderer = production.GetComponent<SpriteRenderer>();
             parentSpriteRenderer.sprite = productionSprite;
 
-
             RectTransform parentRect = production.GetComponent<RectTransform>();
             RectTransform fillRect = production.Find("FillSprite").GetComponent<RectTransform>();
             //  Debug.Log(productionSprite.rect.width.ToString()+ " "+ productionSprite.bounds.size.y);
@@ -138,39 +125,31 @@ public class BuildingBehavior : MonoBehaviour
             // Debug.Log(fillSpriteRenderer.size);
             //  fillSpriteRenderer.size = new Vector2(fillSpriteRenderer.size.x, productionSprite.bounds.size.y);
             //  fillRect.localPosition = Vector2.zero;
-            Debug.Log(parentRect.sizeDelta.y + " : " + fillRect.sizeDelta.y);
-            production.GetComponent<SpriteMask>().sprite = productionSprite;
+          //  Debug.Log(parentRect.sizeDelta.y + " : " + fillRect.sizeDelta.y);
+
             production.GetComponent<SpriteRenderer>().sprite = productionSprite;
 
             float newYScale = parentRect.sizeDelta.y / (fillRect.sizeDelta.y);// productionSprite.bounds.size.y / ((productionSprite.bounds.size.y / 2) - (fillSprite.bounds.size.y / 2));
-            Debug.Log($"{parentRect.sizeDelta.y} / {fillRect.sizeDelta.y} = {newYScale}");
+           // Debug.Log($"{parentRect.sizeDelta.y} / {fillRect.sizeDelta.y} = {newYScale}");
 
             fillRect.localScale = new Vector3(2f, newYScale, 0f);
-            transform.Find("Production").gameObject.AddComponent<PolygonCollider2D>();
+            production.gameObject.AddComponent<PolygonCollider2D>();
             origin = fillRect.localPosition;
             RefreshProductionAmount();
             
 
         }
-        else
-        {
-
-        }
-
 
     }
 
-    void ChangePrefab()
+    public void UpdatePrefab()
     {
         GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(buildingData.spritePath[builder.Level]);
-
-
-    }
-    void AdjustNewCollider()
-    {
-        BoxCollider2D collider = GetComponent<BoxCollider2D>();
+        Destroy(GetComponent<BoxCollider2D>() ?? null);
+        gameObject.AddComponent<BoxCollider2D>();
 
     }
+
     void RefreshProductionAmount()
     {
         Transform production = transform.Find("Production");
@@ -204,7 +183,7 @@ public class BuildingBehavior : MonoBehaviour
     }
     void Update()
     {
-        if(buildingData.productionSpritePath != "")
+        if(isCollectable)
         {
             transform.Find("Production/Amount").gameObject.SetActive(onMouseOverHelper.isMouseOverObject);
 

@@ -105,7 +105,7 @@ public class BuildTimer : MonoBehaviour
             CancelConstructing();
             EventManager.Instance.ActivityFinished(new ActivityInformation() { activityType = ActivityType.Build});
 
-            gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(buildData.spritePath[thisBuilding.Level]);
+            gameObject.GetComponent<BuildingBehavior>().UpdatePrefab();
             return true;
         }
         return false;
@@ -175,7 +175,7 @@ public class BuildTimer : MonoBehaviour
         if (laborCenter.CharacterInBuilding[thisBuilding.constructionStatus.teamNumber] != null)
         {
 
-            productionPointTemp += laborCenter.CharacterInBuilding[thisBuilding.constructionStatus.teamNumber].Characters.Sum(c => ((c.Stats.strength * 0.2f / 8) + (c.Stats.speed * 0.2f / 8) + (c.Stats.crafting * 0.8f / 3)));
+            productionPointTemp += laborCenter.CharacterInBuilding[thisBuilding.constructionStatus.teamNumber].Characters.Sum(c => ((c.Stats.strength * 0.2f / 8) + (c.Stats.speed * 0.2f / 8) + (c.Stats.craftsmanship * 0.8f / 3)));
         //    Debug.Log(laborCenter.CharacterInBuilding[thisBuilding.constructionStatus.teamNumber].Characters.Sum(c => ((c.Stats.strength * 0.2f / 8) + (c.Stats.speed * 0.2f / 8) + (c.Stats.crafting * 0.8f / 3))));
         }
         productionPoint = productionPointTemp;

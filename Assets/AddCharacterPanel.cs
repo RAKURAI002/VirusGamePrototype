@@ -100,11 +100,11 @@ public class AddCharacterPanel : MonoBehaviour
         GameObject statusPanel = transform.Find("InformationPanel/StatusPanel/STATS").gameObject;
         statusPanel.transform.parent.Find("Name").GetComponent<Text>().text = $"<color=green>{character.Name}</color>";
         statusPanel.transform.parent.Find("Level").GetComponent<Text>().text = "<color=green>Level</color> : " + character.level;
-        statusPanel.transform.Find("Healthy").GetComponent<Text>().text = $"Healthy :\t{character.Stats.healthy}";
-        statusPanel.transform.Find("Crafting").GetComponent<Text>().text = $"Crafting :\t{character.Stats.crafting}";
+        statusPanel.transform.Find("Healthy").GetComponent<Text>().text = $"Healthy :\t{character.Stats.immunity}";
+        statusPanel.transform.Find("Crafting").GetComponent<Text>().text = $"Crafting :\t{character.Stats.craftsmanship}";
         statusPanel.transform.Find("Intelligence").GetComponent<Text>().text = $"Intelligence :\t{character.Stats.intelligence}";
         statusPanel.transform.Find("Strength").GetComponent<Text>().text = $"Strength :\t{character.Stats.strength}";
-        statusPanel.transform.Find("Observing").GetComponent<Text>().text = $"Observing :\t{character.Stats.observing}";
+        statusPanel.transform.Find("Observing").GetComponent<Text>().text = $"Observing :\t{character.Stats.perception}";
         statusPanel.transform.Find("Luck").GetComponent<Text>().text = $"Luck :\t{character.Stats.luck}";
         statusPanel.transform.Find("Speed").GetComponent<Text>().text = $"Speed :\t{character.Stats.speed}";
 

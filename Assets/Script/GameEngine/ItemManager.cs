@@ -60,12 +60,18 @@ public class ItemManager : SingletonComponent<ItemManager>
 
     }
     /// <summary>
-    /// Resource update cycle function. Called in Start.
+    /// Resource update cycle. Invoked in Start.
     /// </summary>
     void UpdateResourceEveryMinute()
     {
         foreach (Builder builder in BuildManager.Instance.AllBuildings)
         {
+            if (string.IsNullOrEmpty(LoadManager.Instance.allBuildingData[builder.Type].productionSpritePath))
+            {
+                continue;
+
+            }
+
             UpdateBuildingResource(builder);
 
         }
@@ -91,6 +97,7 @@ public class ItemManager : SingletonComponent<ItemManager>
 
     void UpdateBuildingResource(Builder builder)
     {
+        Debug.Log(builder.Type);
         Building buildingData = LoadManager.Instance.allBuildingData[builder.Type];
 
         if (buildingData.production[builder.Level] == null)
@@ -103,7 +110,7 @@ public class ItemManager : SingletonComponent<ItemManager>
         foreach (KeyValuePair<string, int> baseProduction in buildingData.production[builder.Level])
         {
             Resource resource = LoadManager.Instance.allResourceData[baseProduction.Key];
-            if(resource.type != Resource.ResourceType.Material)
+            if (resource.type != Resource.ResourceType.Material)
             {
                 return;
 
@@ -120,8 +127,15 @@ public class ItemManager : SingletonComponent<ItemManager>
 
             Debug.Log($"{RESOURCE_CICLE_TIME} seconds passed. Base Production of {builder.Type}[ID : {builder.ID}] is {baseProduction.Value} and sum of Character's Speed in building is {characterStatsSum} resulting in INCREASE " +
                 $"{LoadManager.Instance.allResourceData[baseProduction.Key].Name} : {finalUpdatedAmount}");
-           
-            builder.currentProductionAmount += finalUpdatedAmount * 5;
+
+            Building buildData = LoadManager.Instance.allBuildingData[builder.Type];
+            Debug.Log(buildData.type);
+            Debug.Log(buildData.maxProductionStored[builder.Level]);
+            builder.currentProductionAmount += finalUpdatedAmount * 10;
+            if (builder.currentProductionAmount >= buildData.maxProductionStored[builder.Level])
+            {
+                builder.currentProductionAmount = buildData.maxProductionStored[builder.Level];
+            }
             EventManager.Instance.ResourceChanged(baseProduction.Key);
 
         }
@@ -265,7 +279,7 @@ public class ItemManager : SingletonComponent<ItemManager>
         {
             if (resource.Value > (ItemManager.Instance.AllResources.ContainsKey(resource.Key) ? ItemManager.Instance.AllResources[resource.Key].Amount : 0))
             {
-                Debug.Log($"Not enough Resource ({LoadManager.Instance.allResourceData[resource.Key].Name})");
+                //Debug.Log($"Not enough Resource ({LoadManager.Instance.allResourceData[resource.Key].Name})");
                 return false;
             }
         }
@@ -273,9 +287,9 @@ public class ItemManager : SingletonComponent<ItemManager>
     }
     public bool IsAffordable(string name, int amount)
     {
-        if (amount > (ItemManager.Instance.AllResources.ContainsKey(name) ? ItemManager.Instance.AllResources[name].Amount : 0))
+        if (amount > GetResourceAmount(name))
         {
-            Debug.Log($"Not enough Resource ({LoadManager.Instance.allResourceData[name].Name})");
+            // Debug.Log($"Not enough Resource ({LoadManager.Instance.allResourceData[name].Name})");
             return false;
         }
 

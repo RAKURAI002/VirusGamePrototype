@@ -11,7 +11,7 @@ public class CharacterManager : SingletonComponent<CharacterManager>
     [SerializeField] public List<Character> characterWaitingInLine;
     public List<Character> AllCharacters { get { return allCharacters; } set { allCharacters = value; } }
 
-    float CHARACTER_ADDING_EVENT_CYCLE = 1f;
+    float CHARACTER_ADDING_EVENT_CYCLE = 60f;
 
     #region Unity Functions
     protected override void Awake()
@@ -64,7 +64,14 @@ public class CharacterManager : SingletonComponent<CharacterManager>
 
     void CharacterJoiningEvent()
     {
-        if(LoadManager.Instance.allCharacterData.Count <= 0)
+        if (LoadManager.Instance.allCharacterData.Count <= 0)
+        {
+            return;
+
+        }
+
+        /// Event occur chance
+        if (UnityEngine.Random.Range(0, 101) >= 30 / ((characterWaitingInLine.Count / 5) + 1))
         {
             return;
 
@@ -80,10 +87,10 @@ public class CharacterManager : SingletonComponent<CharacterManager>
         EventManager.Instance.CharacterAssigned();
 
 
-      
+
     }
 
-    
+
     public void CreateNewCharacter()
     {
         Character character = new Character("John " + Random.Range(0, 10000));
@@ -171,11 +178,11 @@ public class CharacterManager : SingletonComponent<CharacterManager>
     {
         if (ItemManager.Instance.TryConsumeResources(item.Name, 1))
         {
-            if(character.effects.Exists(e => e.name == item.effect.name))
+            if (character.effects.Exists(e => e.name == item.effect.name))
             {
                 Debug.Log("Same");
                 ApplyItemEffect(character, character.effects.Single(e => e.name == item.effect.name), true);
-            
+
             }
             else
             {
@@ -183,11 +190,11 @@ public class CharacterManager : SingletonComponent<CharacterManager>
                 ApplyItemEffect(character, character.effects[character.effects.Count - 1], false);
 
             }
-           
-            
 
-       //     Debug.Log(character.Name + $"  {item.effect.name}");
-            
+
+
+            //     Debug.Log(character.Name + $"  {item.effect.name}");
+
 
         }
 
@@ -195,9 +202,9 @@ public class CharacterManager : SingletonComponent<CharacterManager>
 
     void ApplyItemEffect(Character character, Resource.Effect effect, bool isAlreadySameEffectActive)
     {
-        if(!isAlreadySameEffectActive)
+        if (!isAlreadySameEffectActive)
         {
-          //  Debug.Log("Applying Effect" + effect.name);
+            //  Debug.Log("Applying Effect" + effect.name);
             GameObject effectTimerGO = new GameObject(character.Name + ":" + effect.name);
             effectTimerGO.transform.SetParent(CharacterManager.Instance.gameObject.transform.Find("ItemEffectTimer"));
             effectTimerGO.AddComponent<ItemEffectTimer>().StartEffect(character, effect);
@@ -205,10 +212,10 @@ public class CharacterManager : SingletonComponent<CharacterManager>
         }
         else
         {
-            
+
             GameObject effectTimerGO = CharacterManager.Instance.gameObject.transform.Find("ItemEffectTimer/" + effect.instanceID).gameObject;
             effectTimerGO.GetComponent<ItemEffectTimer>().IncreaseDuration(effect.duration);
-          //  Debug.Log(effectTimerGO.name);
+            //  Debug.Log(effectTimerGO.name);
 
         }
 

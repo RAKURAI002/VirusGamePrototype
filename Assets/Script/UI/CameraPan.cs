@@ -6,6 +6,7 @@ using UnityEngine.Tilemaps;
 
 public class CameraPan : MonoBehaviour
 {
+    Camera mainCamera;
 
     public float MouseZoomSpeed = 15.0f;
     public float ZoomMinBound = 30f;
@@ -24,9 +25,11 @@ public class CameraPan : MonoBehaviour
     public static bool isPanning { get; set; }
     private void Start()
     {
+        mainCamera = Camera.main;
         transform.position = new Vector3(-35f, 40f, -10);
         boundMin = boundRendererGO.GetComponent<SpriteRenderer>().bounds.min;
         boundMax = boundRendererGO.GetComponent<SpriteRenderer>().bounds.max;
+
     }
     // Update is called once per frame
     void Update()
@@ -43,19 +46,22 @@ public class CameraPan : MonoBehaviour
 
     void ClampPosition()
     {
-        Camera.main.transform.position = new Vector3(
-                Mathf.Clamp(Camera.main.transform.position.x, boundMin.x + (Camera.main.aspect * Camera.main.orthographicSize),
-                boundMax.x - (Camera.main.aspect * Camera.main.orthographicSize)),
-               Mathf.Clamp(Camera.main.transform.position.y, boundMin.y + (Camera.main.orthographicSize),
-               boundMax.y - (Camera.main.orthographicSize)),
-               Camera.main.transform.position.z);
+        mainCamera.transform.position = new Vector3(
+                Mathf.Clamp(mainCamera.transform.position.x, boundMin.x + (mainCamera.aspect * mainCamera.orthographicSize),
+                boundMax.x - (mainCamera.aspect * mainCamera.orthographicSize)),
+               Mathf.Clamp(mainCamera.transform.position.y, boundMin.y + (mainCamera.orthographicSize),
+               boundMax.y - (mainCamera.orthographicSize)),
+               mainCamera.transform.position.z);
+
     }
     void OnDrawGizmos()
     {
-        float verticalHeightSeen = Camera.main.orthographicSize * 2.0f;
+        Camera targetCamera = Camera.main;
+        float verticalHeightSeen = targetCamera.orthographicSize * 2.0f;
 
         Gizmos.color = Color.cyan;
-        Gizmos.DrawWireCube(transform.position, new Vector3((verticalHeightSeen * Camera.main.aspect), verticalHeightSeen, 0));
+        Gizmos.DrawWireCube(transform.position, new Vector3((verticalHeightSeen * targetCamera.aspect), verticalHeightSeen, 0));
+
     }
     private void PanCamera()
     {
@@ -74,7 +80,7 @@ public class CameraPan : MonoBehaviour
                 isPanning = true;
             }
             Vector3 direction = touchStart - GetWorldPosition(groundZ);
-            Camera.main.transform.position += direction;
+            mainCamera.transform.position += direction;
 
         }
         if (Input.GetMouseButtonUp(0))
@@ -105,13 +111,13 @@ public class CameraPan : MonoBehaviour
              scroll = Input.GetAxis("Mouse ScrollWheel");
 #endif
 
-        if (Camera.main.transform.position.x > boundMax.x || Camera.main.transform.position.x < boundMin.x)
+        if (mainCamera.transform.position.x > boundMax.x || mainCamera.transform.position.x < boundMin.x)
         {
             return;
         }
-       
-        Camera.main.orthographicSize -= scroll * MouseZoomSpeed;
-        Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize, ZoomMinBound, ZoomMaxBound);
+
+        mainCamera.orthographicSize -= scroll * MouseZoomSpeed;
+        mainCamera.orthographicSize = Mathf.Clamp(mainCamera.orthographicSize, ZoomMinBound, ZoomMaxBound);
 
     }
     IEnumerator DelaySetPanning()
@@ -122,7 +128,7 @@ public class CameraPan : MonoBehaviour
     }
     private Vector3 GetWorldPosition(float z)
     {
-        Ray mousePos = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray mousePos = mainCamera.ScreenPointToRay(Input.mousePosition);
         Plane ground = new Plane(Vector3.forward, new Vector3(0, 0, z));
         float distance;
         ground.Raycast(mousePos, out distance);

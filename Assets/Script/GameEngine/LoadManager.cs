@@ -85,6 +85,7 @@ public class LoadManager : SingletonComponent<LoadManager>
 
         CheckFirstLogin();
 
+
     }
 
     public void SavePlayerDataToJson()
@@ -149,7 +150,7 @@ public class LoadManager : SingletonComponent<LoadManager>
                     allBuildingData.Add(building.type, building);
                 }
 
-                Debug.Log("Fetching Building Data completed.\n" + req.downloadHandler.text);
+                Debug.Log("Fetching Building Data completed.\n");
 
             }
         }));
@@ -169,7 +170,7 @@ public class LoadManager : SingletonComponent<LoadManager>
                 {
                     allQuestData.Add(questData.questID, questData);
                 }
-                Debug.Log("Fetching Quest Data completed.\n" + req.downloadHandler.text);
+                Debug.Log("Fetching Quest Data completed.\n");
             }
         }));
         Debug.Log("Fetching Resource Data . . .");
@@ -187,7 +188,7 @@ public class LoadManager : SingletonComponent<LoadManager>
                 {
                     allResourceData.Add(resource.Name, resource);
                 }
-                Debug.Log("Fetching Resource Data completed.\n" + req.downloadHandler.text);
+                Debug.Log("Fetching Resource Data completed.\n");
             }
         }));
         Debug.Log("Fetching Equipment Data . . .");
@@ -205,7 +206,7 @@ public class LoadManager : SingletonComponent<LoadManager>
                 {
                     allEquipmentData.Add(equipment.Name, equipment);
                 }
-                Debug.Log("Fetching Equipment Data completed.\n" + req.downloadHandler.text);
+                Debug.Log("Fetching Equipment Data completed.\n");
 
             }
         }));
@@ -219,7 +220,7 @@ public class LoadManager : SingletonComponent<LoadManager>
             else
             {
                 allEnemyData = new List<Enemy>();
-                Debug.Log("Fetching Enemy Data completed.\n" + req.downloadHandler.text);
+                Debug.Log("Fetching Enemy Data completed.\n");
                 allEnemyData.AddRange(JsonHelper.FromJson<Enemy>(req.downloadHandler.text));
             }
         }));
@@ -232,8 +233,9 @@ public class LoadManager : SingletonComponent<LoadManager>
             else
             {
                 allCharacterData = new List<Character.CharacterData>();
-                Debug.Log("Fetching Character Data completed.\n" + req.downloadHandler.text);
+                Debug.Log("Fetching Character Data completed.\n");
                 allCharacterData.AddRange(JsonHelper.FromJson<Character.CharacterData>(req.downloadHandler.text));
+
             }
         }));
 
@@ -253,7 +255,6 @@ public class LoadManager : SingletonComponent<LoadManager>
 
         Debug.Log("Load GameData Complete.");
 
-
     }
 
     void LoadPlayerDataToScene()
@@ -271,10 +272,8 @@ public class LoadManager : SingletonComponent<LoadManager>
         MapManager.Instance.LoadBuildingToScene();
         RemoveDuplicateCharacterData();
 
-
-
         EventManager.Instance.GameDataLoadFinished();
-
+        
     }
     void RemoveDuplicateCharacterData()
     {
@@ -292,6 +291,7 @@ public class LoadManager : SingletonComponent<LoadManager>
         {
 
             Character.CharacterData[] cData = LoadManager.Instance.allCharacterData.Where(c => c.name == character.Name).ToArray();
+   
    
             if (cData.Length != 0)
             {

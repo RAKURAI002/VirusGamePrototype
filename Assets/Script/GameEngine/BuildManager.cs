@@ -47,7 +47,7 @@ public class BuildManager : SingletonComponent<BuildManager>
     }
     #endregion
 
-    public bool CreateNewBuilding(Building.BuildingType type, int teamNumber, Vector3 position)
+    public bool CreateNewBuilding(Building.BuildingType type, int teamNumber, Vector2 position)
     {
         Builder laborCenter = allBuildings.SingleOrDefault(b => b.Type == Building.BuildingType.LaborCenter);
         if ((laborCenter == null || laborCenter.Level == 0) && gameObject.transform.Find("TimerCanvas").childCount >= 1)

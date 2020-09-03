@@ -4,25 +4,24 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 using System;
+using System.Linq;
+
 
 namespace Tests
 {
 
     public class DataValidationTest
     {
-
+        LoadManager loadManager;
 
         [UnityTest]
         public IEnumerator LoadGameDataFromJSONTest()
         {
             GameObject loadManagerGO = new GameObject();
 
-            LoadManager loadManager = loadManagerGO.AddComponent<LoadManager>();
+            loadManager = loadManagerGO.AddComponent<LoadManager>();
 
             yield return TestRoutineRunner.Instance.StartCoroutine(loadManager.LoadInGameData());
-                
-
-            Debug.Log(loadManager.allBuildingData.Count);
 
             Assert.GreaterOrEqual(loadManager.allBuildingData.Count, 1);
             Assert.GreaterOrEqual(loadManager.allEnemyData.Count, 1);
@@ -32,17 +31,51 @@ namespace Tests
 
         }
 
-        public IEnumerator ResourceDataValidationTest()
+
+
+        [UnityTest]
+        public IEnumerator ResourceRecipeContainCraftResultData()
         {
 
+
+            bool isContainResult = true;
+            foreach (KeyValuePair<string, Resource> keyValuePair in loadManager.allResourceData)
+            {
+                Resource resource = keyValuePair.Value;
+
+                if (resource.IsRecipe())
+                {
+                    var result = loadManager.allResourceData.SingleOrDefault(r => r.Value.Name == (resource.Name.Replace("Recipe:", "")));
+
+                    if (result.Equals(default(KeyValuePair<string, Resource>)))
+                    {
+                        Debug.LogWarning($"Problems on {resource.Name} : {resource.Name.Replace("Recipe:", "")}");
+                        isContainResult = false;
+
+                    }
+                }
+
+
+            }
+
+            Assert.IsTrue(isContainResult);
             yield return null;
 
+           
         }
+        /*
+        [UnityTest]
+        public IEnumerator BuildingDataKeyNotDuplicate()
+        {
+            yield return null;
+            Debug.Log($"{loadManager.allBuildingData.Distinct().ToArray().Length} : {Enum.GetNames(typeof(Building.BuildingType)).Length}");
+            Assert.IsTrue(loadManager.allBuildingData.Distinct().ToArray().Length == Enum.GetNames(typeof(Building.BuildingType)).Length);
+            
 
-
+        }*/
 
     }
-
+    
     public class TestRoutineRunner : MonoBehaviour
     {
         // implementation of the singleton pattern
@@ -84,6 +117,7 @@ namespace Tests
             whenDone?.Invoke();
         }
     }
+
 
 
 }

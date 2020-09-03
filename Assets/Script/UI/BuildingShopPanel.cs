@@ -115,6 +115,7 @@ public class BuildingShopPanel : MonoBehaviour
 
         for (int i = 0; i < BuildManager.Instance.AllBuildings.Count; i++)
         {
+            Debug.Log($"{BuildManager.Instance.AllBuildings[i].Type} : {BuildManager.Instance.AllBuildings[i].CurrentActiveAmount} / {BuildManager.Instance.AllBuildings[i].maxActiveAmount}");
             if (BuildManager.Instance.AllBuildings[i].CurrentActiveAmount == BuildManager.Instance.AllBuildings[i].maxActiveAmount)
             {
                 Button button = GameObject.Find("ShopButton" + ((int)BuildManager.Instance.AllBuildings[i].Type).ToString()).GetComponent<Button>();

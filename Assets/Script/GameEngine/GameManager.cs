@@ -126,6 +126,7 @@ public class GameManager : SingletonComponent<GameManager>
     }
 
 
+
     public static string GetGameObjectPath(GameObject obj)
     {
         string path = "/" + obj.name;

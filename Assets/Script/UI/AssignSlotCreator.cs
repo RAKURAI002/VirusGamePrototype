@@ -63,7 +63,7 @@ public class AssignSlotCreator : MonoBehaviour
             float productionPoint = (float)(LoadManager.Instance.allBuildingData[Building.BuildingType.LaborCenter].production[builder.Level]["Production"]);
             if (builder.CharacterInBuilding != null)
             {
-                productionPoint += builder.CharacterInBuilding[teamNumber].Characters.Sum(c => ((c.Stats.strength * 0.2f / 8) + (c.Stats.speed * 0.2f / 8) + (c.Stats.crafting * 0.8f / 3)));
+                productionPoint += builder.CharacterInBuilding[teamNumber].Characters.Sum(c => ((c.Stats.strength * 0.2f / 8) + (c.Stats.speed * 0.2f / 8) + (c.Stats.craftsmanship * 0.8f / 3)));
            
             }
 
@@ -79,7 +79,7 @@ public class AssignSlotCreator : MonoBehaviour
             float productionPoint = (float)(LoadManager.Instance.allBuildingData[builder.Type].production[builder.Level]["Production"]);
             if (builder.CharacterInBuilding != null)
             {
-                productionPoint += builder.CharacterInBuilding[teamNumber].Characters.Sum(c => ((c.Stats.strength * 0.2f / 8) + (c.Stats.speed * 0.2f / 8) + (c.Stats.crafting * 0.8f / 3)));
+                productionPoint += builder.CharacterInBuilding[teamNumber].Characters.Sum(c => ((c.Stats.strength * 0.2f / 8) + (c.Stats.speed * 0.2f / 8) + (c.Stats.craftsmanship * 0.8f / 3)));
 
             }
 

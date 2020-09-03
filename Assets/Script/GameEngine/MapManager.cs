@@ -19,10 +19,7 @@ public class MapManager : SingletonComponent<MapManager>
         gridLayout = transform.parent.GetComponentInParent<GridLayout>();
         tilemap = gameObject.GetComponent<Tilemap>();
     }
-    protected override void OnInitialize()
-    {
 
-    }
     void OnEnable()
     {
         EventManager.Instance.OnPlayerLevelUp += OnPlayerLevelUp;
@@ -39,7 +36,12 @@ public class MapManager : SingletonComponent<MapManager>
 
     void Start()
     {
-        SetExpandedArea();
+        if(Instance.secondCalled)
+        {
+            SetExpandedArea();
+
+        }
+        
     }
 
     void Update()
@@ -76,6 +78,8 @@ public class MapManager : SingletonComponent<MapManager>
     public Tile defaultTileMap;
     Dictionary<int, List<Vector3Int[]>> constructableGridDictionary;
     List<Vector3Int[]> constructableGrid;
+
+    int BUILDING_POSITION_OFFSET = 1;
 
     bool buildPermission;
 
@@ -136,10 +140,16 @@ public class MapManager : SingletonComponent<MapManager>
                 StartCoroutine(DelaySetCanvasActive(false));
                 /// -------------------------------------------------------------------------------
 
+                int maxX = constructableGrid[i].Select(g1 => g1.x).Max();
+                int maxY = constructableGrid[i].Select(g2 => g2.y).Max();
+
+                Vector3Int currentCellPosition = constructableGrid[i].SingleOrDefault(g => g.x == maxX && g.y == maxY);
+                Vector2 adjustedPosition = gridLayout.CellToWorld(new Vector3Int(currentCellPosition.x + BUILDING_POSITION_OFFSET, currentCellPosition.y + BUILDING_POSITION_OFFSET, 0));
                 Action<int> callback = (teamNumber) =>
                 {
                     TeamSelectorCallback((Building.BuildingType)int.Parse(SelectedBuildingName),
-                    teamNumber, position, i);
+                    teamNumber, adjustedPosition, i);
+
                 };
 
                 Builder builder = new Builder((Building.BuildingType)int.Parse(SelectedBuildingName));
@@ -155,7 +165,8 @@ public class MapManager : SingletonComponent<MapManager>
     {
         for (int i = 0; i < constructableGrid.Count; i++)
         {
-            if (constructableGrid[i].Contains(gridLayout.WorldToCell(builder.Position)))
+            Vector3Int cell = gridLayout.WorldToCell(builder.Position);
+            if (constructableGrid[i].Contains(new Vector3Int(cell.x - BUILDING_POSITION_OFFSET, cell.y - BUILDING_POSITION_OFFSET, 0)))
             {
                 BuildManager.Instance.LoadBuilding(builder);
                 constructableGrid.RemoveAt(i);
@@ -225,10 +236,10 @@ public class MapManager : SingletonComponent<MapManager>
             return false;
         }
     }
+    
     void AddConstructableGrid()
     {
         constructableGridDictionary = new Dictionary<int, List<Vector3Int[]>>();
-        //  constructableGridDictionary.Add();
 
         constructableGrid = new List<Vector3Int[]>();
         for (int i = 0; i < 60; i++)
@@ -569,9 +580,9 @@ public class MapManager : SingletonComponent<MapManager>
             callback(0);
         }
     }
-    void TeamSelectorCallback(Building.BuildingType type, int teamNumber, Vector3Int position, int removingTileIndex)
+    void TeamSelectorCallback(Building.BuildingType type, int teamNumber, Vector2 position, int removingTileIndex)
     {
-        if (BuildManager.Instance.CreateNewBuilding(type, teamNumber, gridLayout.CellToWorld(position)))
+        if (BuildManager.Instance.CreateNewBuilding(type, teamNumber, position))
         {
             constructableGrid.RemoveAt(removingTileIndex);
         }

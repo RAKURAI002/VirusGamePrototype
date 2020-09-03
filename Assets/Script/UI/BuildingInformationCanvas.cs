@@ -114,7 +114,6 @@ public class BuildingInformationCanvas : MonoBehaviour
             Debug.Log($"No LaborCenter found. Using Default production point(5).");
             BuildManager.Instance.UpgradeBuilding(builder, 1);
             gameObject.GetComponent<ClosePanelHelper>().ForceClosePanel();
-           // gameObject.SetActive(false);
 
         }
     }
@@ -122,17 +121,21 @@ public class BuildingInformationCanvas : MonoBehaviour
     {
         BuildManager.Instance.UpgradeBuilding(builder, teamnumber);
         return;
+
     }
     void ShowAssignPanel()
     {
         GameObject assignPanel = transform.Find("AssignPanel").gameObject;
         assignPanel.SetActive(true);
         RefreshAssignUI();
+
     }
+
     void ShowCraftingPanelPanel()
     {
         GameObject craftingPanel = GameManager.FindInActiveObjectByName("CraftingPanel");
         craftingPanel.GetComponent<CraftingPanel>().ShowCraftingPanel(builder);
+
     }
 
     public void RefreshInformationCanvas()

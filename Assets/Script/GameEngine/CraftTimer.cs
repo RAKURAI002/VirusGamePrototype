@@ -82,7 +82,7 @@ public class CraftTimer : MonoBehaviour
 
         if (builder.CharacterInBuilding[activityInformation.teamNumber] != null)
         {
-            productionPointTemp += builder.CharacterInBuilding[activityInformation.teamNumber].Characters.Sum(c => ((c.Stats.strength * 0.2f / 8) + (c.Stats.speed * 0.2f / 8) + (c.Stats.crafting * 0.8f / 3)));
+            productionPointTemp += builder.CharacterInBuilding[activityInformation.teamNumber].Characters.Sum(c => ((c.Stats.strength * 0.2f / 8) + (c.Stats.speed * 0.2f / 8) + (c.Stats.craftsmanship * 0.8f / 3)));
         }
         productionPoint = productionPointTemp;
     }

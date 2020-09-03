@@ -15,7 +15,6 @@ public class QuestManager : SingletonComponent<QuestManager>
     {
         SceneManager.sceneLoaded += OnLevelFinishedLoading;
 
-
     }
 
     void OnDisable()
@@ -214,7 +213,7 @@ public class QuestManager : SingletonComponent<QuestManager>
         foreach (string resourceName in currentQuest.dropResourceName)
         {
             Character character = characters[UnityEngine.Random.Range(0, characters.Count - 1)];
-            int amount = character.Stats.observing; // ***************************
+            int amount = character.Stats.perception; // ***************************
             questLog.AppendLine($"{character.Name} found {LoadManager.Instance.allResourceData[resourceName].Name} : {amount} unit(s)");
             ItemManager.Instance.AddResource(resourceName, amount);
             itemList.Add(resourceName, amount);

@@ -28,7 +28,7 @@ public class Builder
     }
     public Builder(Building.BuildingType type, Vector3 pos, GameObject representGameObject)
     {
-        this.id = BuildManager.Instance.AllBuildings.Count;
+        this.id = GenerateID();
         this.type = type;
         this.position = pos;
         this.representGameObject = representGameObject;
@@ -40,7 +40,7 @@ public class Builder
     }
     public Builder(Building.BuildingType type, Vector3 pos, int level, GameObject representGameObject, Construction constructionStatus)
     {
-        this.id = BuildManager.Instance.AllBuildings.Count;
+        this.id = GenerateID();
         this.type = type;
         this.position = pos;
         this.representGameObject = representGameObject;
@@ -72,7 +72,17 @@ public class Builder
         set { teamLockState = value; }
 
     }
+    public int GenerateID()
+    {
+        if (BuildManager.Instance.AllBuildings.Count == 0)
+        {
+            return IDMask.BUILDING_ID_MASK + 1;
 
+        }
+
+        return (BuildManager.Instance.AllBuildings.Select(b => b.id).Max() + 1 );
+
+    }
     public List<CharacterWrapper> CharacterInBuilding
     {
         get

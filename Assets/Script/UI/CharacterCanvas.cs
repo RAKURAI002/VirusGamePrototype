@@ -62,11 +62,11 @@ public class CharacterCanvas : MonoBehaviour
         GameObject statusPanel = transform.Find("MainPanel/InformationPanel/StatusPanel/STATS").gameObject;
         statusPanel.transform.parent.Find("Name").GetComponent<Text>().text = "<color=green>Name</color> : " + character.Name;
         statusPanel.transform.parent.Find("Level").GetComponent<Text>().text = "<color=green>Level</color> : " + character.level;
-        statusPanel.transform.Find("Healthy").GetComponent<Text>().text = $"Healthy :\t{character.Stats.healthy} + <color=red>{character.equipments.Sum(e => e.Stats.healthy)}</color>";
-        statusPanel.transform.Find("Crafting").GetComponent<Text>().text = $"Crafting :\t{character.Stats.crafting} + <color=red>{character.equipments.Sum(e => e.Stats.crafting)}</color>";
+        statusPanel.transform.Find("Healthy").GetComponent<Text>().text = $"Healthy :\t{character.Stats.immunity} + <color=red>{character.equipments.Sum(e => e.Stats.immunity)}</color>";
+        statusPanel.transform.Find("Crafting").GetComponent<Text>().text = $"Crafting :\t{character.Stats.craftsmanship} + <color=red>{character.equipments.Sum(e => e.Stats.craftsmanship)}</color>";
         statusPanel.transform.Find("Intelligence").GetComponent<Text>().text = $"Intelligence :\t{character.Stats.intelligence} + <color=red>{character.equipments.Sum(e => e.Stats.intelligence)}</color>";
         statusPanel.transform.Find("Strength").GetComponent<Text>().text = $"Strength :\t{character.Stats.strength} + <color=red>{character.equipments.Sum(e => e.Stats.strength)}</color>";
-        statusPanel.transform.Find("Observing").GetComponent<Text>().text = $"Observing :\t{character.Stats.observing} + <color=red>{character.equipments.Sum(e => e.Stats.observing)}</color>";
+        statusPanel.transform.Find("Observing").GetComponent<Text>().text = $"Observing :\t{character.Stats.perception} + <color=red>{character.equipments.Sum(e => e.Stats.perception)}</color>";
         statusPanel.transform.Find("Luck").GetComponent<Text>().text = $"Luck :\t{character.Stats.luck} + <color=red>{character.equipments.Sum(e => e.Stats.luck)}</color>";
         statusPanel.transform.Find("Speed").GetComponent<Text>().text = $"Speed :\t{character.Stats.speed} + <color=red>{character.equipments.Sum(e => e.Stats.speed)}</color>";
 
