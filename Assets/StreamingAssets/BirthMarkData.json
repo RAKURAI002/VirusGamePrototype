@@ -1,0 +1,14 @@
+{
+    "datas": {
+        "keys": [
+            "{\"name\":\"StrengthbM\",\"tier\":1,\"spritePath\":\"\",\"effectValues\":[2,3,4,5],\"statToIncrease\":{\"speed\":0,\"craftsmanship\":0,\"intelligence\":0,\"strength\":3,\"perception\":0,\"luck\":0,\"immunity\":0},\"isAlliesAffected\":false}",
+            "{\"name\":\"IntBM\",\"tier\":1,\"spritePath\":\"\",\"effectValues\":[2,3,4,5],\"statToIncrease\":{\"speed\":0,\"craftsmanship\":0,\"intelligence\":3,\"strength\":0,\"perception\":0,\"luck\":0,\"immunity\":0},\"isAlliesAffected\":false}",
+            "{\"name\":\"SonOfFarmer\",\"tier\":1,\"spritePath\":\"\",\"effectValues\":[2,3,4,5],\"buildingType\":1}"
+        ],
+        "values": [
+            "IncreaseSTATSBirthMark",
+            "IncreaseSTATSBirthMark",
+            "ParticularEffectOnBuildingBirthMark"
+        ]
+    }
+}

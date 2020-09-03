@@ -28,6 +28,7 @@ public class LoadManager : SingletonComponent<LoadManager>
     [SerializeField] public List<Enemy> allEnemyData; /// ********************
     [SerializeField] public QuestDataDictionary allQuestData; /// ****************
     [SerializeField] public List<Character.CharacterData> allCharacterData;
+    [SerializeField] public List<BirthMarkData> allBirthMarkDatas;
 
     #region Unity Functions
     protected override void Awake()
@@ -236,6 +237,24 @@ public class LoadManager : SingletonComponent<LoadManager>
                 Debug.Log("Fetching Character Data completed.\n");
                 allCharacterData.AddRange(JsonHelper.FromJson<Character.CharacterData>(req.downloadHandler.text));
 
+            }
+        }));
+        Coroutine c7 = StartCoroutine(LoadManager.Instance.GetRequest("/BirthMarkData.json", (UnityWebRequest req) =>
+        {
+            if (req.isNetworkError || req.isHttpError)
+            {
+                Debug.Log($"{req.error}: {req.downloadHandler.text}");
+            }
+            else
+            {
+                allBirthMarkDatas = new List<BirthMarkData>();
+                Debug.Log("Fetching Character Data completed.\n");
+
+                BirthMarkSerializer birthMarkSerializer = new BirthMarkSerializer();
+
+                birthMarkSerializer = JsonUtility.FromJson<BirthMarkSerializer>(req.downloadHandler.text);
+
+                allBirthMarkDatas = birthMarkSerializer.birthMarkDatas;
             }
         }));
 

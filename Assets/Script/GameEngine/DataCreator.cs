@@ -7,9 +7,10 @@ public class DataCreator : MonoBehaviour
     void Start()
     {
         CreateBuildingJsonData();
-        // CreateEnemyData();
+        CreateEnemyData();
         CreateQuestJsonData();
         CreateResourceData();
+        CreateBirthMarkData();
     }
 
     List<string> GetSpritePath(string name)
@@ -32,16 +33,16 @@ public class DataCreator : MonoBehaviour
     void CreateEquipmentJsonData()
     {
         List<Equipment> equipment = new List<Equipment>();
-        equipment.Add(new Equipment(1, "Item1", Item.RarityTier.Uncommon, "Too mighty blade.", Equipment.EquipmentPosition.Hand, ("Sprites/Equipments/Item1"), new Character.AllStats { strength = 8, speed = -1} ));
-        equipment.Add(new Equipment(2, "Item2", Item.RarityTier.UltraRare, "Seems like a MONKEY's heart ?", Equipment.EquipmentPosition.Body, ("Sprites/Equipments/Item2"), new Character.AllStats { strength = 20, speed = 10 , immunity = 20}));
+        equipment.Add(new Equipment(1, "Item1", Item.RarityTier.Uncommon, "Too mighty blade.", Equipment.EquipmentPosition.Hand, ("Sprites/Equipments/Item1"), new Character.AllStats { strength = 8, speed = -1 }));
+        equipment.Add(new Equipment(2, "Item2", Item.RarityTier.UltraRare, "Seems like a MONKEY's heart ?", Equipment.EquipmentPosition.Body, ("Sprites/Equipments/Item2"), new Character.AllStats { strength = 20, speed = 10, immunity = 20 }));
         equipment.Add(new Equipment(3, "Item3", Item.RarityTier.Uncommon, "What is this ?", Equipment.EquipmentPosition.Face, ("Sprites/Equipments/Item3"), new Character.AllStats { strength = 1, perception = 3 }));
-        equipment.Add(new Equipment(4, "Item4", Item.RarityTier.Rare, "Hmmm . . .", Equipment.EquipmentPosition.Leg, ("Sprites/Equipments/Item4"), new Character.AllStats { speed = 4, intelligence =  4 }));
+        equipment.Add(new Equipment(4, "Item4", Item.RarityTier.Rare, "Hmmm . . .", Equipment.EquipmentPosition.Leg, ("Sprites/Equipments/Item4"), new Character.AllStats { speed = 4, intelligence = 4 }));
         equipment.Add(new Equipment(5, "Item5", Item.RarityTier.Rare, "Unleash your TRUE power.", Equipment.EquipmentPosition.Hand, ("Sprites/Equipments/Item5"), new Character.AllStats { strength = 3, intelligence = 3, luck = 3, perception = 3, immunity = 3, craftsmanship = 3, speed = 3 }));
-        equipment.Add(new Equipment(6, "Item6", Item.RarityTier.Uncommon, "An ancient Sorcerer's boots.", Equipment.EquipmentPosition.Foot, ("Sprites/Equipments/Item6"), new Character.AllStats { strength = 2, intelligence = 5}));
+        equipment.Add(new Equipment(6, "Item6", Item.RarityTier.Uncommon, "An ancient Sorcerer's boots.", Equipment.EquipmentPosition.Foot, ("Sprites/Equipments/Item6"), new Character.AllStats { strength = 2, intelligence = 5 }));
         equipment.Add(new Equipment(7, "Item7", Item.RarityTier.Rare, "That seems heavy.", Equipment.EquipmentPosition.Body, ("Sprites/Equipments/Item7"), new Character.AllStats { strength = 12, speed = -3 }));
         equipment.Add(new Equipment(8, "Item8", Item.RarityTier.Uncommon, "Can cut everything except trees.", Equipment.EquipmentPosition.Hand, ("Sprites/Equipments/Item8"), new Character.AllStats { strength = 6, speed = -1 }));
         equipment.Add(new Equipment(9, "Item9", Item.RarityTier.Uncommon, "Make you more tanky.", Equipment.EquipmentPosition.Hand, ("Sprites/Equipments/Item9"), new Character.AllStats { strength = 3 }));
-        equipment.Add(new Equipment(10, "Item10", Item.RarityTier.Rare, "Smell bloody . . .", Equipment.EquipmentPosition.Hand, ("Sprites/Equipments/Item10"), new Character.AllStats { luck = -1, strength = 6 , intelligence = 1}));
+        equipment.Add(new Equipment(10, "Item10", Item.RarityTier.Rare, "Smell bloody . . .", Equipment.EquipmentPosition.Hand, ("Sprites/Equipments/Item10"), new Character.AllStats { luck = -1, strength = 6, intelligence = 1 }));
         equipment.Add(new Equipment(11, "Item11", Item.RarityTier.SuperRare, "Better than your Nike :)", Equipment.EquipmentPosition.Foot, ("Sprites/Equipments/Item11"), new Character.AllStats { speed = 8 }));
         equipment.Add(new Equipment(12, "Item12", Item.RarityTier.Uncommon, "How this could wear as pants ?", Equipment.EquipmentPosition.Leg, ("Sprites/Equipments/Item12"), new Character.AllStats { }));
         equipment.Add(new Equipment(13, "Item13", Item.RarityTier.Uncommon, "A certain shield.", Equipment.EquipmentPosition.Hand, ("Sprites/Equipments/Item13"), new Character.AllStats { strength = 4, speed = -1 }));
@@ -86,7 +87,7 @@ public class DataCreator : MonoBehaviour
         allProduction.Add(new DictionaryStringToInt() { { "Food", 6 }, { "Water", 7 }, { "Production", 30 } });
 
         List<DictionaryStringToInt> allConsuming = new List<DictionaryStringToInt>();
-       
+
 
         List<int> upgradePoint = new List<int>(){200,
                                             300,
@@ -130,12 +131,12 @@ public class DataCreator : MonoBehaviour
 
         List<DictionaryStringToInt> FarmResourceProduction = new List<DictionaryStringToInt>();
         FarmResourceProduction.Add(new DictionaryStringToInt());
-        FarmResourceProduction.Add(new DictionaryStringToInt() { { "Food", 1 }});
-        FarmResourceProduction.Add(new DictionaryStringToInt() { { "Food", 2 }});
-        FarmResourceProduction.Add(new DictionaryStringToInt() { { "Food", 3 }});
-        FarmResourceProduction.Add(new DictionaryStringToInt() { { "Food", 4 }});
-        FarmResourceProduction.Add(new DictionaryStringToInt() { { "Food", 5 }});
-        FarmResourceProduction.Add(new DictionaryStringToInt() { { "Food", 6 }});
+        FarmResourceProduction.Add(new DictionaryStringToInt() { { "Food", 1 } });
+        FarmResourceProduction.Add(new DictionaryStringToInt() { { "Food", 2 } });
+        FarmResourceProduction.Add(new DictionaryStringToInt() { { "Food", 3 } });
+        FarmResourceProduction.Add(new DictionaryStringToInt() { { "Food", 4 } });
+        FarmResourceProduction.Add(new DictionaryStringToInt() { { "Food", 5 } });
+        FarmResourceProduction.Add(new DictionaryStringToInt() { { "Food", 6 } });
         FarmResourceProduction.Add(new DictionaryStringToInt() { { "Food", 7 }, { "Production", 30 } });
         FarmResourceProduction.Add(new DictionaryStringToInt() { { "Food", 8 }, { "Production", 30 } });
         FarmResourceProduction.Add(new DictionaryStringToInt() { { "Food", 9 }, { "Production", 30 } });
@@ -196,7 +197,7 @@ public class DataCreator : MonoBehaviour
         q[1].questID = 2;
         q[1].questName = "Area1-2Normal";
         q[1].requireStats = new Character.AllStats { immunity = 4, strength = 5 };
-        q[1].dropResourceName = new List<string>() { "Wood"};
+        q[1].dropResourceName = new List<string>() { "Wood" };
         q[1].enemiesIDList = new List<int>() { 1 };
         q[1].duration = 60;
 
@@ -225,7 +226,7 @@ public class DataCreator : MonoBehaviour
     {
         List<Resource> r = new List<Resource>();
 
-        
+
         r.Add(new Resource(r.Count, "Wood", Item.RarityTier.Common, "Just a certain Wood.", Resource.ResourceType.Material, "Sprites/Resource/Wood"));
         r.Add(new Resource(r.Count, "Stone", Item.RarityTier.Common, "Just a certain Stone.", Resource.ResourceType.Material, "Sprites/Resource/Stone"));
         r.Add(new Resource(r.Count, "Water", Item.RarityTier.Common, "No water No life.", Resource.ResourceType.Material, "Sprites/Resource/Water"));
@@ -238,11 +239,11 @@ public class DataCreator : MonoBehaviour
         r.Add(new Resource(r.Count, "Wheat", Item.RarityTier.Common, "CoCoCrunch !?", Resource.ResourceType.Ingredient, "Sprites/Resource/Wheat"));
         r.Add(new Resource(r.Count, "Bread", Item.RarityTier.Common, "Low-Grade Bread.", Resource.ResourceType.Ingredient, "Sprites/Resource/Bread"));
         r.Add(new Resource(r.Count, "Meat", Item.RarityTier.Common, "YumYum . . .", Resource.ResourceType.Ingredient, "Sprites/Resource/Meat"));
-        r.Add(new Resource(r.Count, "Burger", Item.RarityTier.Common, "American SPIRIT.", Resource.ResourceType.Consumable, "Sprites/Resource/Burger", 
-            new Resource.Effect() { name = "Burger Power", spritePath = "Sprites/Resource/Burger", stats = new Character.AllStats() { strength = 20 }, duration = 300})) ;
+        r.Add(new Resource(r.Count, "Burger", Item.RarityTier.Common, "American SPIRIT.", Resource.ResourceType.Consumable, "Sprites/Resource/Burger",
+            new Resource.Effect() { name = "Burger Power", spritePath = "Sprites/Resource/Burger", stats = new Character.AllStats() { strength = 20 }, duration = 300 }));
         r.Add(new Resource(r.Count, "Golden Burger", Item.RarityTier.Uncommon, "GOLDEN American SPIRIT.", Resource.ResourceType.Consumable, "Sprites/Resource/Golden Burger",
-            new Resource.Effect() { name = "Golden Burger Power", spritePath = "Sprites/Resource/GoldenBurger", stats = new Character.AllStats() { strength = 50, speed = 50, perception = 50 }, duration = 3600 }));      
-        
+            new Resource.Effect() { name = "Golden Burger Power", spritePath = "Sprites/Resource/GoldenBurger", stats = new Character.AllStats() { strength = 50, speed = 50, perception = 50 }, duration = 3600 }));
+
         r.Add(new Resource(r.Count, "Common Face Mask", Item.RarityTier.Common, "COUGH COUGH . . .", Resource.ResourceType.Gadget, "Sprites/Resource/Common Face Mask"));
         r.Add(new Resource(r.Count, "Ultra Instinct Face Mask", Item.RarityTier.UltraRare, "COUGH!! COUGH!! It's over 9000 !!!?? ", Resource.ResourceType.Gadget, "Sprites/Resource/Ultra Instinct Face Mask"));
         r.Add(new Resource(r.Count, "Medicine(maybe)", Item.RarityTier.Uncommon, "Everyone love this.", Resource.ResourceType.Medicine, "Sprites/Resource/Medicine(maybe)"));
@@ -254,13 +255,13 @@ public class DataCreator : MonoBehaviour
 
         r.Add(new Resource(r.Count, "Production", Item.RarityTier.Unknown, "Specific Building Production .", Resource.ResourceType.Special, "Sprites/Resource/Production"));
         r.Add(new Resource(r.Count, "Gold", Item.RarityTier.Unknown, "Specific Building Production .", Resource.ResourceType.Currency, "Sprites/Resource/Gold"));
-        r.Add(new Resource(r.Count, "Diamond", Item.RarityTier.Unknown, "Specific Building Production .",  Resource.ResourceType.Currency, "Sprites/Resource/Diamond"));
+        r.Add(new Resource(r.Count, "Diamond", Item.RarityTier.Unknown, "Specific Building Production .", Resource.ResourceType.Currency, "Sprites/Resource/Diamond"));
 
-        r.Add(new Resource(r.Count, "Recipe:Bread", Item.RarityTier.Common, "Recipe.", Resource.ResourceType.ConsumableRecipe, "Sprites/Resource/Recipe", 
+        r.Add(new Resource(r.Count, "Recipe:Bread", Item.RarityTier.Common, "Recipe.", Resource.ResourceType.ConsumableRecipe, "Sprites/Resource/Recipe",
             new Item.CraftingData(new DictionaryStringToInt() { { "Wheat", 3 } }, 200)));
 
         r.Add(new Resource(r.Count, "Recipe:Burger", Item.RarityTier.Common, "Recipe.", Resource.ResourceType.ConsumableRecipe, "Sprites/Resource/Recipe",
-            new Item.CraftingData(new DictionaryStringToInt() { { "Bread", 2 }, { "Meat", 1} }, 400)));
+            new Item.CraftingData(new DictionaryStringToInt() { { "Bread", 2 }, { "Meat", 1 } }, 400)));
 
         r.Add(new Resource(r.Count, "Recipe:Golden Burger", Item.RarityTier.Uncommon, "Recipe.", Resource.ResourceType.ConsumableRecipe, "Sprites/Resource/Recipe",
             new Item.CraftingData(new DictionaryStringToInt() { { "Burger", 1 }, { "Gold", 9 } }, 1600)));
@@ -293,7 +294,7 @@ public class DataCreator : MonoBehaviour
     {
         List<Enemy> e = new List<Enemy>();
 
-        e.Add(new Enemy(1, "Wolf Alpha", new Enemy.AllStats { attack = 5, defense = 3, hitPoint = 8, speed = 7, intelligence = 3}));
+        e.Add(new Enemy(1, "Wolf Alpha", new Enemy.AllStats { attack = 5, defense = 3, hitPoint = 8, speed = 7, intelligence = 3 }));
         e.Add(new Enemy(2, "Wolf Beta", new Enemy.AllStats { attack = 2, defense = 7, hitPoint = 13, speed = 2, intelligence = 6 }));
         e.Add(new Enemy(3, "The Guardian", new Enemy.AllStats { attack = 0, defense = 20, hitPoint = 30, speed = 0, intelligence = 6 }));
         e.Add(new Enemy(4, "Something that already died", new Enemy.AllStats { attack = 1000, defense = 0, hitPoint = -1, speed = 0, intelligence = 6 }));
@@ -302,5 +303,113 @@ public class DataCreator : MonoBehaviour
         string enemyDatas = JsonHelper.ToJson(e.ToArray(), true);// Newtonsoft.Json.JsonConvert.SerializeObject(playerData, Newtonsoft.Json.Formatting.Indented); //JsonUtility.ToJson(playerData, true); 
         Debug.Log("Saving Data to JSON : " + enemyDatas);
         System.IO.File.WriteAllText(Application.streamingAssetsPath + "/EnemyData.json", enemyDatas);
+    }
+
+    void CreateBirthMarkData()
+    {
+        List<BirthMarkData> birthMarkDatas = new List<BirthMarkData>();
+        birthMarkDatas.Add(new IncreaseSTATSBirthMark()
+        {
+            name = "StrengthBM",
+            effectValues = new List<float>() { 5, 7.5f, 10, 15, 20 },
+            isAlliesAffected = false,
+            spritePath = "Sprites/UI/RedCircle",
+            statToIncrease = typeof(Character.AllStats).GetField("strength"),
+            tier = 1
+        });
+        birthMarkDatas.Add(new IncreaseSTATSBirthMark()
+        {
+            name = "IntelligenceBM",
+            effectValues = new List<float>() { 5, 7.5f, 10, 15, 20 },
+            isAlliesAffected = false,
+            spritePath = "Sprites/UI/RedCircle",
+            statToIncrease = typeof(Character.AllStats).GetField("intelligence"),
+            tier = 1
+        });
+        birthMarkDatas.Add(new IncreaseSTATSBirthMark()
+        {
+            name = "CraftsmanshipBM",
+            effectValues = new List<float>() { 5, 7.5f, 10, 15, 20 },
+            isAlliesAffected = false,
+            spritePath = "Sprites/UI/RedCircle",
+            statToIncrease = typeof(Character.AllStats).GetField("craftsmanship"),
+            tier = 1
+        });
+        birthMarkDatas.Add(new IncreaseSTATSBirthMark()
+        {
+            name = "LuckBM",
+            effectValues = new List<float>() { 5, 7.5f, 10, 15, 20 },
+            isAlliesAffected = false,
+            spritePath = "Sprites/UI/RedCircle",
+            statToIncrease = typeof(Character.AllStats).GetField("luck"),
+            tier = 1
+        });
+        birthMarkDatas.Add(new IncreaseSTATSBirthMark()
+        {
+            name = "ImmunityBM",
+            effectValues = new List<float>() { 5, 7.5f, 10, 15, 20 },
+            isAlliesAffected = false,
+            spritePath = "Sprites/UI/RedCircle",
+            statToIncrease = typeof(Character.AllStats).GetField("immunity"),
+            tier = 1
+        });
+        birthMarkDatas.Add(new IncreaseSTATSBirthMark()
+        {
+            name = "PerceptionBM",
+            effectValues = new List<float>() { 5, 7.5f, 10, 15, 20 },
+            isAlliesAffected = false,
+            spritePath = "Sprites/UI/RedCircle",
+            statToIncrease = typeof(Character.AllStats).GetField("perception"),
+            tier = 1
+        });
+        birthMarkDatas.Add(new IncreaseSTATSBirthMark()
+        {
+            name = "SpeedBM",
+            effectValues = new List<float>() { 5, 7.5f, 10, 15, 20 },
+            isAlliesAffected = false,
+            spritePath = "Sprites/UI/RedCircle",
+            statToIncrease = typeof(Character.AllStats).GetField("speed"),
+            tier = 1
+        });
+
+        birthMarkDatas.Add(new ParticularEffectOnBuildingBirthMark()
+        {
+            name = "SonOfFarmer",
+            effectValues = new List<float>() { 10, 15, 20, 25, 30 },
+            spritePath = "Sprites/UI/RedCircle",
+            tier = 1,
+            buildingType = Building.BuildingType.Farm
+        });
+        birthMarkDatas.Add(new ParticularEffectOnBuildingBirthMark()
+        {
+            name = "SonOfWaterFilter",
+            effectValues = new List<float>() { 10, 15, 20, 25, 30 },
+            spritePath = "Sprites/UI/RedCircle",
+            tier = 1,
+            buildingType = Building.BuildingType.WaterTreatmentCenter
+        });
+        birthMarkDatas.Add(new ParticularEffectOnBuildingBirthMark()
+        {
+            name = "SonOfGoldDigger",
+            effectValues = new List<float>() { 10, 15, 20, 25, 30 },
+            spritePath = "Sprites/UI/RedCircle",
+            tier = 1,
+            buildingType = Building.BuildingType.Mine
+        });
+        birthMarkDatas.Add(new ParticularEffectOnBuildingBirthMark()
+        {
+            name = "SonOfGoldDigger",
+            effectValues = new List<float>() { 10, 15, 20, 25, 30 },
+            spritePath = "Sprites/UI/RedCircle",
+            tier = 2,
+            buildingType = Building.BuildingType.Mine
+        });
+
+        BirthMarkSerializer birthMarkSerializer = new BirthMarkSerializer();
+        birthMarkSerializer.birthMarkDatas = birthMarkDatas;
+        string birthMarkDatass = JsonUtility.ToJson(birthMarkSerializer, true);
+        Debug.Log("Saving BirthMarkDatas Data to JSON : " + birthMarkDatass);
+        System.IO.File.WriteAllText(Application.streamingAssetsPath + "/BirthMarkData.json", birthMarkDatass);
+
     }
 }

@@ -23,8 +23,9 @@ public class BuildTimer : MonoBehaviour
 
     private void Awake()
     {
+        Debug.Log($"{1}");
         laborCenter = BuildManager.Instance.AllBuildings.SingleOrDefault(b => b.Type == Building.BuildingType.LaborCenter);
-
+        thisBuilding = BuildManager.Instance.AllBuildings.Single(builder => builder.representGameObject.name == this.gameObject.name);
     }
     private void OnEnable()
     {
@@ -68,7 +69,7 @@ public class BuildTimer : MonoBehaviour
     {
 
 
-        thisBuilding = BuildManager.Instance.AllBuildings.Single(builder => builder.representGameObject.name == this.gameObject.name);
+        
         Debug.Log(thisBuilding.Type.ToString());
         thisBuilding.constructionStatus.isConstructing = true;
 
@@ -82,7 +83,6 @@ public class BuildTimer : MonoBehaviour
         GetProductionPoint();
         if (thisBuilding.constructionStatus.finishPoint == 0)
         {
-            thisBuilding.constructionStatus.currentPoint = 0;
             thisBuilding.constructionStatus.finishPoint = thisBuilding.constructionStatus.constructPointRequired;
         }
         else
@@ -110,7 +110,12 @@ public class BuildTimer : MonoBehaviour
         }
         return false;
     }
-
+    public void ForceFinish()
+    {
+        Debug.Log($"{2}");   
+       // thisBuilding.constructionStatus.currentPoint = thisBuilding.constructionStatus.finishPoint;
+        return;
+    }
     void IncreaseCurrentPoint()
     {
         {

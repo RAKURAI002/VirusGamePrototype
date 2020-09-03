@@ -160,7 +160,35 @@ public class BuildManager : SingletonComponent<BuildManager>
         //    Debug.Log(builder.ToString());
         //}
     }
+    public void ForceCreateBuilding(Building.BuildingType type, int cellIndex)
+    {
+        MapManager mapManager = MapManager.Instance;
+        var position = mapManager.CalculateBuildPosition(cellIndex);
 
+        GameObject builderGO = Instantiate(Resources.Load<GameObject>("Prefabs/BuildingPrefab"), position, Quaternion.identity);
+        builderGO.SetActive(false);
+        builderGO.transform.SetParent(this.gameObject.transform.Find("AllBuildings"));
+
+        Builder builder = new Builder(type, position, builderGO);
+        Building buildData = LoadManager.Instance.allBuildingData[builder.Type];
+
+        builder.InitializeData();
+        builder.constructionStatus = new Builder.Construction { teamNumber = 0, currentPoint = buildData.upgradePoint[builder.Level], constructPointRequired = buildData.upgradePoint[builder.Level], isConstructing = true };
+        AddBuildingsToList(builder);
+
+        builderGO.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(buildData.spritePath[builder.Level]);
+        builderGO.name = builder.ID.ToString();
+        builderGO.AddComponent<BuildingBehavior>().SetBuilder(builder);
+        builder.representGameObject = builderGO;
+
+        BuildTimer buildTimer = builder.representGameObject.AddComponent<BuildTimer>();
+        buildTimer.ForceFinish();
+        builderGO.SetActive(true);
+
+
+        mapManager.constructableGrid.RemoveAt(cellIndex);
+
+    }
     public bool UpgradeBuilding(Builder builder, int teamNumber)
     {
         if (builder.constructionStatus.isConstructing == true)

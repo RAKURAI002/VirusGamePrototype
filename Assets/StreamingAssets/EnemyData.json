@@ -35,7 +35,7 @@
         },
         {
             "id": 4,
-            "name": "Someone that already died",
+            "name": "Something that already died",
             "stats": {
                 "attack": 1000,
                 "defense": 0,
@@ -46,7 +46,7 @@
         },
         {
             "id": 5,
-            "name": "Hatsune Miku",
+            "name": "Hatsune Miku (GOD form)",
             "stats": {
                 "attack": 99,
                 "defense": 99,

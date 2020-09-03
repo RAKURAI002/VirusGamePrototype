@@ -39,7 +39,9 @@ public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IS
 [System.Serializable] 
 public class DictionaryIntToInt : SerializableDictionary<int, int> 
 { }
-
+[System.Serializable]
+public class DictionaryStringToString : SerializableDictionary<string, string>
+{ }
 [System.Serializable]
 public class DictionaryStringToInt : SerializableDictionary<string, int>
 { }

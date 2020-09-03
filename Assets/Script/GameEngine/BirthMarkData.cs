@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
+using System.Reflection;
 /// <summary>
 /// Implement BirthMark Effects using Factory Method Pattern.
 /// </summary>
@@ -9,16 +10,50 @@ public enum BirthMarkType
 {
     IncreaseSTATSBirthMark
 
+        
+}
+[System.Serializable]
+public class BirthMarkSerializer : ISerializationCallbackReceiver
+{
+    [NonSerialized]
+    public List<BirthMarkData> birthMarkDatas = new List<BirthMarkData>();
 
+    [SerializeField]
+    DictionaryStringToString datas;
+
+    public void OnAfterDeserialize()
+    {
+        foreach(var data in datas)
+        {
+
+            Type type = Type.GetType(data.Value);
+            birthMarkDatas.Add((BirthMarkData)JsonUtility.FromJson(data.Key, type));
+        }
+    }
+
+    public void OnBeforeSerialize()
+    {
+        datas = new DictionaryStringToString();
+
+        foreach (BirthMarkData birthMarkData in birthMarkDatas)
+        {
+            datas.Add(JsonUtility.ToJson(birthMarkData), birthMarkData.GetType().ToString());
+            Debug.Log($"{datas.Keys}");
+
+        }
+
+    }
 }
 
-public abstract class BirthMarkData
+
+[System.Serializable]
+public abstract class BirthMarkData 
 {
-    [SerializeField] public string effectName;
+    [SerializeField] public string name;
     [SerializeField] public int tier;
     [SerializeField] public string spritePath;
 
-    [SerializeField] public List<int> effectValues;
+    [SerializeField] public List<float> effectValues;
 
     public abstract BirthMarkData CreateBirthMarkObject<T>();
 
@@ -29,7 +64,7 @@ public abstract class BirthMarkData
 public class IncreaseSTATSBirthMark : BirthMarkData
 {
     
-    [SerializeField] public Character.AllStats statToIncrease;
+    [SerializeField] public FieldInfo statToIncrease;
 
     [SerializeField] public bool isAlliesAffected;
 
@@ -57,5 +92,15 @@ public class ParticularEffectOnBuildingBirthMark : BirthMarkData
     }
 
 }
+[System.Serializable]
+public class PBirthMark : BirthMarkData
+{
+    [SerializeField] public Building.BuildingType buildingType;
 
+    public override BirthMarkData CreateBirthMarkObject<T>()
+    {
+        return new ParticularEffectOnBuildingBirthMark();
+    }
+
+}
 

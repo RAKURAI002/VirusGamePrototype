@@ -72,12 +72,12 @@ public class MapManager : SingletonComponent<MapManager>
     #endregion
 
     Tilemap tilemap;
-    GridLayout gridLayout;
+    public GridLayout gridLayout;
 
     public Tile selectedTile;
     public Tile defaultTileMap;
     Dictionary<int, List<Vector3Int[]>> constructableGridDictionary;
-    List<Vector3Int[]> constructableGrid;
+    public List<Vector3Int[]> constructableGrid;
 
     int BUILDING_POSITION_OFFSET = 1;
 
@@ -139,13 +139,8 @@ public class MapManager : SingletonComponent<MapManager>
                 MainCanvas.canvasActive = true;
                 StartCoroutine(DelaySetCanvasActive(false));
                 /// -------------------------------------------------------------------------------
-
-                int maxX = constructableGrid[i].Select(g1 => g1.x).Max();
-                int maxY = constructableGrid[i].Select(g2 => g2.y).Max();
-
-                Vector3Int currentCellPosition = constructableGrid[i].SingleOrDefault(g => g.x == maxX && g.y == maxY);
-                Vector2 adjustedPosition = gridLayout.CellToWorld(new Vector3Int(currentCellPosition.x + BUILDING_POSITION_OFFSET, currentCellPosition.y + BUILDING_POSITION_OFFSET, 0));
-                Action<int> callback = (teamNumber) =>
+                Vector2 adjustedPosition = CalculateBuildPosition(i);
+                 Action<int> callback = (teamNumber) =>
                 {
                     TeamSelectorCallback((Building.BuildingType)int.Parse(SelectedBuildingName),
                     teamNumber, adjustedPosition, i);
@@ -159,7 +154,15 @@ public class MapManager : SingletonComponent<MapManager>
             }
         }
     }
+    public Vector2 CalculateBuildPosition(int cellIndex)
+    {
+        int maxX = constructableGrid[cellIndex].Select(g1 => g1.x).Max();
+        int maxY = constructableGrid[cellIndex].Select(g2 => g2.y).Max();
 
+        Vector3Int currentCellPosition = constructableGrid[cellIndex].SingleOrDefault(g => g.x == maxX && g.y == maxY);
+        return gridLayout.CellToWorld(new Vector3Int(currentCellPosition.x + BUILDING_POSITION_OFFSET, currentCellPosition.y + BUILDING_POSITION_OFFSET, 0));
+
+    }
 
     public void LoadTile(Builder builder)
     {
@@ -236,7 +239,7 @@ public class MapManager : SingletonComponent<MapManager>
             return false;
         }
     }
-    
+
     void AddConstructableGrid()
     {
         constructableGridDictionary = new Dictionary<int, List<Vector3Int[]>>();
@@ -595,9 +598,11 @@ public class MapManager : SingletonComponent<MapManager>
     public void ReclaimConstructableGrid(Builder builder)
     {
 
-        Vector3Int[] position = new Vector3Int[1];
-        position[0] = gridLayout.WorldToCell(builder.Position);
-        MapManager.Instance.constructableGrid.Add(position);
+        Vector3Int[] allPosition = new Vector3Int[1];
+        Vector3Int reclaimCellPosition = gridLayout.WorldToCell(builder.Position);
+        allPosition[0] = new Vector3Int(reclaimCellPosition.x - BUILDING_POSITION_OFFSET, reclaimCellPosition.y - BUILDING_POSITION_OFFSET, 0);
+
+        MapManager.Instance.constructableGrid.Add(allPosition);
     }
     public void LoadBuildingToScene()
     {
