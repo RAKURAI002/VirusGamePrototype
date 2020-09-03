@@ -74,9 +74,9 @@ public class DataCreator : MonoBehaviour
 
         List<DictionaryStringToInt> allProduction = new List<DictionaryStringToInt>();
         allProduction.Add(new DictionaryStringToInt());
-        allProduction.Add(new DictionaryStringToInt() { { "Food", 2 }});
-        allProduction.Add(new DictionaryStringToInt() { { "Food", 3 }});
-        allProduction.Add(new DictionaryStringToInt() { { "Food", 3 }});
+        allProduction.Add(new DictionaryStringToInt() { { "Food", 2 }, { "Production", 30 } });
+        allProduction.Add(new DictionaryStringToInt() { { "Food", 3 }, { "Production", 30 } });
+        allProduction.Add(new DictionaryStringToInt() { { "Food", 3 }, { "Production", 30 } });
         allProduction.Add(new DictionaryStringToInt() { { "Food", 4 }, { "Water", 4 }, { "Production", 30 } });
         allProduction.Add(new DictionaryStringToInt() { { "Food", 4 }, { "Water", 5 }, { "Production", 30 } });
         allProduction.Add(new DictionaryStringToInt() { { "Food", 5 }, { "Water", 5 }, { "Production", 30 } });
@@ -241,7 +241,7 @@ public class DataCreator : MonoBehaviour
         r.Add(new Resource(r.Count, "Burger", Item.RarityTier.Common, "American SPIRIT.", Resource.ResourceType.Consumable, "Sprites/Resource/Burger", 
             new Resource.Effect() { name = "Burger Power", spritePath = "Sprites/Resource/Burger", stats = new Character.AllStats() { strength = 20 }, duration = 300})) ;
         r.Add(new Resource(r.Count, "Golden Burger", Item.RarityTier.Uncommon, "GOLDEN American SPIRIT.", Resource.ResourceType.Consumable, "Sprites/Resource/Golden Burger",
-            new Resource.Effect() { name = "Golden Burger Power", spritePath = "Sprites/Resource/GoldenBurger", stats = new Character.AllStats() { strength = 50, speed = 50, attack = 50, defense = 50, perception = 50 }, duration = 3600 }));      
+            new Resource.Effect() { name = "Golden Burger Power", spritePath = "Sprites/Resource/GoldenBurger", stats = new Character.AllStats() { strength = 50, speed = 50, perception = 50 }, duration = 3600 }));      
         
         r.Add(new Resource(r.Count, "Common Face Mask", Item.RarityTier.Common, "COUGH COUGH . . .", Resource.ResourceType.Gadget, "Sprites/Resource/Common Face Mask"));
         r.Add(new Resource(r.Count, "Ultra Instinct Face Mask", Item.RarityTier.UltraRare, "COUGH!! COUGH!! It's over 9000 !!!?? ", Resource.ResourceType.Gadget, "Sprites/Resource/Ultra Instinct Face Mask"));

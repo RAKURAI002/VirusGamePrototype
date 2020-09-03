@@ -5,15 +5,12 @@
             "questName": "Area1-1Normal",
             "requireStats": {
                 "speed": 0,
-                "crafting": 0,
+                "craftsmanship": 0,
                 "intelligence": 0,
                 "strength": 5,
-                "observing": 0,
+                "perception": 0,
                 "luck": 0,
-                "healthy": 4,
-                "hitPoint": 0,
-                "attack": 0,
-                "defense": 0
+                "immunity": 4
             },
             "dropResourceName": [
                 "Wood"
@@ -28,15 +25,12 @@
             "questName": "Area1-2Normal",
             "requireStats": {
                 "speed": 0,
-                "crafting": 0,
+                "craftsmanship": 0,
                 "intelligence": 0,
                 "strength": 5,
-                "observing": 0,
+                "perception": 0,
                 "luck": 0,
-                "healthy": 4,
-                "hitPoint": 0,
-                "attack": 0,
-                "defense": 0
+                "immunity": 4
             },
             "dropResourceName": [
                 "Wood"
@@ -51,15 +45,12 @@
             "questName": "Area1-3Normal",
             "requireStats": {
                 "speed": 0,
-                "crafting": 0,
+                "craftsmanship": 0,
                 "intelligence": 0,
                 "strength": 5,
-                "observing": 0,
+                "perception": 0,
                 "luck": 0,
-                "healthy": 4,
-                "hitPoint": 0,
-                "attack": 0,
-                "defense": 0
+                "immunity": 4
             },
             "dropResourceName": [
                 "Wood"
@@ -75,15 +66,12 @@
             "questName": "Area1-1Hard",
             "requireStats": {
                 "speed": 0,
-                "crafting": 0,
+                "craftsmanship": 0,
                 "intelligence": 0,
                 "strength": 5,
-                "observing": 0,
+                "perception": 0,
                 "luck": 0,
-                "healthy": 4,
-                "hitPoint": 0,
-                "attack": 0,
-                "defense": 0
+                "immunity": 4
             },
             "dropResourceName": [
                 "Wood"

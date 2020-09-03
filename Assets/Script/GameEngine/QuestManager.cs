@@ -182,7 +182,7 @@ public class QuestManager : SingletonComponent<QuestManager>
     bool CalculateBattleDamage(Character character, Enemy enemy, int turn, StringBuilder questLog)
     {
         int n = 3;
-       
+       /*
         if(turn % 2 == 0)
         {
             int damage = (int)Math.Floor(n * Math.Exp(0.004f * (enemy.Stats.attack - character.Stats.defense)) * UnityEngine.Random.Range(0.8f, 1.2f));
@@ -197,7 +197,7 @@ public class QuestManager : SingletonComponent<QuestManager>
             questLog.AppendLine($"Turn {turn}({character.Name}) : Dealing {damage} damage to {enemy.Name}. {enemy.Name} has {enemy.CurrentHp} Hp left.");
 
         }
-
+       */
         if (character.currentHp >= 0 && enemy.CurrentHp >= 0)
             return true;
         else

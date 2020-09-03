@@ -28,10 +28,6 @@ public class Character
         public int luck;
         public int immunity;
 
-        public int hitPoint;
-        public int attack;
-        public int defense;
-
     }
 
     public enum GenderType
@@ -91,9 +87,16 @@ public class Character
 
         stats = new AllStats();
 
-        for (int i = 0; i < 50; i++)
+        FieldInfo[] fInfos = stats.GetType().GetFields();
+        for (int i = 0; i < fInfos.Length; i++)
         {
-            FieldInfo fInfo = stats.GetType().GetFields()[UnityEngine.Random.Range(0, 7)];
+            FieldInfo fInfo = fInfos[i];
+            fInfo.SetValue(this.stats, (int)fInfo.GetValue(this.stats) + 1);
+
+        }
+        for (int i = 0; i < (50 - fInfos.Length); i++)
+        {
+            FieldInfo fInfo = stats.GetType().GetFields()[UnityEngine.Random.Range(0, fInfos.Length)];
             fInfo.SetValue(this.stats, (int)fInfo.GetValue(this.stats) + 1);
 
         }
@@ -107,7 +110,6 @@ public class Character
         healthStatus = HealthStatus.Healthly;
         spritePath = "Sprites/Character/Character" + UnityEngine.Random.Range(1, 10).ToString();
         effects = new List<Resource.Effect>();
-        currentHp = stats.hitPoint;
 
     }
     public int GenerateID()
@@ -154,7 +156,6 @@ public class Character
         healthStatus = HealthStatus.Healthly;
         this.spritePath = spritePath;
         effects = new List<Resource.Effect>();
-        currentHp = stats.hitPoint;
 
     }
 
@@ -209,10 +210,6 @@ public class Character
         stats.speed += _stats.speed;
         stats.strength += _stats.strength;
 
-        stats.attack += _stats.attack;
-        stats.defense += _stats.defense;
-        stats.hitPoint += _stats.hitPoint;
-
     }
 
     public void DecreaseStats(AllStats _stats)
@@ -224,10 +221,6 @@ public class Character
         stats.perception -= _stats.perception;
         stats.speed -= _stats.speed;
         stats.strength -= _stats.strength;
-
-        stats.attack -= _stats.attack;
-        stats.defense -= _stats.defense;
-        stats.hitPoint -= _stats.hitPoint;
 
     }
 
