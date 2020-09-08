@@ -140,6 +140,16 @@ public class BuildingInformationCanvas : MonoBehaviour
 
     public void RefreshInformationCanvas()
     {
+        GameObject destroyButtonGO = transform.Find("InformationPanel/BuildingOption/Destroy").gameObject;
+        if (buildingData.IsStarterBuilding())
+        {
+            destroyButtonGO.SetActive(false);
+        }
+        else
+        {
+            destroyButtonGO.SetActive(true);
+        }
+
         Image buildingImage = transform.Find("BuildImage").gameObject.GetComponent<Image>();
         Text buildingName = transform.Find("BuildName").gameObject.GetComponent<Text>();
         Text buildingDescription = transform.Find("InformationPanel/BuildDescription").gameObject.GetComponent<Text>();

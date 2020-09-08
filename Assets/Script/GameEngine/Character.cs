@@ -44,9 +44,7 @@ public class Character
         [SerializeField] string spritePath;
         [SerializeField] int tier;
         [SerializeField] int level;
-        [SerializeField] string effectName;
-
-        
+        [SerializeField] string effectName;  
 
     }
 
@@ -102,8 +100,8 @@ public class Character
         }
 
         level = 1;
-        birthMarks = new List<BirthMarkPosition>();
-        birthMarks.Add(BirthMarkPosition.Arm);
+        birthMarks = new List<BirthMark>();
+       // birthMarks.Add();
 
         equipments = new List<Equipment>();
         workStatus = WorkStatus.Idle;
@@ -112,6 +110,13 @@ public class Character
         effects = new List<Resource.Effect>();
 
     }
+    public Character(string name, GenderType gender, string spritePath) : this(name)
+    {
+        this.gender = gender;
+        this.spritePath = spritePath;
+
+    }
+
     public int GenerateID()
     {
         if (CharacterManager.Instance.AllCharacters.Count == 0)
@@ -126,38 +131,12 @@ public class Character
         {
             maxIDCandidate2 = CharacterManager.Instance.characterWaitingInLine.Select(c => c.id).Max();
         }
-       
 
         return Mathf.Max(maxIDCandidate1, maxIDCandidate2) + 1;
 
     }
 
-    public Character(string name, GenderType gender, string spritePath)
-    {
-        id = GenerateID();
-        this.name = name;
-        this.gender = gender;
 
-        stats = new AllStats();
-
-        for (int i = 0; i < 50; i++)
-        {
-            FieldInfo fInfo = stats.GetType().GetFields()[UnityEngine.Random.Range(0, 7)];
-            fInfo.SetValue(this.stats, (int)fInfo.GetValue(this.stats) + 1);
-
-        }
-
-        level = 1;
-        birthMarks = new List<BirthMarkPosition>();
-        birthMarks.Add(BirthMarkPosition.Arm);
-
-        equipments = new List<Equipment>();
-        workStatus = WorkStatus.Idle;
-        healthStatus = HealthStatus.Healthly;
-        this.spritePath = spritePath;
-        effects = new List<Resource.Effect>();
-
-    }
 
     [SerializeField] private int id;
     [SerializeField] private string name;
@@ -165,7 +144,7 @@ public class Character
     [SerializeField] private int experience;
     [SerializeField] private GenderType gender;
     [SerializeField] private AllStats stats;
-    [SerializeField] private List<BirthMarkPosition> birthMarks;
+    [SerializeField] private List<BirthMark> birthMarks;
 
     [SerializeField] public List<Equipment> equipments;
     [SerializeField] public WorkStatus workStatus;
@@ -177,7 +156,6 @@ public class Character
 
     [SerializeField] public List<Resource.Effect> effects;
 
-
     [SerializeField] public string spritePath;
 
     public int ID { get { return id; } }
@@ -185,10 +163,14 @@ public class Character
     public int Experience { get { return experience; } }
     public GenderType Gender { get { return gender; } }
     public AllStats Stats { get { return stats; } set { stats = value; } }
-    public List<BirthMarkPosition> BirthMarks { get { return birthMarks; } }
+    public List<BirthMark> BirthMarks { get { return birthMarks; } }
     public int WorkingPlaceID { get; set; }
 
-
+    List<BirthMark> RandomBirthMark()
+    {
+        
+        return default;
+    }
     public void AddEXP(int exp)
     {
         this.experience += exp;

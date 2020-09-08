@@ -9,8 +9,8 @@
                         "Wood"
                     ],
                     "values": [
-                        2,
-                        2
+                        10,
+                        10
                     ]
                 },
                 {
@@ -19,8 +19,8 @@
                         "Wood"
                     ],
                     "values": [
-                        2,
-                        3
+                        50,
+                        125
                     ]
                 },
                 {
@@ -29,8 +29,8 @@
                         "Wood"
                     ],
                     "values": [
-                        3,
-                        3
+                        100,
+                        250
                     ]
                 },
                 {
@@ -39,8 +39,8 @@
                         "Wood"
                     ],
                     "values": [
-                        3,
-                        4
+                        200,
+                        500
                     ]
                 },
                 {
@@ -49,8 +49,8 @@
                         "Wood"
                     ],
                     "values": [
-                        4,
-                        4
+                        400,
+                        1000
                     ]
                 },
                 {
@@ -59,8 +59,8 @@
                         "Wood"
                     ],
                     "values": [
-                        4,
-                        5
+                        800,
+                        2000
                     ]
                 },
                 {
@@ -69,8 +69,8 @@
                         "Wood"
                     ],
                     "values": [
-                        5,
-                        5
+                        1600,
+                        4000
                     ]
                 },
                 {
@@ -79,8 +79,8 @@
                         "Wood"
                     ],
                     "values": [
-                        5,
-                        6
+                        3200,
+                        8000
                     ]
                 },
                 {
@@ -89,8 +89,8 @@
                         "Wood"
                     ],
                     "values": [
-                        6,
-                        6
+                        6400,
+                        16000
                     ]
                 },
                 {
@@ -99,18 +99,8 @@
                         "Wood"
                     ],
                     "values": [
-                        6,
-                        7
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        6,
-                        7
+                        12800,
+                        32000
                     ]
                 }
             ],
@@ -124,7 +114,7 @@
                         "Food"
                     ],
                     "values": [
-                        1
+                        10
                     ]
                 },
                 {
@@ -132,7 +122,7 @@
                         "Food"
                     ],
                     "values": [
-                        2
+                        12
                     ]
                 },
                 {
@@ -140,7 +130,7 @@
                         "Food"
                     ],
                     "values": [
-                        3
+                        14
                     ]
                 },
                 {
@@ -148,7 +138,7 @@
                         "Food"
                     ],
                     "values": [
-                        4
+                        16
                     ]
                 },
                 {
@@ -156,7 +146,7 @@
                         "Food"
                     ],
                     "values": [
-                        5
+                        18
                     ]
                 },
                 {
@@ -164,66 +154,57 @@
                         "Food"
                     ],
                     "values": [
-                        6
+                        20
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Production"
+                        "Food"
                     ],
                     "values": [
-                        7,
-                        30
+                        22
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Production"
+                        "Food"
                     ],
                     "values": [
-                        8,
-                        30
+                        24
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Production"
+                        "Food"
                     ],
                     "values": [
-                        9,
-                        30
+                        26
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Production"
+                        "Food"
                     ],
                     "values": [
-                        10,
-                        30
+                        28
                     ]
                 }
             ],
             "consuming": [],
             "upgradePoint": [
                 200,
-                300,
-                300,
-                300,
-                300,
-                300,
-                600,
-                600,
-                600,
-                600,
-                600
+                7200,
+                14400,
+                28800,
+                57600,
+                115200,
+                230400,
+                460800,
+                921600,
+                1843200
             ],
-            "maxActiveAmount": 2,
-            "maxLevel": 9,
+            "maxActiveAmount": 3,
+            "maxLevel": 10,
             "maxCharacterStored": {
                 "keys": [
                     0,
@@ -261,44 +242,37 @@
                     },
                     {
                         "amount": [
-                            3,
-                            1
+                            4
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            2
+                            4
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            3
+                            4
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            3
+                            4
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            3
+                            4
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            3
+                            4
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            3
+                            4
                         ]
                     }
                 ]
@@ -318,16 +292,16 @@
             "description": "NO !!!",
             "maxProductionStored": [
                 0,
-                100,
-                300,
-                500,
-                700,
-                900,
-                1100,
-                1300,
-                1500,
-                1700,
-                1900
+                600,
+                1200,
+                2800,
+                5400,
+                9000,
+                13600,
+                19200,
+                25800,
+                33400,
+                42000
             ],
             "productionSpritePath": "Sprites/UI/FoodIcon"
         },
@@ -340,8 +314,8 @@
                         "Wood"
                     ],
                     "values": [
-                        2,
-                        2
+                        2500,
+                        5000
                     ]
                 },
                 {
@@ -350,8 +324,8 @@
                         "Wood"
                     ],
                     "values": [
-                        2,
-                        3
+                        10000,
+                        20000
                     ]
                 },
                 {
@@ -360,88 +334,8 @@
                         "Wood"
                     ],
                     "values": [
-                        3,
-                        3
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        3,
-                        4
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        4,
-                        4
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        4,
-                        5
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        5,
-                        5
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        5,
-                        6
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        6,
-                        6
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        6,
-                        7
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        6,
-                        7
+                        30000,
+                        50000
                     ]
                 }
             ],
@@ -451,149 +345,60 @@
                     "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Production"
-                    ],
-                    "values": [
-                        2,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Production"
-                    ],
-                    "values": [
-                        3,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Production"
-                    ],
-                    "values": [
-                        3,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        4,
-                        4,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        4,
-                        5,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        5,
-                        5,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        5,
-                        6,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        6,
-                        6,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        6,
-                        7,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        6,
-                        7,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 }
             ],
             "consuming": [],
             "upgradePoint": [
-                200,
-                300,
-                300,
-                300,
-                300,
-                300,
-                600,
-                600,
-                600,
-                600,
-                600
+                72000,
+                360000,
+                1080000
             ],
             "maxActiveAmount": 1,
-            "maxLevel": 9,
+            "maxLevel": 3,
             "maxCharacterStored": {
                 "keys": [
                     0,
                     1,
                     2,
-                    3,
-                    4,
-                    5,
-                    6,
-                    7,
-                    8,
-                    9,
-                    10
+                    3
                 ],
                 "values": [
                     {
@@ -613,48 +418,6 @@
                     },
                     {
                         "amount": [
-                            3
-                        ]
-                    },
-                    {
-                        "amount": [
-                            3,
-                            1
-                        ]
-                    },
-                    {
-                        "amount": [
-                            3,
-                            2
-                        ]
-                    },
-                    {
-                        "amount": [
-                            3,
-                            3
-                        ]
-                    },
-                    {
-                        "amount": [
-                            3,
-                            3
-                        ]
-                    },
-                    {
-                        "amount": [
-                            3,
-                            3
-                        ]
-                    },
-                    {
-                        "amount": [
-                            3,
-                            3
-                        ]
-                    },
-                    {
-                        "amount": [
-                            3,
                             3
                         ]
                     }
@@ -685,8 +448,8 @@
                         "Wood"
                     ],
                     "values": [
-                        2,
-                        2
+                        2500,
+                        5000
                     ]
                 },
                 {
@@ -695,8 +458,8 @@
                         "Wood"
                     ],
                     "values": [
-                        2,
-                        3
+                        10000,
+                        20000
                     ]
                 },
                 {
@@ -705,240 +468,115 @@
                         "Wood"
                     ],
                     "values": [
-                        3,
-                        3
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        3,
-                        4
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        4,
-                        4
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        4,
-                        5
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        5,
-                        5
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        5,
-                        6
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        6,
-                        6
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        6,
-                        7
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        6,
-                        7
+                        30000,
+                        50000
                     ]
                 }
             ],
             "production": [
                 {
-                    "keys": [],
-                    "values": []
-                },
-                {
                     "keys": [
-                        "Food",
                         "Production"
                     ],
                     "values": [
-                        2,
-                        30
+                        20
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
                         "Production"
                     ],
                     "values": [
-                        3,
-                        30
+                        20
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
                         "Production"
                     ],
                     "values": [
-                        3,
-                        30
+                        20
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Water",
                         "Production"
                     ],
                     "values": [
-                        4,
-                        4,
-                        30
+                        20
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Water",
                         "Production"
                     ],
                     "values": [
-                        4,
-                        5,
-                        30
+                        20
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Water",
                         "Production"
                     ],
                     "values": [
-                        5,
-                        5,
-                        30
+                        20
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Water",
                         "Production"
                     ],
                     "values": [
-                        5,
-                        6,
-                        30
+                        20
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Water",
                         "Production"
                     ],
                     "values": [
-                        6,
-                        6,
-                        30
+                        20
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Water",
                         "Production"
                     ],
                     "values": [
-                        6,
-                        7,
-                        30
+                        20
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Water",
                         "Production"
                     ],
                     "values": [
-                        6,
-                        7,
-                        30
+                        20
+                    ]
+                },
+                {
+                    "keys": [
+                        "Production"
+                    ],
+                    "values": [
+                        20
                     ]
                 }
             ],
             "consuming": [],
             "upgradePoint": [
-                200,
-                300,
-                300,
-                300,
-                300,
-                300,
-                600,
-                600,
-                600,
-                600,
-                600
+                72000,
+                360000,
+                1080000
             ],
             "maxActiveAmount": 1,
-            "maxLevel": 9,
+            "maxLevel": 3,
             "maxCharacterStored": {
                 "keys": [
                     0,
                     1,
                     2,
-                    3,
-                    4,
-                    5,
-                    6,
-                    7,
-                    8,
-                    9,
-                    10
+                    3
                 ],
                 "values": [
                     {
@@ -958,48 +596,6 @@
                     },
                     {
                         "amount": [
-                            3
-                        ]
-                    },
-                    {
-                        "amount": [
-                            3,
-                            1
-                        ]
-                    },
-                    {
-                        "amount": [
-                            3,
-                            2
-                        ]
-                    },
-                    {
-                        "amount": [
-                            3,
-                            3
-                        ]
-                    },
-                    {
-                        "amount": [
-                            3,
-                            3
-                        ]
-                    },
-                    {
-                        "amount": [
-                            3,
-                            3
-                        ]
-                    },
-                    {
-                        "amount": [
-                            3,
-                            3
-                        ]
-                    },
-                    {
-                        "amount": [
-                            3,
                             3
                         ]
                     }
@@ -1030,8 +626,8 @@
                         "Wood"
                     ],
                     "values": [
-                        2,
-                        2
+                        500,
+                        500
                     ]
                 },
                 {
@@ -1040,8 +636,8 @@
                         "Wood"
                     ],
                     "values": [
-                        2,
-                        3
+                        1000,
+                        1600
                     ]
                 },
                 {
@@ -1050,8 +646,8 @@
                         "Wood"
                     ],
                     "values": [
-                        3,
-                        3
+                        1500,
+                        2600
                     ]
                 },
                 {
@@ -1060,8 +656,8 @@
                         "Wood"
                     ],
                     "values": [
-                        3,
-                        4
+                        4500,
+                        6100
                     ]
                 },
                 {
@@ -1070,8 +666,8 @@
                         "Wood"
                     ],
                     "values": [
-                        4,
-                        4
+                        10000,
+                        12100
                     ]
                 },
                 {
@@ -1080,8 +676,8 @@
                         "Wood"
                     ],
                     "values": [
-                        4,
-                        5
+                        18000,
+                        20600
                     ]
                 },
                 {
@@ -1090,8 +686,8 @@
                         "Wood"
                     ],
                     "values": [
-                        5,
-                        5
+                        28500,
+                        31600
                     ]
                 },
                 {
@@ -1100,8 +696,8 @@
                         "Wood"
                     ],
                     "values": [
-                        5,
-                        6
+                        41500,
+                        45100
                     ]
                 },
                 {
@@ -1110,8 +706,8 @@
                         "Wood"
                     ],
                     "values": [
-                        6,
-                        6
+                        57000,
+                        61100
                     ]
                 },
                 {
@@ -1120,18 +716,8 @@
                         "Wood"
                     ],
                     "values": [
-                        6,
-                        7
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        6,
-                        7
+                        75000,
+                        79600
                     ]
                 }
             ],
@@ -1141,136 +727,61 @@
                     "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Production"
-                    ],
-                    "values": [
-                        2,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Production"
-                    ],
-                    "values": [
-                        3,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Production"
-                    ],
-                    "values": [
-                        3,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        4,
-                        4,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        4,
-                        5,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        5,
-                        5,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        5,
-                        6,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        6,
-                        6,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        6,
-                        7,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        6,
-                        7,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 }
             ],
             "consuming": [],
             "upgradePoint": [
-                200,
-                300,
-                300,
-                300,
-                300,
-                300,
-                600,
-                600,
-                600,
-                600,
-                600
+                6000,
+                13500,
+                27000,
+                54000,
+                108000,
+                216000,
+                432000,
+                864000,
+                1728000,
+                3456000
             ],
             "maxActiveAmount": 1,
-            "maxLevel": 9,
+            "maxLevel": 10,
             "maxCharacterStored": {
                 "keys": [
                     0,
@@ -1308,44 +819,37 @@
                     },
                     {
                         "amount": [
-                            3,
-                            1
+                            4
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            2
+                            4
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            3
+                            4
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            3
+                            4
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            3
+                            4
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            3
+                            4
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            3
+                            4
                         ]
                     }
                 ]
@@ -1375,8 +879,8 @@
                         "Wood"
                     ],
                     "values": [
-                        2,
-                        2
+                        500,
+                        500
                     ]
                 },
                 {
@@ -1385,8 +889,8 @@
                         "Wood"
                     ],
                     "values": [
-                        2,
-                        3
+                        1000,
+                        1600
                     ]
                 },
                 {
@@ -1395,8 +899,8 @@
                         "Wood"
                     ],
                     "values": [
-                        3,
-                        3
+                        1500,
+                        2600
                     ]
                 },
                 {
@@ -1405,8 +909,8 @@
                         "Wood"
                     ],
                     "values": [
-                        3,
-                        4
+                        4500,
+                        6100
                     ]
                 },
                 {
@@ -1415,8 +919,8 @@
                         "Wood"
                     ],
                     "values": [
-                        4,
-                        4
+                        10000,
+                        12100
                     ]
                 },
                 {
@@ -1425,8 +929,8 @@
                         "Wood"
                     ],
                     "values": [
-                        4,
-                        5
+                        18000,
+                        20600
                     ]
                 },
                 {
@@ -1435,8 +939,8 @@
                         "Wood"
                     ],
                     "values": [
-                        5,
-                        5
+                        28500,
+                        31600
                     ]
                 },
                 {
@@ -1445,8 +949,8 @@
                         "Wood"
                     ],
                     "values": [
-                        5,
-                        6
+                        41500,
+                        45100
                     ]
                 },
                 {
@@ -1455,8 +959,8 @@
                         "Wood"
                     ],
                     "values": [
-                        6,
-                        6
+                        57000,
+                        61100
                     ]
                 },
                 {
@@ -1465,157 +969,116 @@
                         "Wood"
                     ],
                     "values": [
-                        6,
-                        7
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        6,
-                        7
+                        75000,
+                        79600
                     ]
                 }
             ],
             "production": [
                 {
-                    "keys": [],
-                    "values": []
-                },
-                {
                     "keys": [
-                        "Food",
                         "Production"
                     ],
                     "values": [
-                        2,
-                        30
+                        20
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
                         "Production"
                     ],
                     "values": [
-                        3,
-                        30
+                        20
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
                         "Production"
                     ],
                     "values": [
-                        3,
-                        30
+                        20
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Water",
                         "Production"
                     ],
                     "values": [
-                        4,
-                        4,
-                        30
+                        20
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Water",
                         "Production"
                     ],
                     "values": [
-                        4,
-                        5,
-                        30
+                        20
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Water",
                         "Production"
                     ],
                     "values": [
-                        5,
-                        5,
-                        30
+                        20
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Water",
                         "Production"
                     ],
                     "values": [
-                        5,
-                        6,
-                        30
+                        20
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Water",
                         "Production"
                     ],
                     "values": [
-                        6,
-                        6,
-                        30
+                        20
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Water",
                         "Production"
                     ],
                     "values": [
-                        6,
-                        7,
-                        30
+                        20
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Water",
                         "Production"
                     ],
                     "values": [
-                        6,
-                        7,
-                        30
+                        20
+                    ]
+                },
+                {
+                    "keys": [
+                        "Production"
+                    ],
+                    "values": [
+                        20
                     ]
                 }
             ],
             "consuming": [],
             "upgradePoint": [
-                200,
-                300,
-                300,
-                300,
-                300,
-                300,
-                600,
-                600,
-                600,
-                600,
-                600
+                6000,
+                13500,
+                27000,
+                54000,
+                108000,
+                216000,
+                432000,
+                864000,
+                1728000,
+                3456000
             ],
             "maxActiveAmount": 1,
-            "maxLevel": 9,
+            "maxLevel": 10,
             "maxCharacterStored": {
                 "keys": [
                     0,
@@ -1672,11 +1135,20 @@
                     {
                         "amount": [
                             3,
-                            3
+                            3,
+                            1
                         ]
                     },
                     {
                         "amount": [
+                            3,
+                            3,
+                            2
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
                             3,
                             3
                         ]
@@ -1684,11 +1156,6 @@
                     {
                         "amount": [
                             3,
-                            3
-                        ]
-                    },
-                    {
-                        "amount": [
                             3,
                             3
                         ]
@@ -1720,8 +1187,8 @@
                         "Wood"
                     ],
                     "values": [
-                        2,
-                        2
+                        2500,
+                        5000
                     ]
                 },
                 {
@@ -1730,8 +1197,8 @@
                         "Wood"
                     ],
                     "values": [
-                        2,
-                        3
+                        10000,
+                        20000
                     ]
                 },
                 {
@@ -1740,240 +1207,115 @@
                         "Wood"
                     ],
                     "values": [
-                        3,
-                        3
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        3,
-                        4
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        4,
-                        4
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        4,
-                        5
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        5,
-                        5
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        5,
-                        6
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        6,
-                        6
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        6,
-                        7
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        6,
-                        7
+                        30000,
+                        50000
                     ]
                 }
             ],
             "production": [
                 {
-                    "keys": [],
-                    "values": []
-                },
-                {
                     "keys": [
-                        "Food",
                         "Production"
                     ],
                     "values": [
-                        2,
-                        30
+                        20
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
                         "Production"
                     ],
                     "values": [
-                        3,
-                        30
+                        20
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
                         "Production"
                     ],
                     "values": [
-                        3,
-                        30
+                        20
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Water",
                         "Production"
                     ],
                     "values": [
-                        4,
-                        4,
-                        30
+                        20
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Water",
                         "Production"
                     ],
                     "values": [
-                        4,
-                        5,
-                        30
+                        20
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Water",
                         "Production"
                     ],
                     "values": [
-                        5,
-                        5,
-                        30
+                        20
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Water",
                         "Production"
                     ],
                     "values": [
-                        5,
-                        6,
-                        30
+                        20
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Water",
                         "Production"
                     ],
                     "values": [
-                        6,
-                        6,
-                        30
+                        20
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Water",
                         "Production"
                     ],
                     "values": [
-                        6,
-                        7,
-                        30
+                        20
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Water",
                         "Production"
                     ],
                     "values": [
-                        6,
-                        7,
-                        30
+                        20
+                    ]
+                },
+                {
+                    "keys": [
+                        "Production"
+                    ],
+                    "values": [
+                        20
                     ]
                 }
             ],
             "consuming": [],
             "upgradePoint": [
-                200,
-                300,
-                300,
-                300,
-                300,
-                300,
-                600,
-                600,
-                600,
-                600,
-                600
+                72000,
+                360000,
+                1080000
             ],
             "maxActiveAmount": 1,
-            "maxLevel": 9,
+            "maxLevel": 3,
             "maxCharacterStored": {
                 "keys": [
                     0,
                     1,
                     2,
-                    3,
-                    4,
-                    5,
-                    6,
-                    7,
-                    8,
-                    9,
-                    10
+                    3
                 ],
                 "values": [
                     {
@@ -1993,48 +1335,6 @@
                     },
                     {
                         "amount": [
-                            3
-                        ]
-                    },
-                    {
-                        "amount": [
-                            3,
-                            1
-                        ]
-                    },
-                    {
-                        "amount": [
-                            3,
-                            2
-                        ]
-                    },
-                    {
-                        "amount": [
-                            3,
-                            3
-                        ]
-                    },
-                    {
-                        "amount": [
-                            3,
-                            3
-                        ]
-                    },
-                    {
-                        "amount": [
-                            3,
-                            3
-                        ]
-                    },
-                    {
-                        "amount": [
-                            3,
-                            3
-                        ]
-                    },
-                    {
-                        "amount": [
-                            3,
                             3
                         ]
                     }
@@ -2065,8 +1365,8 @@
                         "Wood"
                     ],
                     "values": [
-                        2,
-                        2
+                        10,
+                        10
                     ]
                 },
                 {
@@ -2075,8 +1375,8 @@
                         "Wood"
                     ],
                     "values": [
-                        2,
-                        3
+                        50,
+                        125
                     ]
                 },
                 {
@@ -2085,8 +1385,8 @@
                         "Wood"
                     ],
                     "values": [
-                        3,
-                        3
+                        100,
+                        250
                     ]
                 },
                 {
@@ -2095,8 +1395,8 @@
                         "Wood"
                     ],
                     "values": [
-                        3,
-                        4
+                        200,
+                        500
                     ]
                 },
                 {
@@ -2105,68 +1405,8 @@
                         "Wood"
                     ],
                     "values": [
-                        4,
-                        4
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        4,
-                        5
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        5,
-                        5
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        5,
-                        6
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        6,
-                        6
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        6,
-                        7
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        6,
-                        7
+                        400,
+                        1000
                     ]
                 }
             ],
@@ -2176,136 +1416,56 @@
                     "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Production"
-                    ],
-                    "values": [
-                        2,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Production"
-                    ],
-                    "values": [
-                        3,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Production"
-                    ],
-                    "values": [
-                        3,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        4,
-                        4,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        4,
-                        5,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        5,
-                        5,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        5,
-                        6,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        6,
-                        6,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        6,
-                        7,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        6,
-                        7,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 }
             ],
             "consuming": [],
             "upgradePoint": [
-                200,
-                300,
-                300,
-                300,
-                300,
-                300,
-                600,
-                600,
-                600,
-                600,
-                600
+                144000,
+                288000,
+                576000,
+                1152000,
+                2304000
             ],
             "maxActiveAmount": 1,
-            "maxLevel": 9,
+            "maxLevel": 5,
             "maxCharacterStored": {
                 "keys": [
                     0,
@@ -2313,12 +1473,7 @@
                     2,
                     3,
                     4,
-                    5,
-                    6,
-                    7,
-                    8,
-                    9,
-                    10
+                    5
                 ],
                 "values": [
                     {
@@ -2343,44 +1498,12 @@
                     },
                     {
                         "amount": [
-                            3,
-                            1
+                            4
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            2
-                        ]
-                    },
-                    {
-                        "amount": [
-                            3,
-                            3
-                        ]
-                    },
-                    {
-                        "amount": [
-                            3,
-                            3
-                        ]
-                    },
-                    {
-                        "amount": [
-                            3,
-                            3
-                        ]
-                    },
-                    {
-                        "amount": [
-                            3,
-                            3
-                        ]
-                    },
-                    {
-                        "amount": [
-                            3,
-                            3
+                            4
                         ]
                     }
                 ]
@@ -2410,8 +1533,8 @@
                         "Wood"
                     ],
                     "values": [
-                        2,
-                        2
+                        500,
+                        500
                     ]
                 },
                 {
@@ -2420,8 +1543,8 @@
                         "Wood"
                     ],
                     "values": [
-                        2,
-                        3
+                        1250,
+                        2500
                     ]
                 },
                 {
@@ -2430,8 +1553,8 @@
                         "Wood"
                     ],
                     "values": [
-                        3,
-                        3
+                        2500,
+                        5000
                     ]
                 },
                 {
@@ -2440,8 +1563,8 @@
                         "Wood"
                     ],
                     "values": [
-                        3,
-                        4
+                        5000,
+                        10000
                     ]
                 },
                 {
@@ -2450,8 +1573,8 @@
                         "Wood"
                     ],
                     "values": [
-                        4,
-                        4
+                        10000,
+                        20000
                     ]
                 },
                 {
@@ -2460,8 +1583,8 @@
                         "Wood"
                     ],
                     "values": [
-                        4,
-                        5
+                        20000,
+                        40000
                     ]
                 },
                 {
@@ -2470,8 +1593,8 @@
                         "Wood"
                     ],
                     "values": [
-                        5,
-                        5
+                        40000,
+                        80000
                     ]
                 },
                 {
@@ -2480,8 +1603,8 @@
                         "Wood"
                     ],
                     "values": [
-                        5,
-                        6
+                        80000,
+                        160000
                     ]
                 },
                 {
@@ -2490,8 +1613,8 @@
                         "Wood"
                     ],
                     "values": [
-                        6,
-                        6
+                        160000,
+                        320000
                     ]
                 },
                 {
@@ -2500,18 +1623,8 @@
                         "Wood"
                     ],
                     "values": [
-                        6,
-                        7
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        6,
-                        7
+                        320000,
+                        640000
                     ]
                 }
             ],
@@ -2522,135 +1635,100 @@
                 },
                 {
                     "keys": [
-                        "Food",
                         "Production"
                     ],
                     "values": [
-                        2,
-                        30
+                        3
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
                         "Production"
                     ],
                     "values": [
-                        3,
-                        30
+                        4
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
                         "Production"
                     ],
                     "values": [
-                        3,
-                        30
+                        5
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Water",
                         "Production"
                     ],
                     "values": [
-                        4,
-                        4,
-                        30
+                        6
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Water",
                         "Production"
                     ],
                     "values": [
-                        4,
-                        5,
-                        30
+                        7
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Water",
                         "Production"
                     ],
                     "values": [
-                        5,
-                        5,
-                        30
+                        8
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Water",
                         "Production"
                     ],
                     "values": [
-                        5,
-                        6,
-                        30
+                        9
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Water",
                         "Production"
                     ],
                     "values": [
-                        6,
-                        6,
-                        30
+                        10
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Water",
                         "Production"
                     ],
                     "values": [
-                        6,
-                        7,
-                        30
+                        11
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Water",
                         "Production"
                     ],
                     "values": [
-                        6,
-                        7,
-                        30
+                        12
                     ]
                 }
             ],
             "consuming": [],
             "upgradePoint": [
-                200,
-                300,
-                300,
-                300,
-                300,
-                300,
-                600,
-                600,
-                600,
-                600,
-                600
+                6000,
+                9000,
+                18000,
+                36000,
+                72000,
+                14400,
+                28800,
+                57600,
+                1152000,
+                2304000
             ],
-            "maxActiveAmount": 1,
-            "maxLevel": 9,
+            "maxActiveAmount": 5,
+            "maxLevel": 10,
             "maxCharacterStored": {
                 "keys": [
                     0,
@@ -2673,59 +1751,52 @@
                     },
                     {
                         "amount": [
-                            1
-                        ]
-                    },
-                    {
-                        "amount": [
-                            2
-                        ]
-                    },
-                    {
-                        "amount": [
                             3
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            1
+                            4
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            2
+                            4
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            3
+                            4
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            3
+                            4
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            3
+                            4
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            3
+                            4
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            3
+                            4
+                        ]
+                    },
+                    {
+                        "amount": [
+                            4
+                        ]
+                    },
+                    {
+                        "amount": [
+                            4
                         ]
                     }
                 ]
@@ -2752,111 +1823,127 @@
                 {
                     "keys": [
                         "Stone",
-                        "Wood"
+                        "Wood",
+                        "Food",
+                        "Water"
                     ],
                     "values": [
-                        2,
-                        2
+                        2500,
+                        1250,
+                        1500,
+                        750
                     ]
                 },
                 {
                     "keys": [
                         "Stone",
-                        "Wood"
+                        "Wood",
+                        "Food",
+                        "Water"
                     ],
                     "values": [
-                        2,
-                        3
+                        5000,
+                        2500,
+                        3000,
+                        1500
                     ]
                 },
                 {
                     "keys": [
                         "Stone",
-                        "Wood"
+                        "Wood",
+                        "Food",
+                        "Water"
                     ],
                     "values": [
-                        3,
-                        3
+                        10000,
+                        5000,
+                        6000,
+                        3000
                     ]
                 },
                 {
                     "keys": [
                         "Stone",
-                        "Wood"
+                        "Wood",
+                        "Food",
+                        "Water"
                     ],
                     "values": [
-                        3,
-                        4
+                        20000,
+                        10000,
+                        12000,
+                        6000
                     ]
                 },
                 {
                     "keys": [
                         "Stone",
-                        "Wood"
+                        "Wood",
+                        "Food",
+                        "Water"
                     ],
                     "values": [
-                        4,
-                        4
+                        40000,
+                        20000,
+                        24000,
+                        12000
                     ]
                 },
                 {
                     "keys": [
                         "Stone",
-                        "Wood"
+                        "Wood",
+                        "Food",
+                        "Water"
                     ],
                     "values": [
-                        4,
-                        5
+                        80000,
+                        40000,
+                        48000,
+                        24000
                     ]
                 },
                 {
                     "keys": [
                         "Stone",
-                        "Wood"
+                        "Wood",
+                        "Food",
+                        "Water"
                     ],
                     "values": [
-                        5,
-                        5
+                        160000,
+                        80000,
+                        96000,
+                        48000
                     ]
                 },
                 {
                     "keys": [
                         "Stone",
-                        "Wood"
+                        "Wood",
+                        "Food",
+                        "Water"
                     ],
                     "values": [
-                        5,
-                        6
+                        320000,
+                        160000,
+                        192000,
+                        96000
                     ]
                 },
                 {
                     "keys": [
                         "Stone",
-                        "Wood"
+                        "Wood",
+                        "Food",
+                        "Water"
                     ],
                     "values": [
-                        6,
-                        6
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        6,
-                        7
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        6,
-                        7
+                        640000,
+                        320000,
+                        384000,
+                        192000
                     ]
                 }
             ],
@@ -2866,136 +1953,61 @@
                     "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Production"
-                    ],
-                    "values": [
-                        2,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Production"
-                    ],
-                    "values": [
-                        3,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Production"
-                    ],
-                    "values": [
-                        3,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        4,
-                        4,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        4,
-                        5,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        5,
-                        5,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        5,
-                        6,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        6,
-                        6,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        6,
-                        7,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        6,
-                        7,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 }
             ],
             "consuming": [],
             "upgradePoint": [
-                200,
-                300,
-                300,
-                300,
-                300,
-                300,
-                600,
-                600,
-                600,
-                600,
-                600
+                6000,
+                36000,
+                72000,
+                144000,
+                288000,
+                576000,
+                1152000,
+                2304000,
+                4608000,
+                9216000
             ],
             "maxActiveAmount": 1,
-            "maxLevel": 9,
+            "maxLevel": 10,
             "maxCharacterStored": {
                 "keys": [
                     0,
@@ -3052,11 +2064,20 @@
                     {
                         "amount": [
                             3,
-                            3
+                            3,
+                            1
                         ]
                     },
                     {
                         "amount": [
+                            3,
+                            3,
+                            2
+                        ]
+                    },
+                    {
+                        "amount": [
+                            3,
                             3,
                             3
                         ]
@@ -3064,11 +2085,6 @@
                     {
                         "amount": [
                             3,
-                            3
-                        ]
-                    },
-                    {
-                        "amount": [
                             3,
                             3
                         ]
@@ -3100,8 +2116,8 @@
                         "Wood"
                     ],
                     "values": [
-                        2,
-                        2
+                        500,
+                        500
                     ]
                 },
                 {
@@ -3110,8 +2126,8 @@
                         "Wood"
                     ],
                     "values": [
-                        2,
-                        3
+                        1250,
+                        2500
                     ]
                 },
                 {
@@ -3120,8 +2136,8 @@
                         "Wood"
                     ],
                     "values": [
-                        3,
-                        3
+                        2500,
+                        5000
                     ]
                 },
                 {
@@ -3130,8 +2146,8 @@
                         "Wood"
                     ],
                     "values": [
-                        3,
-                        4
+                        5000,
+                        10000
                     ]
                 },
                 {
@@ -3140,8 +2156,8 @@
                         "Wood"
                     ],
                     "values": [
-                        4,
-                        4
+                        10000,
+                        20000
                     ]
                 },
                 {
@@ -3150,8 +2166,8 @@
                         "Wood"
                     ],
                     "values": [
-                        4,
-                        5
+                        20000,
+                        40000
                     ]
                 },
                 {
@@ -3160,8 +2176,8 @@
                         "Wood"
                     ],
                     "values": [
-                        5,
-                        5
+                        40000,
+                        80000
                     ]
                 },
                 {
@@ -3170,8 +2186,8 @@
                         "Wood"
                     ],
                     "values": [
-                        5,
-                        6
+                        80000,
+                        160000
                     ]
                 },
                 {
@@ -3180,8 +2196,8 @@
                         "Wood"
                     ],
                     "values": [
-                        6,
-                        6
+                        160000,
+                        320000
                     ]
                 },
                 {
@@ -3190,18 +2206,8 @@
                         "Wood"
                     ],
                     "values": [
-                        6,
-                        7
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        6,
-                        7
+                        320000,
+                        640000
                     ]
                 }
             ],
@@ -3211,136 +2217,61 @@
                     "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Production"
-                    ],
-                    "values": [
-                        2,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Production"
-                    ],
-                    "values": [
-                        3,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Production"
-                    ],
-                    "values": [
-                        3,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        4,
-                        4,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        4,
-                        5,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        5,
-                        5,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        5,
-                        6,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        6,
-                        6,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        6,
-                        7,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        6,
-                        7,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 }
             ],
             "consuming": [],
             "upgradePoint": [
-                200,
-                300,
-                300,
-                300,
-                300,
-                300,
-                600,
-                600,
-                600,
-                600,
-                600
+                6000,
+                9000,
+                18000,
+                36000,
+                72000,
+                14400,
+                28800,
+                57600,
+                1152000,
+                2304000
             ],
-            "maxActiveAmount": 1,
-            "maxLevel": 9,
+            "maxActiveAmount": 3,
+            "maxLevel": 10,
             "maxCharacterStored": {
                 "keys": [
                     0,
@@ -3363,59 +2294,52 @@
                     },
                     {
                         "amount": [
-                            1
+                            0
                         ]
                     },
                     {
                         "amount": [
-                            2
+                            0
                         ]
                     },
                     {
                         "amount": [
-                            3
+                            0
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            1
+                            0
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            2
+                            0
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            3
+                            0
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            3
+                            0
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            3
+                            0
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            3
+                            0
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            3
+                            0
                         ]
                     }
                 ]
@@ -3445,8 +2369,8 @@
                         "Wood"
                     ],
                     "values": [
-                        2,
-                        2
+                        10,
+                        10
                     ]
                 },
                 {
@@ -3455,8 +2379,8 @@
                         "Wood"
                     ],
                     "values": [
-                        2,
-                        3
+                        50,
+                        125
                     ]
                 },
                 {
@@ -3465,8 +2389,8 @@
                         "Wood"
                     ],
                     "values": [
-                        3,
-                        3
+                        100,
+                        250
                     ]
                 },
                 {
@@ -3475,8 +2399,8 @@
                         "Wood"
                     ],
                     "values": [
-                        3,
-                        4
+                        200,
+                        500
                     ]
                 },
                 {
@@ -3485,8 +2409,8 @@
                         "Wood"
                     ],
                     "values": [
-                        4,
-                        4
+                        400,
+                        1000
                     ]
                 },
                 {
@@ -3495,8 +2419,8 @@
                         "Wood"
                     ],
                     "values": [
-                        4,
-                        5
+                        800,
+                        2000
                     ]
                 },
                 {
@@ -3505,8 +2429,8 @@
                         "Wood"
                     ],
                     "values": [
-                        5,
-                        5
+                        1600,
+                        4000
                     ]
                 },
                 {
@@ -3515,8 +2439,8 @@
                         "Wood"
                     ],
                     "values": [
-                        5,
-                        6
+                        3200,
+                        8000
                     ]
                 },
                 {
@@ -3525,8 +2449,8 @@
                         "Wood"
                     ],
                     "values": [
-                        6,
-                        6
+                        6400,
+                        16000
                     ]
                 },
                 {
@@ -3535,18 +2459,8 @@
                         "Wood"
                     ],
                     "values": [
-                        6,
-                        7
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        6,
-                        7
+                        12800,
+                        32000
                     ]
                 }
             ],
@@ -3557,121 +2471,100 @@
                 },
                 {
                     "keys": [
-                        "Water",
-                        "Production"
+                        "Water"
                     ],
                     "values": [
-                        1,
+                        10
+                    ]
+                },
+                {
+                    "keys": [
+                        "Water"
+                    ],
+                    "values": [
+                        12
+                    ]
+                },
+                {
+                    "keys": [
+                        "Water"
+                    ],
+                    "values": [
+                        14
+                    ]
+                },
+                {
+                    "keys": [
+                        "Water"
+                    ],
+                    "values": [
+                        16
+                    ]
+                },
+                {
+                    "keys": [
+                        "Water"
+                    ],
+                    "values": [
+                        18
+                    ]
+                },
+                {
+                    "keys": [
+                        "Water"
+                    ],
+                    "values": [
                         20
                     ]
                 },
                 {
                     "keys": [
-                        "Water",
-                        "Production"
+                        "Water"
                     ],
                     "values": [
-                        2,
-                        30
+                        22
                     ]
                 },
                 {
                     "keys": [
-                        "Water",
-                        "Production"
+                        "Water"
                     ],
                     "values": [
-                        3,
-                        30
+                        24
                     ]
                 },
                 {
                     "keys": [
-                        "Water",
-                        "Production"
+                        "Water"
                     ],
                     "values": [
-                        4,
-                        30
+                        26
                     ]
                 },
                 {
                     "keys": [
-                        "Water",
-                        "Production"
+                        "Water"
                     ],
                     "values": [
-                        5,
-                        30
-                    ]
-                },
-                {
-                    "keys": [
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        6,
-                        30
-                    ]
-                },
-                {
-                    "keys": [
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        7,
-                        30
-                    ]
-                },
-                {
-                    "keys": [
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        8,
-                        30
-                    ]
-                },
-                {
-                    "keys": [
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        9,
-                        30
-                    ]
-                },
-                {
-                    "keys": [
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        10,
-                        30
+                        28
                     ]
                 }
             ],
             "consuming": [],
             "upgradePoint": [
                 200,
-                300,
-                300,
-                300,
-                300,
-                300,
-                600,
-                600,
-                600,
-                600,
-                600
+                7200,
+                14400,
+                28800,
+                57600,
+                115200,
+                230400,
+                460800,
+                921600,
+                1843200
             ],
-            "maxActiveAmount": 2,
-            "maxLevel": 9,
+            "maxActiveAmount": 3,
+            "maxLevel": 10,
             "maxCharacterStored": {
                 "keys": [
                     0,
@@ -3709,44 +2602,37 @@
                     },
                     {
                         "amount": [
-                            3,
-                            1
+                            4
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            2
+                            4
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            3
+                            4
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            3
+                            4
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            3
+                            4
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            3
+                            4
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            3
+                            4
                         ]
                     }
                 ]
@@ -3766,16 +2652,16 @@
             "description": "NO !!!",
             "maxProductionStored": [
                 0,
-                100,
-                300,
-                500,
-                700,
-                900,
-                1100,
-                1300,
-                1500,
-                1700,
-                1900
+                600,
+                1200,
+                2800,
+                5400,
+                9000,
+                13600,
+                19200,
+                25800,
+                33400,
+                42000
             ],
             "productionSpritePath": "Sprites/UI/WaterIcon"
         },
@@ -3788,8 +2674,8 @@
                         "Wood"
                     ],
                     "values": [
-                        2,
-                        2
+                        2500,
+                        5000
                     ]
                 },
                 {
@@ -3798,8 +2684,8 @@
                         "Wood"
                     ],
                     "values": [
-                        2,
-                        3
+                        10000,
+                        20000
                     ]
                 },
                 {
@@ -3808,240 +2694,115 @@
                         "Wood"
                     ],
                     "values": [
-                        3,
-                        3
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        3,
-                        4
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        4,
-                        4
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        4,
-                        5
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        5,
-                        5
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        5,
-                        6
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        6,
-                        6
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        6,
-                        7
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        6,
-                        7
+                        30000,
+                        50000
                     ]
                 }
             ],
             "production": [
                 {
-                    "keys": [],
-                    "values": []
-                },
-                {
                     "keys": [
-                        "Food",
                         "Production"
                     ],
                     "values": [
-                        2,
-                        30
+                        20
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
                         "Production"
                     ],
                     "values": [
-                        3,
-                        30
+                        20
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
                         "Production"
                     ],
                     "values": [
-                        3,
-                        30
+                        20
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Water",
                         "Production"
                     ],
                     "values": [
-                        4,
-                        4,
-                        30
+                        20
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Water",
                         "Production"
                     ],
                     "values": [
-                        4,
-                        5,
-                        30
+                        20
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Water",
                         "Production"
                     ],
                     "values": [
-                        5,
-                        5,
-                        30
+                        20
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Water",
                         "Production"
                     ],
                     "values": [
-                        5,
-                        6,
-                        30
+                        20
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Water",
                         "Production"
                     ],
                     "values": [
-                        6,
-                        6,
-                        30
+                        20
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Water",
                         "Production"
                     ],
                     "values": [
-                        6,
-                        7,
-                        30
+                        20
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Water",
                         "Production"
                     ],
                     "values": [
-                        6,
-                        7,
-                        30
+                        20
+                    ]
+                },
+                {
+                    "keys": [
+                        "Production"
+                    ],
+                    "values": [
+                        20
                     ]
                 }
             ],
             "consuming": [],
             "upgradePoint": [
-                200,
-                300,
-                300,
-                300,
-                300,
-                300,
-                600,
-                600,
-                600,
-                600,
-                600
+                72000,
+                360000,
+                1080000
             ],
             "maxActiveAmount": 1,
-            "maxLevel": 9,
+            "maxLevel": 3,
             "maxCharacterStored": {
                 "keys": [
                     0,
                     1,
                     2,
-                    3,
-                    4,
-                    5,
-                    6,
-                    7,
-                    8,
-                    9,
-                    10
+                    3
                 ],
                 "values": [
                     {
@@ -4061,48 +2822,6 @@
                     },
                     {
                         "amount": [
-                            3
-                        ]
-                    },
-                    {
-                        "amount": [
-                            3,
-                            1
-                        ]
-                    },
-                    {
-                        "amount": [
-                            3,
-                            2
-                        ]
-                    },
-                    {
-                        "amount": [
-                            3,
-                            3
-                        ]
-                    },
-                    {
-                        "amount": [
-                            3,
-                            3
-                        ]
-                    },
-                    {
-                        "amount": [
-                            3,
-                            3
-                        ]
-                    },
-                    {
-                        "amount": [
-                            3,
-                            3
-                        ]
-                    },
-                    {
-                        "amount": [
-                            3,
                             3
                         ]
                     }
@@ -4133,8 +2852,8 @@
                         "Wood"
                     ],
                     "values": [
-                        2,
-                        2
+                        10,
+                        10
                     ]
                 },
                 {
@@ -4143,8 +2862,8 @@
                         "Wood"
                     ],
                     "values": [
-                        2,
-                        3
+                        50,
+                        125
                     ]
                 },
                 {
@@ -4153,8 +2872,8 @@
                         "Wood"
                     ],
                     "values": [
-                        3,
-                        3
+                        100,
+                        250
                     ]
                 },
                 {
@@ -4163,8 +2882,8 @@
                         "Wood"
                     ],
                     "values": [
-                        3,
-                        4
+                        200,
+                        500
                     ]
                 },
                 {
@@ -4173,8 +2892,8 @@
                         "Wood"
                     ],
                     "values": [
-                        4,
-                        4
+                        400,
+                        1000
                     ]
                 },
                 {
@@ -4183,8 +2902,8 @@
                         "Wood"
                     ],
                     "values": [
-                        4,
-                        5
+                        800,
+                        2000
                     ]
                 },
                 {
@@ -4193,8 +2912,8 @@
                         "Wood"
                     ],
                     "values": [
-                        5,
-                        5
+                        1600,
+                        4000
                     ]
                 },
                 {
@@ -4203,8 +2922,8 @@
                         "Wood"
                     ],
                     "values": [
-                        5,
-                        6
+                        3200,
+                        8000
                     ]
                 },
                 {
@@ -4213,8 +2932,8 @@
                         "Wood"
                     ],
                     "values": [
-                        6,
-                        6
+                        6400,
+                        16000
                     ]
                 },
                 {
@@ -4223,18 +2942,8 @@
                         "Wood"
                     ],
                     "values": [
-                        6,
-                        7
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        6,
-                        7
+                        12800,
+                        32000
                     ]
                 }
             ],
@@ -4244,136 +2953,61 @@
                     "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Production"
-                    ],
-                    "values": [
-                        2,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Production"
-                    ],
-                    "values": [
-                        3,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Production"
-                    ],
-                    "values": [
-                        3,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        4,
-                        4,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        4,
-                        5,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        5,
-                        5,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        5,
-                        6,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        6,
-                        6,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        6,
-                        7,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
-                    "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        6,
-                        7,
-                        30
-                    ]
+                    "keys": [],
+                    "values": []
                 }
             ],
             "consuming": [],
             "upgradePoint": [
-                200,
-                300,
-                300,
-                300,
-                300,
-                300,
-                600,
-                600,
-                600,
-                600,
-                600
+                6000,
+                36000,
+                72000,
+                144000,
+                288000,
+                576000,
+                1152000,
+                2304000,
+                4608000,
+                9216000
             ],
             "maxActiveAmount": 1,
-            "maxLevel": 9,
+            "maxLevel": 10,
             "maxCharacterStored": {
                 "keys": [
                     0,
@@ -4396,59 +3030,52 @@
                     },
                     {
                         "amount": [
-                            1
+                            0
                         ]
                     },
                     {
                         "amount": [
-                            2
+                            0
                         ]
                     },
                     {
                         "amount": [
-                            3
+                            0
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            1
+                            0
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            2
+                            0
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            3
+                            0
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            3
+                            0
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            3
+                            0
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            3
+                            0
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            3
+                            0
                         ]
                     }
                 ]
@@ -4478,8 +3105,8 @@
                         "Wood"
                     ],
                     "values": [
-                        2,
-                        2
+                        10,
+                        10
                     ]
                 },
                 {
@@ -4488,8 +3115,8 @@
                         "Wood"
                     ],
                     "values": [
-                        2,
-                        3
+                        50,
+                        125
                     ]
                 },
                 {
@@ -4498,8 +3125,8 @@
                         "Wood"
                     ],
                     "values": [
-                        3,
-                        3
+                        100,
+                        250
                     ]
                 },
                 {
@@ -4508,8 +3135,8 @@
                         "Wood"
                     ],
                     "values": [
-                        3,
-                        4
+                        200,
+                        500
                     ]
                 },
                 {
@@ -4518,8 +3145,8 @@
                         "Wood"
                     ],
                     "values": [
-                        4,
-                        4
+                        400,
+                        1000
                     ]
                 },
                 {
@@ -4528,8 +3155,8 @@
                         "Wood"
                     ],
                     "values": [
-                        4,
-                        5
+                        800,
+                        2000
                     ]
                 },
                 {
@@ -4538,8 +3165,8 @@
                         "Wood"
                     ],
                     "values": [
-                        5,
-                        5
+                        1600,
+                        4000
                     ]
                 },
                 {
@@ -4548,8 +3175,8 @@
                         "Wood"
                     ],
                     "values": [
-                        5,
-                        6
+                        3200,
+                        8000
                     ]
                 },
                 {
@@ -4558,8 +3185,8 @@
                         "Wood"
                     ],
                     "values": [
-                        6,
-                        6
+                        6400,
+                        16000
                     ]
                 },
                 {
@@ -4568,18 +3195,8 @@
                         "Wood"
                     ],
                     "values": [
-                        6,
-                        7
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        6,
-                        7
+                        12800,
+                        32000
                     ]
                 }
             ],
@@ -4590,135 +3207,120 @@
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Production"
+                        "Gold",
+                        "Stone"
+                    ],
+                    "values": [
+                        1,
+                        6
+                    ]
+                },
+                {
+                    "keys": [
+                        "Gold",
+                        "Stone"
                     ],
                     "values": [
                         2,
-                        30
+                        16
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Production"
+                        "Gold",
+                        "Stone"
                     ],
                     "values": [
                         3,
-                        30
+                        26
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Production"
-                    ],
-                    "values": [
-                        3,
-                        30
-                    ]
-                },
-                {
-                    "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
+                        "Gold",
+                        "Stone"
                     ],
                     "values": [
                         4,
-                        4,
-                        30
+                        36
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        4,
-                        5,
-                        30
-                    ]
-                },
-                {
-                    "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
+                        "Gold",
+                        "Stone"
                     ],
                     "values": [
                         5,
-                        5,
-                        30
+                        46
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
+                        "Gold",
+                        "Stone"
                     ],
                     "values": [
-                        5,
                         6,
-                        30
+                        56
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
+                        "Gold",
+                        "Stone"
                     ],
                     "values": [
-                        6,
-                        6,
-                        30
-                    ]
-                },
-                {
-                    "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
-                    ],
-                    "values": [
-                        6,
                         7,
-                        30
+                        66
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
+                        "Gold",
+                        "Stone"
                     ],
                     "values": [
-                        6,
-                        7,
-                        30
+                        8,
+                        76
+                    ]
+                },
+                {
+                    "keys": [
+                        "Gold",
+                        "Stone"
+                    ],
+                    "values": [
+                        9,
+                        86
+                    ]
+                },
+                {
+                    "keys": [
+                        "Gold",
+                        "Stone"
+                    ],
+                    "values": [
+                        10,
+                        96
                     ]
                 }
             ],
             "consuming": [],
             "upgradePoint": [
                 200,
-                300,
-                300,
-                300,
-                300,
-                300,
-                600,
-                600,
-                600,
-                600,
-                600
+                7200,
+                14400,
+                28800,
+                57600,
+                115200,
+                230400,
+                460800,
+                921600,
+                1843200
             ],
-            "maxActiveAmount": 1,
-            "maxLevel": 9,
+            "maxActiveAmount": 3,
+            "maxLevel": 3,
             "maxCharacterStored": {
                 "keys": [
                     0,
@@ -4756,44 +3358,37 @@
                     },
                     {
                         "amount": [
-                            3,
-                            1
+                            4
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            2
+                            4
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            3
+                            4
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            3
+                            4
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            3
+                            4
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            3
+                            4
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            3
+                            4
                         ]
                     }
                 ]
@@ -4811,8 +3406,20 @@
                 "Sprites/Building/Mine1"
             ],
             "description": "NO !!!",
-            "maxProductionStored": [],
-            "productionSpritePath": ""
+            "maxProductionStored": [
+                0,
+                60,
+                120,
+                180,
+                240,
+                300,
+                360,
+                420,
+                480,
+                540,
+                600
+            ],
+            "productionSpritePath": "Sprites/UI/FoodIcon"
         },
         {
             "type": 15,
@@ -4823,8 +3430,8 @@
                         "Wood"
                     ],
                     "values": [
-                        2,
-                        2
+                        10,
+                        10
                     ]
                 },
                 {
@@ -4833,8 +3440,8 @@
                         "Wood"
                     ],
                     "values": [
-                        2,
-                        3
+                        50,
+                        125
                     ]
                 },
                 {
@@ -4843,8 +3450,8 @@
                         "Wood"
                     ],
                     "values": [
-                        3,
-                        3
+                        100,
+                        250
                     ]
                 },
                 {
@@ -4853,8 +3460,8 @@
                         "Wood"
                     ],
                     "values": [
-                        3,
-                        4
+                        200,
+                        500
                     ]
                 },
                 {
@@ -4863,8 +3470,8 @@
                         "Wood"
                     ],
                     "values": [
-                        4,
-                        4
+                        400,
+                        1000
                     ]
                 },
                 {
@@ -4873,8 +3480,8 @@
                         "Wood"
                     ],
                     "values": [
-                        4,
-                        5
+                        800,
+                        2000
                     ]
                 },
                 {
@@ -4883,8 +3490,8 @@
                         "Wood"
                     ],
                     "values": [
-                        5,
-                        5
+                        1600,
+                        4000
                     ]
                 },
                 {
@@ -4893,8 +3500,8 @@
                         "Wood"
                     ],
                     "values": [
-                        5,
-                        6
+                        3200,
+                        8000
                     ]
                 },
                 {
@@ -4903,8 +3510,8 @@
                         "Wood"
                     ],
                     "values": [
-                        6,
-                        6
+                        6400,
+                        16000
                     ]
                 },
                 {
@@ -4913,18 +3520,8 @@
                         "Wood"
                     ],
                     "values": [
-                        6,
-                        7
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        6,
-                        7
+                        12800,
+                        32000
                     ]
                 }
             ],
@@ -4935,135 +3532,100 @@
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Production"
+                        "Wood"
                     ],
                     "values": [
-                        2,
-                        30
+                        6
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Production"
+                        "Wood"
                     ],
                     "values": [
-                        3,
-                        30
+                        16
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Production"
+                        "Wood"
                     ],
                     "values": [
-                        3,
-                        30
+                        26
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
+                        "Wood"
                     ],
                     "values": [
-                        4,
-                        4,
-                        30
+                        36
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
+                        "Wood"
                     ],
                     "values": [
-                        4,
-                        5,
-                        30
+                        46
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
+                        "Wood"
                     ],
                     "values": [
-                        5,
-                        5,
-                        30
+                        56
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
+                        "Wood"
                     ],
                     "values": [
-                        5,
-                        6,
-                        30
+                        66
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
+                        "Wood"
                     ],
                     "values": [
-                        6,
-                        6,
-                        30
+                        76
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
+                        "Wood"
                     ],
                     "values": [
-                        6,
-                        7,
-                        30
+                        86
                     ]
                 },
                 {
                     "keys": [
-                        "Food",
-                        "Water",
-                        "Production"
+                        "Wood"
                     ],
                     "values": [
-                        6,
-                        7,
-                        30
+                        96
                     ]
                 }
             ],
             "consuming": [],
             "upgradePoint": [
                 200,
-                300,
-                300,
-                300,
-                300,
-                300,
-                600,
-                600,
-                600,
-                600,
-                600
+                7200,
+                14400,
+                28800,
+                57600,
+                115200,
+                230400,
+                460800,
+                921600,
+                1843200
             ],
-            "maxActiveAmount": 1,
-            "maxLevel": 9,
+            "maxActiveAmount": 3,
+            "maxLevel": 10,
             "maxCharacterStored": {
                 "keys": [
                     0,
@@ -5101,44 +3663,37 @@
                     },
                     {
                         "amount": [
-                            3,
-                            1
+                            4
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            2
+                            4
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            3
+                            4
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            3
+                            4
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            3
+                            4
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            3
+                            4
                         ]
                     },
                     {
                         "amount": [
-                            3,
-                            3
+                            4
                         ]
                     }
                 ]
@@ -5156,8 +3711,20 @@
                 "Sprites/Building/LumberYard1"
             ],
             "description": "NO !!!",
-            "maxProductionStored": [],
-            "productionSpritePath": ""
+            "maxProductionStored": [
+                0,
+                500,
+                1000,
+                2500,
+                5000,
+                8500,
+                13000,
+                18500,
+                25000,
+                32500,
+                41000
+            ],
+            "productionSpritePath": "Sprites/UI/FoodIcon"
         }
     ]
 }

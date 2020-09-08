@@ -1,13 +1,47 @@
 {
     "datas": {
         "keys": [
-            "{\"name\":\"StrengthbM\",\"tier\":1,\"spritePath\":\"\",\"effectValues\":[2,3,4,5],\"statToIncrease\":{\"speed\":0,\"craftsmanship\":0,\"intelligence\":0,\"strength\":3,\"perception\":0,\"luck\":0,\"immunity\":0},\"isAlliesAffected\":false}",
-            "{\"name\":\"IntBM\",\"tier\":1,\"spritePath\":\"\",\"effectValues\":[2,3,4,5],\"statToIncrease\":{\"speed\":0,\"craftsmanship\":0,\"intelligence\":3,\"strength\":0,\"perception\":0,\"luck\":0,\"immunity\":0},\"isAlliesAffected\":false}",
-            "{\"name\":\"SonOfFarmer\",\"tier\":1,\"spritePath\":\"\",\"effectValues\":[2,3,4,5],\"buildingType\":1}"
+            "{\"name\":\"StrengthBM\",\"tier\":1,\"spritePath\":\"Sprites/UI/RedCircle\",\"effectValues\":[5.0,7.5,10.0,15.0,20.0],\"isAlliesAffected\":false}",
+            "{\"name\":\"IntelligenceBM\",\"tier\":1,\"spritePath\":\"Sprites/UI/RedCircle\",\"effectValues\":[5.0,7.5,10.0,15.0,20.0],\"isAlliesAffected\":false}",
+            "{\"name\":\"CraftsmanshipBM\",\"tier\":1,\"spritePath\":\"Sprites/UI/RedCircle\",\"effectValues\":[5.0,7.5,10.0,15.0,20.0],\"isAlliesAffected\":false}",
+            "{\"name\":\"LuckBM\",\"tier\":1,\"spritePath\":\"Sprites/UI/RedCircle\",\"effectValues\":[5.0,7.5,10.0,15.0,20.0],\"isAlliesAffected\":false}",
+            "{\"name\":\"ImmunityBM\",\"tier\":1,\"spritePath\":\"Sprites/UI/RedCircle\",\"effectValues\":[5.0,7.5,10.0,15.0,20.0],\"isAlliesAffected\":false}",
+            "{\"name\":\"PerceptionBM\",\"tier\":1,\"spritePath\":\"Sprites/UI/RedCircle\",\"effectValues\":[5.0,7.5,10.0,15.0,20.0],\"isAlliesAffected\":false}",
+            "{\"name\":\"SpeedBM\",\"tier\":1,\"spritePath\":\"Sprites/UI/RedCircle\",\"effectValues\":[5.0,7.5,10.0,15.0,20.0],\"isAlliesAffected\":false}",
+            "{\"name\":\"Son of Farmer\",\"tier\":1,\"spritePath\":\"Sprites/UI/RedCircle\",\"effectValues\":[10.0,15.0,20.0,25.0,30.0],\"buildingType\":1}",
+            "{\"name\":\"Son of WaterFilter\",\"tier\":1,\"spritePath\":\"Sprites/UI/RedCircle\",\"effectValues\":[10.0,15.0,20.0,25.0,30.0],\"buildingType\":8}",
+            "{\"name\":\"Son of GoldDigger\",\"tier\":1,\"spritePath\":\"Sprites/UI/RedCircle\",\"effectValues\":[10.0,15.0,20.0,25.0,30.0],\"buildingType\":14}",
+            "{\"name\":\"Farmer Master\",\"tier\":2,\"spritePath\":\"Sprites/UI/RedCircle\",\"effectValues\":[5.0,7.5,10.0,12.5,15.0],\"buildingType\":1}",
+            "{\"name\":\"Water Filter Master\",\"tier\":2,\"spritePath\":\"Sprites/UI/RedCircle\",\"effectValues\":[5.0,7.5,10.0,12.5,15.0],\"buildingType\":8}",
+            "{\"name\":\"Gold Digger Master\",\"tier\":2,\"spritePath\":\"Sprites/UI/RedCircle\",\"effectValues\":[5.0,7.5,10.0,12.5,15.0],\"buildingType\":14}",
+            "{\"name\":\"Son of Nurse\",\"tier\":2,\"spritePath\":\"Sprites/UI/RedCircle\",\"effectValues\":[10.0,15.0,20.0,25.0,30.0],\"buildingType\":6}",
+            "{\"name\":\"Monkey King\",\"tier\":2,\"spritePath\":\"Sprites/UI/RedCircle\",\"effectValues\":[5.0,7.5,10.0,12.5,15.0],\"buildingType\":8}",
+            "{\"name\":\"Economic Man\",\"tier\":2,\"spritePath\":\"Sprites/UI/RedCircle\",\"effectValues\":[4.0,8.0,12.0,16.0,20.0],\"buildingType\":11}",
+            "{\"name\":\"Cupid\",\"tier\":2,\"spritePath\":\"Sprites/UI/RedCircle\",\"effectValues\":[10.0,25.0,40.0,55.0,70.0],\"buildingType\":11}",
+            "{\"name\":\"Jack of All Trade\",\"tier\":2,\"spritePath\":\"Sprites/UI/RedCircle\",\"effectValues\":[10.0,15.0,20.0,25.0,30.0],\"buildingType\":0}",
+            "{\"name\":\"Nerd\",\"tier\":2,\"spritePath\":\"Sprites/UI/RedCircle\",\"effectValues\":[3.0,6.0,9.0,12.0,15.0],\"buildingType\":3}",
+            "{\"name\":\"Iron Chef\",\"tier\":2,\"spritePath\":\"Sprites/UI/RedCircle\",\"effectValues\":[3.0,6.0,9.0,12.0,15.0],\"buildingType\":3}"
         ],
         "values": [
             "IncreaseSTATSBirthMark",
             "IncreaseSTATSBirthMark",
+            "IncreaseSTATSBirthMark",
+            "IncreaseSTATSBirthMark",
+            "IncreaseSTATSBirthMark",
+            "IncreaseSTATSBirthMark",
+            "IncreaseSTATSBirthMark",
+            "ParticularEffectOnBuildingBirthMark",
+            "ParticularEffectOnBuildingBirthMark",
+            "ParticularEffectOnBuildingBirthMark",
+            "ParticularEffectOnBuildingBirthMark",
+            "ParticularEffectOnBuildingBirthMark",
+            "ParticularEffectOnBuildingBirthMark",
+            "ParticularEffectOnBuildingBirthMark",
+            "ParticularEffectOnBuildingBirthMark",
+            "ParticularEffectOnBuildingBirthMark",
+            "ParticularEffectOnBuildingBirthMark",
+            "ParticularEffectOnBuildingBirthMark",
+            "ParticularEffectOnBuildingBirthMark",
             "ParticularEffectOnBuildingBirthMark"
         ]
     }

@@ -82,4 +82,8 @@ public class Building
     [SerializeField] public List<int> maxProductionStored;
     [SerializeField] public string productionSpritePath;
 
+    public bool IsStarterBuilding()
+    {
+        return (type == BuildingType.LaborCenter || type == BuildingType.TownBase);
+    }
 }

@@ -317,10 +317,10 @@ public class ItemManager : SingletonComponent<ItemManager>
         AddResource(4, 10);
         AddResource(3, 10);
         AddResource(5, 10);
-        AddResource("Stone", 10);
-        AddResource("Wood", 10);
-        AddResource("Gold", 10);
-        AddResource("Diamond", 10);
+        AddResource("Stone", 1000);
+        AddResource("Wood", 1000);
+        AddResource("Gold", 100);
+        AddResource("Diamond", 100);
         AddResource("Wheat", 10);
         AddResource("Meat", 10);
         AddResource("Burger", 5);

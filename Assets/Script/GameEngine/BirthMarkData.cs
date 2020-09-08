@@ -4,14 +4,10 @@ using UnityEngine;
 using System;
 using System.Reflection;
 /// <summary>
-/// Implement BirthMark Effects using Factory Method Pattern.
+/// Implement BirthMark Effects.
 /// </summary>
-public enum BirthMarkType
-{
-    IncreaseSTATSBirthMark
+/// 
 
-        
-}
 [System.Serializable]
 public class BirthMarkSerializer : ISerializationCallbackReceiver
 {
@@ -90,10 +86,11 @@ public class ParticularEffectOnBuildingBirthMark : BirthMarkData
     {
         return new ParticularEffectOnBuildingBirthMark();
     }
-
+    
 }
+
 [System.Serializable]
-public class PBirthMark : BirthMarkData
+public class DoubleProductBirthMark : BirthMarkData
 {
     [SerializeField] public Building.BuildingType buildingType;
 
