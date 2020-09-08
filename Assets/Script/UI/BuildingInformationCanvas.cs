@@ -11,7 +11,7 @@ public class BuildingInformationCanvas : MonoBehaviour
 {
     Builder builder;
     Building buildingData;
-
+    int x;
     private void Awake()
     {
 
