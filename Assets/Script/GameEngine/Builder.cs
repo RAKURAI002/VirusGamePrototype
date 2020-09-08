@@ -59,7 +59,7 @@ public class Builder
     [SerializeField] private int currentActiveAmount = 0;
     [SerializeField] private List<int> teamLockState;
 
-    [SerializeField] private List<CharacterWrapper> characterInBuilding;
+    [SerializeField] private List<CharacterWrapper> characterTeamsInBuilding;
 
     [SerializeField] public float currentProductionAmount;
 
@@ -76,7 +76,7 @@ public class Builder
     {
         if (BuildManager.Instance.AllBuildings.Count == 0)
         {
-            return IDMask.BUILDING_ID_MASK + 1;
+            return Constant.IDMask.BUILDING_ID_MASK + 1;
 
         }
 
@@ -87,29 +87,29 @@ public class Builder
     {
         get
         {          
-            if(characterInBuilding == null)
+            if(characterTeamsInBuilding == null)
             {
-                characterInBuilding = new List<CharacterWrapper>();
+                characterTeamsInBuilding = new List<CharacterWrapper>();
             }
 
             int maxTeam = LoadManager.Instance.allBuildingData[this.type].maxCharacterStored[level].amount.Count;
             for (int i = 0; i < maxTeam; i++)
             {
-                    if (characterInBuilding.ElementAtOrDefault(i) == null)
+                    if (characterTeamsInBuilding.ElementAtOrDefault(i) == null)
                     {
-                            characterInBuilding.Add(new CharacterWrapper());
+                            characterTeamsInBuilding.Add(new CharacterWrapper());
 
                     }
 
             }
 
-            return characterInBuilding ;
+            return characterTeamsInBuilding ;
 
         }
         
         set
         {
-            characterInBuilding = value;
+            characterTeamsInBuilding = value;
 
         }
 

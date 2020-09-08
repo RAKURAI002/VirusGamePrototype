@@ -40,11 +40,21 @@ public class Character
     [System.Serializable]
     public class BirthMark
     {
-        [SerializeField] string name;
-        [SerializeField] string spritePath;
-        [SerializeField] int tier;
-        [SerializeField] int level;
-        [SerializeField] string effectName;  
+        public BirthMark(BirthMarkData birthMarkData)
+        {
+            this.name = birthMarkData.name;
+            this.spritePath = birthMarkData.spritePath;
+            this.tier = birthMarkData.tier;
+            this.level = UnityEngine.Random.Range(1, birthMarkData.effectValues.Count + 1);
+            this.type = birthMarkData.GetType();
+
+        }
+
+        [SerializeField] public  string name;
+        [SerializeField] public string spritePath;
+        [SerializeField] public Type type;
+        [SerializeField] public int tier;
+        [SerializeField] public int level;
 
     }
 
@@ -57,9 +67,9 @@ public class Character
         Arm,
         Leg,
         Foot
-      
+
     }
-    
+
     public enum HealthStatus
     {
         Unknown,
@@ -100,8 +110,10 @@ public class Character
         }
 
         level = 1;
-        birthMarks = new List<BirthMark>();
-       // birthMarks.Add();
+
+        RandomBirthMark(ref birthMarks);
+
+
 
         equipments = new List<Equipment>();
         workStatus = WorkStatus.Idle;
@@ -121,13 +133,13 @@ public class Character
     {
         if (CharacterManager.Instance.AllCharacters.Count == 0)
         {
-            return IDMask.CHARACTER_ID_MASK + 1;
+            return Constant.IDMask.CHARACTER_ID_MASK + 1;
 
         }
 
         int maxIDCandidate1 = CharacterManager.Instance.AllCharacters.Select(c => c.id).Max();
         int maxIDCandidate2 = 0;
-        if(CharacterManager.Instance.characterWaitingInLine.Count > 0)
+        if (CharacterManager.Instance.characterWaitingInLine.Count > 0)
         {
             maxIDCandidate2 = CharacterManager.Instance.characterWaitingInLine.Select(c => c.id).Max();
         }
@@ -152,7 +164,7 @@ public class Character
     [SerializeField] private int workingPlaceID = -1;
 
     [SerializeField] public int statsUpPoint;
-    [SerializeField] public int currentHp;
+    [SerializeField] public int hitPoint;
 
     [SerializeField] public List<Resource.Effect> effects;
 
@@ -166,10 +178,84 @@ public class Character
     public List<BirthMark> BirthMarks { get { return birthMarks; } }
     public int WorkingPlaceID { get; set; }
 
-    List<BirthMark> RandomBirthMark()
+    void RandomBirthMark(ref List<BirthMark> birthMarks)
     {
+        int totalDivisor = 0;
+        List<int> chanceTable = new List<int>();
+        foreach(var chance in typeof(Constant.BirthMarkAmountChance).GetFields())
+        {
+            chanceTable.Add((int)chance.GetValue(null));
+            totalDivisor += (int)chance.GetValue(null);
+
+        }
+         
+
+        int randomBirthMarkAmount = UnityEngine.Random.Range(0, totalDivisor);
+       // Debug.Log($"Total = {randomBirthMarkAmount} /  {totalDivisor}");
+        for (int i = 0; i < chanceTable.Count; i++)
+        {
+            if(randomBirthMarkAmount < chanceTable[i])
+            {
+                AddBirthMark(ref birthMarks, i);
+                break;
+
+            }
+            else
+            {
+                randomBirthMarkAmount -= chanceTable[i];
+
+            }
+
+        }
+
+
+        return;
+
+    }
+    void AddBirthMark(ref List<BirthMark> birthMarks, int amount)
+    {
+         Debug.Log($"Start random {amount} BirthMark(s) . . .");
+        birthMarks = new List<BirthMark>();
+        if(amount == 0)
+        {
+            return;
+
+        }
+
+        int totalDivisor = 0;
+        List<int> chanceTable = new List<int>();
+        foreach (var chance in typeof(Constant.BirthMarkTierChance).GetFields())
+        {
+            chanceTable.Add((int)chance.GetValue(null));
+            totalDivisor += (int)chance.GetValue(null);
+
+        }
         
-        return default;
+        for (int birthMarkAmount = 0 ; birthMarkAmount < amount ; birthMarkAmount++)
+        {
+            int randomTier = UnityEngine.Random.Range(0, totalDivisor);
+            for (int birthMarkTier = 1; birthMarkTier <= chanceTable.Count; birthMarkTier++)
+            {
+                if (randomTier < chanceTable[birthMarkTier - 1])
+                {
+                    Debug.Log($"Random Tier {birthMarkTier} BirthMark to character.");
+                    
+                    List<BirthMarkData> bmData = LoadManager.Instance.allBirthMarkDatas.Where(bm => bm.tier == birthMarkTier).ToList();
+                    int randomEffect = UnityEngine.Random.Range(0, bmData.Count);
+                    birthMarks.Add(new BirthMark(bmData[randomEffect]));
+
+                    break;
+
+                }
+                else
+                {
+                    randomTier -= chanceTable[birthMarkAmount];
+
+                }
+
+            }
+        }
+        return;
     }
     public void AddEXP(int exp)
     {
@@ -179,6 +265,7 @@ public class Character
         {
             level++;
             statsUpPoint += 3;
+
         }
 
     }

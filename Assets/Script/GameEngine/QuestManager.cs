@@ -198,7 +198,7 @@ public class QuestManager : SingletonComponent<QuestManager>
 
         }
        */
-        if (character.currentHp >= 0 && enemy.CurrentHp >= 0)
+        if (character.hitPoint >= 0 && enemy.CurrentHp >= 0)
             return true;
         else
             return false;

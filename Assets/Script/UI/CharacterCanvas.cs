@@ -25,6 +25,7 @@ public class CharacterCanvas : MonoBehaviour
         CreateCharacterSlot();
         EventManager.Instance.OnCharacterAssigned += UpdateInformation;
         EventManager.Instance.OnResourceChanged += OnResourceChanged;
+
     }
     private void OnDisable()
     {
@@ -59,18 +60,34 @@ public class CharacterCanvas : MonoBehaviour
     {
         GameObject characterImage = transform.Find("MainPanel/InformationPanel/CharacterImage").gameObject;
         characterImage.GetComponent<Image>().sprite = Resources.Load<Sprite>(character.spritePath);
-        GameObject statusPanel = transform.Find("MainPanel/InformationPanel/StatusPanel/STATS").gameObject;
-        statusPanel.transform.parent.Find("Name").GetComponent<Text>().text = "<color=green>Name</color> : " + character.Name;
-        statusPanel.transform.parent.Find("Level").GetComponent<Text>().text = "<color=green>Level</color> : " + character.level;
-        statusPanel.transform.Find("Healthy").GetComponent<Text>().text = $"Healthy :\t{character.Stats.immunity} + <color=red>{character.equipments.Sum(e => e.Stats.immunity)}</color>";
-        statusPanel.transform.Find("Crafting").GetComponent<Text>().text = $"Crafting :\t{character.Stats.craftsmanship} + <color=red>{character.equipments.Sum(e => e.Stats.craftsmanship)}</color>";
-        statusPanel.transform.Find("Intelligence").GetComponent<Text>().text = $"Intelligence :\t{character.Stats.intelligence} + <color=red>{character.equipments.Sum(e => e.Stats.intelligence)}</color>";
-        statusPanel.transform.Find("Strength").GetComponent<Text>().text = $"Strength :\t{character.Stats.strength} + <color=red>{character.equipments.Sum(e => e.Stats.strength)}</color>";
-        statusPanel.transform.Find("Observing").GetComponent<Text>().text = $"Observing :\t{character.Stats.perception} + <color=red>{character.equipments.Sum(e => e.Stats.perception)}</color>";
-        statusPanel.transform.Find("Luck").GetComponent<Text>().text = $"Luck :\t{character.Stats.luck} + <color=red>{character.equipments.Sum(e => e.Stats.luck)}</color>";
-        statusPanel.transform.Find("Speed").GetComponent<Text>().text = $"Speed :\t{character.Stats.speed} + <color=red>{character.equipments.Sum(e => e.Stats.speed)}</color>";
+        GameObject statsPanel = transform.Find("MainPanel/InformationPanel/StatusPanel/STATS").gameObject;
+        statsPanel.transform.parent.Find("Name").GetComponent<Text>().text = "<color=green>Name</color> : " + character.Name;
+        statsPanel.transform.parent.Find("Level").GetComponent<Text>().text = "<color=green>Level</color> : " + character.level;
+        statsPanel.transform.Find("Healthy").GetComponent<Text>().text = $"Healthy :\t{character.Stats.immunity} + <color=red>{character.equipments.Sum(e => e.Stats.immunity)}</color>";
+        statsPanel.transform.Find("Crafting").GetComponent<Text>().text = $"Crafting :\t{character.Stats.craftsmanship} + <color=red>{character.equipments.Sum(e => e.Stats.craftsmanship)}</color>";
+        statsPanel.transform.Find("Intelligence").GetComponent<Text>().text = $"Intelligence :\t{character.Stats.intelligence} + <color=red>{character.equipments.Sum(e => e.Stats.intelligence)}</color>";
+        statsPanel.transform.Find("Strength").GetComponent<Text>().text = $"Strength :\t{character.Stats.strength} + <color=red>{character.equipments.Sum(e => e.Stats.strength)}</color>";
+        statsPanel.transform.Find("Observing").GetComponent<Text>().text = $"Observing :\t{character.Stats.perception} + <color=red>{character.equipments.Sum(e => e.Stats.perception)}</color>";
+        statsPanel.transform.Find("Luck").GetComponent<Text>().text = $"Luck :\t{character.Stats.luck} + <color=red>{character.equipments.Sum(e => e.Stats.luck)}</color>";
+        statsPanel.transform.Find("Speed").GetComponent<Text>().text = $"Speed :\t{character.Stats.speed} + <color=red>{character.equipments.Sum(e => e.Stats.speed)}</color>";
 
-        Text statsPointText = statusPanel.transform.Find("StatsPoint").GetComponent<Text>();
+        Text statsPointText = statsPanel.transform.Find("StatsPoint").GetComponent<Text>();
+
+        Transform birthMarkContainer = transform.Find("MainPanel/InformationPanel/StatusPanel/BrithMarkPanel/Container");
+        foreach(Transform transform in birthMarkContainer)
+        {
+            Destroy(transform.gameObject);
+
+        }
+
+        foreach(Character.BirthMark birthMark in character.BirthMarks)
+        {
+            Image bmImage = new GameObject().AddComponent<Image>();
+            bmImage.transform.SetParent(birthMarkContainer);
+            bmImage.sprite = Resources.Load<Sprite>(birthMark.spritePath);
+
+        }
+
 
         List<Transform> plusButtons = new List<Transform>();
 
@@ -92,7 +109,7 @@ public class CharacterCanvas : MonoBehaviour
         }
 
 
-        foreach (Transform transform in statusPanel.transform.Cast<Transform>().Select(t => t.Find("PlusButton")).OfType<Transform>())
+        foreach (Transform transform in statsPanel.transform.Cast<Transform>().Select(t => t.Find("PlusButton")).OfType<Transform>())
         {
             plusButtons.Add(transform);
 

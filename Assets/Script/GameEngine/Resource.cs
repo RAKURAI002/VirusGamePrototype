@@ -31,7 +31,7 @@ public class Resource : Item
 
     public Resource(int id, string name, RarityTier rarity, string description, ResourceType type, string spritePath)
     {
-        this.id = id;
+        this.id = id + Constant.IDMask.RESOURCE_ID_MASK;
         this.name = name;
         this.rarity = rarity;
         this.description = description;

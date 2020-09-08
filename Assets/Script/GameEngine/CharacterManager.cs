@@ -11,14 +11,9 @@ public class CharacterManager : SingletonComponent<CharacterManager>
     [SerializeField] public List<Character> characterWaitingInLine;
     public List<Character> AllCharacters { get { return allCharacters; } set { allCharacters = value; } }
 
-    float CHARACTER_ADDING_EVENT_CYCLE = 60f;
+    
 
     #region Unity Functions
-    protected override void Awake()
-    {
-        base.Awake();
-
-    }
     protected override void OnInitialize()
     {
         allCharacters = new List<Character>();
@@ -56,7 +51,7 @@ public class CharacterManager : SingletonComponent<CharacterManager>
 
     void Start()
     {
-        InvokeRepeating("CharacterJoiningEvent", CHARACTER_ADDING_EVENT_CYCLE, CHARACTER_ADDING_EVENT_CYCLE);
+        InvokeRepeating("CharacterJoiningEvent", Constant.TimeCycle.CHARACTER_ADDING_EVENT_CYCLE, Constant.TimeCycle.CHARACTER_ADDING_EVENT_CYCLE);
 
     }
 
@@ -64,6 +59,7 @@ public class CharacterManager : SingletonComponent<CharacterManager>
 
     void CharacterJoiningEvent()
     {
+        Debug.Log($"{Constant.TimeCycle.CHARACTER_ADDING_EVENT_CYCLE}s passed, Trying to start CharacterJoiningEvent.");
         if (LoadManager.Instance.allCharacterData.Count <= 0)
         {
             return;
@@ -71,7 +67,10 @@ public class CharacterManager : SingletonComponent<CharacterManager>
         }
 
         /// Event occur chance
-        if (UnityEngine.Random.Range(0, 101) >= 30 / ((characterWaitingInLine.Count / 5) + 1))
+        int random = UnityEngine.Random.Range(0, 101);
+        int joiningChance = Constant.CalculatingFunction.CharacterJoiningChanceCalculation(characterWaitingInLine.Count);
+        Debug.Log($"Chance : 0 - {joiningChance}, Randomed : {random}. Adding event = {!(random >= joiningChance)}");
+        if (random >= joiningChance)
         {
             return;
 
@@ -79,7 +78,6 @@ public class CharacterManager : SingletonComponent<CharacterManager>
 
         int index = UnityEngine.Random.Range(0, LoadManager.Instance.allCharacterData.Count);
 
-        Debug.Log(index);
         Character.CharacterData characterData = LoadManager.Instance.allCharacterData[index];
         Character character = new Character(characterData.name, characterData.gender, characterData.spritePath); ;
         characterWaitingInLine.Add(character);
@@ -98,7 +96,7 @@ public class CharacterManager : SingletonComponent<CharacterManager>
         AddCharacterToList(character);
         LoadManager.Instance.SavePlayerDataToJson();
         return;
-
+        
     }
 
 
@@ -110,13 +108,17 @@ public class CharacterManager : SingletonComponent<CharacterManager>
 
     void OnGameDataLoadFinished()
     {
+        ApplyItemEffectsToCharacters();
+
+    }
+    void ApplyItemEffectsToCharacters()
+    {
         allCharacters.Where((c) => c.effects.Count > 0).ToList().ForEach(c =>
         {
             c.effects.ForEach(e => { Debug.Log($"Applying {e.name} to {c.Name}"); ApplyItemEffect(c, e, false); });
         });
 
     }
-
 
     public bool AssignWork(Character character, Builder builder, int team)
     {

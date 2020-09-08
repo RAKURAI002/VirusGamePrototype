@@ -56,7 +56,7 @@ public class Building
         TownBase,
         WaterTreatmentCenter,
         WareHouse,
-        FishingPond,
+        Fishery,
         LaborCenter,
         Armory,
         TradingCenter,

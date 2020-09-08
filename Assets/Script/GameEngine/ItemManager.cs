@@ -14,7 +14,7 @@ public class ItemManager : SingletonComponent<ItemManager>
     private EquipmentDictionary allEquipments;
 
     /// 1 Resource update cycle's period.
-    float RESOURCE_CICLE_TIME = 5f;
+    float RESOURCE_CICLE_TIME = Constant.TimeCycle.RESOURCE_UPDATE_CYCLE;
 
     public ResourceDictionary AllResources { get { return allResources; } set { allResources = value; } }
     public EquipmentDictionary AllEquipments { get { return allEquipments; } set { allEquipments = value; } }
@@ -97,7 +97,6 @@ public class ItemManager : SingletonComponent<ItemManager>
 
     void UpdateBuildingResource(Builder builder)
     {
-        Debug.Log(builder.Type);
         Building buildingData = LoadManager.Instance.allBuildingData[builder.Type];
 
         if (buildingData.production[builder.Level] == null)
@@ -107,6 +106,14 @@ public class ItemManager : SingletonComponent<ItemManager>
 
         }
 
+        if (builder.CharacterInBuilding.Count != 1)
+        {
+            Debug.LogWarning($"Only single team Building can access this function.");
+            return;
+
+        }
+
+        List<Character> characters = builder.CharacterInBuilding[0].Characters;
         foreach (KeyValuePair<string, int> baseProduction in buildingData.production[builder.Level])
         {
             Resource resource = LoadManager.Instance.allResourceData[baseProduction.Key];
@@ -115,14 +122,37 @@ public class ItemManager : SingletonComponent<ItemManager>
                 return;
 
             }
-
-            int finalUpdatedAmount = baseProduction.Value;
+            float finalUpdatedAmount = baseProduction.Value;
             int characterStatsSum = 0;
 
-            if (builder.CharacterInBuilding != null)
+            foreach (Character character in characters)
             {
-                // characterStatsSum = builder.CharacterInBuilding.Sum(c => c.Characters.Sum( ch => ch.Stats.speed));
-                finalUpdatedAmount += characterStatsSum;
+                finalUpdatedAmount += character.Stats.speed * 0.2f;
+
+                List<Character.BirthMark> birthMarks = character.BirthMarks.Where(bm => bm.type == typeof(ParticularEffectOnBuildingBirthMark)).DefaultIfEmpty().ToList();
+
+                if (birthMarks.Count == 0)
+                {
+                    continue;
+
+                }
+                /*
+                List<BirthMarkData> birthMarkDatas = new List<BirthMarkData>();
+                birthMarks.ForEach((bm) =>
+                {
+                    birthMarkDatas.Add(ObjectCopier.Clone<BirthMarkData>(LoadManager.Instance.allBirthMarkDatas.SingleOrDefault(bData => bData.name == bm.name)));
+                    birthMarkDatas
+                });
+
+                birthMarkDatas.Where(bData => ((ParticularEffectOnBuildingBirthMark)bData).buildingType == builder.Type).ToList().ForEach((bm) =>
+                {
+                    bm.effectValues[]
+
+                });*/
+
+
+
+
             }
 
             Debug.Log($"{RESOURCE_CICLE_TIME} seconds passed. Base Production of {builder.Type}[ID : {builder.ID}] is {baseProduction.Value} and sum of Character's Speed in building is {characterStatsSum} resulting in INCREASE " +
@@ -131,10 +161,11 @@ public class ItemManager : SingletonComponent<ItemManager>
             Building buildData = LoadManager.Instance.allBuildingData[builder.Type];
             Debug.Log(buildData.type);
             Debug.Log(buildData.maxProductionStored[builder.Level]);
-            builder.currentProductionAmount += finalUpdatedAmount * 10;
+            builder.currentProductionAmount += finalUpdatedAmount;
             if (builder.currentProductionAmount >= buildData.maxProductionStored[builder.Level])
             {
                 builder.currentProductionAmount = buildData.maxProductionStored[builder.Level];
+
             }
             EventManager.Instance.ResourceChanged(baseProduction.Key);
 

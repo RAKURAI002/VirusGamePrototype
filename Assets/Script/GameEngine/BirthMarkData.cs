@@ -21,9 +21,9 @@ public class BirthMarkSerializer : ISerializationCallbackReceiver
     {
         foreach(var data in datas)
         {
-
             Type type = Type.GetType(data.Value);
             birthMarkDatas.Add((BirthMarkData)JsonUtility.FromJson(data.Key, type));
+
         }
     }
 
@@ -47,7 +47,9 @@ public abstract class BirthMarkData
 {
     [SerializeField] public string name;
     [SerializeField] public int tier;
+    [SerializeField] public int level;
     [SerializeField] public string spritePath;
+
 
     [SerializeField] public List<float> effectValues;
 
@@ -93,6 +95,17 @@ public class ParticularEffectOnBuildingBirthMark : BirthMarkData
 public class DoubleProductBirthMark : BirthMarkData
 {
     [SerializeField] public Building.BuildingType buildingType;
+
+    public override BirthMarkData CreateBirthMarkObject<T>()
+    {
+        return new ParticularEffectOnBuildingBirthMark();
+    }
+
+}
+
+[System.Serializable]
+public class AddMoreActionBirthMark : BirthMarkData
+{
 
     public override BirthMarkData CreateBirthMarkObject<T>()
     {

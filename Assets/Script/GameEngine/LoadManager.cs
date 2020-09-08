@@ -248,7 +248,7 @@ public class LoadManager : SingletonComponent<LoadManager>
             else
             {
                 allBirthMarkDatas = new List<BirthMarkData>();
-                Debug.Log("Fetching Character Data completed.\n");
+                Debug.Log("Fetching Character BirthMark Data completed.\n");
 
                 BirthMarkSerializer birthMarkSerializer = new BirthMarkSerializer();
 
@@ -272,6 +272,7 @@ public class LoadManager : SingletonComponent<LoadManager>
 
         yield return c6;
 
+        yield return c7;
         Debug.Log("Load GameData Complete.");
 
     }

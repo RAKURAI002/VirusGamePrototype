@@ -97,10 +97,10 @@ public class MapManager : SingletonComponent<MapManager>
             {
                 Destroy(treeGO);
             }
-
+            
         }
 
-        for (int i = 1; i <= LoadManager.Instance.playerData.level / 5; i++)
+        for (int i = 2; i <= LoadManager.Instance.playerData.level / 5; i++)
         {
             GameObject fogGO = GameObject.Find("Map/FogArea/" + i);
             if (fogGO)
@@ -119,8 +119,11 @@ public class MapManager : SingletonComponent<MapManager>
             if (fogGO)
             {
                 Destroy(fogGO);
+
             }
+
         }
+
     }
     public string SelectedBuildingName { get; set; }
 

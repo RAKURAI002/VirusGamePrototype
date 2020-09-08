@@ -345,7 +345,7 @@ public class DataCreator : MonoBehaviour
         string description = "NO !!!";
         List<Building> bu = new List<Building>();
         bu.Add(new Building(Building.BuildingType.Farm, resourceBuildingCost, farmResourceProduction, allConsuming, resourceUpgradePoint, 3, 10, maxCharacterInWorking, description, GetSpritePath("Farm"), farm_waterProductionStored, "Sprites/UI/FoodIcon"));
-        bu.Add(new Building(Building.BuildingType.FishingPond, craftBuildingCost, allProduction, allConsuming, craftUpgradePoint, 1, 3, maxCharacterInCraft, description, GetSpritePath("FishingPond")));
+        bu.Add(new Building(Building.BuildingType.Fishery, craftBuildingCost, allProduction, allConsuming, craftUpgradePoint, 1, 3, maxCharacterInCraft, description, GetSpritePath("FishingPond")));
         bu.Add(new Building(Building.BuildingType.Kitchen, craftBuildingCost, laborProduction, allConsuming, craftUpgradePoint, 1, 3, maxCharacterInCraft, description, GetSpritePath("Kitchen")));
         bu.Add(new Building(Building.BuildingType.Laboratory, labBuildingCost, allProduction, allConsuming, labUpgradePoint, 1, 10, maxCharacterInWorking, description, GetSpritePath("Laboratory")));
         bu.Add(new Building(Building.BuildingType.LaborCenter, labBuildingCost, laborProduction, allConsuming, labUpgradePoint, 1, 10, maxCharacterInTeam, description, GetSpritePath("LaborCenter")));//***
@@ -495,7 +495,7 @@ public class DataCreator : MonoBehaviour
             name = "StrengthBM",
             effectValues = new List<float>() { 5, 7.5f, 10, 15, 20 },
             isAlliesAffected = false,
-            spritePath = "Sprites/UI/RedCircle",
+            spritePath = "Sprites/Character/BirthMarks/BirthMark1",
             statToIncrease = typeof(Character.AllStats).GetField("strength"),
             tier = 1
         });
@@ -504,7 +504,7 @@ public class DataCreator : MonoBehaviour
             name = "IntelligenceBM",
             effectValues = new List<float>() { 5, 7.5f, 10, 15, 20 },
             isAlliesAffected = false,
-            spritePath = "Sprites/UI/RedCircle",
+            spritePath = "Sprites/Character/BirthMarks/BirthMark2",
             statToIncrease = typeof(Character.AllStats).GetField("intelligence"),
             tier = 1
         });
@@ -513,7 +513,7 @@ public class DataCreator : MonoBehaviour
             name = "CraftsmanshipBM",
             effectValues = new List<float>() { 5, 7.5f, 10, 15, 20 },
             isAlliesAffected = false,
-            spritePath = "Sprites/UI/RedCircle",
+            spritePath = "Sprites/Character/BirthMarks/BirthMark3",
             statToIncrease = typeof(Character.AllStats).GetField("craftsmanship"),
             tier = 1
         });
@@ -522,7 +522,7 @@ public class DataCreator : MonoBehaviour
             name = "LuckBM",
             effectValues = new List<float>() { 5, 7.5f, 10, 15, 20 },
             isAlliesAffected = false,
-            spritePath = "Sprites/UI/RedCircle",
+            spritePath = "Sprites/Character/BirthMarks/BirthMark4",
             statToIncrease = typeof(Character.AllStats).GetField("luck"),
             tier = 1
         });
@@ -531,7 +531,7 @@ public class DataCreator : MonoBehaviour
             name = "ImmunityBM",
             effectValues = new List<float>() { 5, 7.5f, 10, 15, 20 },
             isAlliesAffected = false,
-            spritePath = "Sprites/UI/RedCircle",
+            spritePath = "Sprites/Character/BirthMarks/BirthMark5",
             statToIncrease = typeof(Character.AllStats).GetField("immunity"),
             tier = 1
         });
@@ -540,7 +540,7 @@ public class DataCreator : MonoBehaviour
             name = "PerceptionBM",
             effectValues = new List<float>() { 5, 7.5f, 10, 15, 20 },
             isAlliesAffected = false,
-            spritePath = "Sprites/UI/RedCircle",
+            spritePath = "Sprites/Character/BirthMarks/BirthMark6",
             statToIncrease = typeof(Character.AllStats).GetField("perception"),
             tier = 1
         });
@@ -549,7 +549,7 @@ public class DataCreator : MonoBehaviour
             name = "SpeedBM",
             effectValues = new List<float>() { 5, 7.5f, 10, 15, 20 },
             isAlliesAffected = false,
-            spritePath = "Sprites/UI/RedCircle",
+            spritePath = "Sprites/Character/BirthMarks/BirthMark7",
             statToIncrease = typeof(Character.AllStats).GetField("speed"),
             tier = 1
         });
@@ -558,7 +558,7 @@ public class DataCreator : MonoBehaviour
         {
             name = "Son of Farmer",
             effectValues = new List<float>() { 10, 15, 20, 25, 30 },
-            spritePath = "Sprites/UI/RedCircle",
+            spritePath = "Sprites/Character/BirthMarks/BirthMark8",
             tier = 1,
             buildingType = Building.BuildingType.Farm
         });
@@ -566,7 +566,7 @@ public class DataCreator : MonoBehaviour
         {
             name = "Son of WaterFilter",
             effectValues = new List<float>() { 10, 15, 20, 25, 30 },
-            spritePath = "Sprites/UI/RedCircle",
+            spritePath = "Sprites/Character/BirthMarks/BirthMark9",
             tier = 1,
             buildingType = Building.BuildingType.WaterTreatmentCenter
         });
@@ -574,7 +574,7 @@ public class DataCreator : MonoBehaviour
         {
             name = "Son of GoldDigger",
             effectValues = new List<float>() { 10, 15, 20, 25, 30 },
-            spritePath = "Sprites/UI/RedCircle",
+            spritePath = "Sprites/Character/BirthMarks/BirthMark10",
             tier = 1,
             buildingType = Building.BuildingType.Mine
         });
@@ -582,7 +582,7 @@ public class DataCreator : MonoBehaviour
         {
             name = "Farmer Master",
             effectValues = new List<float>() { 5, 7.5f, 10, 12.5f, 15 },
-            spritePath = "Sprites/UI/RedCircle",
+            spritePath = "Sprites/Character/BirthMarks/BirthMark11",
             tier = 2,
             buildingType = Building.BuildingType.Farm
         });
@@ -590,7 +590,7 @@ public class DataCreator : MonoBehaviour
         {
             name = "Water Filter Master",
             effectValues = new List<float>() { 5, 7.5f, 10, 12.5f, 15 },
-            spritePath = "Sprites/UI/RedCircle",
+            spritePath = "Sprites/Character/BirthMarks/BirthMark12",
             tier = 2,
             buildingType = Building.BuildingType.WaterTreatmentCenter
         });
@@ -598,7 +598,7 @@ public class DataCreator : MonoBehaviour
         {
             name = "Gold Digger Master",
             effectValues = new List<float>() { 5, 7.5f, 10, 12.5f, 15 },
-            spritePath = "Sprites/UI/RedCircle",
+            spritePath = "Sprites/Character/BirthMarks/BirthMark13",
             tier = 2,
             buildingType = Building.BuildingType.Mine
         });
@@ -606,7 +606,7 @@ public class DataCreator : MonoBehaviour
         {
             name = "Son of Nurse",
             effectValues = new List<float>() { 10, 15, 20, 25, 30 },
-            spritePath = "Sprites/UI/RedCircle",
+            spritePath = "Sprites/Character/BirthMarks/BirthMark14",
             tier = 2,
             buildingType = Building.BuildingType.Residence
         });
@@ -614,7 +614,7 @@ public class DataCreator : MonoBehaviour
         {
             name = "Monkey King",
             effectValues = new List<float>() { 5, 7.5f, 10, 12.5f, 15 },
-            spritePath = "Sprites/UI/RedCircle",
+            spritePath = "Sprites/Character/BirthMarks/BirthMark15",
             tier = 2,
             buildingType = Building.BuildingType.WaterTreatmentCenter
         });
@@ -622,7 +622,7 @@ public class DataCreator : MonoBehaviour
         {
             name = "Economic Man",
             effectValues = new List<float>() { 4, 8, 12, 16, 20 },
-            spritePath = "Sprites/UI/RedCircle",
+            spritePath = "Sprites/Character/BirthMarks/BirthMark16",
             tier = 2,
             buildingType = Building.BuildingType.LaborCenter
         });
@@ -630,7 +630,7 @@ public class DataCreator : MonoBehaviour
         {
             name = "Cupid",
             effectValues = new List<float>() { 10, 25, 40, 55, 70 },
-            spritePath = "Sprites/UI/RedCircle",
+            spritePath = "Sprites/Character/BirthMarks/BirthMark17",
             tier = 2,
             buildingType = Building.BuildingType.LaborCenter
         });
@@ -638,7 +638,7 @@ public class DataCreator : MonoBehaviour
         {
             name = "Jack of All Trade",
             effectValues = new List<float>() { 10, 15, 20, 25, 30 },
-            spritePath = "Sprites/UI/RedCircle",
+            spritePath = "Sprites/Character/BirthMarks/BirthMark18",
             tier = 3,
 
         });
@@ -646,7 +646,7 @@ public class DataCreator : MonoBehaviour
         {
             name = "Nerd",
             effectValues = new List<float>() { 3, 6, 9, 12, 15 },
-            spritePath = "Sprites/UI/RedCircle",
+            spritePath = "Sprites/Character/BirthMarks/BirthMark19",
             tier = 3,
             buildingType = Building.BuildingType.Laboratory
         });
@@ -654,7 +654,7 @@ public class DataCreator : MonoBehaviour
         {
             name = "Iron Chef",
             effectValues = new List<float>() { 3, 6, 9, 12, 15 },
-            spritePath = "Sprites/UI/RedCircle",
+            spritePath = "Sprites/Character/BirthMarks/BirthMark20",
             tier = 3,
             buildingType = Building.BuildingType.Kitchen
         });
@@ -662,7 +662,7 @@ public class DataCreator : MonoBehaviour
         {
             name = "MultiCooker",
             effectValues = new List<float>() { 4, 8, 12, 16, 20 },
-            spritePath = "Sprites/UI/RedCircle",
+            spritePath = "Sprites/Character/BirthMarks/BirthMark21",
             tier = 4,
             buildingType = Building.BuildingType.Kitchen
         });
@@ -670,33 +670,41 @@ public class DataCreator : MonoBehaviour
         {
             name = "MultiSmith",
             effectValues = new List<float>() { 4, 8, 12, 16, 20 },
-            spritePath = "Sprites/UI/RedCircle",
+            spritePath = "Sprites/Character/BirthMarks/BirthMark22",
             tier = 4,
             buildingType = Building.BuildingType.Armory
         });
         birthMarkDatas.Add(new DoubleProductBirthMark()
         {
-            name = "MultiFish",
+            name = "MultiFisher",
             effectValues = new List<float>() { 4, 8, 12, 16, 20 },
-            spritePath = "Sprites/UI/RedCircle",
+            spritePath = "Sprites/Character/BirthMarks/BirthMark23",
             tier = 4,
-            buildingType = Building.BuildingType.FishingPond
+            buildingType = Building.BuildingType.Fishery
         });
         birthMarkDatas.Add(new DoubleProductBirthMark()
         {
             name = "MultiAlcemist",
             effectValues = new List<float>() { 4, 8, 12, 16, 20 },
-            spritePath = "Sprites/UI/RedCircle",
+            spritePath = "Sprites/Character/BirthMarks/BirthMark24",
             tier = 4,
             buildingType = Building.BuildingType.MedicalCenter
         });
         birthMarkDatas.Add(new ParticularEffectOnBuildingBirthMark()
         {
-            name = "Iron Chef",
-            effectValues = new List<float>() { 3, 6, 9, 12, 15 },
-            spritePath = "Sprites/UI/RedCircle",
-            tier = 3,
-            buildingType = Building.BuildingType.Kitchen
+            name = "Luck of The Sea",
+            effectValues = new List<float>() { 80, 90, 100 },
+            spritePath = "Sprites/Character/BirthMarks/BirthMark25",
+            tier = 5,
+            buildingType = Building.BuildingType.Fishery
+        });
+        birthMarkDatas.Add(new AddMoreActionBirthMark()
+        {
+            name = "777",
+            effectValues = new List<float>() { 1, 1, 2 },
+            spritePath = "Sprites/Character/BirthMarks/BirthMark26",
+            tier = 5,
+
         });
 
         BirthMarkSerializer birthMarkSerializer = new BirthMarkSerializer();

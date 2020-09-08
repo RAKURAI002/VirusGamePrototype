@@ -22,7 +22,7 @@ public class MainCanvas : MonoBehaviour
 
     public GameObject confirmationPanel;
     public GameObject warningPanel;
-    public GameObject notificationButtonContainer;
+    public GameObject notificationPanelContainer;
     public Text playerName;
     public Text playerLevel;
 
@@ -300,12 +300,12 @@ public class MainCanvas : MonoBehaviour
 
     public void OnClickNotification()
     {
-        foreach (Transform child in notificationButtonContainer.transform)
+        foreach (Transform child in notificationPanelContainer.transform)
         {
             GameObject.Destroy(child.gameObject);
         }
 
-        notificationButtonContainer.transform.parent.parent.gameObject.SetActive(true);
+        notificationPanelContainer.transform.parent.parent.gameObject.SetActive(true);
         canvasActive = true;
 
         int notiAmount = NotificationManager.Instance.ProcessingActivies.Where(pa => pa.Value.isFinished).ToList().Count;

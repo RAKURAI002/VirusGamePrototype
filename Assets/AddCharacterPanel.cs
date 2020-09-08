@@ -97,16 +97,31 @@ public class AddCharacterPanel : MonoBehaviour
     {
         GameObject characterImage = transform.Find("InformationPanel/StatusPanel/CharacterImage").gameObject;
         characterImage.GetComponent<Image>().sprite = Resources.Load<Sprite>(character.spritePath);
-        GameObject statusPanel = transform.Find("InformationPanel/StatusPanel/STATS").gameObject;
-        statusPanel.transform.parent.Find("Name").GetComponent<Text>().text = $"<color=green>{character.Name}</color>";
-        statusPanel.transform.parent.Find("Level").GetComponent<Text>().text = "<color=green>Level</color> : " + character.level;
-        statusPanel.transform.Find("Healthy").GetComponent<Text>().text = $"Healthy :\t{character.Stats.immunity}";
-        statusPanel.transform.Find("Crafting").GetComponent<Text>().text = $"Crafting :\t{character.Stats.craftsmanship}";
-        statusPanel.transform.Find("Intelligence").GetComponent<Text>().text = $"Intelligence :\t{character.Stats.intelligence}";
-        statusPanel.transform.Find("Strength").GetComponent<Text>().text = $"Strength :\t{character.Stats.strength}";
-        statusPanel.transform.Find("Observing").GetComponent<Text>().text = $"Observing :\t{character.Stats.perception}";
-        statusPanel.transform.Find("Luck").GetComponent<Text>().text = $"Luck :\t{character.Stats.luck}";
-        statusPanel.transform.Find("Speed").GetComponent<Text>().text = $"Speed :\t{character.Stats.speed}";
+        GameObject statsPanel = transform.Find("InformationPanel/StatusPanel/STATS").gameObject;
+        statsPanel.transform.parent.Find("Name").GetComponent<Text>().text = $"<color=green>{character.Name}</color>";
+        statsPanel.transform.parent.Find("Level").GetComponent<Text>().text = "<color=green>Level</color> : " + character.level;
+        statsPanel.transform.Find("Healthy").GetComponent<Text>().text = $"Healthy :\t{character.Stats.immunity}";
+        statsPanel.transform.Find("Crafting").GetComponent<Text>().text = $"Crafting :\t{character.Stats.craftsmanship}";
+        statsPanel.transform.Find("Intelligence").GetComponent<Text>().text = $"Intelligence :\t{character.Stats.intelligence}";
+        statsPanel.transform.Find("Strength").GetComponent<Text>().text = $"Strength :\t{character.Stats.strength}";
+        statsPanel.transform.Find("Observing").GetComponent<Text>().text = $"Observing :\t{character.Stats.perception}";
+        statsPanel.transform.Find("Luck").GetComponent<Text>().text = $"Luck :\t{character.Stats.luck}";
+        statsPanel.transform.Find("Speed").GetComponent<Text>().text = $"Speed :\t{character.Stats.speed}";
+
+        Transform birthMarkContainer = transform.Find("InformationPanel/StatusPanel/BirthMarkPanel/Container");
+        foreach (Transform transform in birthMarkContainer)
+        {
+            Destroy(transform.gameObject);
+
+        }
+
+        foreach (Character.BirthMark birthMark in character.BirthMarks)
+        {
+            Image bmImage = new GameObject().AddComponent<Image>();
+            bmImage.transform.SetParent(birthMarkContainer);
+            bmImage.sprite = Resources.Load<Sprite>(birthMark.spritePath);
+
+        }
 
     }
 

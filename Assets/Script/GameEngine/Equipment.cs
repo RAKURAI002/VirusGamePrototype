@@ -20,7 +20,7 @@ public class Equipment : Item
 
     public Equipment(int id, string name, RarityTier rarity, string description, EquipmentPosition position, string spritePath, Character.AllStats stats)
     {
-        this.id = id;
+        this.id = id + Constant.IDMask.EQUIPMENT_ID_MASK;
         this.name = name;
         this.rarity = rarity;
         this.description = description;
@@ -30,7 +30,7 @@ public class Equipment : Item
     }
     public Equipment(Equipment equipment)
     {
-        this.id = equipment.id;
+        this.id = equipment.id + Constant.IDMask.EQUIPMENT_ID_MASK;
         this.name = equipment.name;
         this.rarity = equipment.rarity;
         this.description = equipment.description;
