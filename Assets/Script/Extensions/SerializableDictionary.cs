@@ -97,7 +97,7 @@ public class ActivityInformation
     public float currentPoint;
     public long finishPoint;
 
-
+    public bool AvoidBattle;
 }
 
 [System.Serializable]

@@ -11,7 +11,7 @@ public class BuildingInformationCanvas : MonoBehaviour
 {
     Builder builder;
     Building buildingData;
-    int x;
+
     private void Awake()
     {
 
@@ -153,13 +153,20 @@ public class BuildingInformationCanvas : MonoBehaviour
         Image buildingImage = transform.Find("BuildImage").gameObject.GetComponent<Image>();
         Text buildingName = transform.Find("BuildName").gameObject.GetComponent<Text>();
         Text buildingDescription = transform.Find("InformationPanel/BuildDescription").gameObject.GetComponent<Text>();
+        Text buildingProduction = transform.Find("InformationPanel/BuildProduction").gameObject.GetComponent<Text>();
         Text buildingLevel = transform.Find("BuildName/BuildLevel").gameObject.GetComponent<Text>();
         //Text buildingStatus = transform.Find("InformationPanel/BuildStatus").gameObject.GetComponent<Text>();
 
+        buildingProduction.text = "  ";
+        foreach (KeyValuePair<string, int> baseProduction in buildingData.production[builder.Level])
+        {
+            buildingProduction.text = "Production : " + (baseProduction.Value * 60).ToString() + "/hr";
+
+        }
 
         buildingImage.sprite = builder.representGameObject.GetComponent<SpriteRenderer>().sprite;
         buildingName.text = builder.Type.ToString();
-       // buildingDescription.text = buildingData..ToString();
+        buildingDescription.text = "Building information : " +  buildingData.description.ToString();
         buildingLevel.text = "Level : " + builder.Level.ToString();
         /*
         foreach (KeyValuePair<string, int> resource in buildingData.production[builder.Level])
