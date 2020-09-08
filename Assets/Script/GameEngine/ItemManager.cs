@@ -59,6 +59,15 @@ public class ItemManager : SingletonComponent<ItemManager>
         return allResources.ContainsKey(name) ? Mathf.FloorToInt(allResources[name].Amount) : 0;
 
     }
+
+    public int GetbuildingCost(string name, Building building)
+    {
+
+        int value = building.buildingCost[0].ContainsKey(name) ? building.buildingCost[1].Single(x => x.Key == name).Value : 0;
+
+        Debug.Log("value" + value.ToString());
+        return value;
+    }
     /// <summary>
     /// Resource update cycle. Invoked in Start.
     /// </summary>

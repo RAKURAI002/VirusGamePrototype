@@ -47,7 +47,17 @@ public class ResultPanel : MonoBehaviour
             
             GameObject itemGO = new GameObject();
             itemGO.transform.SetParent(container.transform);
-            itemGO.AddComponent<Image>().sprite = Resources.Load<Sprite>(LoadManager.Instance.allResourceData[resource.Key].spritePath);
+
+            if (LoadManager.Instance.allResourceData.ContainsKey(resource.Key))
+            {
+
+                itemGO.AddComponent<Image>().sprite = Resources.Load<Sprite>(LoadManager.Instance.allResourceData[resource.Key].spritePath);
+            }
+            else if (LoadManager.Instance.allEquipmentData.ContainsKey(resource.Key))
+            {
+
+                itemGO.AddComponent<Image>().sprite = Resources.Load<Sprite>(LoadManager.Instance.allEquipmentData[resource.Key].spritePath);
+            }
 
             GameObject textGO = new GameObject();
             textGO.name = "Amount";

@@ -5,6 +5,12 @@ using System;
 
 public static class Constant
 {
+    public static int DODGE_CHANCE = 20;
+    public static int RETREAT_CHANCE = 20;
+    public static int RUNAWAY_CHANCE = 30;
+    public static int CRITICAL_CHANCE = 10;
+    public static int WKDAMAGE_CHANCE = 15;
+
     public static class ItemRarityChance
     {
         public static float COMMON_DROP_CHANCE = 45;

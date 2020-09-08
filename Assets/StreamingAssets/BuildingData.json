@@ -289,7 +289,7 @@
                 "Sprites/Building/Farm1",
                 "Sprites/Building/Farm1"
             ],
-            "description": "NO !!!",
+            "description": "Produce Food for your Settlement.",
             "maxProductionStored": [
                 0,
                 600,
@@ -435,7 +435,7 @@
                 "Sprites/Building/FishingPond1",
                 "Sprites/Building/FishingPond1"
             ],
-            "description": "NO !!!",
+            "description": "Fish Farm",
             "maxProductionStored": [],
             "productionSpritePath": ""
         },
@@ -613,7 +613,7 @@
                 "Sprites/Building/Kitchen1",
                 "Sprites/Building/Kitchen1"
             ],
-            "description": "NO !!!",
+            "description": "Produce special food to increase stats.",
             "maxProductionStored": [],
             "productionSpritePath": ""
         },
@@ -866,7 +866,7 @@
                 "Sprites/Building/Laboratory1",
                 "Sprites/Building/Laboratory1"
             ],
-            "description": "NO !!!",
+            "description": "Research something.",
             "maxProductionStored": [],
             "productionSpritePath": ""
         },
@@ -1174,7 +1174,7 @@
                 "Sprites/Building/LaborCenter1",
                 "Sprites/Building/LaborCenter1"
             ],
-            "description": "NO !!!",
+            "description": "LaborCenter.",
             "maxProductionStored": [],
             "productionSpritePath": ""
         },
@@ -1352,7 +1352,7 @@
                 "Sprites/Building/MedicalCenter1",
                 "Sprites/Building/MedicalCenter1"
             ],
-            "description": "NO !!!",
+            "description": "Produce Med kit.",
             "maxProductionStored": [],
             "productionSpritePath": ""
         },
@@ -1520,7 +1520,7 @@
                 "Sprites/Building/QuarantineSite1",
                 "Sprites/Building/QuarantineSite1"
             ],
-            "description": "NO !!!",
+            "description": "Quarantine helps prevent spread of disease ",
             "maxProductionStored": [],
             "productionSpritePath": ""
         },
@@ -1813,7 +1813,7 @@
                 "Sprites/Building/Residence1",
                 "Sprites/Building/Residence1"
             ],
-            "description": "NO !!!",
+            "description": "Increases number of people in Town and breed new member.",
             "maxProductionStored": [],
             "productionSpritePath": ""
         },
@@ -2103,7 +2103,7 @@
                 "Sprites/Building/TownBase1",
                 "Sprites/Building/TownBase1"
             ],
-            "description": "NO !!!",
+            "description": "Assign quest.",
             "maxProductionStored": [],
             "productionSpritePath": ""
         },
@@ -2356,7 +2356,7 @@
                 "Sprites/Building/WareHouse1",
                 "Sprites/Building/WareHouse1"
             ],
-            "description": "NO !!!",
+            "description": "Increase Number of items you can hold.",
             "maxProductionStored": [],
             "productionSpritePath": ""
         },
@@ -2649,7 +2649,7 @@
                 "Sprites/Building/WaterTreatmentCenter1",
                 "Sprites/Building/WaterTreatmentCenter1"
             ],
-            "description": "NO !!!",
+            "description": "Produce Water for your Settlement.",
             "maxProductionStored": [
                 0,
                 600,
@@ -2839,7 +2839,7 @@
                 "Sprites/Building/Armory1",
                 "Sprites/Building/Armory1"
             ],
-            "description": "NO !!!",
+            "description": "Craft Items.",
             "maxProductionStored": [],
             "productionSpritePath": ""
         },
@@ -3092,7 +3092,7 @@
                 "Sprites/Building/TradingCenter1",
                 "Sprites/Building/TradingCenter1"
             ],
-            "description": "NO !!!",
+            "description": "Trading Center.",
             "maxProductionStored": [],
             "productionSpritePath": ""
         },
@@ -3405,7 +3405,7 @@
                 "Sprites/Building/Mine1",
                 "Sprites/Building/Mine1"
             ],
-            "description": "NO !!!",
+            "description": "Mine.",
             "maxProductionStored": [
                 0,
                 60,
@@ -3710,7 +3710,7 @@
                 "Sprites/Building/LumberYard1",
                 "Sprites/Building/LumberYard1"
             ],
-            "description": "NO !!!",
+            "description": "LumberYard.",
             "maxProductionStored": [
                 0,
                 500,

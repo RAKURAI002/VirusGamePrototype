@@ -342,23 +342,42 @@ public class DataCreator : MonoBehaviour
         woodResourceProduction.Add(new DictionaryStringToInt() { { "Wood", 76 } });
         woodResourceProduction.Add(new DictionaryStringToInt() { { "Wood", 86 } });
         woodResourceProduction.Add(new DictionaryStringToInt() { { "Wood", 96 } });
-        string description = "NO !!!";
+
+        List<string> description = new List<string>();
+        description.Add("null");
+        description.Add("Produce Food for your Settlement.");
+        description.Add("Fish Farm");
+        description.Add("Produce special food to increase stats.");
+        description.Add("Research something.");
+        description.Add("LaborCenter.");
+        description.Add("Produce Med kit.");
+        description.Add("Quarantine helps prevent spread of disease ");
+        description.Add("Increases number of people in Town and breed new member.");
+        description.Add("Assign quest.");
+        description.Add("Increase Number of items you can hold.");
+        description.Add("Produce Water for your Settlement.");
+        description.Add("Craft Items.");
+        description.Add("Trading Center.");
+        description.Add("Mine.");
+        description.Add("LumberYard.");
+
+
         List<Building> bu = new List<Building>();
-        bu.Add(new Building(Building.BuildingType.Farm, resourceBuildingCost, farmResourceProduction, allConsuming, resourceUpgradePoint, 3, 10, maxCharacterInWorking, description, GetSpritePath("Farm"), farm_waterProductionStored, "Sprites/UI/FoodIcon"));
-        bu.Add(new Building(Building.BuildingType.Fishery, craftBuildingCost, allProduction, allConsuming, craftUpgradePoint, 1, 3, maxCharacterInCraft, description, GetSpritePath("FishingPond")));
-        bu.Add(new Building(Building.BuildingType.Kitchen, craftBuildingCost, laborProduction, allConsuming, craftUpgradePoint, 1, 3, maxCharacterInCraft, description, GetSpritePath("Kitchen")));
-        bu.Add(new Building(Building.BuildingType.Laboratory, labBuildingCost, allProduction, allConsuming, labUpgradePoint, 1, 10, maxCharacterInWorking, description, GetSpritePath("Laboratory")));
-        bu.Add(new Building(Building.BuildingType.LaborCenter, labBuildingCost, laborProduction, allConsuming, labUpgradePoint, 1, 10, maxCharacterInTeam, description, GetSpritePath("LaborCenter")));//***
-        bu.Add(new Building(Building.BuildingType.MedicalCenter, craftBuildingCost, laborProduction, allConsuming, craftUpgradePoint, 1, 3, maxCharacterInCraft, description, GetSpritePath("MedicalCenter")));
-        bu.Add(new Building(Building.BuildingType.QuarantineSite, QuarantineSiteCost, allProduction, allConsuming, QuarantineUpgradePoint, 1, 5, maxCharacterInQZone, description, GetSpritePath("QuarantineSite")));
-        bu.Add(new Building(Building.BuildingType.Residence, containBuildingCost, residentResourceProduction, allConsuming, containUpgradePoint, 5, 10, maxCharacterInResident, description, GetSpritePath("Residence")));
-        bu.Add(new Building(Building.BuildingType.TownBase, townBaseCost, allProduction, allConsuming, townBaseUpgradePoint, 1, 10, maxCharacterInTeam, description, GetSpritePath("TownBase")));//****
-        bu.Add(new Building(Building.BuildingType.WareHouse, containBuildingCost, allProduction, allConsuming, containUpgradePoint, 3, 10, maxCharacter, description, GetSpritePath("WareHouse")));
-        bu.Add(new Building(Building.BuildingType.WaterTreatmentCenter, resourceBuildingCost, waterResourceProduction, allConsuming, resourceUpgradePoint, 3, 10, maxCharacterInWorking, description, GetSpritePath("WaterTreatmentCenter"), farm_waterProductionStored, "Sprites/UI/WaterIcon"));
-        bu.Add(new Building(Building.BuildingType.Armory, craftBuildingCost, laborProduction, allConsuming, craftUpgradePoint, 1, 3, maxCharacterInCraft, description, GetSpritePath("Armory")));
-        bu.Add(new Building(Building.BuildingType.TradingCenter, resourceBuildingCost, allProduction, allConsuming, townBaseUpgradePoint, 1, 10, maxCharacter, description, GetSpritePath("TradingCenter")));
-        bu.Add(new Building(Building.BuildingType.Mine, resourceBuildingCost, mineResourceProduction, allConsuming, resourceUpgradePoint, 3, 3, maxCharacterInWorking, description, GetSpritePath("Mine"), goldProductionStored, "Sprites/UI/FoodIcon"));
-        bu.Add(new Building(Building.BuildingType.LumberYard, resourceBuildingCost, woodResourceProduction, allConsuming, resourceUpgradePoint, 3, 10, maxCharacterInWorking, description, GetSpritePath("LumberYard"), woodProductionStored, "Sprites/UI/FoodIcon"));
+        bu.Add(new Building(Building.BuildingType.Farm, resourceBuildingCost, farmResourceProduction, allConsuming, resourceUpgradePoint, 3, 10, maxCharacterInWorking, description[1], GetSpritePath("Farm"), farm_waterProductionStored, "Sprites/UI/FoodIcon"));
+        bu.Add(new Building(Building.BuildingType.Fishery, craftBuildingCost, allProduction, allConsuming, craftUpgradePoint, 1, 3, maxCharacterInCraft, description[2], GetSpritePath("FishingPond")));
+        bu.Add(new Building(Building.BuildingType.Kitchen, craftBuildingCost, laborProduction, allConsuming, craftUpgradePoint, 1, 3, maxCharacterInCraft, description[3], GetSpritePath("Kitchen")));
+        bu.Add(new Building(Building.BuildingType.Laboratory, labBuildingCost, allProduction, allConsuming, labUpgradePoint, 1, 10, maxCharacterInWorking, description[4], GetSpritePath("Laboratory")));
+        bu.Add(new Building(Building.BuildingType.LaborCenter, labBuildingCost, laborProduction, allConsuming, labUpgradePoint, 1, 10, maxCharacterInTeam, description[5], GetSpritePath("LaborCenter")));//***
+        bu.Add(new Building(Building.BuildingType.MedicalCenter, craftBuildingCost, laborProduction, allConsuming, craftUpgradePoint, 1, 3, maxCharacterInCraft, description[6], GetSpritePath("MedicalCenter")));
+        bu.Add(new Building(Building.BuildingType.QuarantineSite, QuarantineSiteCost, allProduction, allConsuming, QuarantineUpgradePoint, 1, 5, maxCharacterInQZone, description[7], GetSpritePath("QuarantineSite")));
+        bu.Add(new Building(Building.BuildingType.Residence, containBuildingCost, residentResourceProduction, allConsuming, containUpgradePoint, 5, 10, maxCharacterInResident, description[8], GetSpritePath("Residence")));
+        bu.Add(new Building(Building.BuildingType.TownBase, townBaseCost, allProduction, allConsuming, townBaseUpgradePoint, 1, 10, maxCharacterInTeam, description[9], GetSpritePath("TownBase")));//****
+        bu.Add(new Building(Building.BuildingType.WareHouse, containBuildingCost, allProduction, allConsuming, containUpgradePoint, 3, 10, maxCharacter, description[10], GetSpritePath("WareHouse")));
+        bu.Add(new Building(Building.BuildingType.WaterTreatmentCenter, resourceBuildingCost, waterResourceProduction, allConsuming, resourceUpgradePoint, 3, 10, maxCharacterInWorking, description[11], GetSpritePath("WaterTreatmentCenter"), farm_waterProductionStored, "Sprites/UI/WaterIcon"));
+        bu.Add(new Building(Building.BuildingType.Armory, craftBuildingCost, laborProduction, allConsuming, craftUpgradePoint, 1, 3, maxCharacterInCraft, description[12], GetSpritePath("Armory")));
+        bu.Add(new Building(Building.BuildingType.TradingCenter, resourceBuildingCost, allProduction, allConsuming, townBaseUpgradePoint, 1, 10, maxCharacter, description[13], GetSpritePath("TradingCenter")));
+        bu.Add(new Building(Building.BuildingType.Mine, resourceBuildingCost, mineResourceProduction, allConsuming, resourceUpgradePoint, 3, 3, maxCharacterInWorking, description[14], GetSpritePath("Mine"), goldProductionStored, "Sprites/UI/FoodIcon"));
+        bu.Add(new Building(Building.BuildingType.LumberYard, resourceBuildingCost, woodResourceProduction, allConsuming, resourceUpgradePoint, 3, 10, maxCharacterInWorking, description[15], GetSpritePath("LumberYard"), woodProductionStored, "Sprites/UI/FoodIcon"));
         string buildingDatas = JsonHelper.ToJson(bu.ToArray(), true);// Newtonsoft.Json.JsonConvert.SerializeObject(playerData, Newtonsoft.Json.Formatting.Indented); //JsonUtility.ToJson(playerData, true); 
         Debug.Log("Creating JSON data : " + buildingDatas);
         System.IO.File.WriteAllText(Application.streamingAssetsPath + "/BuildingData.json", buildingDatas);
