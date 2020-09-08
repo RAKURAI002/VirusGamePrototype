@@ -73,11 +73,11 @@ public class DataCreator : MonoBehaviour
         craftBuildingCost.Add(new DictionaryStringToInt() { { "Stone", 10000 }, { "Wood", 20000 } });       //lv1->2
         craftBuildingCost.Add(new DictionaryStringToInt() { { "Stone", 30000 }, { "Wood", 50000 } });       //lv2->3
         List<DictionaryStringToInt> QuarantineSiteCost = new List<DictionaryStringToInt>();
-        QuarantineSiteCost.Add(new DictionaryStringToInt() { { "Stone", 10 }, { "Wood", 10 } });          //shop->lv1
-        QuarantineSiteCost.Add(new DictionaryStringToInt() { { "Stone", 50 }, { "Wood", 125 } });         //lv1->2
-        QuarantineSiteCost.Add(new DictionaryStringToInt() { { "Stone", 100 }, { "Wood", 250 } });        //lv2->3
-        QuarantineSiteCost.Add(new DictionaryStringToInt() { { "Stone", 200 }, { "Wood", 500 } });        //lv3->4
-        QuarantineSiteCost.Add(new DictionaryStringToInt() { { "Stone", 400 }, { "Wood", 1000 } });       //lv4->5
+        QuarantineSiteCost.Add(new DictionaryStringToInt() { { "Stone", 1000 }, { "Wood", 1000 } });          //shop->lv1
+        QuarantineSiteCost.Add(new DictionaryStringToInt() { { "Stone", 10000 }, { "Wood", 15000 } });         //lv1->2
+        QuarantineSiteCost.Add(new DictionaryStringToInt() { { "Stone", 11000 }, { "Wood", 20000 } });        //lv2->3
+        QuarantineSiteCost.Add(new DictionaryStringToInt() { { "Stone", 12500 }, { "Wood", 25500 } });        //lv3->4
+        QuarantineSiteCost.Add(new DictionaryStringToInt() { { "Stone", 14500 }, { "Wood", 315000 } });       //lv4->5
         List<DictionaryStringToInt> containBuildingCost = new List<DictionaryStringToInt>();
         containBuildingCost.Add(new DictionaryStringToInt() { { "Stone", 500 }, { "Wood", 500 } });
         containBuildingCost.Add(new DictionaryStringToInt() { { "Stone", 1250 }, { "Wood", 2500 } });
@@ -342,10 +342,24 @@ public class DataCreator : MonoBehaviour
         woodResourceProduction.Add(new DictionaryStringToInt() { { "Wood", 76 } });
         woodResourceProduction.Add(new DictionaryStringToInt() { { "Wood", 86 } });
         woodResourceProduction.Add(new DictionaryStringToInt() { { "Wood", 96 } });
+
+        List<DictionaryStringToInt> warehouseProduction = new List<DictionaryStringToInt>();
+        residentResourceProduction.Add(new DictionaryStringToInt());
+        residentResourceProduction.Add(new DictionaryStringToInt() { { "Production", 4000 } });
+        residentResourceProduction.Add(new DictionaryStringToInt() { { "Production", 8000 } });
+        residentResourceProduction.Add(new DictionaryStringToInt() { { "Production", 16000 } });
+        residentResourceProduction.Add(new DictionaryStringToInt() { { "Production", 32000 } });
+        residentResourceProduction.Add(new DictionaryStringToInt() { { "Production", 64000 } });
+        residentResourceProduction.Add(new DictionaryStringToInt() { { "Production", 128000 } });
+        residentResourceProduction.Add(new DictionaryStringToInt() { { "Production", 256000 } });
+        residentResourceProduction.Add(new DictionaryStringToInt() { { "Production", 512000 } });
+        residentResourceProduction.Add(new DictionaryStringToInt() { { "Production", 1024000 } });
+        residentResourceProduction.Add(new DictionaryStringToInt() { { "Production", 2048000 } });
+        int a;
         string description = "NO !!!";
         List<Building> bu = new List<Building>();
         bu.Add(new Building(Building.BuildingType.Farm, resourceBuildingCost, farmResourceProduction, allConsuming, resourceUpgradePoint, 3, 10, maxCharacterInWorking, description, GetSpritePath("Farm"), farm_waterProductionStored, "Sprites/UI/FoodIcon"));
-        bu.Add(new Building(Building.BuildingType.Fishery, craftBuildingCost, allProduction, allConsuming, craftUpgradePoint, 1, 3, maxCharacterInCraft, description, GetSpritePath("FishingPond")));
+        bu.Add(new Building(Building.BuildingType.FishingPond, craftBuildingCost, allProduction, allConsuming, craftUpgradePoint, 1, 3, maxCharacterInCraft, description, GetSpritePath("FishingPond")));
         bu.Add(new Building(Building.BuildingType.Kitchen, craftBuildingCost, laborProduction, allConsuming, craftUpgradePoint, 1, 3, maxCharacterInCraft, description, GetSpritePath("Kitchen")));
         bu.Add(new Building(Building.BuildingType.Laboratory, labBuildingCost, allProduction, allConsuming, labUpgradePoint, 1, 10, maxCharacterInWorking, description, GetSpritePath("Laboratory")));
         bu.Add(new Building(Building.BuildingType.LaborCenter, labBuildingCost, laborProduction, allConsuming, labUpgradePoint, 1, 10, maxCharacterInTeam, description, GetSpritePath("LaborCenter")));//***
