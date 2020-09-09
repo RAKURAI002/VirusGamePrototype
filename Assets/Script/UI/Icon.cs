@@ -23,15 +23,23 @@ public abstract class Icon : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     protected abstract void SetDescription();
     protected virtual void UpdateText()
     {
+        if(desciption.Equals(default(StringBuilder)))
+        {
+            return;
+
+        }
         text.text = desciption.ToString();
+
+        GetComponentInChildren<TextBoxScaler>().Scale();
 
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         SetDescription();
-        textPanel.gameObject.SetActive(true);
         UpdateText();
+        textPanel.gameObject.SetActive(true);
+        
     }
 
     public void OnPointerExit(PointerEventData eventData)

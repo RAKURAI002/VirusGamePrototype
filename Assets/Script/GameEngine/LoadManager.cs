@@ -18,7 +18,6 @@ using System.Runtime.Serialization.Formatters.Binary;
 /// </summary>
 public class LoadManager : SingletonComponent<LoadManager>
 {
-
     [SerializeField] public PlayerData playerData { get; set; }
 
     [SerializeField] public BuildingDictionary allBuildingData;

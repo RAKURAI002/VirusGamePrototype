@@ -563,7 +563,7 @@
         },
         {
             "id": 5017,
-            "name": "Production",
+            "name": "BaseHealAmount",
             "rarity": 0,
             "description": "Specific Building Production .",
             "spritePath": "Sprites/Resource/Production",
@@ -596,6 +596,72 @@
         },
         {
             "id": 5018,
+            "name": "BreedingChance",
+            "rarity": 0,
+            "description": "Specific Building Production .",
+            "spritePath": "Sprites/Resource/Production",
+            "craftingData": {
+                "craftingMaterials": {
+                    "keys": [],
+                    "values": []
+                },
+                "pointRequired": 0
+            },
+            "type": 6,
+            "effect": {
+                "name": "",
+                "spritePath": "",
+                "stats": {
+                    "speed": 0,
+                    "craftsmanship": 0,
+                    "intelligence": 0,
+                    "strength": 0,
+                    "perception": 0,
+                    "luck": 0,
+                    "immunity": 0
+                },
+                "duration": 0,
+                "instanceID": "",
+                "startTime": 0,
+                "finishTime": 0
+            },
+            "amount": 0.0
+        },
+        {
+            "id": 5019,
+            "name": "Production",
+            "rarity": 0,
+            "description": "Specific Building Production .",
+            "spritePath": "Sprites/Resource/Production",
+            "craftingData": {
+                "craftingMaterials": {
+                    "keys": [],
+                    "values": []
+                },
+                "pointRequired": 0
+            },
+            "type": 6,
+            "effect": {
+                "name": "",
+                "spritePath": "",
+                "stats": {
+                    "speed": 0,
+                    "craftsmanship": 0,
+                    "intelligence": 0,
+                    "strength": 0,
+                    "perception": 0,
+                    "luck": 0,
+                    "immunity": 0
+                },
+                "duration": 0,
+                "instanceID": "",
+                "startTime": 0,
+                "finishTime": 0
+            },
+            "amount": 0.0
+        },
+        {
+            "id": 5020,
             "name": "Gold",
             "rarity": 0,
             "description": "Specific Building Production .",
@@ -628,7 +694,7 @@
             "amount": 0.0
         },
         {
-            "id": 5019,
+            "id": 5021,
             "name": "Diamond",
             "rarity": 0,
             "description": "Specific Building Production .",
@@ -661,7 +727,7 @@
             "amount": 0.0
         },
         {
-            "id": 20,
+            "id": 22,
             "name": "Recipe:Bread",
             "rarity": 1,
             "description": "Recipe.",
@@ -698,7 +764,7 @@
             "amount": 0.0
         },
         {
-            "id": 21,
+            "id": 23,
             "name": "Recipe:Burger",
             "rarity": 1,
             "description": "Recipe.",
@@ -737,7 +803,7 @@
             "amount": 0.0
         },
         {
-            "id": 22,
+            "id": 24,
             "name": "Recipe:Golden Burger",
             "rarity": 2,
             "description": "Recipe.",
@@ -776,7 +842,7 @@
             "amount": 0.0
         },
         {
-            "id": 23,
+            "id": 25,
             "name": "Recipe:Ultra Instinct Face Mask",
             "rarity": 5,
             "description": "Recipe.",
@@ -817,7 +883,7 @@
             "amount": 0.0
         },
         {
-            "id": 24,
+            "id": 26,
             "name": "Recipe:Common Face Mask",
             "rarity": 1,
             "description": "Recipe.",
@@ -856,7 +922,7 @@
             "amount": 0.0
         },
         {
-            "id": 25,
+            "id": 27,
             "name": "Recipe:Medicine(maybe)",
             "rarity": 1,
             "description": "Recipe.",

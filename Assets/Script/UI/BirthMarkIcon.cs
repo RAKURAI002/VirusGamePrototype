@@ -17,8 +17,8 @@ public class BirthMarkIcon : Icon
     protected override void SetDescription()
     {
         desciption.Clear();
-        desciption.AppendLine($"{birthMarkData.name}(Level{birthMarkData.level})");
-        desciption.AppendLine($"");
+      //  desciption.AppendLine($"{birthMarkData.name}(Level{birthMarkData.level})");
+        desciption.AppendLine($"dd");
 
         Debug.Log($"{desciption}");
     }

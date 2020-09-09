@@ -3,6 +3,7 @@
         {
             "id": 6001,
             "name": "Gold>1000",
+            "description": "",
             "rewards": {
                 "keys": [
                     "Stone",

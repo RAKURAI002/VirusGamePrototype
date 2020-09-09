@@ -297,16 +297,16 @@ public class DataCreator : MonoBehaviour
             mineResourceProduction.Add(new DictionaryStringToInt() { { "Gold", 10 }, { "Stone", 96 } });
             List<DictionaryStringToInt> residentResourceProduction = new List<DictionaryStringToInt>();
             residentResourceProduction.Add(new DictionaryStringToInt());
-            residentResourceProduction.Add(new DictionaryStringToInt() { { "Production", 3 } });
-            residentResourceProduction.Add(new DictionaryStringToInt() { { "Production", 4 } });
-            residentResourceProduction.Add(new DictionaryStringToInt() { { "Production", 5 } });
-            residentResourceProduction.Add(new DictionaryStringToInt() { { "Production", 6 } });
-            residentResourceProduction.Add(new DictionaryStringToInt() { { "Production", 7 } });
-            residentResourceProduction.Add(new DictionaryStringToInt() { { "Production", 8 } });
-            residentResourceProduction.Add(new DictionaryStringToInt() { { "Production", 9 } });
-            residentResourceProduction.Add(new DictionaryStringToInt() { { "Production", 10 } });
-            residentResourceProduction.Add(new DictionaryStringToInt() { { "Production", 11 } });
-            residentResourceProduction.Add(new DictionaryStringToInt() { { "Production", 12 } });
+            residentResourceProduction.Add(new DictionaryStringToInt() { { "MaxCharacterStored", 3 }, { "BaseHealAmount", 5 }, { "BreedingChance", 5 } });
+            residentResourceProduction.Add(new DictionaryStringToInt() { { "MaxCharacterStored", 4 }, { "BaseHealAmount", 5 }, { "BreedingChance", 5 } });
+            residentResourceProduction.Add(new DictionaryStringToInt() { { "MaxCharacterStored", 5 }, { "BaseHealAmount", 5 }, { "BreedingChance", 5 } });
+            residentResourceProduction.Add(new DictionaryStringToInt() { { "MaxCharacterStored", 6 }, { "BaseHealAmount", 5 }, { "BreedingChance", 5 } });
+            residentResourceProduction.Add(new DictionaryStringToInt() { { "MaxCharacterStored", 7 }, { "BaseHealAmount", 5 }, { "BreedingChance", 5 } });
+            residentResourceProduction.Add(new DictionaryStringToInt() { { "MaxCharacterStored", 8 }, { "BaseHealAmount", 5 }, { "BreedingChance", 5 } });
+            residentResourceProduction.Add(new DictionaryStringToInt() { { "MaxCharacterStored", 9 }, { "BaseHealAmount", 5 }, { "BreedingChance", 5 } });
+            residentResourceProduction.Add(new DictionaryStringToInt() { { "MaxCharacterStored", 10 }, { "BaseHealAmount", 5 }, { "BreedingChance", 5 } });
+            residentResourceProduction.Add(new DictionaryStringToInt() { { "MaxCharacterStored", 11 }, { "BaseHealAmount", 5 }, { "BreedingChance", 5 } });
+            residentResourceProduction.Add(new DictionaryStringToInt() { { "MaxCharacterStored", 12 }, { "BaseHealAmount", 5 }, { "BreedingChance", 5 } });
             List<DictionaryStringToInt> laborProduction = new List<DictionaryStringToInt>();
             laborProduction.Add(new DictionaryStringToInt() { { "Production", 20 } });
             laborProduction.Add(new DictionaryStringToInt() { { "Production", 20 } });
@@ -344,6 +344,19 @@ public class DataCreator : MonoBehaviour
             woodResourceProduction.Add(new DictionaryStringToInt() { { "Wood", 86 } });
             woodResourceProduction.Add(new DictionaryStringToInt() { { "Wood", 96 } });
 
+            List<DictionaryStringToInt> warehouseProduction = new List<DictionaryStringToInt>();
+            residentResourceProduction.Add(new DictionaryStringToInt());
+            residentResourceProduction.Add(new DictionaryStringToInt() { { "Production", 4000 } });
+            residentResourceProduction.Add(new DictionaryStringToInt() { { "Production", 8000 } });
+            residentResourceProduction.Add(new DictionaryStringToInt() { { "Production", 16000 } });
+            residentResourceProduction.Add(new DictionaryStringToInt() { { "Production", 32000 } });
+            residentResourceProduction.Add(new DictionaryStringToInt() { { "Production", 64000 } });
+            residentResourceProduction.Add(new DictionaryStringToInt() { { "Production", 128000 } });
+            residentResourceProduction.Add(new DictionaryStringToInt() { { "Production", 256000 } });
+            residentResourceProduction.Add(new DictionaryStringToInt() { { "Production", 512000 } });
+            residentResourceProduction.Add(new DictionaryStringToInt() { { "Production", 1024000 } });
+            residentResourceProduction.Add(new DictionaryStringToInt() { { "Production", 2048000 } });
+
             Dictionary<Building.BuildingType, string> description = new Dictionary<Building.BuildingType, string>();
             description.Add(Building.BuildingType.Farm, "One of basic needs. Manage this propery or get starve all !");
             description.Add(Building.BuildingType.Fishery, "Fishing from here and get a chance for rare item !");
@@ -371,7 +384,7 @@ public class DataCreator : MonoBehaviour
             bu.Add(new Building(Building.BuildingType.QuarantineSite, QuarantineSiteCost, allProduction, allConsuming, QuarantineUpgradePoint, 1, 5, maxCharacterInQZone, description[Building.BuildingType.QuarantineSite], GetSpritePath("QuarantineSite")));
             bu.Add(new Building(Building.BuildingType.Residence, containBuildingCost, residentResourceProduction, allConsuming, containUpgradePoint, 5, 10, maxCharacterInResident, description[Building.BuildingType.Residence], GetSpritePath("Residence")));
             bu.Add(new Building(Building.BuildingType.TownBase, townBaseCost, allProduction, allConsuming, townBaseUpgradePoint, 1, 10, maxCharacterInTeam, description[Building.BuildingType.TownBase], GetSpritePath("TownBase")));//****
-            bu.Add(new Building(Building.BuildingType.WareHouse, containBuildingCost, allProduction, allConsuming, containUpgradePoint, 3, 10, maxCharacter, description[Building.BuildingType.WareHouse], GetSpritePath("WareHouse")));
+            bu.Add(new Building(Building.BuildingType.WareHouse, containBuildingCost, warehouseProduction, allConsuming, containUpgradePoint, 3, 10, maxCharacter, description[Building.BuildingType.WareHouse], GetSpritePath("WareHouse")));
             bu.Add(new Building(Building.BuildingType.WaterTreatmentCenter, resourceBuildingCost, waterResourceProduction, allConsuming, resourceUpgradePoint, 3, 10, maxCharacterInWorking, description[Building.BuildingType.WaterTreatmentCenter], GetSpritePath("WaterTreatmentCenter"), farm_waterProductionStored, "Sprites/UI/WaterIcon"));
             bu.Add(new Building(Building.BuildingType.Armory, craftBuildingCost, laborProduction, allConsuming, craftUpgradePoint, 1, 3, maxCharacterInCraft, description[Building.BuildingType.Armory], GetSpritePath("Armory")));
             bu.Add(new Building(Building.BuildingType.TradingCenter, resourceBuildingCost, allProduction, allConsuming, townBaseUpgradePoint, 1, 10, maxCharacter, description[Building.BuildingType.TradingCenter], GetSpritePath("TradingCenter")));
@@ -452,6 +465,8 @@ public class DataCreator : MonoBehaviour
 
 
 
+            r.Add(new Resource(r.Count, "BaseHealAmount", Item.RarityTier.Unknown, "Specific Building Production .", Resource.ResourceType.Special, "Sprites/Resource/Production"));
+            r.Add(new Resource(r.Count, "BreedingChance", Item.RarityTier.Unknown, "Specific Building Production .", Resource.ResourceType.Special, "Sprites/Resource/Production"));
 
             r.Add(new Resource(r.Count, "Production", Item.RarityTier.Unknown, "Specific Building Production .", Resource.ResourceType.Special, "Sprites/Resource/Production"));
             r.Add(new Resource(r.Count, "Gold", Item.RarityTier.Unknown, "Specific Building Production .", Resource.ResourceType.Currency, "Sprites/Resource/Gold"));

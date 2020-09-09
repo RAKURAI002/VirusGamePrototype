@@ -8,6 +8,7 @@ public class AchievementData
 {
     [SerializeField] public int id;
     [SerializeField] public string name;
+    [SerializeField] public string description;
     [SerializeField] public DictionaryStringToInt rewards;
     [SerializeField] public Func<bool> condition;
 

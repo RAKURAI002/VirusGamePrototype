@@ -1635,34 +1635,134 @@
                 },
                 {
                     "keys": [
-                        "Production"
+                        "MaxCharacterStored",
+                        "BaseHealAmount",
+                        "BreedingChance"
                     ],
                     "values": [
-                        3
-                    ]
-                },
-                {
-                    "keys": [
-                        "Production"
-                    ],
-                    "values": [
-                        4
-                    ]
-                },
-                {
-                    "keys": [
-                        "Production"
-                    ],
-                    "values": [
+                        3,
+                        5,
                         5
                     ]
                 },
                 {
                     "keys": [
+                        "MaxCharacterStored",
+                        "BaseHealAmount",
+                        "BreedingChance"
+                    ],
+                    "values": [
+                        4,
+                        5,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "MaxCharacterStored",
+                        "BaseHealAmount",
+                        "BreedingChance"
+                    ],
+                    "values": [
+                        5,
+                        5,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "MaxCharacterStored",
+                        "BaseHealAmount",
+                        "BreedingChance"
+                    ],
+                    "values": [
+                        6,
+                        5,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "MaxCharacterStored",
+                        "BaseHealAmount",
+                        "BreedingChance"
+                    ],
+                    "values": [
+                        7,
+                        5,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "MaxCharacterStored",
+                        "BaseHealAmount",
+                        "BreedingChance"
+                    ],
+                    "values": [
+                        8,
+                        5,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "MaxCharacterStored",
+                        "BaseHealAmount",
+                        "BreedingChance"
+                    ],
+                    "values": [
+                        9,
+                        5,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "MaxCharacterStored",
+                        "BaseHealAmount",
+                        "BreedingChance"
+                    ],
+                    "values": [
+                        10,
+                        5,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "MaxCharacterStored",
+                        "BaseHealAmount",
+                        "BreedingChance"
+                    ],
+                    "values": [
+                        11,
+                        5,
+                        5
+                    ]
+                },
+                {
+                    "keys": [
+                        "MaxCharacterStored",
+                        "BaseHealAmount",
+                        "BreedingChance"
+                    ],
+                    "values": [
+                        12,
+                        5,
+                        5
+                    ]
+                },
+                {
+                    "keys": [],
+                    "values": []
+                },
+                {
+                    "keys": [
                         "Production"
                     ],
                     "values": [
-                        6
+                        4000
                     ]
                 },
                 {
@@ -1670,7 +1770,7 @@
                         "Production"
                     ],
                     "values": [
-                        7
+                        8000
                     ]
                 },
                 {
@@ -1678,7 +1778,7 @@
                         "Production"
                     ],
                     "values": [
-                        8
+                        16000
                     ]
                 },
                 {
@@ -1686,7 +1786,7 @@
                         "Production"
                     ],
                     "values": [
-                        9
+                        32000
                     ]
                 },
                 {
@@ -1694,7 +1794,7 @@
                         "Production"
                     ],
                     "values": [
-                        10
+                        64000
                     ]
                 },
                 {
@@ -1702,7 +1802,7 @@
                         "Production"
                     ],
                     "values": [
-                        11
+                        128000
                     ]
                 },
                 {
@@ -1710,7 +1810,31 @@
                         "Production"
                     ],
                     "values": [
-                        12
+                        256000
+                    ]
+                },
+                {
+                    "keys": [
+                        "Production"
+                    ],
+                    "values": [
+                        512000
+                    ]
+                },
+                {
+                    "keys": [
+                        "Production"
+                    ],
+                    "values": [
+                        1024000
+                    ]
+                },
+                {
+                    "keys": [
+                        "Production"
+                    ],
+                    "values": [
+                        2048000
                     ]
                 }
             ],
@@ -2211,52 +2335,7 @@
                     ]
                 }
             ],
-            "production": [
-                {
-                    "keys": [],
-                    "values": []
-                },
-                {
-                    "keys": [],
-                    "values": []
-                },
-                {
-                    "keys": [],
-                    "values": []
-                },
-                {
-                    "keys": [],
-                    "values": []
-                },
-                {
-                    "keys": [],
-                    "values": []
-                },
-                {
-                    "keys": [],
-                    "values": []
-                },
-                {
-                    "keys": [],
-                    "values": []
-                },
-                {
-                    "keys": [],
-                    "values": []
-                },
-                {
-                    "keys": [],
-                    "values": []
-                },
-                {
-                    "keys": [],
-                    "values": []
-                },
-                {
-                    "keys": [],
-                    "values": []
-                }
-            ],
+            "production": [],
             "consuming": [],
             "upgradePoint": [
                 6000,

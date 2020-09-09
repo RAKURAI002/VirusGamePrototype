@@ -11,6 +11,11 @@ public class TextBoxScaler : MonoBehaviour
 
     void OnEnable()
     {
+        Scale();
+
+    }
+    public void Scale()
+    {
         GetComponent<RectTransform>().sizeDelta = new Vector2(TargetText.preferredWidth + Offset.x, TargetText.preferredHeight + Offset.y);
 
     }
