@@ -1,0 +1,18 @@
+{
+    "Items": [
+        {
+            "id": 6001,
+            "name": "Gold>1000",
+            "rewards": {
+                "keys": [
+                    "Stone",
+                    "Wood"
+                ],
+                "values": [
+                    1,
+                    5
+                ]
+            }
+        }
+    ]
+}

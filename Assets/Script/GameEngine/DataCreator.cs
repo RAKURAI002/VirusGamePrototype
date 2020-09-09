@@ -515,7 +515,8 @@ public class DataCreator : MonoBehaviour
                 isAlliesAffected = false,
                 spritePath = "Sprites/Character/BirthMarks/BirthMark1",
                 statToIncrease = typeof(Character.AllStats).GetField("strength"),
-                tier = 1
+                tier = 1,
+                description = "Increase Strength attribute"
             });
             birthMarkDatas.Add(new IncreaseSTATSBirthMark()
             {
@@ -524,7 +525,8 @@ public class DataCreator : MonoBehaviour
                 isAlliesAffected = false,
                 spritePath = "Sprites/Character/BirthMarks/BirthMark2",
                 statToIncrease = typeof(Character.AllStats).GetField("intelligence"),
-                tier = 1
+                tier = 1,
+                description = "Increase Intelligence attribute"
             });
             birthMarkDatas.Add(new IncreaseSTATSBirthMark()
             {
@@ -533,7 +535,8 @@ public class DataCreator : MonoBehaviour
                 isAlliesAffected = false,
                 spritePath = "Sprites/Character/BirthMarks/BirthMark3",
                 statToIncrease = typeof(Character.AllStats).GetField("craftsmanship"),
-                tier = 1
+                tier = 1,
+                description = "Increase Craftsmanship attribute"
             });
             birthMarkDatas.Add(new IncreaseSTATSBirthMark()
             {
@@ -542,7 +545,8 @@ public class DataCreator : MonoBehaviour
                 isAlliesAffected = false,
                 spritePath = "Sprites/Character/BirthMarks/BirthMark4",
                 statToIncrease = typeof(Character.AllStats).GetField("luck"),
-                tier = 1
+                tier = 1,
+                description = "Increase Luck attribute"
             });
             birthMarkDatas.Add(new IncreaseSTATSBirthMark()
             {
@@ -551,7 +555,8 @@ public class DataCreator : MonoBehaviour
                 isAlliesAffected = false,
                 spritePath = "Sprites/Character/BirthMarks/BirthMark5",
                 statToIncrease = typeof(Character.AllStats).GetField("immunity"),
-                tier = 1
+                tier = 1,
+                description = "Increase Immunity attribute"
             });
             birthMarkDatas.Add(new IncreaseSTATSBirthMark()
             {
@@ -560,7 +565,8 @@ public class DataCreator : MonoBehaviour
                 isAlliesAffected = false,
                 spritePath = "Sprites/Character/BirthMarks/BirthMark6",
                 statToIncrease = typeof(Character.AllStats).GetField("perception"),
-                tier = 1
+                tier = 1,
+                description = "Increase Perception attribute"
             });
             birthMarkDatas.Add(new IncreaseSTATSBirthMark()
             {
@@ -569,98 +575,112 @@ public class DataCreator : MonoBehaviour
                 isAlliesAffected = false,
                 spritePath = "Sprites/Character/BirthMarks/BirthMark7",
                 statToIncrease = typeof(Character.AllStats).GetField("speed"),
-                tier = 1
+                tier = 1,
+                description = "Increase Speed attribute"
             });
 
-            birthMarkDatas.Add(new ParticularEffectOnBuildingBirthMark()
+            birthMarkDatas.Add(new IncreaseProductionOnBuildingBirthMark()
             {
                 name = "Son of Farmer",
                 effectValues = new List<float>() { 0.10f, 0.15f, 0.20f, 0.25f, 0.30f },
                 spritePath = "Sprites/Character/BirthMarks/BirthMark8",
                 tier = 1,
-                buildingType = Building.BuildingType.Farm
+                buildingType = Building.BuildingType.Farm,
+                description = "Increase self production in Farm"
             });
-            birthMarkDatas.Add(new ParticularEffectOnBuildingBirthMark()
+            birthMarkDatas.Add(new IncreaseProductionOnBuildingBirthMark()
             {
                 name = "Son of WaterFilter",
                 effectValues = new List<float>() { 0.10f, 0.15f, 0.20f, 0.25f, 0.30f },
                 spritePath = "Sprites/Character/BirthMarks/BirthMark9",
                 tier = 1,
-                buildingType = Building.BuildingType.WaterTreatmentCenter
+                buildingType = Building.BuildingType.WaterTreatmentCenter,
+                description = "Increase self production in Water Treatment Center"
             });
-            birthMarkDatas.Add(new ParticularEffectOnBuildingBirthMark()
+            birthMarkDatas.Add(new IncreaseProductionOnBuildingBirthMark()
             {
                 name = "Son of GoldDigger",
                 effectValues = new List<float>() { 0.10f, 0.15f, 0.20f, 0.25f, 0.30f },
                 spritePath = "Sprites/Character/BirthMarks/BirthMark10",
                 tier = 1,
-                buildingType = Building.BuildingType.Mine
+                buildingType = Building.BuildingType.Mine,
+                description = "Increase self production in Mine"
             });
-            birthMarkDatas.Add(new ParticularEffectOnBuildingBirthMark()
+            birthMarkDatas.Add(new IncreaseProductionOnBuildingBirthMark()
             {
                 name = "Farmer Master",
                 effectValues = new List<float>() { 0.05f, 0.075f, 0.10f, 0.125f, 0.15f },
                 spritePath = "Sprites/Character/BirthMarks/BirthMark11",
                 tier = 2,
-                buildingType = Building.BuildingType.Farm
+                buildingType = Building.BuildingType.Farm,
+                description = "Increase all production in Farm"
             });
-            birthMarkDatas.Add(new ParticularEffectOnBuildingBirthMark()
+            birthMarkDatas.Add(new IncreaseProductionOnBuildingBirthMark()
             {
                 name = "Water Filter Master",
                 effectValues = new List<float>() { 0.05f, 0.075f, 0.10f, 0.125f, 0.15f },
                 spritePath = "Sprites/Character/BirthMarks/BirthMark12",
                 tier = 2,
-                buildingType = Building.BuildingType.WaterTreatmentCenter
+                buildingType = Building.BuildingType.WaterTreatmentCenter,
+                description = "Increase all production in Water Treatment Center"
             });
-            birthMarkDatas.Add(new ParticularEffectOnBuildingBirthMark()
+            birthMarkDatas.Add(new IncreaseProductionOnBuildingBirthMark()
             {
                 name = "Gold Digger Master",
                 effectValues = new List<float>() { 0.05f, 0.075f, 0.10f, 0.125f, 0.15f },
                 spritePath = "Sprites/Character/BirthMarks/BirthMark13",
                 tier = 2,
-                buildingType = Building.BuildingType.Mine
+                buildingType = Building.BuildingType.Mine,
+                description = "Increase all production in Mine"
             });
-            birthMarkDatas.Add(new ParticularEffectOnBuildingBirthMark()
+            birthMarkDatas.Add(new IncreaseProductionOnBuildingBirthMark()
             {
                 name = "Son of Nurse",
                 effectValues = new List<float>() { 0.10f, 0.15f, 0.20f, 0.25f, 0.30f },
                 spritePath = "Sprites/Character/BirthMarks/BirthMark14",
                 tier = 2,
-                buildingType = Building.BuildingType.Residence
+                buildingType = Building.BuildingType.Residence,
+                description = "All character healing in Residence increased"
             });
-            birthMarkDatas.Add(new ParticularEffectOnBuildingBirthMark()
+            birthMarkDatas.Add(new IncreaseProductionOnBuildingBirthMark()
             {
                 name = "Monkey King",
                 effectValues = new List<float>() { 0.05f, 0.075f, 0.10f, 0.125f, 0.15f },
                 spritePath = "Sprites/Character/BirthMarks/BirthMark15",
                 tier = 2,
-                buildingType = Building.BuildingType.TownBase
+                buildingType = Building.BuildingType.TownBase,
+                description = "Exploration quest team speed increase"
             });
-            birthMarkDatas.Add(new ParticularEffectOnBuildingBirthMark()
+            birthMarkDatas.Add(new IncreaseProductionOnBuildingBirthMark()
             {
                 name = "Economic Man",
                 effectValues = new List<float>() { 0.04f, 0.08f, 0.12f, 0.16f, 0.20f },
                 spritePath = "Sprites/Character/BirthMarks/BirthMark16",
                 tier = 2,
-                buildingType = Building.BuildingType.LaborCenter
+                buildingType = Building.BuildingType.LaborCenter,
+                description = "Upgrade cost reduce"
             });
-            birthMarkDatas.Add(new ParticularEffectOnBuildingBirthMark()
+            birthMarkDatas.Add(new IncreaseProductionOnBuildingBirthMark()
             {
                 name = "Cupid",
                 effectValues = new List<float>() { 0.10f, 0.25f, 0.40f, 0.55f, 0.70f },
                 spritePath = "Sprites/Character/BirthMarks/BirthMark17",
                 tier = 2,
-                buildingType = Building.BuildingType.LaborCenter
+                buildingType = Building.BuildingType.LaborCenter,
+                description = "Upgrade cost reduce"
             });
-            birthMarkDatas.Add(new ParticularEffectOnBuildingBirthMark()
+            birthMarkDatas.Add(new IncreaseProductionOnManyBuildingBirthMark()
             {
                 name = "Jack of All Trade",
                 effectValues = new List<float>() { 0.10f, 0.15f, 0.20f, 0.25f, 0.30f },
                 spritePath = "Sprites/Character/BirthMarks/BirthMark18",
                 tier = 3,
+                buildingType = new Building.BuildingType[3] { Building.BuildingType.Farm, 
+                    Building.BuildingType.WaterTreatmentCenter, Building.BuildingType.Mine } ,
+                description = "Increase self production while working for resources"
 
             });
-            birthMarkDatas.Add(new ParticularEffectOnBuildingBirthMark()
+            birthMarkDatas.Add(new IncreaseProductionOnBuildingBirthMark()
             {
                 name = "Nerd",
                 effectValues = new List<float>() { 0.03f, 0.06f, 0.09f, 0.12f, 0.15f },
@@ -668,7 +688,7 @@ public class DataCreator : MonoBehaviour
                 tier = 3,
                 buildingType = Building.BuildingType.Laboratory
             });
-            birthMarkDatas.Add(new ParticularEffectOnBuildingBirthMark()
+            birthMarkDatas.Add(new IncreaseProductionOnBuildingBirthMark()
             {
                 name = "Iron Chef",
                 effectValues = new List<float>() { 0.03f, 0.06f, 0.09f, 0.12f, 0.15f },
@@ -676,7 +696,7 @@ public class DataCreator : MonoBehaviour
                 tier = 3,
                 buildingType = Building.BuildingType.Kitchen
             });
-            birthMarkDatas.Add(new DoubleProductBirthMark()
+            birthMarkDatas.Add(new ChanceToDoubleProductBirthMark()
             {
                 name = "MultiCooker",
                 effectValues = new List<float>() { 0.04f, 0.08f, 0.12f, 0.16f, 0.20f },
@@ -684,7 +704,7 @@ public class DataCreator : MonoBehaviour
                 tier = 4,
                 buildingType = Building.BuildingType.Kitchen
             });
-            birthMarkDatas.Add(new DoubleProductBirthMark()
+            birthMarkDatas.Add(new ChanceToDoubleProductBirthMark()
             {
                 name = "MultiSmith",
                 effectValues = new List<float>() { 0.04f, 0.08f, 0.12f, 0.16f, 0.20f },
@@ -692,7 +712,7 @@ public class DataCreator : MonoBehaviour
                 tier = 4,
                 buildingType = Building.BuildingType.Armory
             });
-            birthMarkDatas.Add(new DoubleProductBirthMark()
+            birthMarkDatas.Add(new ChanceToDoubleProductBirthMark()
             {
                 name = "MultiFisher",
                 effectValues = new List<float>() { 0.04f, 0.08f, 0.12f, 0.16f, 0.20f },
@@ -700,7 +720,7 @@ public class DataCreator : MonoBehaviour
                 tier = 4,
                 buildingType = Building.BuildingType.Fishery
             });
-            birthMarkDatas.Add(new DoubleProductBirthMark()
+            birthMarkDatas.Add(new ChanceToDoubleProductBirthMark()
             {
                 name = "MultiAlcemist",
                 effectValues = new List<float>() { 0.04f, 0.08f, 0.12f, 0.16f, 0.20f },
@@ -708,13 +728,14 @@ public class DataCreator : MonoBehaviour
                 tier = 4,
                 buildingType = Building.BuildingType.MedicalCenter
             });
-            birthMarkDatas.Add(new ParticularEffectOnBuildingBirthMark()
+            birthMarkDatas.Add(new IncreaseProductionOnBuildingBirthMark()
             {
                 name = "Luck of The Sea",
                 effectValues = new List<float>() { 0.80f, 0.90f, 1 },
                 spritePath = "Sprites/Character/BirthMarks/BirthMark25",
                 tier = 5,
                 buildingType = Building.BuildingType.Fishery
+                
             });
             birthMarkDatas.Add(new AddMoreActionBirthMark()
             {
@@ -738,8 +759,8 @@ public class DataCreator : MonoBehaviour
             achievements.Add(new AchievementData() { id = achievements.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK, name = "Gold>1000", rewards = new DictionaryStringToInt() { { "Stone", 1 }, { "Wood", 5 } }, condition = () => { return ItemManager.Instance.GetResourceAmount("Gold") > 1000; } });
 
             string achievementsData = JsonHelper.ToJson<AchievementData>(achievements.ToArray(), true);
-            Debug.Log("Saving achievementsData Data to JSON : " + achievementsData);
-            System.IO.File.WriteAllText(Application.streamingAssetsPath + "/achievements.json", achievementsData);
+            Debug.Log("Saving Achievements Data to JSON : " + achievementsData);
+            System.IO.File.WriteAllText(Application.streamingAssetsPath + "/AchievementData.json", achievementsData);
 
 
         }

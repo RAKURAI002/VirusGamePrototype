@@ -29,6 +29,7 @@ public class LoadManager : SingletonComponent<LoadManager>
     [SerializeField] public QuestDataDictionary allQuestData; /// ****************
     [SerializeField] public List<Character.CharacterData> allCharacterData;
     [SerializeField] public List<BirthMarkData> allBirthMarkDatas;
+    [SerializeField] public List<AchievementData> allAchievementDatas;
 
     #region Unity Functions
     protected override void Awake()
@@ -257,6 +258,19 @@ public class LoadManager : SingletonComponent<LoadManager>
                 allBirthMarkDatas = birthMarkSerializer.birthMarkDatas;
             }
         }));
+        Coroutine c8 = StartCoroutine(LoadManager.Instance.GetRequest("/AchievementData.json", (UnityWebRequest req) =>
+        {
+            if (req.isNetworkError || req.isHttpError)
+            {
+                Debug.Log($"{req.error}: {req.downloadHandler.text}");
+            }
+            else
+            {
+                allAchievementDatas = new List<AchievementData>();
+                Debug.Log("Fetching Character Achievement Datas completed.\n");
+                allAchievementDatas = JsonHelper.FromJson<AchievementData>(req.downloadHandler.text).ToList();
+            }
+        }));
 
         Debug.Log("Now Waiting . . .");
 
@@ -273,6 +287,9 @@ public class LoadManager : SingletonComponent<LoadManager>
         yield return c6;
 
         yield return c7;
+
+        yield return c8;
+
         Debug.Log("Load GameData Complete.");
 
     }
