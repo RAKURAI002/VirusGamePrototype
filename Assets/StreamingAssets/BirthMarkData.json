@@ -4,6 +4,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             "{\"name\":\"StrengthBM\",\"tier\":1,\"level\":0,\"spritePath\":\"Sprites/Character/BirthMarks/BirthMark1\",\"description\":\"Increase Strength attribute\",\"effectValues\":[0.05000000074505806,0.07500000298023224,0.10000000149011612,0.15000000596046449,0.20000000298023225],\"isAlliesAffected\":false}",
             "{\"name\":\"IntelligenceBM\",\"tier\":1,\"level\":0,\"spritePath\":\"Sprites/Character/BirthMarks/BirthMark2\",\"description\":\"Increase Intelligence attribute\",\"effectValues\":[0.05000000074505806,0.07500000298023224,0.10000000149011612,0.15000000596046449,0.20000000298023225],\"isAlliesAffected\":false}",
             "{\"name\":\"CraftsmanshipBM\",\"tier\":1,\"level\":0,\"spritePath\":\"Sprites/Character/BirthMarks/BirthMark3\",\"description\":\"Increase Craftsmanship attribute\",\"effectValues\":[0.05000000074505806,0.07500000298023224,0.10000000149011612,0.15000000596046449,0.20000000298023225],\"isAlliesAffected\":false}",
@@ -31,6 +32,8 @@
             "{\"name\":\"Luck of The Sea\",\"tier\":5,\"level\":0,\"spritePath\":\"Sprites/Character/BirthMarks/BirthMark25\",\"description\":\"\",\"effectValues\":[0.800000011920929,0.8999999761581421,1.0],\"buildingType\":10}",
             "{\"name\":\"777\",\"tier\":5,\"level\":0,\"spritePath\":\"Sprites/Character/BirthMarks/BirthMark26\",\"description\":\"\",\"effectValues\":[1.0,1.0,2.0]}"
 =======
+=======
+>>>>>>> parent of 23f75b0... Commit
 =======
 >>>>>>> parent of 23f75b0... Commit
 =======
@@ -63,7 +66,10 @@
             "{\"name\":\"777\",\"tier\":5,\"level\":0,\"spritePath\":\"Sprites/Character/BirthMarks/BirthMark26\",\"effectValues\":[1.0,1.0,2.0]}"
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> parent of 5bd5b8d... c
+=======
+>>>>>>> parent of 23f75b0... Commit
 =======
 >>>>>>> parent of 23f75b0... Commit
 =======
