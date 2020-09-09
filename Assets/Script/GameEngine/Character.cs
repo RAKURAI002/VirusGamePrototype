@@ -46,13 +46,13 @@ public class Character
             this.spritePath = birthMarkData.spritePath;
             this.tier = birthMarkData.tier;
             this.level = UnityEngine.Random.Range(1, birthMarkData.effectValues.Count + 1);
-            this.type = birthMarkData.GetType();
+            this.type = birthMarkData.GetType().ToString();
 
         }
 
         [SerializeField] public  string name;
         [SerializeField] public string spritePath;
-        [SerializeField] public Type type;
+        [SerializeField] public string type;
         [SerializeField] public int tier;
         [SerializeField] public int level;
 

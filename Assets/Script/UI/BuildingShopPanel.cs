@@ -10,10 +10,17 @@ public class BuildingShopPanel : MonoBehaviour
 {
     public Button cancelButton;
     Button currentSelectedButton;
+    bool isInitialize;
 
+    private void Awake()
+    {
+        isInitialize = false;
+
+    }
     private void OnEnable()
     {
         EventManager.Instance.OnResourceChanged += OnResourceChanged;
+        InitializeShopData();
         RefreshPanel();
     }
     private void OnDisable()
@@ -33,6 +40,10 @@ public class BuildingShopPanel : MonoBehaviour
         {
             MainCanvas.canvasActive = false;
         }
+    }
+    void InitializeShopData()
+    {
+
     }
     void OnResourceChanged(string name)
     {
@@ -55,6 +66,7 @@ public class BuildingShopPanel : MonoBehaviour
         if (currentSelectedButton != null)
         {
             currentSelectedButton.interactable = true;
+
         }
 
         MapManager.Instance.CancleShowAvailableTiles();
@@ -67,38 +79,50 @@ public class BuildingShopPanel : MonoBehaviour
 
         Debug.Log("Refreshing Building Shop Panel . . .");
 
-        for (int i = 0; i < Enum.GetNames(typeof(Building.BuildingType)).Length - 1; i++)
+        for (int i = 1; i < Enum.GetNames(typeof(Building.BuildingType)).Length; i++)
         {
 
-            Button button = GameObject.Find("ShopButton" + (i + 1).ToString()).GetComponent<Button>();
-            Builder bu = null;
+            Button button = transform.Find("Container/ShopButton" + (i).ToString()).GetComponent<Button>();
+            Builder builder = null;
 
             if (button != null)
             {
                 button.interactable = true;
 
-                bu = BuildManager.Instance.AllBuildings.FirstOrDefault(b => ((int)b.Type) == int.Parse(button.name.Replace("ShopButton", "")));
+                builder = BuildManager.Instance.AllBuildings.FirstOrDefault(b => ((int)b.Type) == int.Parse(button.name.Replace("ShopButton", "")));
 
-                if (bu != null)
+                if (builder != null)
                 {
-                    button.transform.Find("BGPanel/ActiveAmount").GetComponent<Text>().text = bu.CurrentActiveAmount.ToString() + "/" + bu.maxActiveAmount;
+                    button.transform.Find("BGPanel/ActiveAmount").GetComponent<Text>().text = builder.CurrentActiveAmount.ToString() + "/" + builder.maxActiveAmount;
 
                 }
                 else
                 {
-                    bu = new Builder((Building.BuildingType)(i + 1));
-                    button.transform.Find("BGPanel/ActiveAmount").GetComponent<Text>().text = "0 /" + bu.maxActiveAmount;
+                    builder = new Builder((Building.BuildingType)(i));
+                    button.transform.Find("BGPanel/ActiveAmount").GetComponent<Text>().text = "0 /" + builder.maxActiveAmount;
 
                 }
 
             }
             else
             {
-                Debug.LogWarning("Can't find Building button !");
+                Debug.LogWarning($"Can't find Building button {i} !");
 
             }
 
-            Building buildingData = LoadManager.Instance.allBuildingData[bu.Type];
+            Building buildingData = LoadManager.Instance.allBuildingData[builder.Type];
+
+            if(!isInitialize)
+            {
+                Debug.Log($"IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII");   
+                button.transform.Find("BGPanel/UpgradePoint").GetComponent<Text>().text = buildingData.upgradePoint[0].ToString();
+
+                button.transform.Find("Cost/Wood/CostText").GetComponent<Text>().text = buildingData.buildingCost[0]["Wood"].ToString();
+                button.transform.Find("Cost/Stone/CostText").GetComponent<Text>().text = buildingData.buildingCost[0]["Stone"].ToString();
+                isInitialize = true;
+
+            }
+
             if (!ItemManager.Instance.IsAffordable(buildingData.buildingCost[0]))
             {
                 button.image.color = new Color(1f, 0.5f, 0.5f, 1f);
@@ -111,7 +135,7 @@ public class BuildingShopPanel : MonoBehaviour
 
             }
 
-        }
+        } /// End of all Button loop.
 
         for (int i = 0; i < BuildManager.Instance.AllBuildings.Count; i++)
         {

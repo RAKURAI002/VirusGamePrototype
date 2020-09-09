@@ -47,7 +47,7 @@ public static class Constant
     /// </summary>
     public static class TimeCycle
     {
-        public static int RESOURCE_UPDATE_CYCLE = 60;
+        public static int RESOURCE_UPDATE_CYCLE = 10;
         public static int CHARACTER_ADDING_EVENT_CYCLE = 60;
 
     }
@@ -67,6 +67,7 @@ public static class Constant
         public static int QUEST_ID_MASK = 3000;
         public static int EQUIPMENT_ID_MASK = 4000;
         public static int RESOURCE_ID_MASK = 5000;
+        public static int ACHIEVEMENT_ID_MASK = 6000;
 
     }
 
