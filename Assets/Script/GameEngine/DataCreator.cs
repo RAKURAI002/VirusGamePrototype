@@ -734,10 +734,23 @@ public class DataCreator : MonoBehaviour
     void CreateAchievementData()
     {
         List<AchievementData> achievements = new List<AchievementData>();
+        achievements.Add(new AchievementData() { id = achievements.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK, name = "More than 1000 Food.", rewards = new DictionaryStringToInt() { { "Stone", 1 }, { "Wood", 5 } }, condition = () => { return ItemManager.Instance.GetResourceAmount("Gold") > 100; } });
+        achievements.Add(new AchievementData() { id = achievements.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK, name = "More than 1000 Wood.", rewards = new DictionaryStringToInt() { { "Stone", 1 }, { "Wood", 5 } }, condition = () => { return ItemManager.Instance.GetResourceAmount("Gold") > 100; } });
+        achievements.Add(new AchievementData() { id = achievements.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK, name = "More than 1000 Stone.", rewards = new DictionaryStringToInt() { { "Stone", 1 }, { "Wood", 5 } }, condition = () => { return ItemManager.Instance.GetResourceAmount("Gold") > 100; } });
+        achievements.Add(new AchievementData() { id = achievements.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK, name = "There are 5 peoples.", rewards = new DictionaryStringToInt() { { "Stone", 1 }, { "Wood", 5 } }, condition = () => { return ItemManager.Instance.GetResourceAmount("Gold") > 100; } });
+        achievements.Add(new AchievementData() { id = achievements.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK, name = "Player lavel up to 5.", rewards = new DictionaryStringToInt() { { "Stone", 1 }, { "Wood", 5 } }, condition = () => { return ItemManager.Instance.GetResourceAmount("Gold") > 100; } });
         achievements.Add(new AchievementData() { id = achievements.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK, name = "More than 100 Gold.", rewards = new DictionaryStringToInt() { { "Stone", 1 }, { "Wood", 5 } }, condition = () => { return ItemManager.Instance.GetResourceAmount("Gold") > 100; } });
+        achievements.Add(new AchievementData() { id = achievements.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK, name = "More than 100 Gold.", rewards = new DictionaryStringToInt() { { "Stone", 1 }, { "Wood", 5 } }, condition = () => { return ItemManager.Instance.GetResourceAmount("Gold") > 100; } });
+        achievements.Add(new AchievementData() { id = achievements.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK, name = "More than 100 Gold.", rewards = new DictionaryStringToInt() { { "Stone", 1 }, { "Wood", 5 } }, condition = () => { return ItemManager.Instance.GetResourceAmount("Gold") > 100; } });
+        achievements.Add(new AchievementData() { id = achievements.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK, name = "More than 100 Gold.", rewards = new DictionaryStringToInt() { { "Stone", 1 }, { "Wood", 5 } }, condition = () => { return ItemManager.Instance.GetResourceAmount("Gold") > 100; } });
+        achievements.Add(new AchievementData() { id = achievements.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK, name = "More than 100 Gold.", rewards = new DictionaryStringToInt() { { "Stone", 1 }, { "Wood", 5 } }, condition = () => { return ItemManager.Instance.GetResourceAmount("Gold") > 100; } });
+        achievements.Add(new AchievementData() { id = achievements.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK, name = "More than 100 Gold.", rewards = new DictionaryStringToInt() { { "Stone", 1 }, { "Wood", 5 } }, condition = () => { return ItemManager.Instance.GetResourceAmount("Gold") > 100; } });
+
+
 
         Text text;
         //text.text = achievements[0].name;
+        
 
         if(achievements[0].condition())
         {

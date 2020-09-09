@@ -1,6 +1,7 @@
 {
     "datas": {
         "keys": [
+<<<<<<< HEAD
             "{\"name\":\"StrengthBM\",\"tier\":1,\"level\":0,\"spritePath\":\"Sprites/Character/BirthMarks/BirthMark1\",\"description\":\"Increase Strength attribute\",\"effectValues\":[0.05000000074505806,0.07500000298023224,0.10000000149011612,0.15000000596046449,0.20000000298023225],\"isAlliesAffected\":false}",
             "{\"name\":\"IntelligenceBM\",\"tier\":1,\"level\":0,\"spritePath\":\"Sprites/Character/BirthMarks/BirthMark2\",\"description\":\"Increase Intelligence attribute\",\"effectValues\":[0.05000000074505806,0.07500000298023224,0.10000000149011612,0.15000000596046449,0.20000000298023225],\"isAlliesAffected\":false}",
             "{\"name\":\"CraftsmanshipBM\",\"tier\":1,\"level\":0,\"spritePath\":\"Sprites/Character/BirthMarks/BirthMark3\",\"description\":\"Increase Craftsmanship attribute\",\"effectValues\":[0.05000000074505806,0.07500000298023224,0.10000000149011612,0.15000000596046449,0.20000000298023225],\"isAlliesAffected\":false}",
@@ -27,6 +28,34 @@
             "{\"name\":\"MultiAlcemist\",\"tier\":4,\"level\":0,\"spritePath\":\"Sprites/Character/BirthMarks/BirthMark24\",\"description\":\"\",\"effectValues\":[0.03999999910593033,0.07999999821186066,0.11999999731779099,0.1599999964237213,0.20000000298023225],\"buildingType\":4}",
             "{\"name\":\"Luck of The Sea\",\"tier\":5,\"level\":0,\"spritePath\":\"Sprites/Character/BirthMarks/BirthMark25\",\"description\":\"\",\"effectValues\":[0.800000011920929,0.8999999761581421,1.0],\"buildingType\":10}",
             "{\"name\":\"777\",\"tier\":5,\"level\":0,\"spritePath\":\"Sprites/Character/BirthMarks/BirthMark26\",\"description\":\"\",\"effectValues\":[1.0,1.0,2.0]}"
+=======
+            "{\"name\":\"StrengthBM\",\"tier\":1,\"level\":0,\"spritePath\":\"Sprites/Character/BirthMarks/BirthMark1\",\"effectValues\":[0.05000000074505806,0.07500000298023224,0.10000000149011612,0.15000000596046449,0.20000000298023225],\"isAlliesAffected\":false}",
+            "{\"name\":\"IntelligenceBM\",\"tier\":1,\"level\":0,\"spritePath\":\"Sprites/Character/BirthMarks/BirthMark2\",\"effectValues\":[0.05000000074505806,0.07500000298023224,0.10000000149011612,0.15000000596046449,0.20000000298023225],\"isAlliesAffected\":false}",
+            "{\"name\":\"CraftsmanshipBM\",\"tier\":1,\"level\":0,\"spritePath\":\"Sprites/Character/BirthMarks/BirthMark3\",\"effectValues\":[0.05000000074505806,0.07500000298023224,0.10000000149011612,0.15000000596046449,0.20000000298023225],\"isAlliesAffected\":false}",
+            "{\"name\":\"LuckBM\",\"tier\":1,\"level\":0,\"spritePath\":\"Sprites/Character/BirthMarks/BirthMark4\",\"effectValues\":[0.05000000074505806,0.07500000298023224,0.10000000149011612,0.15000000596046449,0.20000000298023225],\"isAlliesAffected\":false}",
+            "{\"name\":\"ImmunityBM\",\"tier\":1,\"level\":0,\"spritePath\":\"Sprites/Character/BirthMarks/BirthMark5\",\"effectValues\":[0.05000000074505806,0.07500000298023224,0.10000000149011612,0.15000000596046449,0.20000000298023225],\"isAlliesAffected\":false}",
+            "{\"name\":\"PerceptionBM\",\"tier\":1,\"level\":0,\"spritePath\":\"Sprites/Character/BirthMarks/BirthMark6\",\"effectValues\":[0.05000000074505806,0.07500000298023224,0.10000000149011612,0.15000000596046449,0.20000000298023225],\"isAlliesAffected\":false}",
+            "{\"name\":\"SpeedBM\",\"tier\":1,\"level\":0,\"spritePath\":\"Sprites/Character/BirthMarks/BirthMark7\",\"effectValues\":[0.05000000074505806,0.07500000298023224,0.10000000149011612,0.15000000596046449,0.20000000298023225],\"isAlliesAffected\":false}",
+            "{\"name\":\"Son of Farmer\",\"tier\":1,\"level\":0,\"spritePath\":\"Sprites/Character/BirthMarks/BirthMark8\",\"effectValues\":[0.10000000149011612,0.15000000596046449,0.20000000298023225,0.25,0.30000001192092898],\"buildingType\":1}",
+            "{\"name\":\"Son of WaterFilter\",\"tier\":1,\"level\":0,\"spritePath\":\"Sprites/Character/BirthMarks/BirthMark9\",\"effectValues\":[0.10000000149011612,0.15000000596046449,0.20000000298023225,0.25,0.30000001192092898],\"buildingType\":8}",
+            "{\"name\":\"Son of GoldDigger\",\"tier\":1,\"level\":0,\"spritePath\":\"Sprites/Character/BirthMarks/BirthMark10\",\"effectValues\":[0.10000000149011612,0.15000000596046449,0.20000000298023225,0.25,0.30000001192092898],\"buildingType\":14}",
+            "{\"name\":\"Farmer Master\",\"tier\":2,\"level\":0,\"spritePath\":\"Sprites/Character/BirthMarks/BirthMark11\",\"effectValues\":[0.05000000074505806,0.07500000298023224,0.10000000149011612,0.125,0.15000000596046449],\"buildingType\":1}",
+            "{\"name\":\"Water Filter Master\",\"tier\":2,\"level\":0,\"spritePath\":\"Sprites/Character/BirthMarks/BirthMark12\",\"effectValues\":[0.05000000074505806,0.07500000298023224,0.10000000149011612,0.125,0.15000000596046449],\"buildingType\":8}",
+            "{\"name\":\"Gold Digger Master\",\"tier\":2,\"level\":0,\"spritePath\":\"Sprites/Character/BirthMarks/BirthMark13\",\"effectValues\":[0.05000000074505806,0.07500000298023224,0.10000000149011612,0.125,0.15000000596046449],\"buildingType\":14}",
+            "{\"name\":\"Son of Nurse\",\"tier\":2,\"level\":0,\"spritePath\":\"Sprites/Character/BirthMarks/BirthMark14\",\"effectValues\":[0.10000000149011612,0.15000000596046449,0.20000000298023225,0.25,0.30000001192092898],\"buildingType\":6}",
+            "{\"name\":\"Monkey King\",\"tier\":2,\"level\":0,\"spritePath\":\"Sprites/Character/BirthMarks/BirthMark15\",\"effectValues\":[0.05000000074505806,0.07500000298023224,0.10000000149011612,0.125,0.15000000596046449],\"buildingType\":7}",
+            "{\"name\":\"Economic Man\",\"tier\":2,\"level\":0,\"spritePath\":\"Sprites/Character/BirthMarks/BirthMark16\",\"effectValues\":[0.03999999910593033,0.07999999821186066,0.11999999731779099,0.1599999964237213,0.20000000298023225],\"buildingType\":11}",
+            "{\"name\":\"Cupid\",\"tier\":2,\"level\":0,\"spritePath\":\"Sprites/Character/BirthMarks/BirthMark17\",\"effectValues\":[0.10000000149011612,0.25,0.4000000059604645,0.550000011920929,0.699999988079071],\"buildingType\":11}",
+            "{\"name\":\"Jack of All Trade\",\"tier\":3,\"level\":0,\"spritePath\":\"Sprites/Character/BirthMarks/BirthMark18\",\"effectValues\":[0.10000000149011612,0.15000000596046449,0.20000000298023225,0.25,0.30000001192092898],\"buildingType\":0}",
+            "{\"name\":\"Nerd\",\"tier\":3,\"level\":0,\"spritePath\":\"Sprites/Character/BirthMarks/BirthMark19\",\"effectValues\":[0.029999999329447748,0.05999999865889549,0.09000000357627869,0.11999999731779099,0.15000000596046449],\"buildingType\":3}",
+            "{\"name\":\"Iron Chef\",\"tier\":3,\"level\":0,\"spritePath\":\"Sprites/Character/BirthMarks/BirthMark20\",\"effectValues\":[0.029999999329447748,0.05999999865889549,0.09000000357627869,0.11999999731779099,0.15000000596046449],\"buildingType\":2}",
+            "{\"name\":\"MultiCooker\",\"tier\":4,\"level\":0,\"spritePath\":\"Sprites/Character/BirthMarks/BirthMark21\",\"effectValues\":[0.03999999910593033,0.07999999821186066,0.11999999731779099,0.1599999964237213,0.20000000298023225],\"buildingType\":2}",
+            "{\"name\":\"MultiSmith\",\"tier\":4,\"level\":0,\"spritePath\":\"Sprites/Character/BirthMarks/BirthMark22\",\"effectValues\":[0.03999999910593033,0.07999999821186066,0.11999999731779099,0.1599999964237213,0.20000000298023225],\"buildingType\":12}",
+            "{\"name\":\"MultiFisher\",\"tier\":4,\"level\":0,\"spritePath\":\"Sprites/Character/BirthMarks/BirthMark23\",\"effectValues\":[0.03999999910593033,0.07999999821186066,0.11999999731779099,0.1599999964237213,0.20000000298023225],\"buildingType\":10}",
+            "{\"name\":\"MultiAlcemist\",\"tier\":4,\"level\":0,\"spritePath\":\"Sprites/Character/BirthMarks/BirthMark24\",\"effectValues\":[0.03999999910593033,0.07999999821186066,0.11999999731779099,0.1599999964237213,0.20000000298023225],\"buildingType\":4}",
+            "{\"name\":\"Luck of The Sea\",\"tier\":5,\"level\":0,\"spritePath\":\"Sprites/Character/BirthMarks/BirthMark25\",\"effectValues\":[0.800000011920929,0.8999999761581421,1.0],\"buildingType\":10}",
+            "{\"name\":\"777\",\"tier\":5,\"level\":0,\"spritePath\":\"Sprites/Character/BirthMarks/BirthMark26\",\"effectValues\":[1.0,1.0,2.0]}"
+>>>>>>> parent of 5bd5b8d... c
         ],
         "values": [
             "IncreaseSTATSBirthMark",

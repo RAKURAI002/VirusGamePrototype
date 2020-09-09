@@ -1,8 +1,8 @@
 {
     "Items": [
         {
-            "id": 6001,
-            "name": "More than 100 Gold.",
+            "id": 1,
+            "name": "Gold>1000",
             "rewards": {
                 "keys": [
                     "Stone",

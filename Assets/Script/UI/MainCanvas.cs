@@ -16,7 +16,6 @@ public class MainCanvas : MonoBehaviour
     public GameObject inventoryCanvas;
     public GameObject buildingShopCanvas;
     public GameObject toWorkCanvas;
-    public GameObject achievementCanvas;
     public GameObject[] characterCanvas;
 
     public GameObject resourcePanel;
@@ -353,11 +352,6 @@ public class MainCanvas : MonoBehaviour
         toWorkCanvas.SetActive(true);
         canvasActive = true;
 
-    }
-    public void OnClickAchievement()
-    {
-        achievementCanvas.SetActive(true);
-        canvasActive = true;
     }
     public void OnClickExitButton()
     {
