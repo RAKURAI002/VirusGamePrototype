@@ -130,7 +130,7 @@ public class ItemManager : SingletonComponent<ItemManager>
             {
                 float productionAmount = character.Stats.speed * 0.2f;
 
-                List<Character.BirthMark> birthMarks = character.BirthMarks.Where(bm => bm.type == typeof(IncreaseProductionOnBuildingBirthMark).ToString()).ToList();
+                List<Character.BirthMark> birthMarks = character.BirthMarks.Where(bm => bm.type == typeof(ParticularEffectOnBuildingBirthMark).ToString()).ToList();
                 Debug.Log(string.Concat(birthMarks.Select(b => b.type.ToString())));
                 if (birthMarks.Count == 0)
                 {
@@ -158,8 +158,8 @@ public class ItemManager : SingletonComponent<ItemManager>
                 });
 
                 log.AppendLine($"{character.Name} : speed = {character.Stats.speed} increases {character.Stats.speed * 0.2f}");
-                Debug.Log($"{string.Concat(birthMarkDatas.Select(b => ((IncreaseProductionOnBuildingBirthMark)b).buildingType))}");
-                birthMarkDatas.Where(bData => ((IncreaseProductionOnBuildingBirthMark)bData).buildingType == builder.Type).ToList().ForEach((bData) =>
+                Debug.Log($"{string.Concat(birthMarkDatas.Select(b => ((ParticularEffectOnBuildingBirthMark)b).buildingType))}");
+                birthMarkDatas.Where(bData => ((ParticularEffectOnBuildingBirthMark)bData).buildingType == builder.Type).ToList().ForEach((bData) =>
                 {
                     log.AppendLine($"Affected BirthMarks are {bData.name}(Level{bData.level}) increase {productionAmount * bData.effectValues[bData.level]}");
                     productionAmount += productionAmount * bData.effectValues[bData.level];
