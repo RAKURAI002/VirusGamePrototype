@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DataCreator : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class DataCreator : MonoBehaviour
         CreateQuestJsonData();
         CreateResourceData();
         CreateBirthMarkData();
+        CreateAchievementData();
     }
 
     List<string> GetSpritePath(string name)
@@ -355,11 +357,11 @@ public class DataCreator : MonoBehaviour
         residentResourceProduction.Add(new DictionaryStringToInt() { { "Production", 512000 } });
         residentResourceProduction.Add(new DictionaryStringToInt() { { "Production", 1024000 } });
         residentResourceProduction.Add(new DictionaryStringToInt() { { "Production", 2048000 } });
-        int a;
+
         string description = "NO !!!";
         List<Building> bu = new List<Building>();
         bu.Add(new Building(Building.BuildingType.Farm, resourceBuildingCost, farmResourceProduction, allConsuming, resourceUpgradePoint, 3, 10, maxCharacterInWorking, description, GetSpritePath("Farm"), farm_waterProductionStored, "Sprites/UI/FoodIcon"));
-        bu.Add(new Building(Building.BuildingType.FishingPond, craftBuildingCost, allProduction, allConsuming, craftUpgradePoint, 1, 3, maxCharacterInCraft, description, GetSpritePath("FishingPond")));
+        bu.Add(new Building(Building.BuildingType.Fishery, craftBuildingCost, allProduction, allConsuming, craftUpgradePoint, 1, 3, maxCharacterInCraft, description, GetSpritePath("FishingPond")));
         bu.Add(new Building(Building.BuildingType.Kitchen, craftBuildingCost, laborProduction, allConsuming, craftUpgradePoint, 1, 3, maxCharacterInCraft, description, GetSpritePath("Kitchen")));
         bu.Add(new Building(Building.BuildingType.Laboratory, labBuildingCost, allProduction, allConsuming, labUpgradePoint, 1, 10, maxCharacterInWorking, description, GetSpritePath("Laboratory")));
         bu.Add(new Building(Building.BuildingType.LaborCenter, labBuildingCost, laborProduction, allConsuming, labUpgradePoint, 1, 10, maxCharacterInTeam, description, GetSpritePath("LaborCenter")));//***
@@ -367,7 +369,7 @@ public class DataCreator : MonoBehaviour
         bu.Add(new Building(Building.BuildingType.QuarantineSite, QuarantineSiteCost, allProduction, allConsuming, QuarantineUpgradePoint, 1, 5, maxCharacterInQZone, description, GetSpritePath("QuarantineSite")));
         bu.Add(new Building(Building.BuildingType.Residence, containBuildingCost, residentResourceProduction, allConsuming, containUpgradePoint, 5, 10, maxCharacterInResident, description, GetSpritePath("Residence")));
         bu.Add(new Building(Building.BuildingType.TownBase, townBaseCost, allProduction, allConsuming, townBaseUpgradePoint, 1, 10, maxCharacterInTeam, description, GetSpritePath("TownBase")));//****
-        bu.Add(new Building(Building.BuildingType.WareHouse, containBuildingCost, allProduction, allConsuming, containUpgradePoint, 3, 10, maxCharacter, description, GetSpritePath("WareHouse")));
+        bu.Add(new Building(Building.BuildingType.WareHouse, containBuildingCost, warehouseProduction, allConsuming, containUpgradePoint, 3, 10, maxCharacter, description, GetSpritePath("WareHouse")));
         bu.Add(new Building(Building.BuildingType.WaterTreatmentCenter, resourceBuildingCost, waterResourceProduction, allConsuming, resourceUpgradePoint, 3, 10, maxCharacterInWorking, description, GetSpritePath("WaterTreatmentCenter"), farm_waterProductionStored, "Sprites/UI/WaterIcon"));
         bu.Add(new Building(Building.BuildingType.Armory, craftBuildingCost, laborProduction, allConsuming, craftUpgradePoint, 1, 3, maxCharacterInCraft, description, GetSpritePath("Armory")));
         bu.Add(new Building(Building.BuildingType.TradingCenter, resourceBuildingCost, allProduction, allConsuming, townBaseUpgradePoint, 1, 10, maxCharacter, description, GetSpritePath("TradingCenter")));
@@ -726,6 +728,25 @@ public class DataCreator : MonoBehaviour
         string birthMarkDatass = JsonUtility.ToJson(birthMarkSerializer, true);
         Debug.Log("Saving BirthMarkDatas Data to JSON : " + birthMarkDatass);
         System.IO.File.WriteAllText(Application.streamingAssetsPath + "/BirthMarkData.json", birthMarkDatass);
+
+    }
+
+    void CreateAchievementData()
+    {
+        List<AchievementData> achievements = new List<AchievementData>();
+        achievements.Add(new AchievementData() { id = achievements.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK, name = "More than 100 Gold.", rewards = new DictionaryStringToInt() { { "Stone", 1 }, { "Wood", 5 } }, condition = () => { return ItemManager.Instance.GetResourceAmount("Gold") > 100; } });
+
+        Text text;
+        //text.text = achievements[0].name;
+
+        if(achievements[0].condition())
+        {
+
+        }
+
+        string achievementsData = JsonHelper.ToJson<AchievementData>(achievements.ToArray(), true);
+        Debug.Log("Saving achievementsData Data to JSON : " + achievementsData);
+        System.IO.File.WriteAllText(Application.streamingAssetsPath + "/achievements.json", achievementsData);
 
     }
 }

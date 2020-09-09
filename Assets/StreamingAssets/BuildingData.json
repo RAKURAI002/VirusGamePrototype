@@ -289,7 +289,7 @@
                 "Sprites/Building/Farm1",
                 "Sprites/Building/Farm1"
             ],
-            "description": "One of basic needs. Manage this propery or get starve all !",
+            "description": "NO !!!",
             "maxProductionStored": [
                 0,
                 600,
@@ -424,18 +424,18 @@
                 ]
             },
             "spritePath": [
-                "Sprites/Building/Fishery0",
-                "Sprites/Building/Fishery1",
-                "Sprites/Building/Fishery1",
-                "Sprites/Building/Fishery1",
-                "Sprites/Building/Fishery1",
-                "Sprites/Building/Fishery1",
-                "Sprites/Building/Fishery1",
-                "Sprites/Building/Fishery1",
-                "Sprites/Building/Fishery1",
-                "Sprites/Building/Fishery1"
+                "Sprites/Building/FishingPond0",
+                "Sprites/Building/FishingPond1",
+                "Sprites/Building/FishingPond1",
+                "Sprites/Building/FishingPond1",
+                "Sprites/Building/FishingPond1",
+                "Sprites/Building/FishingPond1",
+                "Sprites/Building/FishingPond1",
+                "Sprites/Building/FishingPond1",
+                "Sprites/Building/FishingPond1",
+                "Sprites/Building/FishingPond1"
             ],
-            "description": "Fishing from here and get a chance for rare item !",
+            "description": "NO !!!",
             "maxProductionStored": [],
             "productionSpritePath": ""
         },
@@ -613,7 +613,7 @@
                 "Sprites/Building/Kitchen1",
                 "Sprites/Building/Kitchen1"
             ],
-            "description": "Produce special food for temporary increase your character stats.",
+            "description": "NO !!!",
             "maxProductionStored": [],
             "productionSpritePath": ""
         },
@@ -866,7 +866,7 @@
                 "Sprites/Building/Laboratory1",
                 "Sprites/Building/Laboratory1"
             ],
-            "description": "Research and unlock some cool technologies.",
+            "description": "NO !!!",
             "maxProductionStored": [],
             "productionSpritePath": ""
         },
@@ -1174,7 +1174,7 @@
                 "Sprites/Building/LaborCenter1",
                 "Sprites/Building/LaborCenter1"
             ],
-            "description": "Set some characters here for more efficiency on building task.",
+            "description": "NO !!!",
             "maxProductionStored": [],
             "productionSpritePath": ""
         },
@@ -1352,7 +1352,7 @@
                 "Sprites/Building/MedicalCenter1",
                 "Sprites/Building/MedicalCenter1"
             ],
-            "description": "Craft some medicine and let your characters carry them to the quest.",
+            "description": "NO !!!",
             "maxProductionStored": [],
             "productionSpritePath": ""
         },
@@ -1365,48 +1365,48 @@
                         "Wood"
                     ],
                     "values": [
-                        10,
-                        10
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        50,
-                        125
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        100,
-                        250
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        200,
-                        500
-                    ]
-                },
-                {
-                    "keys": [
-                        "Stone",
-                        "Wood"
-                    ],
-                    "values": [
-                        400,
+                        1000,
                         1000
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        10000,
+                        15000
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        11000,
+                        20000
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        12500,
+                        25500
+                    ]
+                },
+                {
+                    "keys": [
+                        "Stone",
+                        "Wood"
+                    ],
+                    "values": [
+                        14500,
+                        315000
                     ]
                 }
             ],
@@ -1520,7 +1520,7 @@
                 "Sprites/Building/QuarantineSite1",
                 "Sprites/Building/QuarantineSite1"
             ],
-            "description": "Quarantine site provide space for doing quarantine. Don't forget to take infected characeter here.",
+            "description": "NO !!!",
             "maxProductionStored": [],
             "productionSpritePath": ""
         },
@@ -1712,6 +1712,90 @@
                     "values": [
                         12
                     ]
+                },
+                {
+                    "keys": [],
+                    "values": []
+                },
+                {
+                    "keys": [
+                        "Production"
+                    ],
+                    "values": [
+                        4000
+                    ]
+                },
+                {
+                    "keys": [
+                        "Production"
+                    ],
+                    "values": [
+                        8000
+                    ]
+                },
+                {
+                    "keys": [
+                        "Production"
+                    ],
+                    "values": [
+                        16000
+                    ]
+                },
+                {
+                    "keys": [
+                        "Production"
+                    ],
+                    "values": [
+                        32000
+                    ]
+                },
+                {
+                    "keys": [
+                        "Production"
+                    ],
+                    "values": [
+                        64000
+                    ]
+                },
+                {
+                    "keys": [
+                        "Production"
+                    ],
+                    "values": [
+                        128000
+                    ]
+                },
+                {
+                    "keys": [
+                        "Production"
+                    ],
+                    "values": [
+                        256000
+                    ]
+                },
+                {
+                    "keys": [
+                        "Production"
+                    ],
+                    "values": [
+                        512000
+                    ]
+                },
+                {
+                    "keys": [
+                        "Production"
+                    ],
+                    "values": [
+                        1024000
+                    ]
+                },
+                {
+                    "keys": [
+                        "Production"
+                    ],
+                    "values": [
+                        2048000
+                    ]
                 }
             ],
             "consuming": [],
@@ -1813,7 +1897,7 @@
                 "Sprites/Building/Residence1",
                 "Sprites/Building/Residence1"
             ],
-            "description": "Increase max number of people in town. Something could happen if exactly two opposite gender characters work here . . .",
+            "description": "NO !!!",
             "maxProductionStored": [],
             "productionSpritePath": ""
         },
@@ -2103,7 +2187,7 @@
                 "Sprites/Building/TownBase1",
                 "Sprites/Building/TownBase1"
             ],
-            "description": "Characters in this building will have permission for going outside the town. Explorations are waiting you !",
+            "description": "NO !!!",
             "maxProductionStored": [],
             "productionSpritePath": ""
         },
@@ -2211,52 +2295,7 @@
                     ]
                 }
             ],
-            "production": [
-                {
-                    "keys": [],
-                    "values": []
-                },
-                {
-                    "keys": [],
-                    "values": []
-                },
-                {
-                    "keys": [],
-                    "values": []
-                },
-                {
-                    "keys": [],
-                    "values": []
-                },
-                {
-                    "keys": [],
-                    "values": []
-                },
-                {
-                    "keys": [],
-                    "values": []
-                },
-                {
-                    "keys": [],
-                    "values": []
-                },
-                {
-                    "keys": [],
-                    "values": []
-                },
-                {
-                    "keys": [],
-                    "values": []
-                },
-                {
-                    "keys": [],
-                    "values": []
-                },
-                {
-                    "keys": [],
-                    "values": []
-                }
-            ],
+            "production": [],
             "consuming": [],
             "upgradePoint": [
                 6000,
@@ -2356,7 +2395,7 @@
                 "Sprites/Building/WareHouse1",
                 "Sprites/Building/WareHouse1"
             ],
-            "description": "All of items are stored here. The bigger, the more space.",
+            "description": "NO !!!",
             "maxProductionStored": [],
             "productionSpritePath": ""
         },
@@ -2649,7 +2688,7 @@
                 "Sprites/Building/WaterTreatmentCenter1",
                 "Sprites/Building/WaterTreatmentCenter1"
             ],
-            "description": "Purified water is base requirement for living.",
+            "description": "NO !!!",
             "maxProductionStored": [
                 0,
                 600,
@@ -2839,7 +2878,7 @@
                 "Sprites/Building/Armory1",
                 "Sprites/Building/Armory1"
             ],
-            "description": "Explorations are not easy, unless you have some legendary items crafted from here !",
+            "description": "NO !!!",
             "maxProductionStored": [],
             "productionSpritePath": ""
         },
@@ -3092,7 +3131,7 @@
                 "Sprites/Building/TradingCenter1",
                 "Sprites/Building/TradingCenter1"
             ],
-            "description": "Trading is first step for revitalize the economy.",
+            "description": "NO !!!",
             "maxProductionStored": [],
             "productionSpritePath": ""
         },
@@ -3405,7 +3444,7 @@
                 "Sprites/Building/Mine1",
                 "Sprites/Building/Mine1"
             ],
-            "description": "Even post-apocalypse, gold still maintain it's value.",
+            "description": "NO !!!",
             "maxProductionStored": [
                 0,
                 60,
@@ -3710,7 +3749,7 @@
                 "Sprites/Building/LumberYard1",
                 "Sprites/Building/LumberYard1"
             ],
-            "description": "Back to basic, woods are essential material for building.",
+            "description": "NO !!!",
             "maxProductionStored": [
                 0,
                 500,
