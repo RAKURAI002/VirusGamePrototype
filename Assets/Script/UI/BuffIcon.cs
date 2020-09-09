@@ -70,7 +70,7 @@ public class BuffIcon : Icon
 
     }
 
-    public override void AddDescription()
+    protected override void SetDescription()
     {
         throw new System.NotImplementedException();
     }

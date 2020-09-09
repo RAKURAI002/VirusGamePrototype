@@ -49,7 +49,7 @@ public abstract class BirthMarkData
     [SerializeField] public int tier;
     [SerializeField] public int level;
     [SerializeField] public string spritePath;
-
+    [SerializeField] public string description;
 
     [SerializeField] public List<float> effectValues;
 
@@ -80,25 +80,37 @@ public class IncreaseSTATSBirthMark : BirthMarkData
 }
 
 [System.Serializable]
-public class ParticularEffectOnBuildingBirthMark : BirthMarkData
+public class IncreaseProductionOnBuildingBirthMark : BirthMarkData
 {
     [SerializeField] public Building.BuildingType buildingType;
 
     public override BirthMarkData CreateBirthMarkObject<T>()
     {
-        return new ParticularEffectOnBuildingBirthMark();
+        return new IncreaseProductionOnBuildingBirthMark();
     }
     
 }
+[System.Serializable]
+public class IncreaseProductionOnManyBuildingBirthMark : BirthMarkData
+{
+    [SerializeField] public Building.BuildingType[] buildingType;
+
+    public override BirthMarkData CreateBirthMarkObject<T>()
+    {
+        return new IncreaseProductionOnBuildingBirthMark();
+    }
+
+}
+
 
 [System.Serializable]
-public class DoubleProductBirthMark : BirthMarkData
+public class ChanceToDoubleProductBirthMark : BirthMarkData
 {
     [SerializeField] public Building.BuildingType buildingType;
 
     public override BirthMarkData CreateBirthMarkObject<T>()
     {
-        return new ParticularEffectOnBuildingBirthMark();
+        return new IncreaseProductionOnBuildingBirthMark();
     }
 
 }
@@ -109,7 +121,7 @@ public class AddMoreActionBirthMark : BirthMarkData
 
     public override BirthMarkData CreateBirthMarkObject<T>()
     {
-        return new ParticularEffectOnBuildingBirthMark();
+        return new IncreaseProductionOnBuildingBirthMark();
     }
 
 }
