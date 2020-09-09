@@ -953,6 +953,7 @@ public class DataCreator : MonoBehaviour
             string achievementsData = JsonHelper.ToJson<AchievementData>(achievements.ToArray(), true);
             Debug.Log("Saving achievementsData Data to JSON : " + achievementsData);
             System.IO.File.WriteAllText(Application.streamingAssetsPath + "/achievements.json", achievementsData);
+<<<<<<< HEAD
 >>>>>>> parent of 23f75b0... Commit
 
         BirthMarkSerializer birthMarkSerializer = new BirthMarkSerializer();
@@ -962,6 +963,8 @@ public class DataCreator : MonoBehaviour
         System.IO.File.WriteAllText(Application.streamingAssetsPath + "/BirthMarkData.json", birthMarkDatass);
 
     }
+=======
+>>>>>>> parent of 23f75b0... Commit
 
     void CreateAchievementData()
     {
