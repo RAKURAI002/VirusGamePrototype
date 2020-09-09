@@ -159,7 +159,7 @@ public class BuildingInformationCanvas : MonoBehaviour
 
         buildingImage.sprite = builder.representGameObject.GetComponent<SpriteRenderer>().sprite;
         buildingName.text = builder.Type.ToString();
-       // buildingDescription.text = buildingData..ToString();
+        buildingDescription.text = buildingData.description.ToString();
         buildingLevel.text = "Level : " + builder.Level.ToString();
         /*
         foreach (KeyValuePair<string, int> resource in buildingData.production[builder.Level])

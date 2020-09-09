@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using System.Text;
 using System.Linq;
 using UnityEngine.SceneManagement;
 public class ItemManager : SingletonComponent<ItemManager>
@@ -98,7 +98,7 @@ public class ItemManager : SingletonComponent<ItemManager>
     void UpdateBuildingResource(Builder builder)
     {
         Building buildingData = LoadManager.Instance.allBuildingData[builder.Type];
-
+        StringBuilder log = new StringBuilder();
         if (buildingData.production[builder.Level] == null)
         {
             Debug.LogWarning($"There're NO production available for {builder.Type} level {builder.Level}.");
@@ -116,6 +116,8 @@ public class ItemManager : SingletonComponent<ItemManager>
         List<Character> characters = builder.CharacterInBuilding[0].Characters;
         foreach (KeyValuePair<string, int> baseProduction in buildingData.production[builder.Level])
         {
+            log.AppendLine($"{RESOURCE_CICLE_TIME} seconds passed. Base Production of {builder.Type}[ID : {builder.ID}] is {baseProduction.Value}");
+
             Resource resource = LoadManager.Instance.allResourceData[baseProduction.Key];
             if (resource.type != Resource.ResourceType.Material)
             {
@@ -123,44 +125,57 @@ public class ItemManager : SingletonComponent<ItemManager>
 
             }
             float finalUpdatedAmount = baseProduction.Value;
-            int characterStatsSum = 0;
-
+            Debug.Log($"{characters.Count}");
             foreach (Character character in characters)
             {
-                finalUpdatedAmount += character.Stats.speed * 0.2f;
+                float productionAmount = character.Stats.speed * 0.2f;
 
-                List<Character.BirthMark> birthMarks = character.BirthMarks.Where(bm => bm.type == typeof(ParticularEffectOnBuildingBirthMark)).DefaultIfEmpty().ToList();
-
+                List<Character.BirthMark> birthMarks = character.BirthMarks.Where(bm => bm.type == typeof(ParticularEffectOnBuildingBirthMark).ToString()).ToList();
+                Debug.Log(string.Concat(birthMarks.Select(b => b.type.ToString())));
                 if (birthMarks.Count == 0)
                 {
                     continue;
 
                 }
-                /*
+                //  Debug.Log($"{character.ID} {character.Name}");
+                Debug.Log($"{birthMarks.Count}");
                 List<BirthMarkData> birthMarkDatas = new List<BirthMarkData>();
                 birthMarks.ForEach((bm) =>
                 {
-                    birthMarkDatas.Add(ObjectCopier.Clone<BirthMarkData>(LoadManager.Instance.allBirthMarkDatas.SingleOrDefault(bData => bData.name == bm.name)));
-                    birthMarkDatas
+                    Debug.Log($"{bm.name}");
+                    Debug.Log($"{LoadManager.Instance.allBirthMarkDatas.Count}");
+                    Debug.Log($"{LoadManager.Instance.allBirthMarkDatas.SingleOrDefault(bData => bData.name == bm.name).name}");
+                    BirthMarkData birthMarkData = LoadManager.Instance.allBirthMarkDatas.SingleOrDefault(bData => bData.name == bm.name);
+                    Debug.Log($"{birthMarkData.name}");
+                    if (birthMarkData != null)
+                    {
+                        birthMarkDatas.Add(ObjectCopier.Clone<BirthMarkData>(birthMarkData));
+                        birthMarkDatas[birthMarkDatas.Count - 1].level = bm.level;
+
+                    }
+
+
                 });
 
-                birthMarkDatas.Where(bData => ((ParticularEffectOnBuildingBirthMark)bData).buildingType == builder.Type).ToList().ForEach((bm) =>
+                log.AppendLine($"{character.Name} : speed = {character.Stats.speed} increases {character.Stats.speed * 0.2f}");
+                Debug.Log($"{string.Concat(birthMarkDatas.Select(b => ((ParticularEffectOnBuildingBirthMark)b).buildingType))}");
+                birthMarkDatas.Where(bData => ((ParticularEffectOnBuildingBirthMark)bData).buildingType == builder.Type).ToList().ForEach((bData) =>
                 {
-                    bm.effectValues[]
+                    log.AppendLine($"Affected BirthMarks are {bData.name}(Level{bData.level}) increase {productionAmount * bData.effectValues[bData.level]}");
+                    productionAmount += productionAmount * bData.effectValues[bData.level];
 
-                });*/
+                });
 
+                finalUpdatedAmount += productionAmount;
+                
 
+            } /// End of Character loop
 
-
-            }
-
-            Debug.Log($"{RESOURCE_CICLE_TIME} seconds passed. Base Production of {builder.Type}[ID : {builder.ID}] is {baseProduction.Value} and sum of Character's Speed in building is {characterStatsSum} resulting in INCREASE " +
-                $"{LoadManager.Instance.allResourceData[baseProduction.Key].Name} : {finalUpdatedAmount}");
+            log.AppendLine($"Total production : {finalUpdatedAmount}");
+            Debug.Log($"{log}");
 
             Building buildData = LoadManager.Instance.allBuildingData[builder.Type];
-            Debug.Log(buildData.type);
-            Debug.Log(buildData.maxProductionStored[builder.Level]);
+
             builder.currentProductionAmount += finalUpdatedAmount;
             if (builder.currentProductionAmount >= buildData.maxProductionStored[builder.Level])
             {
@@ -176,7 +191,15 @@ public class ItemManager : SingletonComponent<ItemManager>
 
     public void AddEquipment(int id, int amount)
     {
-        AddEquipment(LoadManager.Instance.allEquipmentData.SingleOrDefault(e => e.Value.ID == id).Key, amount);
+        var equipment = LoadManager.Instance.allEquipmentData.SingleOrDefault(e => e.Value.ID == id);
+        if (equipment.Equals(default(KeyValuePair<string, Equipment>)))
+        {
+            Debug.LogWarning($"There're no {id} ID in Equipment Data.");
+            return;
+
+        }
+
+        AddEquipment(equipment.Key, amount);
         return;
 
     }
@@ -184,17 +207,19 @@ public class ItemManager : SingletonComponent<ItemManager>
     {
         if (!allEquipments.ContainsKey(name))
         {
-            try
+            Debug.Log($"No current Equipment data in player. Trying to Create new one . . .");
+            if (LoadManager.Instance.allEquipmentData.ContainsKey(name))
             {
+
                 allEquipments.Add(name, new Equipment(LoadManager.Instance.allEquipmentData[name]));
-                Debug.Log($"No current Equipment data in player. Trying to Create new one . . .");
-
             }
-            catch (KeyNotFoundException e)
+            else
             {
-                Debug.LogError($"Can't find {name}'s data ::" + e.ToString());
-
+                Debug.LogWarning($"There're no {name} Equipment data in game.");
+                return;
             }
+            
+           
 
         }
 
@@ -206,8 +231,15 @@ public class ItemManager : SingletonComponent<ItemManager>
     }
     public void AddResource(int id, int amount)
     {
-        string name = LoadManager.Instance.allResourceData.SingleOrDefault(r => r.Value.ID == id).Key;
-        AddResource(name, amount);
+        var resource = LoadManager.Instance.allResourceData.SingleOrDefault(r => r.Value.ID == id);
+        if (resource.Equals(default(KeyValuePair<string, Resource>)))
+        {
+            Debug.LogWarning($"There're no {id} ID in Resource Data.");
+            return;
+
+        }
+
+        AddEquipment(resource.Key, amount);
         return;
 
     }
@@ -342,12 +374,6 @@ public class ItemManager : SingletonComponent<ItemManager>
     }
     public void AddTest()
     {
-        AddResource(1, 10);
-        AddResource(2, 10);
-        AddResource(6, 10);
-        AddResource(4, 10);
-        AddResource(3, 10);
-        AddResource(5, 10);
         AddResource("Stone", 1000);
         AddResource("Wood", 1000);
         AddResource("Gold", 100);

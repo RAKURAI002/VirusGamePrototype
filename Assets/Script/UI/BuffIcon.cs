@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 using System.Text;
 using System.Reflection;
 
-public class BuffIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class BuffIcon : Icon
 {
     Resource.Effect effect;
 
@@ -28,7 +28,7 @@ public class BuffIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         effect = _effect;
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
+    public new void OnPointerEnter(PointerEventData eventData)
     {
         Text buffInformationText = transform.Find("BuffInformationPanel/BuffInformationText").GetComponent<Text>();
         buffInformationText.transform.parent.gameObject.SetActive(true);
@@ -64,11 +64,14 @@ public class BuffIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     }
 
-    public void OnPointerExit(PointerEventData eventData)
+    public new void OnPointerExit(PointerEventData eventData)
     {
         transform.Find("BuffInformationPanel").gameObject.SetActive(false);
 
     }
 
-
+    public override void AddDescription()
+    {
+        throw new System.NotImplementedException();
+    }
 }
