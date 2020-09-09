@@ -535,7 +535,6 @@ public class DataCreator : MonoBehaviour
         });
         birthMarkDatas.Add(new IncreaseSTATSBirthMark()
         {
-<<<<<<< HEAD
             name = "LuckBM",
             effectValues = new List<float>() { 5, 7.5f, 10, 15, 20 },
             isAlliesAffected = false,
@@ -657,231 +656,6 @@ public class DataCreator : MonoBehaviour
             effectValues = new List<float>() { 10, 15, 20, 25, 30 },
             spritePath = "Sprites/Character/BirthMarks/BirthMark18",
             tier = 3,
-=======
-            List<BirthMarkData> birthMarkDatas = new List<BirthMarkData>();
-            birthMarkDatas.Add(new IncreaseSTATSBirthMark()
-            {
-                name = "StrengthBM",
-                effectValues = new List<float>() { 0.05f, 0.075f, 0.10f, 0.15f, 0.20f },
-                isAlliesAffected = false,
-                spritePath = "Sprites/Character/BirthMarks/BirthMark1",
-                statToIncrease = typeof(Character.AllStats).GetField("strength"),
-                tier = 1
-            });
-            birthMarkDatas.Add(new IncreaseSTATSBirthMark()
-            {
-                name = "IntelligenceBM",
-                effectValues = new List<float>() { 0.05f, 0.075f, 0.10f, 0.15f, 0.20f },
-                isAlliesAffected = false,
-                spritePath = "Sprites/Character/BirthMarks/BirthMark2",
-                statToIncrease = typeof(Character.AllStats).GetField("intelligence"),
-                tier = 1
-            });
-            birthMarkDatas.Add(new IncreaseSTATSBirthMark()
-            {
-                name = "CraftsmanshipBM",
-                effectValues = new List<float>() { 0.05f, 0.075f, 0.10f, 0.15f, 0.20f },
-                isAlliesAffected = false,
-                spritePath = "Sprites/Character/BirthMarks/BirthMark3",
-                statToIncrease = typeof(Character.AllStats).GetField("craftsmanship"),
-                tier = 1
-            });
-            birthMarkDatas.Add(new IncreaseSTATSBirthMark()
-            {
-                name = "LuckBM",
-                effectValues = new List<float>() { 0.05f, 0.075f, 0.10f, 0.15f, 0.20f },
-                isAlliesAffected = false,
-                spritePath = "Sprites/Character/BirthMarks/BirthMark4",
-                statToIncrease = typeof(Character.AllStats).GetField("luck"),
-                tier = 1
-            });
-            birthMarkDatas.Add(new IncreaseSTATSBirthMark()
-            {
-                name = "ImmunityBM",
-                effectValues = new List<float>() { 0.05f, 0.075f, 0.10f, 0.15f, 0.20f },
-                isAlliesAffected = false,
-                spritePath = "Sprites/Character/BirthMarks/BirthMark5",
-                statToIncrease = typeof(Character.AllStats).GetField("immunity"),
-                tier = 1
-            });
-            birthMarkDatas.Add(new IncreaseSTATSBirthMark()
-            {
-                name = "PerceptionBM",
-                effectValues = new List<float>() { 0.05f, 0.075f, 0.10f, 0.15f, 0.20f },
-                isAlliesAffected = false,
-                spritePath = "Sprites/Character/BirthMarks/BirthMark6",
-                statToIncrease = typeof(Character.AllStats).GetField("perception"),
-                tier = 1
-            });
-            birthMarkDatas.Add(new IncreaseSTATSBirthMark()
-            {
-                name = "SpeedBM",
-                effectValues = new List<float>() { 0.05f, 0.075f, 0.10f, 0.15f, 0.20f },
-                isAlliesAffected = false,
-                spritePath = "Sprites/Character/BirthMarks/BirthMark7",
-                statToIncrease = typeof(Character.AllStats).GetField("speed"),
-                tier = 1
-            });
-
-            birthMarkDatas.Add(new ParticularEffectOnBuildingBirthMark()
-            {
-                name = "Son of Farmer",
-                effectValues = new List<float>() { 0.10f, 0.15f, 0.20f, 0.25f, 0.30f },
-                spritePath = "Sprites/Character/BirthMarks/BirthMark8",
-                tier = 1,
-                buildingType = Building.BuildingType.Farm
-            });
-            birthMarkDatas.Add(new ParticularEffectOnBuildingBirthMark()
-            {
-                name = "Son of WaterFilter",
-                effectValues = new List<float>() { 0.10f, 0.15f, 0.20f, 0.25f, 0.30f },
-                spritePath = "Sprites/Character/BirthMarks/BirthMark9",
-                tier = 1,
-                buildingType = Building.BuildingType.WaterTreatmentCenter
-            });
-            birthMarkDatas.Add(new ParticularEffectOnBuildingBirthMark()
-            {
-                name = "Son of GoldDigger",
-                effectValues = new List<float>() { 0.10f, 0.15f, 0.20f, 0.25f, 0.30f },
-                spritePath = "Sprites/Character/BirthMarks/BirthMark10",
-                tier = 1,
-                buildingType = Building.BuildingType.Mine
-            });
-            birthMarkDatas.Add(new ParticularEffectOnBuildingBirthMark()
-            {
-                name = "Farmer Master",
-                effectValues = new List<float>() { 0.05f, 0.075f, 0.10f, 0.125f, 0.15f },
-                spritePath = "Sprites/Character/BirthMarks/BirthMark11",
-                tier = 2,
-                buildingType = Building.BuildingType.Farm
-            });
-            birthMarkDatas.Add(new ParticularEffectOnBuildingBirthMark()
-            {
-                name = "Water Filter Master",
-                effectValues = new List<float>() { 0.05f, 0.075f, 0.10f, 0.125f, 0.15f },
-                spritePath = "Sprites/Character/BirthMarks/BirthMark12",
-                tier = 2,
-                buildingType = Building.BuildingType.WaterTreatmentCenter
-            });
-            birthMarkDatas.Add(new ParticularEffectOnBuildingBirthMark()
-            {
-                name = "Gold Digger Master",
-                effectValues = new List<float>() { 0.05f, 0.075f, 0.10f, 0.125f, 0.15f },
-                spritePath = "Sprites/Character/BirthMarks/BirthMark13",
-                tier = 2,
-                buildingType = Building.BuildingType.Mine
-            });
-            birthMarkDatas.Add(new ParticularEffectOnBuildingBirthMark()
-            {
-                name = "Son of Nurse",
-                effectValues = new List<float>() { 0.10f, 0.15f, 0.20f, 0.25f, 0.30f },
-                spritePath = "Sprites/Character/BirthMarks/BirthMark14",
-                tier = 2,
-                buildingType = Building.BuildingType.Residence
-            });
-            birthMarkDatas.Add(new ParticularEffectOnBuildingBirthMark()
-            {
-                name = "Monkey King",
-                effectValues = new List<float>() { 0.05f, 0.075f, 0.10f, 0.125f, 0.15f },
-                spritePath = "Sprites/Character/BirthMarks/BirthMark15",
-                tier = 2,
-                buildingType = Building.BuildingType.TownBase
-            });
-            birthMarkDatas.Add(new ParticularEffectOnBuildingBirthMark()
-            {
-                name = "Economic Man",
-                effectValues = new List<float>() { 0.04f, 0.08f, 0.12f, 0.16f, 0.20f },
-                spritePath = "Sprites/Character/BirthMarks/BirthMark16",
-                tier = 2,
-                buildingType = Building.BuildingType.LaborCenter
-            });
-            birthMarkDatas.Add(new ParticularEffectOnBuildingBirthMark()
-            {
-                name = "Cupid",
-                effectValues = new List<float>() { 0.10f, 0.25f, 0.40f, 0.55f, 0.70f },
-                spritePath = "Sprites/Character/BirthMarks/BirthMark17",
-                tier = 2,
-                buildingType = Building.BuildingType.LaborCenter
-            });
-            birthMarkDatas.Add(new ParticularEffectOnBuildingBirthMark()
-            {
-                name = "Jack of All Trade",
-                effectValues = new List<float>() { 0.10f, 0.15f, 0.20f, 0.25f, 0.30f },
-                spritePath = "Sprites/Character/BirthMarks/BirthMark18",
-                tier = 3,
-
-            });
-            birthMarkDatas.Add(new ParticularEffectOnBuildingBirthMark()
-            {
-                name = "Nerd",
-                effectValues = new List<float>() { 0.03f, 0.06f, 0.09f, 0.12f, 0.15f },
-                spritePath = "Sprites/Character/BirthMarks/BirthMark19",
-                tier = 3,
-                buildingType = Building.BuildingType.Laboratory
-            });
-            birthMarkDatas.Add(new ParticularEffectOnBuildingBirthMark()
-            {
-                name = "Iron Chef",
-                effectValues = new List<float>() { 0.03f, 0.06f, 0.09f, 0.12f, 0.15f },
-                spritePath = "Sprites/Character/BirthMarks/BirthMark20",
-                tier = 3,
-                buildingType = Building.BuildingType.Kitchen
-            });
-            birthMarkDatas.Add(new DoubleProductBirthMark()
-            {
-                name = "MultiCooker",
-                effectValues = new List<float>() { 0.04f, 0.08f, 0.12f, 0.16f, 0.20f },
-                spritePath = "Sprites/Character/BirthMarks/BirthMark21",
-                tier = 4,
-                buildingType = Building.BuildingType.Kitchen
-            });
-            birthMarkDatas.Add(new DoubleProductBirthMark()
-            {
-                name = "MultiSmith",
-                effectValues = new List<float>() { 0.04f, 0.08f, 0.12f, 0.16f, 0.20f },
-                spritePath = "Sprites/Character/BirthMarks/BirthMark22",
-                tier = 4,
-                buildingType = Building.BuildingType.Armory
-            });
-            birthMarkDatas.Add(new DoubleProductBirthMark()
-            {
-                name = "MultiFisher",
-                effectValues = new List<float>() { 0.04f, 0.08f, 0.12f, 0.16f, 0.20f },
-                spritePath = "Sprites/Character/BirthMarks/BirthMark23",
-                tier = 4,
-                buildingType = Building.BuildingType.Fishery
-            });
-            birthMarkDatas.Add(new DoubleProductBirthMark()
-            {
-                name = "MultiAlcemist",
-                effectValues = new List<float>() { 0.04f, 0.08f, 0.12f, 0.16f, 0.20f },
-                spritePath = "Sprites/Character/BirthMarks/BirthMark24",
-                tier = 4,
-                buildingType = Building.BuildingType.MedicalCenter
-            });
-            birthMarkDatas.Add(new ParticularEffectOnBuildingBirthMark()
-            {
-                name = "Luck of The Sea",
-                effectValues = new List<float>() { 0.80f, 0.90f, 1 },
-                spritePath = "Sprites/Character/BirthMarks/BirthMark25",
-                tier = 5,
-                buildingType = Building.BuildingType.Fishery
-            });
-            birthMarkDatas.Add(new AddMoreActionBirthMark()
-            {
-                name = "777",
-                effectValues = new List<float>() { 1, 1, 2 },
-                spritePath = "Sprites/Character/BirthMarks/BirthMark26",
-                tier = 5,
-
-            });
-
-            BirthMarkSerializer birthMarkSerializer = new BirthMarkSerializer();
-            birthMarkSerializer.birthMarkDatas = birthMarkDatas;
-            string birthMarkDatass = JsonUtility.ToJson(birthMarkSerializer, true);
-            Debug.Log("Saving BirthMarkDatas Data to JSON : " + birthMarkDatass);
-            System.IO.File.WriteAllText(Application.streamingAssetsPath + "/BirthMarkData.json", birthMarkDatass);
->>>>>>> parent of 23f75b0... Commit
 
         });
         birthMarkDatas.Add(new ParticularEffectOnBuildingBirthMark()
@@ -947,14 +721,7 @@ public class DataCreator : MonoBehaviour
             spritePath = "Sprites/Character/BirthMarks/BirthMark26",
             tier = 5,
 
-<<<<<<< HEAD
         });
-=======
-            string achievementsData = JsonHelper.ToJson<AchievementData>(achievements.ToArray(), true);
-            Debug.Log("Saving achievementsData Data to JSON : " + achievementsData);
-            System.IO.File.WriteAllText(Application.streamingAssetsPath + "/achievements.json", achievementsData);
-<<<<<<< HEAD
->>>>>>> parent of 23f75b0... Commit
 
         BirthMarkSerializer birthMarkSerializer = new BirthMarkSerializer();
         birthMarkSerializer.birthMarkDatas = birthMarkDatas;
@@ -963,8 +730,6 @@ public class DataCreator : MonoBehaviour
         System.IO.File.WriteAllText(Application.streamingAssetsPath + "/BirthMarkData.json", birthMarkDatass);
 
     }
-=======
->>>>>>> parent of 23f75b0... Commit
 
     void CreateAchievementData()
     {
