@@ -17,43 +17,14 @@ public class BuffIcon : Icon
         int duration = CharacterManager.Instance.gameObject.transform.Find("ItemEffectTimer/" + effect.instanceID).GetComponent<ItemEffectTimer>().timeLeft;
         if(duration != _duration)
         {
-            transform.Find("BuffInformationPanel/BuffDuration").GetComponent<Text>().text = ($"<color=blue>{GetFormattedDuration(duration)}</color>");
+            updateTextBuilder.Append($"<color=blue>{GetFormattedDuration(duration)}</color>");
             _duration = duration;
+            Debug.Log($"{updateTextBuilder}");
+            UpdateText();
         }
         
     }
 
-    public void StartBuffIcon(Resource.Effect _effect)
-    {
-        effect = _effect;
-    }
-
-    public new void OnPointerEnter(PointerEventData eventData)
-    {
-        Text buffInformationText = transform.Find("BuffInformationPanel/BuffInformationText").GetComponent<Text>();
-        buffInformationText.transform.parent.gameObject.SetActive(true);
-
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.AppendLine(effect.name);
-        List<FieldInfo> fInfos = effect.stats.GetType().GetFields().Where(es => (int)es.GetValue(effect.stats) > 0).ToList();
-
-        foreach(FieldInfo fInfo in fInfos)
-        {
-            stringBuilder.AppendLine($"+ {fInfo.Name} : {fInfo.GetValue(effect.stats)}");
-        }
-
-        int duration = CharacterManager.Instance.gameObject.transform.Find("ItemEffectTimer/" + effect.instanceID).GetComponent<ItemEffectTimer>().timeLeft;
-
-        
-
-
-        transform.Find("BuffInformationPanel/BuffDuration").GetComponent<Text>().text = ($"<color=blue>{GetFormattedDuration(duration)}</color>");
-        buffInformationText.text = stringBuilder.ToString();
-
-        buffInformationText.transform.parent.GetComponent<RectTransform>().sizeDelta =
-            new Vector2(buffInformationText.preferredWidth, buffInformationText.preferredHeight + 15) + new Vector2(5, 5);
-
-    }
     string GetFormattedDuration(int duration)
     {
         int hours = Mathf.FloorToInt(duration / 3600);
@@ -64,14 +35,27 @@ public class BuffIcon : Icon
 
     }
 
-    public new void OnPointerExit(PointerEventData eventData)
-    {
-        transform.Find("BuffInformationPanel").gameObject.SetActive(false);
 
+    protected void SetDescription()
+    {
+        permanentTextBuilder.AppendLine(effect.name);
+        List<FieldInfo> fInfos = effect.stats.GetType().GetFields().Where(es => (int)es.GetValue(effect.stats) > 0).ToList();
+
+        foreach (FieldInfo fInfo in fInfos)
+        {
+            permanentTextBuilder.AppendLine($"+ {fInfo.Name} : {fInfo.GetValue(effect.stats)}");
+
+        }
+
+        Debug.Log($"{permanentTextBuilder}");
+        SetText();
     }
 
-    protected override void SetDescription()
+    public override void Initialize<T>(T data, bool isWink)
     {
-        throw new System.NotImplementedException();
+        effect = data as Resource.Effect;
+        this.isWink = isWink;
+        GetComponent<Image>().sprite = Resources.Load<Sprite>(effect.spritePath);
+        SetDescription();
     }
 }

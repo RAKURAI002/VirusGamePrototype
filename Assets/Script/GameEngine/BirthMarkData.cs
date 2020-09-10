@@ -62,7 +62,7 @@ public abstract class BirthMarkData
 public class IncreaseSTATSBirthMark : BirthMarkData
 {
     
-    [SerializeField] public FieldInfo statToIncrease;
+    [SerializeField] public string statToIncrease;
 
     [SerializeField] public bool isAlliesAffected;
 
@@ -82,7 +82,7 @@ public class IncreaseSTATSBirthMark : BirthMarkData
 [System.Serializable]
 public class IncreaseProductionOnBuildingBirthMark : BirthMarkData
 {
-    [SerializeField] public Building.BuildingType buildingType;
+    [SerializeField] public Building.BuildingType[] buildingType;
 
     public override BirthMarkData CreateBirthMarkObject<T>()
     {
@@ -90,17 +90,7 @@ public class IncreaseProductionOnBuildingBirthMark : BirthMarkData
     }
     
 }
-[System.Serializable]
-public class IncreaseProductionOnManyBuildingBirthMark : BirthMarkData
-{
-    [SerializeField] public Building.BuildingType[] buildingType;
 
-    public override BirthMarkData CreateBirthMarkObject<T>()
-    {
-        return new IncreaseProductionOnBuildingBirthMark();
-    }
-
-}
 
 
 [System.Serializable]

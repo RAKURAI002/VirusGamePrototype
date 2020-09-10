@@ -98,15 +98,11 @@ public class BuildingBehavior : MonoBehaviour
             onMouseOverHelper = production.GetComponent<OnMouseOverHelper>();
             onMouseOverHelper.SetOnClickCallBack(OnClickCollectResource);
 
-           
-
             Sprite productionSprite = Resources.Load<Sprite>(buildingData.productionSpritePath);
-           // Color color = productionSprite.texture.GetPixel(productionSprite.texture.width / 2, productionSprite.texture.height / 2);
 
             SpriteRenderer fillSpriteRenderer = transform.Find("Production/FillSprite").GetComponent<SpriteRenderer>();
 
             Sprite fillSprite = Resources.Load<Sprite>("Sprites/UI/Solid");
-            //  fillSprite.texture = ScaleTexture(fillSprite.texture, (int)productionSprite.rect.width, (int)productionSprite.rect.height);
 
             fillSpriteRenderer.sprite = fillSprite;
             fillSpriteRenderer.color = new Color(1f, 1f, 1f, 0.6f);
@@ -118,20 +114,13 @@ public class BuildingBehavior : MonoBehaviour
 
             RectTransform parentRect = production.GetComponent<RectTransform>();
             RectTransform fillRect = production.Find("FillSprite").GetComponent<RectTransform>();
-            //  Debug.Log(productionSprite.rect.width.ToString()+ " "+ productionSprite.bounds.size.y);
-            //  Debug.Log(parentSpriteRenderer.size.x + " : " + parentSpriteRenderer.bounds.size.y);
+
             parentRect.sizeDelta = new Vector2(productionSprite.bounds.size.x, productionSprite.bounds.size.y);
-            //fillRect.sizeDelta = new Vector2(productionSprite.bounds.size.x, productionSprite.bounds.size.y);
-            // Debug.Log(fillSpriteRenderer.size);
-            //  fillSpriteRenderer.size = new Vector2(fillSpriteRenderer.size.x, productionSprite.bounds.size.y);
-            //  fillRect.localPosition = Vector2.zero;
-          //  Debug.Log(parentRect.sizeDelta.y + " : " + fillRect.sizeDelta.y);
+
 
             production.GetComponent<SpriteRenderer>().sprite = productionSprite;
 
-            float newYScale = parentRect.sizeDelta.y / (fillRect.sizeDelta.y);// productionSprite.bounds.size.y / ((productionSprite.bounds.size.y / 2) - (fillSprite.bounds.size.y / 2));
-           // Debug.Log($"{parentRect.sizeDelta.y} / {fillRect.sizeDelta.y} = {newYScale}");
-
+            float newYScale = parentRect.sizeDelta.y / (fillRect.sizeDelta.y);
             fillRect.localScale = new Vector3(2f, newYScale, 0f);
             production.gameObject.AddComponent<PolygonCollider2D>();
             origin = fillRect.localPosition;

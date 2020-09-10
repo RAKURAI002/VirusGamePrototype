@@ -7,39 +7,63 @@ using UnityEngine.UI;
 
 public abstract class Icon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    protected StringBuilder desciption;
-    protected bool isWink;
+    protected StringBuilder permanentTextBuilder;
+    protected StringBuilder updateTextBuilder;
+    public bool isWink { get; set; }
     protected Transform textPanel;
-    protected Text text;
+    protected Text permanentText;
+    protected Text updateText;
 
     private void Awake()
     {
+        permanentTextBuilder = new StringBuilder();
+        updateTextBuilder = new StringBuilder();
+
         textPanel = transform.Find("TextPanel");
-        text = textPanel.GetComponentInChildren<Text>();
-        desciption = new StringBuilder();
+        permanentText = textPanel.GetComponentInChildren<Text>(true);
+        updateText = textPanel.Find("UpdateText").GetComponent<Text>();
 
     }
-
-    protected abstract void SetDescription();
-    protected virtual void UpdateText()
+    private void Start()
     {
-        if(desciption.Equals(default(StringBuilder)))
+        GetComponent<Animation>().enabled = isWink;
+
+
+    }
+    public abstract void Initialize<T>(T data, bool isWink);
+
+    protected virtual void SetText()
+    {
+        if (permanentTextBuilder.Equals(default(StringBuilder)))
         {
             return;
 
         }
-        text.text = desciption.ToString();
+        permanentText.text = permanentTextBuilder.ToString();
 
-        GetComponentInChildren<TextBoxScaler>().Scale();
+        if (!updateTextBuilder.Equals(default(StringBuilder)))
+        {
+            Debug.Log(updateTextBuilder.ToString());
+            updateText.text = updateTextBuilder.ToString();
+            updateTextBuilder.Clear();
+        }
 
+    }
+    protected virtual void UpdateText()
+    {
+        if (!updateTextBuilder.Equals(default(StringBuilder)))
+        {
+            Debug.Log(updateTextBuilder.ToString());
+            updateText.text = updateTextBuilder.ToString();
+            updateTextBuilder.Clear();
+
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        SetDescription();
-        UpdateText();
         textPanel.gameObject.SetActive(true);
-        
+
     }
 
     public void OnPointerExit(PointerEventData eventData)

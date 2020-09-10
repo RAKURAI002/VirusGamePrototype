@@ -27,7 +27,7 @@ public class LoadManager : SingletonComponent<LoadManager>
     [SerializeField] public List<Enemy> allEnemyData; /// ********************
     [SerializeField] public QuestDataDictionary allQuestData; /// ****************
     [SerializeField] public List<Character.CharacterData> allCharacterData;
-    [SerializeField] public List<BirthMarkData> allBirthMarkDatas;
+    [SerializeField] public BirthMarkDataDictionary allBirthMarkDatas;
     [SerializeField] public List<AchievementData> allAchievementDatas;
 
     #region Unity Functions
@@ -247,14 +247,18 @@ public class LoadManager : SingletonComponent<LoadManager>
             }
             else
             {
-                allBirthMarkDatas = new List<BirthMarkData>();
+                allBirthMarkDatas = new BirthMarkDataDictionary();
                 Debug.Log("Fetching Character BirthMark Data completed.\n");
 
                 BirthMarkSerializer birthMarkSerializer = new BirthMarkSerializer();
 
                 birthMarkSerializer = JsonUtility.FromJson<BirthMarkSerializer>(req.downloadHandler.text);
 
-                allBirthMarkDatas = birthMarkSerializer.birthMarkDatas;
+                foreach (var birthMarkData in birthMarkSerializer.birthMarkDatas)
+                {
+                    allBirthMarkDatas.Add(birthMarkData.name, birthMarkData);
+                }
+
             }
         }));
         Coroutine c8 = StartCoroutine(LoadManager.Instance.GetRequest("/AchievementData.json", (UnityWebRequest req) =>

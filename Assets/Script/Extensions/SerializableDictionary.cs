@@ -64,6 +64,9 @@ public class BuilderDictionary : SerializableDictionary<int, Builder>
 public class QuestDataDictionary : SerializableDictionary<int, QuestData>
 { }
 [System.Serializable]
+public class BirthMarkDataDictionary : SerializableDictionary<string, BirthMarkData>
+{ }
+[System.Serializable]
 public class EnemyDictionary : SerializableDictionary<int, Enemy>
 { }
 [System.Serializable]

@@ -180,9 +180,9 @@ public class QuestManager : SingletonComponent<QuestManager>
     }
 
     bool CalculateBattleDamage(Character character, Enemy enemy, int turn, StringBuilder questLog)
-    {
+    {/*
         int n = 3;
-       /*
+       
         if(turn % 2 == 0)
         {
             int damage = (int)Math.Floor(n * Math.Exp(0.004f * (enemy.Stats.attack - character.Stats.defense)) * UnityEngine.Random.Range(0.8f, 1.2f));

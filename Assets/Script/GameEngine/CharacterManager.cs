@@ -182,7 +182,6 @@ public class CharacterManager : SingletonComponent<CharacterManager>
         {
             if (character.effects.Exists(e => e.name == item.effect.name))
             {
-                Debug.Log("Same");
                 ApplyItemEffect(character, character.effects.Single(e => e.name == item.effect.name), true);
 
             }

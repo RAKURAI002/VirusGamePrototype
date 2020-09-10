@@ -27,7 +27,11 @@ public class Character
         public int perception;
         public int luck;
         public int immunity;
-
+        /*
+        public override string ToString()
+        {
+            return string.Concat(this.GetType().GetFields().Select(f => f.Name));
+        }*/
     }
 
     public enum GenderType
@@ -92,7 +96,37 @@ public class Character
         id = GenerateID();
         this.name = name;
         gender = Convert.ToBoolean(UnityEngine.Random.Range(0, 2)) ? GenderType.Male : GenderType.Female;
+        level = 1;
 
+        RandomCharacterStats();
+        RandomBirthMark();
+        ApplyBirthMarkStats();
+        equipments = new List<Equipment>();
+        workStatus = WorkStatus.Idle;
+        healthStatus = HealthStatus.Healthly;
+        spritePath = "Sprites/Character/Character" + UnityEngine.Random.Range(1, 10).ToString();
+        effects = new List<Resource.Effect>();
+
+
+
+    }
+    void ApplyBirthMarkStats()
+    {
+        BirthMark[] statsBirthMarks = birthMarks.Where(bm => bm.type == typeof(IncreaseSTATSBirthMark).ToString()).ToArray();
+        foreach (BirthMark birthMark in statsBirthMarks)
+        {
+            BirthMarkData birthMarkData = LoadManager.Instance.allBirthMarkDatas[birthMark.name];
+
+            FieldInfo fInfo = typeof(Character.AllStats).GetField(((IncreaseSTATSBirthMark)birthMarkData).statToIncrease.ToLower());
+
+            int oldStat = (int)fInfo.GetValue(this.stats);
+            fInfo.SetValue(this.stats, Mathf.RoundToInt( oldStat * (1 + birthMarkData.effectValues[birthMark.level - 1])));
+
+        }
+
+    }
+    void RandomCharacterStats()
+    {
         stats = new AllStats();
 
         FieldInfo[] fInfos = stats.GetType().GetFields();
@@ -108,19 +142,6 @@ public class Character
             fInfo.SetValue(this.stats, (int)fInfo.GetValue(this.stats) + 1);
 
         }
-
-        level = 1;
-
-        RandomBirthMark(ref birthMarks);
-
-
-
-        equipments = new List<Equipment>();
-        workStatus = WorkStatus.Idle;
-        healthStatus = HealthStatus.Healthly;
-        spritePath = "Sprites/Character/Character" + UnityEngine.Random.Range(1, 10).ToString();
-        effects = new List<Resource.Effect>();
-
     }
     public Character(string name, GenderType gender, string spritePath) : this(name)
     {
@@ -178,7 +199,7 @@ public class Character
     public List<BirthMark> BirthMarks { get { return birthMarks; } }
     public int WorkingPlaceID { get; set; }
 
-    void RandomBirthMark(ref List<BirthMark> birthMarks)
+    void RandomBirthMark()
     {
         int totalDivisor = 0;
         List<int> chanceTable = new List<int>();
@@ -196,7 +217,7 @@ public class Character
         {
             if(randomBirthMarkAmount < chanceTable[i])
             {
-                AddBirthMark(ref birthMarks, i);
+                AddBirthMark(i);
                 break;
 
             }
@@ -212,7 +233,7 @@ public class Character
         return;
 
     }
-    void AddBirthMark(ref List<BirthMark> birthMarks, int amount)
+    void AddBirthMark(int amount)
     {
          Debug.Log($"Start random {amount} BirthMark(s) . . .");
         birthMarks = new List<BirthMark>();
@@ -240,7 +261,7 @@ public class Character
                 {
                     Debug.Log($"Random Tier {birthMarkTier} BirthMark to character.");
                     
-                    List<BirthMarkData> bmData = LoadManager.Instance.allBirthMarkDatas.Where(bm => bm.tier == birthMarkTier).ToList();
+                    List<BirthMarkData> bmData = LoadManager.Instance.allBirthMarkDatas.Where(bm => bm.Value.tier == birthMarkTier).Select(bm => bm.Value).ToList();
                     int randomEffect = UnityEngine.Random.Range(0, bmData.Count);
                     birthMarks.Add(new BirthMark(bmData[randomEffect]));
 

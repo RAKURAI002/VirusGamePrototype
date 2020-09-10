@@ -18,6 +18,7 @@ public class Enemy
         public int attack;
         public int defense;
         public int speed;
+        public int perspective;
         public int hitPoint;
         public int intelligence;
     }

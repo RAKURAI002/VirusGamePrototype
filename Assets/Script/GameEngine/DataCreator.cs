@@ -529,7 +529,7 @@ public class DataCreator : MonoBehaviour
                 effectValues = new List<float>() { 0.05f, 0.075f, 0.10f, 0.15f, 0.20f },
                 isAlliesAffected = false,
                 spritePath = "Sprites/Character/BirthMarks/BirthMark1",
-                statToIncrease = typeof(Character.AllStats).GetField("strength"),
+                statToIncrease = typeof(Character.AllStats).GetField("strength").Name,
                 tier = 1,
                 description = "Increase Strength attribute"
             });
@@ -539,7 +539,7 @@ public class DataCreator : MonoBehaviour
                 effectValues = new List<float>() { 0.05f, 0.075f, 0.10f, 0.15f, 0.20f },
                 isAlliesAffected = false,
                 spritePath = "Sprites/Character/BirthMarks/BirthMark2",
-                statToIncrease = typeof(Character.AllStats).GetField("intelligence"),
+                statToIncrease = typeof(Character.AllStats).GetField("intelligence").Name,
                 tier = 1,
                 description = "Increase Intelligence attribute"
             });
@@ -549,7 +549,7 @@ public class DataCreator : MonoBehaviour
                 effectValues = new List<float>() { 0.05f, 0.075f, 0.10f, 0.15f, 0.20f },
                 isAlliesAffected = false,
                 spritePath = "Sprites/Character/BirthMarks/BirthMark3",
-                statToIncrease = typeof(Character.AllStats).GetField("craftsmanship"),
+                statToIncrease = typeof(Character.AllStats).GetField("craftsmanship").Name,
                 tier = 1,
                 description = "Increase Craftsmanship attribute"
             });
@@ -559,7 +559,7 @@ public class DataCreator : MonoBehaviour
                 effectValues = new List<float>() { 0.05f, 0.075f, 0.10f, 0.15f, 0.20f },
                 isAlliesAffected = false,
                 spritePath = "Sprites/Character/BirthMarks/BirthMark4",
-                statToIncrease = typeof(Character.AllStats).GetField("luck"),
+                statToIncrease = typeof(Character.AllStats).GetField("luck").Name,
                 tier = 1,
                 description = "Increase Luck attribute"
             });
@@ -569,7 +569,7 @@ public class DataCreator : MonoBehaviour
                 effectValues = new List<float>() { 0.05f, 0.075f, 0.10f, 0.15f, 0.20f },
                 isAlliesAffected = false,
                 spritePath = "Sprites/Character/BirthMarks/BirthMark5",
-                statToIncrease = typeof(Character.AllStats).GetField("immunity"),
+                statToIncrease = typeof(Character.AllStats).GetField("immunity").Name,
                 tier = 1,
                 description = "Increase Immunity attribute"
             });
@@ -579,7 +579,7 @@ public class DataCreator : MonoBehaviour
                 effectValues = new List<float>() { 0.05f, 0.075f, 0.10f, 0.15f, 0.20f },
                 isAlliesAffected = false,
                 spritePath = "Sprites/Character/BirthMarks/BirthMark6",
-                statToIncrease = typeof(Character.AllStats).GetField("perception"),
+                statToIncrease = typeof(Character.AllStats).GetField("perception").Name,
                 tier = 1,
                 description = "Increase Perception attribute"
             });
@@ -589,7 +589,7 @@ public class DataCreator : MonoBehaviour
                 effectValues = new List<float>() { 0.05f, 0.075f, 0.10f, 0.15f, 0.20f },
                 isAlliesAffected = false,
                 spritePath = "Sprites/Character/BirthMarks/BirthMark7",
-                statToIncrease = typeof(Character.AllStats).GetField("speed"),
+                statToIncrease = typeof(Character.AllStats).GetField("speed").Name,
                 tier = 1,
                 description = "Increase Speed attribute"
             });
@@ -600,7 +600,7 @@ public class DataCreator : MonoBehaviour
                 effectValues = new List<float>() { 0.10f, 0.15f, 0.20f, 0.25f, 0.30f },
                 spritePath = "Sprites/Character/BirthMarks/BirthMark8",
                 tier = 1,
-                buildingType = Building.BuildingType.Farm,
+                buildingType = new Building.BuildingType[1] { Building.BuildingType.Farm },
                 description = "Increase self production in Farm"
             });
             birthMarkDatas.Add(new IncreaseProductionOnBuildingBirthMark()
@@ -609,7 +609,7 @@ public class DataCreator : MonoBehaviour
                 effectValues = new List<float>() { 0.10f, 0.15f, 0.20f, 0.25f, 0.30f },
                 spritePath = "Sprites/Character/BirthMarks/BirthMark9",
                 tier = 1,
-                buildingType = Building.BuildingType.WaterTreatmentCenter,
+                buildingType = new Building.BuildingType[1] { Building.BuildingType.WaterTreatmentCenter },
                 description = "Increase self production in Water Treatment Center"
             });
             birthMarkDatas.Add(new IncreaseProductionOnBuildingBirthMark()
@@ -618,7 +618,7 @@ public class DataCreator : MonoBehaviour
                 effectValues = new List<float>() { 0.10f, 0.15f, 0.20f, 0.25f, 0.30f },
                 spritePath = "Sprites/Character/BirthMarks/BirthMark10",
                 tier = 1,
-                buildingType = Building.BuildingType.Mine,
+                buildingType = new Building.BuildingType[1] { Building.BuildingType.Mine },
                 description = "Increase self production in Mine"
             });
             birthMarkDatas.Add(new IncreaseProductionOnBuildingBirthMark()
@@ -627,7 +627,7 @@ public class DataCreator : MonoBehaviour
                 effectValues = new List<float>() { 0.05f, 0.075f, 0.10f, 0.125f, 0.15f },
                 spritePath = "Sprites/Character/BirthMarks/BirthMark11",
                 tier = 2,
-                buildingType = Building.BuildingType.Farm,
+                buildingType = new Building.BuildingType[1] { Building.BuildingType.Farm },
                 description = "Increase all production in Farm"
             });
             birthMarkDatas.Add(new IncreaseProductionOnBuildingBirthMark()
@@ -636,7 +636,7 @@ public class DataCreator : MonoBehaviour
                 effectValues = new List<float>() { 0.05f, 0.075f, 0.10f, 0.125f, 0.15f },
                 spritePath = "Sprites/Character/BirthMarks/BirthMark12",
                 tier = 2,
-                buildingType = Building.BuildingType.WaterTreatmentCenter,
+                buildingType = new Building.BuildingType[1] { Building.BuildingType.WaterTreatmentCenter },
                 description = "Increase all production in Water Treatment Center"
             });
             birthMarkDatas.Add(new IncreaseProductionOnBuildingBirthMark()
@@ -645,7 +645,7 @@ public class DataCreator : MonoBehaviour
                 effectValues = new List<float>() { 0.05f, 0.075f, 0.10f, 0.125f, 0.15f },
                 spritePath = "Sprites/Character/BirthMarks/BirthMark13",
                 tier = 2,
-                buildingType = Building.BuildingType.Mine,
+                buildingType = new Building.BuildingType[1] { Building.BuildingType.Mine },
                 description = "Increase all production in Mine"
             });
             birthMarkDatas.Add(new IncreaseProductionOnBuildingBirthMark()
@@ -654,7 +654,7 @@ public class DataCreator : MonoBehaviour
                 effectValues = new List<float>() { 0.10f, 0.15f, 0.20f, 0.25f, 0.30f },
                 spritePath = "Sprites/Character/BirthMarks/BirthMark14",
                 tier = 2,
-                buildingType = Building.BuildingType.Residence,
+                buildingType = new Building.BuildingType[1] { Building.BuildingType.Residence },
                 description = "All character healing in Residence increased"
             });
             birthMarkDatas.Add(new IncreaseProductionOnBuildingBirthMark()
@@ -663,7 +663,7 @@ public class DataCreator : MonoBehaviour
                 effectValues = new List<float>() { 0.05f, 0.075f, 0.10f, 0.125f, 0.15f },
                 spritePath = "Sprites/Character/BirthMarks/BirthMark15",
                 tier = 2,
-                buildingType = Building.BuildingType.TownBase,
+                buildingType = new Building.BuildingType[1] { Building.BuildingType.TownBase },
                 description = "Exploration quest team speed increase"
             });
             birthMarkDatas.Add(new IncreaseProductionOnBuildingBirthMark()
@@ -672,7 +672,7 @@ public class DataCreator : MonoBehaviour
                 effectValues = new List<float>() { 0.04f, 0.08f, 0.12f, 0.16f, 0.20f },
                 spritePath = "Sprites/Character/BirthMarks/BirthMark16",
                 tier = 2,
-                buildingType = Building.BuildingType.LaborCenter,
+                buildingType = new Building.BuildingType[1] { Building.BuildingType.LaborCenter },
                 description = "Upgrade cost reduce"
             });
             birthMarkDatas.Add(new IncreaseProductionOnBuildingBirthMark()
@@ -681,10 +681,10 @@ public class DataCreator : MonoBehaviour
                 effectValues = new List<float>() { 0.10f, 0.25f, 0.40f, 0.55f, 0.70f },
                 spritePath = "Sprites/Character/BirthMarks/BirthMark17",
                 tier = 2,
-                buildingType = Building.BuildingType.LaborCenter,
+                buildingType = new Building.BuildingType[1] { Building.BuildingType.LaborCenter },
                 description = "Upgrade cost reduce"
             });
-            birthMarkDatas.Add(new IncreaseProductionOnManyBuildingBirthMark()
+            birthMarkDatas.Add(new IncreaseProductionOnBuildingBirthMark()
             {
                 name = "Jack of All Trade",
                 effectValues = new List<float>() { 0.10f, 0.15f, 0.20f, 0.25f, 0.30f },
@@ -701,7 +701,7 @@ public class DataCreator : MonoBehaviour
                 effectValues = new List<float>() { 0.03f, 0.06f, 0.09f, 0.12f, 0.15f },
                 spritePath = "Sprites/Character/BirthMarks/BirthMark19",
                 tier = 3,
-                buildingType = Building.BuildingType.Laboratory
+                buildingType = new Building.BuildingType[1] { Building.BuildingType.Laboratory }
             });
             birthMarkDatas.Add(new IncreaseProductionOnBuildingBirthMark()
             {
@@ -709,7 +709,7 @@ public class DataCreator : MonoBehaviour
                 effectValues = new List<float>() { 0.03f, 0.06f, 0.09f, 0.12f, 0.15f },
                 spritePath = "Sprites/Character/BirthMarks/BirthMark20",
                 tier = 3,
-                buildingType = Building.BuildingType.Kitchen
+                buildingType = new Building.BuildingType[1] { Building.BuildingType.Kitchen }
             });
             birthMarkDatas.Add(new ChanceToDoubleProductBirthMark()
             {
@@ -749,7 +749,7 @@ public class DataCreator : MonoBehaviour
                 effectValues = new List<float>() { 0.80f, 0.90f, 1 },
                 spritePath = "Sprites/Character/BirthMarks/BirthMark25",
                 tier = 5,
-                buildingType = Building.BuildingType.Fishery
+                buildingType = new Building.BuildingType[1] { Building.BuildingType.Fishery }
                 
             });
             birthMarkDatas.Add(new AddMoreActionBirthMark()

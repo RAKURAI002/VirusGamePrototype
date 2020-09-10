@@ -82,9 +82,10 @@ public class CharacterCanvas : MonoBehaviour
 
         foreach(Character.BirthMark birthMark in character.BirthMarks)
         {
-            Image bmImage = new GameObject().AddComponent<Image>();
-            bmImage.transform.SetParent(birthMarkContainer);
-            bmImage.sprite = Resources.Load<Sprite>(birthMark.spritePath);
+            BirthMarkData birthMarkData = ObjectCopier.Clone(LoadManager.Instance.allBirthMarkDatas[birthMark.name]);
+            birthMarkData.level = birthMark.level;
+            BirthMarkIcon birthMarkIcon = Instantiate(Resources.Load("Prefabs/UI/IconPrefab") as GameObject, birthMarkContainer).AddComponent<BirthMarkIcon>();
+            birthMarkIcon.Initialize(birthMarkData, false);
 
         }
 
@@ -101,10 +102,8 @@ public class CharacterCanvas : MonoBehaviour
 
         foreach(Resource.Effect effect in character.effects)
         {
-
-            GameObject buffIconGO = Instantiate(Resources.Load("Prefabs/UI/BuffIconPrefab") as GameObject, buffIconContainer.transform);
-            buffIconGO.transform.Find("BuffIcon").GetComponent<Image>().sprite = Resources.Load<Sprite>(effect.spritePath);
-            buffIconGO.GetComponent<BuffIcon>().StartBuffIcon(effect);
+            GameObject buffIconGO = Instantiate(Resources.Load("Prefabs/UI/IconPrefab") as GameObject, buffIconContainer.transform);
+            buffIconGO.AddComponent<BuffIcon>().Initialize(effect, true);
 
         }
 
