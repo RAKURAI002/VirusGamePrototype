@@ -69,11 +69,8 @@ public class NotificationManager : SingletonComponent<NotificationManager>
     {
         foreach (var activity in processingActivies)
         {
-        //    Debug.Log(processingActivies.Count);
-        //    Debug.Log(activity.Value.activityID);
             switch (activity.Value.activityType)
             {
-
                 case ActivityType.Quest:
                     {
                         GameObject ActivityTimerGO = new GameObject();

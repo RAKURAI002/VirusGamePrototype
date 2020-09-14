@@ -13,7 +13,9 @@ public class DataCreator : MonoBehaviour
         CreateResourceData();
         CreateBirthMarkData();
         CreateAchievementData();
-
+        CreateEquipmentJsonData();
+    
+    }
         List<string> GetSpritePath(string name)
         {
 
@@ -34,21 +36,21 @@ public class DataCreator : MonoBehaviour
         void CreateEquipmentJsonData()
         {
             List<Equipment> equipment = new List<Equipment>();
-            equipment.Add(new Equipment(1, "Item1", Item.RarityTier.Uncommon, "Too mighty blade.", Equipment.EquipmentPosition.Hand, ("Sprites/Equipments/Item1"), new Character.AllStats { strength = 8, speed = -1 }));
-            equipment.Add(new Equipment(2, "Item2", Item.RarityTier.UltraRare, "Seems like a MONKEY's heart ?", Equipment.EquipmentPosition.Body, ("Sprites/Equipments/Item2"), new Character.AllStats { strength = 20, speed = 10, immunity = 20 }));
-            equipment.Add(new Equipment(3, "Item3", Item.RarityTier.Uncommon, "What is this ?", Equipment.EquipmentPosition.Face, ("Sprites/Equipments/Item3"), new Character.AllStats { strength = 1, perception = 3 }));
-            equipment.Add(new Equipment(4, "Item4", Item.RarityTier.Rare, "Hmmm . . .", Equipment.EquipmentPosition.Leg, ("Sprites/Equipments/Item4"), new Character.AllStats { speed = 4, intelligence = 4 }));
-            equipment.Add(new Equipment(5, "Item5", Item.RarityTier.Rare, "Unleash your TRUE power.", Equipment.EquipmentPosition.Hand, ("Sprites/Equipments/Item5"), new Character.AllStats { strength = 3, intelligence = 3, luck = 3, perception = 3, immunity = 3, craftsmanship = 3, speed = 3 }));
-            equipment.Add(new Equipment(6, "Item6", Item.RarityTier.Uncommon, "An ancient Sorcerer's boots.", Equipment.EquipmentPosition.Foot, ("Sprites/Equipments/Item6"), new Character.AllStats { strength = 2, intelligence = 5 }));
-            equipment.Add(new Equipment(7, "Item7", Item.RarityTier.Rare, "That seems heavy.", Equipment.EquipmentPosition.Body, ("Sprites/Equipments/Item7"), new Character.AllStats { strength = 12, speed = -3 }));
-            equipment.Add(new Equipment(8, "Item8", Item.RarityTier.Uncommon, "Can cut everything except trees.", Equipment.EquipmentPosition.Hand, ("Sprites/Equipments/Item8"), new Character.AllStats { strength = 6, speed = -1 }));
-            equipment.Add(new Equipment(9, "Item9", Item.RarityTier.Uncommon, "Make you more tanky.", Equipment.EquipmentPosition.Hand, ("Sprites/Equipments/Item9"), new Character.AllStats { strength = 3 }));
-            equipment.Add(new Equipment(10, "Item10", Item.RarityTier.Rare, "Smell bloody . . .", Equipment.EquipmentPosition.Hand, ("Sprites/Equipments/Item10"), new Character.AllStats { luck = -1, strength = 6, intelligence = 1 }));
-            equipment.Add(new Equipment(11, "Item11", Item.RarityTier.SuperRare, "Better than your Nike :)", Equipment.EquipmentPosition.Foot, ("Sprites/Equipments/Item11"), new Character.AllStats { speed = 8 }));
-            equipment.Add(new Equipment(12, "Item12", Item.RarityTier.Uncommon, "How this could wear as pants ?", Equipment.EquipmentPosition.Leg, ("Sprites/Equipments/Item12"), new Character.AllStats { }));
-            equipment.Add(new Equipment(13, "Item13", Item.RarityTier.Uncommon, "A certain shield.", Equipment.EquipmentPosition.Hand, ("Sprites/Equipments/Item13"), new Character.AllStats { strength = 4, speed = -1 }));
-            equipment.Add(new Equipment(14, "Item14", Item.RarityTier.SuperRare, "Cheese? on head?", Equipment.EquipmentPosition.Head, ("Sprites/Equipments/Item14"), new Character.AllStats { perception = 15, luck = 15 }));
-            equipment.Add(new Equipment(15, "Item15", Item.RarityTier.Rare, "A cursed crown of something. Bruhhh...", Equipment.EquipmentPosition.Head, ("Sprites/Equipments/Item15"), new Character.AllStats { strength = 10, intelligence = 10, immunity = 10, luck = -10 }));
+            equipment.Add(new Equipment(Constant.IDMask.EQUIPMENT_ID_MASK + 1, "Item1", Item.RarityTier.Uncommon, "Too mighty blade.", Equipment.EquipmentPosition.Hand, ("Sprites/Equipments/Item1"), new Character.AllStats { strength = 8, speed = -1 }));
+            equipment.Add(new Equipment(Constant.IDMask.EQUIPMENT_ID_MASK + 2, "Item2", Item.RarityTier.UltraRare, "Seems like a MONKEY's heart ?", Equipment.EquipmentPosition.Body, ("Sprites/Equipments/Item2"), new Character.AllStats { strength = 20, speed = 10, immunity = 20 }));
+            equipment.Add(new Equipment(Constant.IDMask.EQUIPMENT_ID_MASK + 3, "Item3", Item.RarityTier.Uncommon, "What is this ?", Equipment.EquipmentPosition.Face, ("Sprites/Equipments/Item3"), new Character.AllStats { strength = 1, perception = 3 }));
+            equipment.Add(new Equipment(Constant.IDMask.EQUIPMENT_ID_MASK + 4, "Item4", Item.RarityTier.Rare, "Hmmm . . .", Equipment.EquipmentPosition.Leg, ("Sprites/Equipments/Item4"), new Character.AllStats { speed = 4, intelligence = 4 }));
+            equipment.Add(new Equipment(Constant.IDMask.EQUIPMENT_ID_MASK + 5, "Item5", Item.RarityTier.Rare, "Unleash your TRUE power.", Equipment.EquipmentPosition.Hand, ("Sprites/Equipments/Item5"), new Character.AllStats { strength = 3, intelligence = 3, luck = 3, perception = 3, immunity = 3, craftsmanship = 3, speed = 3 }));
+            equipment.Add(new Equipment(Constant.IDMask.EQUIPMENT_ID_MASK + 6, "Item6", Item.RarityTier.Uncommon, "An ancient Sorcerer's boots.", Equipment.EquipmentPosition.Foot, ("Sprites/Equipments/Item6"), new Character.AllStats { strength = 2, intelligence = 5 }));
+            equipment.Add(new Equipment(Constant.IDMask.EQUIPMENT_ID_MASK + 7, "Item7", Item.RarityTier.Rare, "That seems heavy.", Equipment.EquipmentPosition.Body, ("Sprites/Equipments/Item7"), new Character.AllStats { strength = 12, speed = -3 }));
+            equipment.Add(new Equipment(Constant.IDMask.EQUIPMENT_ID_MASK + 8, "Item8", Item.RarityTier.Uncommon, "Can cut everything except trees.", Equipment.EquipmentPosition.Hand, ("Sprites/Equipments/Item8"), new Character.AllStats { strength = 6, speed = -1 }));
+            equipment.Add(new Equipment(Constant.IDMask.EQUIPMENT_ID_MASK + 9, "Item9", Item.RarityTier.Uncommon, "Make you more tanky.", Equipment.EquipmentPosition.Hand, ("Sprites/Equipments/Item9"), new Character.AllStats { strength = 3 }));
+            equipment.Add(new Equipment(Constant.IDMask.EQUIPMENT_ID_MASK + 10, "Item10", Item.RarityTier.Rare, "Smell bloody . . .", Equipment.EquipmentPosition.Hand, ("Sprites/Equipments/Item10"), new Character.AllStats { luck = -1, strength = 6, intelligence = 1 }));
+            equipment.Add(new Equipment(Constant.IDMask.EQUIPMENT_ID_MASK + 11, "Item11", Item.RarityTier.SuperRare, "Better than your Nike :)", Equipment.EquipmentPosition.Foot, ("Sprites/Equipments/Item11"), new Character.AllStats { speed = 8 }));
+            equipment.Add(new Equipment(Constant.IDMask.EQUIPMENT_ID_MASK + 12, "Item12", Item.RarityTier.Uncommon, "How this could wear as pants ?", Equipment.EquipmentPosition.Leg, ("Sprites/Equipments/Item12"), new Character.AllStats { }));
+            equipment.Add(new Equipment(Constant.IDMask.EQUIPMENT_ID_MASK + 13, "Item13", Item.RarityTier.Uncommon, "A certain shield.", Equipment.EquipmentPosition.Hand, ("Sprites/Equipments/Item13"), new Character.AllStats { strength = 4, speed = -1 }));
+            equipment.Add(new Equipment(Constant.IDMask.EQUIPMENT_ID_MASK + 14, "Item14", Item.RarityTier.SuperRare, "Cheese? on head?", Equipment.EquipmentPosition.Head, ("Sprites/Equipments/Item14"), new Character.AllStats { perception = 15, luck = 15 }));
+            equipment.Add(new Equipment(Constant.IDMask.EQUIPMENT_ID_MASK + 15, "Item15", Item.RarityTier.Rare, "A cursed crown of something. Bruhhh...", Equipment.EquipmentPosition.Head, ("Sprites/Equipments/Item15"), new Character.AllStats { strength = 10, intelligence = 10, immunity = 10, luck = -10 }));
 
             string equipmentDatas = JsonHelper.ToJson(equipment.ToArray(), true);// Newtonsoft.Json.JsonConvert.SerializeObject(playerData, Newtonsoft.Json.Formatting.Indented); //JsonUtility.ToJson(playerData, true); 
             Debug.Log("Creating JSON data : " + equipmentDatas);
@@ -399,7 +401,7 @@ public class DataCreator : MonoBehaviour
         {
             QuestData[] q = new QuestData[4];
             q[0] = new QuestData();
-            q[0].questID = 1;
+            q[0].questID = 1 + Constant.IDMask.QUEST_ID_MASK;
             q[0].questName = "Area1-1Normal";
             q[0].requireStats = new Character.AllStats { immunity = 4, strength = 5 };
             q[0].dropResourceName = new List<string>() { "Wood" };
@@ -407,7 +409,7 @@ public class DataCreator : MonoBehaviour
             q[0].duration = 30;
 
             q[1] = new QuestData();
-            q[1].questID = 2;
+            q[1].questID = 2 + Constant.IDMask.QUEST_ID_MASK;
             q[1].questName = "Area1-2Normal";
             q[1].requireStats = new Character.AllStats { immunity = 4, strength = 5 };
             q[1].dropResourceName = new List<string>() { "Wood" };
@@ -415,7 +417,7 @@ public class DataCreator : MonoBehaviour
             q[1].duration = 60;
 
             q[2] = new QuestData();
-            q[2].questID = 3;
+            q[2].questID = 3 + Constant.IDMask.QUEST_ID_MASK;
             q[2].questName = "Area1-3Normal";
             q[2].requireStats = new Character.AllStats { immunity = 4, strength = 5 };
             q[2].dropResourceName = new List<string>() { "Wood" };
@@ -423,7 +425,7 @@ public class DataCreator : MonoBehaviour
             q[2].duration = 90;
 
             q[3] = new QuestData();
-            q[3].questID = 4;
+            q[3].questID = 4 + Constant.IDMask.QUEST_ID_MASK;
             q[3].questName = "Area1-1Hard";
             q[3].requireStats = new Character.AllStats { immunity = 4, strength = 5 };
             q[3].dropResourceName = new List<string>() { "Wood" };
@@ -440,66 +442,64 @@ public class DataCreator : MonoBehaviour
             List<Resource> r = new List<Resource>();
 
 
-            r.Add(new Resource(r.Count, "Wood", Item.RarityTier.Common, "Just a certain Wood.", Resource.ResourceType.Material, "Sprites/Resource/Wood"));
-            r.Add(new Resource(r.Count, "Stone", Item.RarityTier.Common, "Just a certain Stone.", Resource.ResourceType.Material, "Sprites/Resource/Stone"));
-            r.Add(new Resource(r.Count, "Water", Item.RarityTier.Common, "No water No life.", Resource.ResourceType.Material, "Sprites/Resource/Water"));
-            r.Add(new Resource(r.Count, "Food", Item.RarityTier.Common, "Wanna starve to death?", Resource.ResourceType.Material, "Sprites/Resource/Food"));
-            r.Add(new Resource(r.Count, "Fabric", Item.RarityTier.Common, "I'm so cold.", Resource.ResourceType.Material, "Sprites/Resource/Fabric"));
-            r.Add(new Resource(r.Count, "Rubber", Item.RarityTier.Common, "Useless? who knows.", Resource.ResourceType.Material, "Sprites/Resource/Rubber"));
-            r.Add(new Resource(r.Count, "Steel", Item.RarityTier.Uncommon, "Just a certain Wood.", Resource.ResourceType.Material, "Sprites/Resource/Steel"));
-            r.Add(new Resource(r.Count, "Meteorite", Item.RarityTier.UltraRare, "BOOOOOM!!!", Resource.ResourceType.Material, "Sprites/Resource/Meteorite"));
+        r.Add(new Resource(r.Count + 1, "Wood", Item.RarityTier.Common, "Just a certain Wood.", Resource.ResourceType.Material, "Sprites/Resource/Wood"));
+        r.Add(new Resource(r.Count + 1, "Stone", Item.RarityTier.Common, "Just a certain Stone.", Resource.ResourceType.Material, "Sprites/Resource/Stone"));
+        r.Add(new Resource(r.Count + 1, "Water", Item.RarityTier.Common, "No water No life.", Resource.ResourceType.Material, "Sprites/Resource/Water"));
+        r.Add(new Resource(r.Count + 1, "Food", Item.RarityTier.Common, "Wanna starve to death?", Resource.ResourceType.Material, "Sprites/Resource/Food"));
+        r.Add(new Resource(r.Count + 1, "Fabric", Item.RarityTier.Common, "I'm so cold.", Resource.ResourceType.Material, "Sprites/Resource/Fabric"));
+        r.Add(new Resource(r.Count + 1, "Rubber", Item.RarityTier.Common, "Useless? who knows.", Resource.ResourceType.Material, "Sprites/Resource/Rubber"));
+        r.Add(new Resource(r.Count + 1, "Steel", Item.RarityTier.Uncommon, "Just a certain Wood.", Resource.ResourceType.Material, "Sprites/Resource/Steel"));
+        r.Add(new Resource(r.Count + 1, "Meteorite", Item.RarityTier.UltraRare, "BOOOOOM!!!", Resource.ResourceType.Material, "Sprites/Resource/Meteorite"));
 
-            r.Add(new Resource(r.Count, "Wheat", Item.RarityTier.Common, "CoCoCrunch !?", Resource.ResourceType.Ingredient, "Sprites/Resource/Wheat"));
-            r.Add(new Resource(r.Count, "Bread", Item.RarityTier.Common, "Low-Grade Bread.", Resource.ResourceType.Ingredient, "Sprites/Resource/Bread"));
-            r.Add(new Resource(r.Count, "Meat", Item.RarityTier.Common, "YumYum . . .", Resource.ResourceType.Ingredient, "Sprites/Resource/Meat"));
-            r.Add(new Resource(r.Count, "Burger", Item.RarityTier.Common, "American SPIRIT.", Resource.ResourceType.Consumable, "Sprites/Resource/Burger",
-                new Resource.Effect() { name = "Burger Power", spritePath = "Sprites/Resource/Burger", stats = new Character.AllStats() { strength = 20 }, duration = 300 }));
-            r.Add(new Resource(r.Count, "Golden Burger", Item.RarityTier.Uncommon, "GOLDEN American SPIRIT.", Resource.ResourceType.Consumable, "Sprites/Resource/Golden Burger",
-                new Resource.Effect() { name = "Golden Burger Power", spritePath = "Sprites/Resource/GoldenBurger", stats = new Character.AllStats() { strength = 50, speed = 50, perception = 50 }, duration = 3600 }));
+        r.Add(new Resource(r.Count + 1, "Wheat", Item.RarityTier.Common, "CoCoCrunch !?", Resource.ResourceType.Ingredient, "Sprites/Resource/Wheat"));
+        r.Add(new Resource(r.Count + 1, "Bread", Item.RarityTier.Common, "Low-Grade Bread.", Resource.ResourceType.Ingredient, "Sprites/Resource/Bread"));
+        r.Add(new Resource(r.Count + 1, "Meat", Item.RarityTier.Common, "YumYum . . .", Resource.ResourceType.Ingredient, "Sprites/Resource/Meat"));
+        r.Add(new Resource(r.Count + 1, "Burger", Item.RarityTier.Common, "American SPIRIT.", Resource.ResourceType.Consumable, "Sprites/Resource/Burger",
+            new Resource.Effect() { name = "Burger Power", spritePath = "Sprites/Resource/Burger", stats = new Character.AllStats() { strength = 20 }, duration = 300 }));
+        r.Add(new Resource(r.Count + 1, "Golden Burger", Item.RarityTier.Uncommon, "GOLDEN American SPIRIT.", Resource.ResourceType.Consumable, "Sprites/Resource/Golden Burger",
+            new Resource.Effect() { name = "Golden Burger Power", spritePath = "Sprites/Resource/GoldenBurger", stats = new Character.AllStats() { strength = 50, speed = 50, perception = 50 }, duration = 3600 }));
 
-            r.Add(new Resource(r.Count, "Common Face Mask", Item.RarityTier.Common, "COUGH COUGH . . .", Resource.ResourceType.Gadget, "Sprites/Resource/Common Face Mask"));
-            r.Add(new Resource(r.Count, "Ultra Instinct Face Mask", Item.RarityTier.UltraRare, "COUGH!! COUGH!! It's over 9000 !!!?? ", Resource.ResourceType.Gadget, "Sprites/Resource/Ultra Instinct Face Mask"));
-            r.Add(new Resource(r.Count, "Medicine(maybe)", Item.RarityTier.Uncommon, "Everyone love this.", Resource.ResourceType.Medicine, "Sprites/Resource/Medicine(maybe)"));
+        r.Add(new Resource(r.Count + 1, "Common Face Mask", Item.RarityTier.Common, "COUGH COUGH . . .", Resource.ResourceType.Gadget, "Sprites/Resource/Common Face Mask"));
+        r.Add(new Resource(r.Count + 1, "Ultra Instinct Face Mask", Item.RarityTier.UltraRare, "COUGH!! COUGH!! It's over 9000 !!!?? ", Resource.ResourceType.Gadget, "Sprites/Resource/Ultra Instinct Face Mask"));
+        r.Add(new Resource(r.Count + 1, "Medicine(maybe)", Item.RarityTier.Uncommon, "Everyone love this.", Resource.ResourceType.Medicine, "Sprites/Resource/Medicine(maybe)"));
 
-            r.Add(new Resource(r.Count, "Leaf(maybe)", Item.RarityTier.Uncommon, "A certain leaf.", Resource.ResourceType.Ingredient, "Sprites/Resource/Leaf(maybe)"));
+        r.Add(new Resource(r.Count + 1, "Leaf(maybe)", Item.RarityTier.Uncommon, "A certain leaf.", Resource.ResourceType.Ingredient, "Sprites/Resource/Leaf(maybe)"));
 
+        r.Add(new Resource(r.Count + 1, "BaseHealAmount", Item.RarityTier.Unknown, "Specific Building Production .", Resource.ResourceType.Special, "Sprites/Resource/Production"));
+        r.Add(new Resource(r.Count + 1, "BreedingChance", Item.RarityTier.Unknown, "Specific Building Production .", Resource.ResourceType.Special, "Sprites/Resource/Production"));
 
+        r.Add(new Resource(r.Count + 1, "Production", Item.RarityTier.Unknown, "Specific Building Production .", Resource.ResourceType.Special, "Sprites/Resource/Production"));
+        r.Add(new Resource(r.Count + 1, "Gold", Item.RarityTier.Unknown, "Specific Building Production .", Resource.ResourceType.Currency, "Sprites/Resource/Gold"));
+        r.Add(new Resource(r.Count + 1, "Diamond", Item.RarityTier.Unknown, "Specific Building Production .", Resource.ResourceType.Currency, "Sprites/Resource/Diamond"));
 
-            r.Add(new Resource(r.Count, "BaseHealAmount", Item.RarityTier.Unknown, "Specific Building Production .", Resource.ResourceType.Special, "Sprites/Resource/Production"));
-            r.Add(new Resource(r.Count, "BreedingChance", Item.RarityTier.Unknown, "Specific Building Production .", Resource.ResourceType.Special, "Sprites/Resource/Production"));
+        r.Add(new Resource(r.Count + 1, "Recipe:Bread", Item.RarityTier.Common, "Recipe.", Resource.ResourceType.ConsumableRecipe, "Sprites/Resource/Recipe",
+            new Item.CraftingData(new DictionaryStringToInt() { { "Wheat", 3 } }, 200)));
 
-            r.Add(new Resource(r.Count, "Production", Item.RarityTier.Unknown, "Specific Building Production .", Resource.ResourceType.Special, "Sprites/Resource/Production"));
-            r.Add(new Resource(r.Count, "Gold", Item.RarityTier.Unknown, "Specific Building Production .", Resource.ResourceType.Currency, "Sprites/Resource/Gold"));
-            r.Add(new Resource(r.Count, "Diamond", Item.RarityTier.Unknown, "Specific Building Production .", Resource.ResourceType.Currency, "Sprites/Resource/Diamond"));
+        r.Add(new Resource(r.Count + 1, "Recipe:Burger", Item.RarityTier.Common, "Recipe.", Resource.ResourceType.ConsumableRecipe, "Sprites/Resource/Recipe",
+            new Item.CraftingData(new DictionaryStringToInt() { { "Bread", 2 }, { "Meat", 1 } }, 400)));
 
-            r.Add(new Resource(r.Count, "Recipe:Bread", Item.RarityTier.Common, "Recipe.", Resource.ResourceType.ConsumableRecipe, "Sprites/Resource/Recipe",
-                new Item.CraftingData(new DictionaryStringToInt() { { "Wheat", 3 } }, 200)));
+        r.Add(new Resource(r.Count + 1, "Recipe:Golden Burger", Item.RarityTier.Uncommon, "Recipe.", Resource.ResourceType.ConsumableRecipe, "Sprites/Resource/Recipe",
+            new Item.CraftingData(new DictionaryStringToInt() { { "Burger", 1 }, { "Gold", 9 } }, 1600)));
 
-            r.Add(new Resource(r.Count, "Recipe:Burger", Item.RarityTier.Common, "Recipe.", Resource.ResourceType.ConsumableRecipe, "Sprites/Resource/Recipe",
-                new Item.CraftingData(new DictionaryStringToInt() { { "Bread", 2 }, { "Meat", 1 } }, 400)));
+        r.Add(new Resource(r.Count + 1, "Recipe:Ultra Instinct Face Mask", Item.RarityTier.UltraRare, "Recipe.", Resource.ResourceType.GadgetRecipe, "Sprites/Resource/Recipe",
+            new Item.CraftingData(new DictionaryStringToInt() { { "Common Face Mask", 5 }, { "Fabric", 5 }, { "Rubber", 5 } }, 50000)));
 
-            r.Add(new Resource(r.Count, "Recipe:Golden Burger", Item.RarityTier.Uncommon, "Recipe.", Resource.ResourceType.ConsumableRecipe, "Sprites/Resource/Recipe",
-                new Item.CraftingData(new DictionaryStringToInt() { { "Burger", 1 }, { "Gold", 9 } }, 1600)));
-
-            r.Add(new Resource(r.Count, "Recipe:Ultra Instinct Face Mask", Item.RarityTier.UltraRare, "Recipe.", Resource.ResourceType.GadgetRecipe, "Sprites/Resource/Recipe",
-                new Item.CraftingData(new DictionaryStringToInt() { { "Common Face Mask", 5 }, { "Fabric", 5 }, { "Rubber", 5 } }, 50000)));
-
-            r.Add(new Resource(r.Count, "Recipe:Common Face Mask", Item.RarityTier.Common, "Recipe.", Resource.ResourceType.GadgetRecipe, "Sprites/Resource/Recipe",
-               new Item.CraftingData(new DictionaryStringToInt() { { "Fabric", 3 }, { "Rubber", 4 } }, 1000)));
+        r.Add(new Resource(r.Count + 1, "Recipe:Common Face Mask", Item.RarityTier.Common, "Recipe.", Resource.ResourceType.GadgetRecipe, "Sprites/Resource/Recipe",
+           new Item.CraftingData(new DictionaryStringToInt() { { "Fabric", 3 }, { "Rubber", 4 } }, 1000)));
 
 
-            r.Add(new Resource(r.Count, "Recipe:Medicine(maybe)", Item.RarityTier.Common, "Recipe.", Resource.ResourceType.MedicineRecipe, "Sprites/Resource/Recipe",
-               new Item.CraftingData(new DictionaryStringToInt() { { "Leaf(maybe)", 4 } }, 1000)));
+        r.Add(new Resource(r.Count + 1, "Recipe:Medicine(maybe)", Item.RarityTier.Common, "Recipe.", Resource.ResourceType.MedicineRecipe, "Sprites/Resource/Recipe",
+           new Item.CraftingData(new DictionaryStringToInt() { { "Leaf(maybe)", 4 } }, 1000)));
 
 
 
 
-            /*  byte[] bytes = System.Text.Encoding.UTF8.GetBytes(resourceDatas);
-            StringBuilder stringBuilder = new StringBuilder();
-            bytes.ToList().ForEach(b => { stringBuilder.Append(b); });
-            Debug.Log(stringBuilder.ToString());
-            System.IO.File.WriteAllBytes(Application.streamingAssetsPath + "/ResourceData.byte", bytes);*/
-            string resourceDatas = JsonHelper.ToJson(r.ToArray(), true);// Newtonsoft.Json.JsonConvert.SerializeObject(playerData, Newtonsoft.Json.Formatting.Indented); //JsonUtility.ToJson(playerData, true); 
+        /*  byte[] bytes = System.Text.Encoding.UTF8.GetBytes(resourceDatas);
+        StringBuilder stringBuilder = new StringBuilder();
+        bytes.ToList().ForEach(b => { stringBuilder.Append(b); });
+        Debug.Log(stringBuilder.ToString());
+        System.IO.File.WriteAllBytes(Application.streamingAssetsPath + "/ResourceData.byte", bytes);*/
+        string resourceDatas = JsonHelper.ToJson(r.ToArray(), true);// Newtonsoft.Json.JsonConvert.SerializeObject(playerData, Newtonsoft.Json.Formatting.Indented); //JsonUtility.ToJson(playerData, true); 
             Debug.Log("Creating JSON data : " + resourceDatas);
             System.IO.File.WriteAllText(Application.streamingAssetsPath + "/ResourceData.json", resourceDatas);
 
@@ -779,5 +779,5 @@ public class DataCreator : MonoBehaviour
 
 
         }
-    }
+    
 }

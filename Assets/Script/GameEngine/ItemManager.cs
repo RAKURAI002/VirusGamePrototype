@@ -64,7 +64,7 @@ public class ItemManager : SingletonComponent<ItemManager>
     /// </summary>
     void UpdateResourceEveryMinute()
     {
-        foreach (Builder builder in BuildManager.Instance.AllBuildings)
+        foreach (Builder builder in BuildingManager.Instance.AllBuildings)
         {
             if (string.IsNullOrEmpty(LoadManager.Instance.allBuildingData[builder.Type].productionSpritePath))
             {
@@ -392,24 +392,24 @@ public class ItemManager : SingletonComponent<ItemManager>
         AddResource("Recipe:Medicine(maybe)", 10);
 
 
-        AddEquipment(1, 1);
-        AddEquipment(1, 1);
-        AddEquipment(2, 1);
-        AddEquipment(3, 1);
+        //AddEquipment(1, 1);
+        //AddEquipment(1, 1);
+        //AddEquipment(2, 1);
+        //AddEquipment(3, 1);
 
-        AddEquipment(4, 1);
-        AddEquipment(5, 1);
-        AddEquipment(6, 1);
-        AddEquipment(7, 1);
-        AddEquipment(8, 1);
-        AddEquipment(9, 1);
-        AddEquipment(10, 1);
-        AddEquipment(11, 1);
+        //AddEquipment(4, 1);
+        //AddEquipment(5, 1);
+        //AddEquipment(6, 1);
+        //AddEquipment(7, 1);
+        //AddEquipment(8, 1);
+        //AddEquipment(9, 1);
+        //AddEquipment(10, 1);
+        //AddEquipment(11, 1);
 
-        AddEquipment(12, 1);
-        AddEquipment(13, 1);
-        AddEquipment(14, 1);
-        AddEquipment(15, 1);
+        //AddEquipment(12, 1);
+        //AddEquipment(13, 1);
+        //AddEquipment(14, 1);
+        //AddEquipment(15, 1);
     }
 
 }

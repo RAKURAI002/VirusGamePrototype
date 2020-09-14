@@ -52,7 +52,6 @@ public class MainCanvas : MonoBehaviour
     void OnResourceChanged(string name)
     {
         Transform resourceGO = resourcePanel.transform.Find(name + "Panel");
-        Debug.Log($"{name}");
         if(resourceGO)
         {
             resourceGO.gameObject.GetComponentInChildren<Text>().text = ItemManager.Instance.GetResourceAmount(name).ToString();
@@ -238,7 +237,7 @@ public class MainCanvas : MonoBehaviour
         {
             Debug.LogError("Can't find EditBuilding Component.");
         }
-        Builder selectedBuilding = BuildManager.Instance.AllBuildings.Single(b => b.representGameObject == selectedGameObject);
+        Builder selectedBuilding = BuildingManager.Instance.AllBuildings.Single(b => b.representGameObject == selectedGameObject);
       /*
        if(selectedBuilding.Level == 0)
         {
@@ -252,7 +251,7 @@ public class MainCanvas : MonoBehaviour
 
     public void OnClickWorldMap()
     {
-        Builder townBase = BuildManager.Instance.AllBuildings.SingleOrDefault(b => b.Type == Building.BuildingType.TownBase);
+        Builder townBase = BuildingManager.Instance.AllBuildings.SingleOrDefault(b => b.Type == Building.BuildingType.TownBase);
         if (townBase == null)
         {
             Debug.LogWarning("You NEED to create TownBase before proceed the Exploration.");

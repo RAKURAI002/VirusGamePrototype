@@ -26,12 +26,11 @@ public class Builder
         InitializeData();
 
     }
-    public Builder(Building.BuildingType type, Vector3 pos, GameObject representGameObject)
+    public Builder(Building.BuildingType type, Vector3 pos)
     {
         this.id = GenerateID();
         this.type = type;
         this.position = pos;
-        this.representGameObject = representGameObject;
         this.level = 0;
         this.constructionStatus = new Construction { isConstructing = true, constructPointRequired = 10 };
 
@@ -74,13 +73,13 @@ public class Builder
     }
     public int GenerateID()
     {
-        if (BuildManager.Instance.AllBuildings.Count == 0)
+        if (BuildingManager.Instance.AllBuildings.Count == 0)
         {
             return Constant.IDMask.BUILDING_ID_MASK + 1;
 
         }
 
-        return (BuildManager.Instance.AllBuildings.Select(b => b.id).Max() + 1 );
+        return (BuildingManager.Instance.AllBuildings.Select(b => b.id).Max() + 1 );
 
     }
     public List<CharacterWrapper> CharacterInBuilding
@@ -120,6 +119,8 @@ public class Builder
     public Vector3 Position { get { return position; } set { position = value; } }
     public int Level { get { return level; } set { level = value; } }
     public int CurrentActiveAmount { get { return currentActiveAmount; } set { currentActiveAmount = value; } }
+
+   
 
     public void InitializeData()
     {

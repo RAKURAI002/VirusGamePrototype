@@ -33,6 +33,8 @@ public class PlayerData
     [SerializeField] public ActivityProgressDictionary currentActivities;
 
     [SerializeField] public bool completeTutorial;
+
     [SerializeField] public long lastLoginTime;
+    [SerializeField] public int consecutiveLoginDays;
 
 }

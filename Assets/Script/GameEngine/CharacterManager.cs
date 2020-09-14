@@ -9,6 +9,8 @@ public class CharacterManager : SingletonComponent<CharacterManager>
 {
     [SerializeField] private List<Character> allCharacters;
     [SerializeField] public List<Character> characterWaitingInLine;
+
+    public int MaxCharacterInGame { get; set; }
     public List<Character> AllCharacters { get { return allCharacters; } set { allCharacters = value; } }
 
     
@@ -66,7 +68,6 @@ public class CharacterManager : SingletonComponent<CharacterManager>
 
         }
 
-        /// Event occur chance
         int random = UnityEngine.Random.Range(0, 101);
         int joiningChance = Constant.CalculatingFunction.CharacterJoiningChanceCalculation(characterWaitingInLine.Count);
         Debug.Log($"Chance : 0 - {joiningChance}, Randomed : {random}. Adding event = {!(random >= joiningChance)}");
@@ -76,6 +77,11 @@ public class CharacterManager : SingletonComponent<CharacterManager>
 
         }
 
+        CreateWaitingCharacter();
+
+    }
+    void CreateWaitingCharacter()
+    {
         int index = UnityEngine.Random.Range(0, LoadManager.Instance.allCharacterData.Count);
 
         Character.CharacterData characterData = LoadManager.Instance.allCharacterData[index];
@@ -84,10 +90,7 @@ public class CharacterManager : SingletonComponent<CharacterManager>
         LoadManager.Instance.allCharacterData.Remove(characterData);
         EventManager.Instance.CharacterAssigned();
 
-
-
     }
-
 
     public void CreateNewCharacter()
     {
@@ -140,7 +143,7 @@ public class CharacterManager : SingletonComponent<CharacterManager>
 
         if (character.workStatus == Character.WorkStatus.Working && character.WorkingPlaceID != -1)
         {
-            Builder oldBuilder = BuildManager.Instance.AllBuildings.Single(b => b.ID == character.WorkingPlaceID);
+            Builder oldBuilder = BuildingManager.Instance.AllBuildings.Single(b => b.ID == character.WorkingPlaceID);
             Debug.Log($"This Character is already doing work at {oldBuilder.Type}. Try canceling old work . . .");
             CancleAssignWork(character, oldBuilder);
         }

@@ -45,7 +45,7 @@ public class QuestManager : SingletonComponent<QuestManager>
 
         if (scene.name == "WorldMap")
         {
-            townBase = BuildManager.Instance.AllBuildings.SingleOrDefault(b => b.Type == Building.BuildingType.TownBase);
+            townBase = BuildingManager.Instance.AllBuildings.SingleOrDefault(b => b.Type == Building.BuildingType.TownBase);
 
         }
 
@@ -60,7 +60,7 @@ public class QuestManager : SingletonComponent<QuestManager>
     
     void Start()
     {
-        townBase = BuildManager.Instance.AllBuildings.SingleOrDefault(b => b.Type == Building.BuildingType.TownBase);
+        townBase = BuildingManager.Instance.AllBuildings.SingleOrDefault(b => b.Type == Building.BuildingType.TownBase);
     
     }
  
@@ -110,7 +110,7 @@ public class QuestManager : SingletonComponent<QuestManager>
 
         });
 
-        BuildManager.Instance.AllBuildings.SingleOrDefault(b => b.Type == Building.BuildingType.TownBase).TeamLockState.Add(_teamNumber);
+        BuildingManager.Instance.AllBuildings.SingleOrDefault(b => b.Type == Building.BuildingType.TownBase).TeamLockState.Add(_teamNumber);
 
         LoadManager.Instance.SavePlayerDataToJson();
   
@@ -139,7 +139,7 @@ public class QuestManager : SingletonComponent<QuestManager>
 
         ShowResultPanel(GetQuestReward(characters, questLog, questData), questLog);
 
-        BuildManager.Instance.AllBuildings.SingleOrDefault(b => b.Type == Building.BuildingType.TownBase).TeamLockState.Remove(quest.teamNumber);
+        BuildingManager.Instance.AllBuildings.SingleOrDefault(b => b.Type == Building.BuildingType.TownBase).TeamLockState.Remove(quest.teamNumber);
 
         NotificationManager.Instance.RemoveActivity(quest);
         
@@ -198,7 +198,7 @@ public class QuestManager : SingletonComponent<QuestManager>
 
         }
        */
-        if (character.hitPoint >= 0 && enemy.CurrentHp >= 0)
+        if (character.CurrentHitPoint >= 0 && enemy.CurrentHp >= 0)
             return true;
         else
             return false;

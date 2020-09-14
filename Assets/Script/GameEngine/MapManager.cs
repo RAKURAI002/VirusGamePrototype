@@ -174,7 +174,7 @@ public class MapManager : SingletonComponent<MapManager>
             Vector3Int cell = gridLayout.WorldToCell(builder.Position);
             if (constructableGrid[i].Contains(new Vector3Int(cell.x - BUILDING_POSITION_OFFSET, cell.y - BUILDING_POSITION_OFFSET, 0)))
             {
-                BuildManager.Instance.LoadBuilding(builder);
+                BuildingManager.Instance.LoadBuilding(builder);
                 constructableGrid.RemoveAt(i);
                 return;
             }
@@ -566,7 +566,7 @@ public class MapManager : SingletonComponent<MapManager>
     }
     void ShowTeamSelectorPanel(Builder builder, Action<int> callback)
     {
-        Builder laborCenter = BuildManager.Instance.AllBuildings.SingleOrDefault(b => b.Type == Building.BuildingType.LaborCenter);
+        Builder laborCenter = BuildingManager.Instance.AllBuildings.SingleOrDefault(b => b.Type == Building.BuildingType.LaborCenter);
 
         if (laborCenter != null && laborCenter.Level != 0)
         {
@@ -588,7 +588,7 @@ public class MapManager : SingletonComponent<MapManager>
     }
     void TeamSelectorCallback(Building.BuildingType type, int teamNumber, Vector2 position, int removingTileIndex)
     {
-        if (BuildManager.Instance.CreateNewBuilding(type, teamNumber, position))
+        if (BuildingManager.Instance.CreateNewBuilding(type, teamNumber, position))
         {
             constructableGrid.RemoveAt(removingTileIndex);
         }

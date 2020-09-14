@@ -64,7 +64,7 @@ public class TeamSelectorPanel : MonoBehaviour
                 {
 
                     this.finishPoint = LoadManager.Instance.allBuildingData[builder.Type].upgradePoint[builder.Level];
-                    CreateAssignBuildingContainer(BuildManager.Instance.AllBuildings.SingleOrDefault(b => b.Type == Building.BuildingType.LaborCenter), false);
+                    CreateAssignBuildingContainer(BuildingManager.Instance.AllBuildings.SingleOrDefault(b => b.Type == Building.BuildingType.LaborCenter), false);
 
                     break;
                 }

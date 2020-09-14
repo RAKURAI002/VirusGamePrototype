@@ -86,7 +86,7 @@ public class BuildingInformationCanvas : MonoBehaviour
     }
     public void OnClickDestroyButton()
     {
-        BuildManager.Instance.RemoveBuilding(builder);
+        BuildingManager.Instance.RemoveBuilding(builder);
         GetComponent<ClosePanelHelper>().ForceClosePanel();
 
     }
@@ -100,7 +100,7 @@ public class BuildingInformationCanvas : MonoBehaviour
     }
     void ShowTeamSelectorPanel()
     {
-        Builder laborCenter = BuildManager.Instance.AllBuildings.SingleOrDefault(b => b.Type == Building.BuildingType.LaborCenter);
+        Builder laborCenter = BuildingManager.Instance.AllBuildings.SingleOrDefault(b => b.Type == Building.BuildingType.LaborCenter);
 
         if (laborCenter != null)
         {
@@ -112,14 +112,14 @@ public class BuildingInformationCanvas : MonoBehaviour
         else
         {
             Debug.Log($"No LaborCenter found. Using Default production point(5).");
-            BuildManager.Instance.UpgradeBuilding(builder, 1);
+            BuildingManager.Instance.UpgradeBuilding(builder, 1);
             gameObject.GetComponent<ClosePanelHelper>().ForceClosePanel();
 
         }
     }
     void TeamSelectorCallback(int teamnumber)
     {
-        BuildManager.Instance.UpgradeBuilding(builder, teamnumber);
+        BuildingManager.Instance.UpgradeBuilding(builder, teamnumber);
         return;
 
     }
@@ -141,7 +141,7 @@ public class BuildingInformationCanvas : MonoBehaviour
     public void RefreshInformationCanvas()
     {
         GameObject destroyButtonGO = transform.Find("InformationPanel/BuildingOption/Destroy").gameObject;
-        if (buildingData.IsStarterBuilding())
+        if (buildingData.UnDestroyableBuilding())
         {
             destroyButtonGO.SetActive(false);
         }
@@ -180,7 +180,7 @@ public class BuildingInformationCanvas : MonoBehaviour
             slider.maxValue = builder.constructionStatus.finishPoint;
             slider.value = builder.constructionStatus.currentPoint;
 
-            long timer = GameObject.FindObjectOfType<BuildManager>().transform.Find("AllBuildings/" + builder.ID.ToString()).GetComponent<BuildTimer>().timer;
+            long timer = GameObject.FindObjectOfType<BuildingManager>().transform.Find("AllBuildings/" + builder.ID.ToString()).GetComponent<BuildTimer>().timer;
             int hours = Mathf.FloorToInt(timer / 3600);
             int minutes = Mathf.FloorToInt(timer % 3600 / 60);
             int seconds = Mathf.FloorToInt(timer % 3600 % 60f);

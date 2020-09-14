@@ -51,7 +51,7 @@ public class AreaPanel : MonoBehaviour
          teamSelectorPanel.gameObject.SetActive(true);
          teamSelectorPanel.activityName = QuestManager.Instance.selectingLevel;
          teamSelectorPanel.CreateTeamSelectorPanel(TeamSelectorPanel.Mode.Quest, 
-                BuildManager.Instance.AllBuildings.SingleOrDefault(b => b.Type == Building.BuildingType.TownBase),
+                BuildingManager.Instance.AllBuildings.SingleOrDefault(b => b.Type == Building.BuildingType.TownBase),
                 LoadManager.Instance.allQuestData.SingleOrDefault(q => q.Value.questName == QuestManager.Instance.selectingLevel).Value.duration, QuestManager.Instance.StartQuest , true);
     
     }

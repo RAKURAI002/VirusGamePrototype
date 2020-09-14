@@ -31,7 +31,7 @@ public class AssignWorkCanvas : MonoBehaviour
             return;
         }
 
-        foreach (Builder builder in BuildManager.Instance.AllBuildings)
+        foreach (Builder builder in BuildingManager.Instance.AllBuildings)
         {
             if(builder.Level == 0)
             {

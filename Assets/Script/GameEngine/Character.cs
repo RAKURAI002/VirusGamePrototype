@@ -87,7 +87,9 @@ public class Character
         Unknown,
         Idle,
         Working,
-        Quest
+        Quest,
+        Pregnant,
+        Minor
 
     }
 
@@ -101,13 +103,14 @@ public class Character
         RandomCharacterStats();
         RandomBirthMark();
         ApplyBirthMarkStats();
+
+        currentHitPoint = MaxHitPoint;
+
         equipments = new List<Equipment>();
         workStatus = WorkStatus.Idle;
         healthStatus = HealthStatus.Healthly;
         spritePath = "Sprites/Character/Character" + UnityEngine.Random.Range(1, 10).ToString();
         effects = new List<Resource.Effect>();
-
-
 
     }
     void ApplyBirthMarkStats()
@@ -182,18 +185,23 @@ public class Character
     [SerializeField] public List<Equipment> equipments;
     [SerializeField] public WorkStatus workStatus;
     [SerializeField] public HealthStatus healthStatus;
-    [SerializeField] private int workingPlaceID = -1;
+    [SerializeField] private int workingPlaceID;
 
     [SerializeField] public int statsUpPoint;
-    [SerializeField] public int hitPoint;
+
+    [SerializeField] private int currentHitPoint;
 
     [SerializeField] public List<Resource.Effect> effects;
 
     [SerializeField] public string spritePath;
 
     public int ID { get { return id; } }
-    public string Name { get { return name; } }
+    public string Name { get { return name; } } 
     public int Experience { get { return experience; } }
+
+    public int CurrentHitPoint { get { return currentHitPoint; } set { currentHitPoint = value > MaxHitPoint ? MaxHitPoint : value; } }
+    public int MaxHitPoint { get { return (stats.strength * 2); }}
+
     public GenderType Gender { get { return gender; } }
     public AllStats Stats { get { return stats; } set { stats = value; } }
     public List<BirthMark> BirthMarks { get { return birthMarks; } }

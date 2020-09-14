@@ -13,3 +13,18 @@ public class AchievementData
     [SerializeField] public Func<bool> condition;
 
 }
+
+public class AchievementSerializer : ISerializationCallbackReceiver
+{
+    List<AchievementData> achievementDatas;
+    public void OnAfterDeserialize()
+    {
+       
+    }
+
+    public void OnBeforeSerialize()
+    {
+        
+    }
+}
+

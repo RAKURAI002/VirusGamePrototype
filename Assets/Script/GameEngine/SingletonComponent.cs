@@ -17,7 +17,6 @@ public class SingletonComponent<T> : MonoBehaviour where T : Object
 			if (instance == null)
 			{
 				instance = GameObject.FindObjectOfType<T>();
-				
 				if (instance != null && Application.isPlaying)
 				{
 					(instance as SingletonComponent<T>).Initialize();

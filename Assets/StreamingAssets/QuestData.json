@@ -1,7 +1,7 @@
 {
     "Items": [
         {
-            "questID": 1,
+            "questID": 30001,
             "questName": "Area1-1Normal",
             "requireStats": {
                 "speed": 0,
@@ -21,7 +21,7 @@
             "duration": 30
         },
         {
-            "questID": 2,
+            "questID": 30002,
             "questName": "Area1-2Normal",
             "requireStats": {
                 "speed": 0,
@@ -41,7 +41,7 @@
             "duration": 60
         },
         {
-            "questID": 3,
+            "questID": 30003,
             "questName": "Area1-3Normal",
             "requireStats": {
                 "speed": 0,
@@ -62,7 +62,7 @@
             "duration": 90
         },
         {
-            "questID": 4,
+            "questID": 30004,
             "questName": "Area1-1Hard",
             "requireStats": {
                 "speed": 0,

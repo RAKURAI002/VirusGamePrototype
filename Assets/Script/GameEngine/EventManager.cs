@@ -55,6 +55,7 @@ public class EventManager : SingletonComponent<EventManager>
 
     public void GameDataLoadFinished()
     {
+        Debug.Log($"Load Game data finished.");
         OnGameDataLoadFinished?.Invoke();
 
     }

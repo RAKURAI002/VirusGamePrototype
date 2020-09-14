@@ -1,17 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.EventSystems;
-using System.Threading.Tasks;
 using System.IO;
-using System;
 using System.Linq;
-using UnityEngine.Assertions;
-using UnityEngine.SceneManagement;
-
-using UnityEngine.Tilemaps;
+using UnityEngine;
 using UnityEngine.Networking;
-using System.Runtime.Serialization.Formatters.Binary;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Load all In-Game data and Player data to Runtime.
@@ -78,7 +72,6 @@ public class LoadManager : SingletonComponent<LoadManager>
 
         Debug.Log("Loading Game Data . . .");
         Coroutine LoadGameDataCoroutine = StartCoroutine(LoadInGameData());
-        
 
         yield return LoadGameDataCoroutine;
 
@@ -86,14 +79,13 @@ public class LoadManager : SingletonComponent<LoadManager>
 
         CheckFirstLogin();
 
-
     }
 
     public void SavePlayerDataToJson()
     {
         playerData.characterInPossession = CharacterManager.Instance.AllCharacters;
         playerData.resourceInPossession = ItemManager.Instance.AllResources;
-        playerData.buildingInPossession = BuildManager.Instance.AllBuildings;
+        playerData.buildingInPossession = BuildingManager.Instance.AllBuildings;
         playerData.equipmentInPossession = ItemManager.Instance.AllEquipments;
         playerData.currentActivities = NotificationManager.Instance.ProcessingActivies;
         playerData.characterWaitingInLine = CharacterManager.Instance.characterWaitingInLine;
@@ -293,8 +285,6 @@ public class LoadManager : SingletonComponent<LoadManager>
 
         yield return c8;
 
-        Debug.Log("Load GameData Complete.");
-
     }
 
     void LoadPlayerDataToScene()
@@ -313,7 +303,7 @@ public class LoadManager : SingletonComponent<LoadManager>
         RemoveDuplicateCharacterData();
 
         EventManager.Instance.GameDataLoadFinished();
-        
+
     }
     void RemoveDuplicateCharacterData()
     {
@@ -331,8 +321,8 @@ public class LoadManager : SingletonComponent<LoadManager>
         {
 
             Character.CharacterData[] cData = LoadManager.Instance.allCharacterData.Where(c => c.name == character.Name).ToArray();
-   
-   
+
+
             if (cData.Length != 0)
             {
                 LoadManager.Instance.allCharacterData.Remove(cData[0]);
@@ -351,7 +341,7 @@ public class LoadManager : SingletonComponent<LoadManager>
 
         }
     }
-   
+
     public IEnumerator GetRequest(string path, Action<UnityWebRequest> callback)
     {
         string finalPath = System.IO.Path.Combine(Application.streamingAssetsPath + path);

@@ -45,7 +45,7 @@ public class TeamUpCanvas : MonoBehaviour
             Debug.LogError("Can't find Scrollview container for BuildingPanel.");
             return;
         }
-        Builder builder = BuildManager.Instance.AllBuildings.Single( b => b.Type == Building.BuildingType.TownBase);
+        Builder builder = BuildingManager.Instance.AllBuildings.Single( b => b.Type == Building.BuildingType.TownBase);
 
 
 

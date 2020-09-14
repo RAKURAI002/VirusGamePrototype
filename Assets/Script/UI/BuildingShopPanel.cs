@@ -89,7 +89,7 @@ public class BuildingShopPanel : MonoBehaviour
             {
                 button.interactable = true;
 
-                builder = BuildManager.Instance.AllBuildings.FirstOrDefault(b => ((int)b.Type) == int.Parse(button.name.Replace("ShopButton", "")));
+                builder = BuildingManager.Instance.AllBuildings.FirstOrDefault(b => ((int)b.Type) == int.Parse(button.name.Replace("ShopButton", "")));
 
                 if (builder != null)
                 {
@@ -114,7 +114,6 @@ public class BuildingShopPanel : MonoBehaviour
 
             if(!isInitialize)
             {
-                Debug.Log($"IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII");   
                 button.transform.Find("BGPanel/UpgradePoint").GetComponent<Text>().text = buildingData.upgradePoint[0].ToString();
 
                 button.transform.Find("Cost/Wood/CostText").GetComponent<Text>().text = buildingData.buildingCost[0]["Wood"].ToString();
@@ -137,12 +136,11 @@ public class BuildingShopPanel : MonoBehaviour
 
         } /// End of all Button loop.
 
-        for (int i = 0; i < BuildManager.Instance.AllBuildings.Count; i++)
+        for (int i = 0; i < BuildingManager.Instance.AllBuildings.Count; i++)
         {
-            Debug.Log($"{BuildManager.Instance.AllBuildings[i].Type} : {BuildManager.Instance.AllBuildings[i].CurrentActiveAmount} / {BuildManager.Instance.AllBuildings[i].maxActiveAmount}");
-            if (BuildManager.Instance.AllBuildings[i].CurrentActiveAmount == BuildManager.Instance.AllBuildings[i].maxActiveAmount)
+            if (BuildingManager.Instance.AllBuildings[i].CurrentActiveAmount == BuildingManager.Instance.AllBuildings[i].maxActiveAmount)
             {
-                Button button = GameObject.Find("ShopButton" + ((int)BuildManager.Instance.AllBuildings[i].Type).ToString()).GetComponent<Button>();
+                Button button = GameObject.Find("ShopButton" + ((int)BuildingManager.Instance.AllBuildings[i].Type).ToString()).GetComponent<Button>();
                 if (button != null)
                 {
                     button.interactable = false;
@@ -150,7 +148,7 @@ public class BuildingShopPanel : MonoBehaviour
                 }
                 else
                 {
-                    Debug.LogWarning($"Can't find Building button : {BuildManager.Instance.AllBuildings[i].Type} !");
+                    Debug.LogWarning($"Can't find Building button : {BuildingManager.Instance.AllBuildings[i].Type} !");
 
                 }
 

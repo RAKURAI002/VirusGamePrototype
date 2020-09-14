@@ -120,20 +120,15 @@ public class GameManager : SingletonComponent<GameManager>
     
     public void StartTutorial()
     {
-        /// Add First default Character
         CharacterManager.Instance.CreateNewCharacter();
 
-        /// Add First default Buildings : TownBase, LaborCenter, Ressidence 
-        BuildManager.Instance.ForceCreateBuilding(Building.BuildingType.TownBase, 0);
-        BuildManager.Instance.ForceCreateBuilding(Building.BuildingType.LaborCenter, 0);
-
-        BuildManager.Instance.ForceCreateBuilding(Building.BuildingType.Residence, 1);
+        BuildingManager.Instance.ForceCreateBuilding(Building.BuildingType.TownBase, 0);
+        BuildingManager.Instance.ForceCreateBuilding(Building.BuildingType.LaborCenter, 0);
+        BuildingManager.Instance.ForceCreateBuilding(Building.BuildingType.Residence, 1);
 
         LoadManager.Instance.playerData.completeTutorial = true;
 
     }
-
-
 
     public static string GetGameObjectPath(GameObject obj)
     {

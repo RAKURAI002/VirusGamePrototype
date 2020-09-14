@@ -23,9 +23,8 @@ public class BuildTimer : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log($"{1}");
-        laborCenter = BuildManager.Instance.AllBuildings.SingleOrDefault(b => b.Type == Building.BuildingType.LaborCenter);
-        thisBuilding = BuildManager.Instance.AllBuildings.Single(builder => builder.representGameObject.name == this.gameObject.name);
+        laborCenter = BuildingManager.Instance.AllBuildings.SingleOrDefault(b => b.Type == Building.BuildingType.LaborCenter);
+        thisBuilding = BuildingManager.Instance.AllBuildings.Single(builder => builder.representGameObject.name == this.gameObject.name);
     }
     private void OnEnable()
     {
@@ -67,10 +66,6 @@ public class BuildTimer : MonoBehaviour
 
     void Initiate()
     {
-
-
-        
-        Debug.Log(thisBuilding.Type.ToString());
         thisBuilding.constructionStatus.isConstructing = true;
 
 
@@ -112,7 +107,6 @@ public class BuildTimer : MonoBehaviour
     }
     public void ForceFinish()
     {
-        Debug.Log($"{2}");   
        // thisBuilding.constructionStatus.currentPoint = thisBuilding.constructionStatus.finishPoint;
         return;
     }

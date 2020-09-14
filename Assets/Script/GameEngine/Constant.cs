@@ -49,6 +49,7 @@ public static class Constant
     {
         public static int RESOURCE_UPDATE_CYCLE = 10;
         public static int CHARACTER_ADDING_EVENT_CYCLE = 60;
+        public static int RESIDENCE_HEALING_CYCLE = 60;
 
     }
     public static class CalculatingFunction
@@ -62,12 +63,12 @@ public static class Constant
 
     public static class IDMask
     {
-        public static int BUILDING_ID_MASK = 1000;
-        public static int CHARACTER_ID_MASK = 2000;
-        public static int QUEST_ID_MASK = 3000;
-        public static int EQUIPMENT_ID_MASK = 4000;
-        public static int RESOURCE_ID_MASK = 5000;
-        public static int ACHIEVEMENT_ID_MASK = 6000;
+        public static int BUILDING_ID_MASK = 10000;
+        public static int CHARACTER_ID_MASK = 20000;
+        public static int QUEST_ID_MASK = 30000;
+        public static int EQUIPMENT_ID_MASK = 40000;
+        public static int RESOURCE_ID_MASK = 50000;
+        public static int ACHIEVEMENT_ID_MASK = 60000;
 
     }
 
