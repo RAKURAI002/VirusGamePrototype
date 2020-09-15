@@ -115,11 +115,9 @@ public class BuildingShopPanel : MonoBehaviour
             if(!isInitialize)
             {
                 button.transform.Find("BGPanel/UpgradePoint").GetComponent<Text>().text = buildingData.upgradePoint[0].ToString();
-
                 button.transform.Find("Cost/Wood/CostText").GetComponent<Text>().text = buildingData.buildingCost[0]["Wood"].ToString();
                 button.transform.Find("Cost/Stone/CostText").GetComponent<Text>().text = buildingData.buildingCost[0]["Stone"].ToString();
-                isInitialize = true;
-
+                
             }
 
             if (!ItemManager.Instance.IsAffordable(buildingData.buildingCost[0]))
@@ -135,6 +133,7 @@ public class BuildingShopPanel : MonoBehaviour
             }
 
         } /// End of all Button loop.
+        isInitialize = true;
 
         for (int i = 0; i < BuildingManager.Instance.AllBuildings.Count; i++)
         {

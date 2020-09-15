@@ -50,7 +50,7 @@ public class ItemManager : SingletonComponent<ItemManager>
     }
     void Start()
     {
-        InvokeRepeating("UpdateResourceEveryMinute", RESOURCE_CICLE_TIME, RESOURCE_CICLE_TIME);
+       
     }
     #endregion
 
@@ -62,24 +62,7 @@ public class ItemManager : SingletonComponent<ItemManager>
     /// <summary>
     /// Resource update cycle. Invoked in Start.
     /// </summary>
-    void UpdateResourceEveryMinute()
-    {
-        foreach (Builder builder in BuildingManager.Instance.AllBuildings)
-        {
-            if (string.IsNullOrEmpty(LoadManager.Instance.allBuildingData[builder.Type].productionSpritePath))
-            {
-                continue;
 
-            }
-
-            UpdateBuildingResource(builder);
-
-        }
-
-        //CharacterResourceConsuming();
-        return;
-
-    }
 
     void CharacterResourceConsuming()
     {
@@ -314,9 +297,14 @@ public class ItemManager : SingletonComponent<ItemManager>
     bool ConsumeResource(string name, int amount)
     {
         Debug.Log($"Consuming {name} : {amount} unit(s) from Player . . .");
+        if(amount == 0)
+        {
+            return true;
+        }
+
         if (!allResources.ContainsKey(name))
         {
-            Debug.LogError($"There're NO {name} in Player Inventory");
+            Debug.LogWarning($"There're NO {name} in Player Inventory");
             return false;
         }
         else if (allResources[name].Amount < amount)

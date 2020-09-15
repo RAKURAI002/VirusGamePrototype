@@ -217,10 +217,9 @@ public class Character
             totalDivisor += (int)chance.GetValue(null);
 
         }
-         
 
         int randomBirthMarkAmount = UnityEngine.Random.Range(0, totalDivisor);
-       // Debug.Log($"Total = {randomBirthMarkAmount} /  {totalDivisor}");
+
         for (int i = 0; i < chanceTable.Count; i++)
         {
             if(randomBirthMarkAmount < chanceTable[i])
@@ -243,7 +242,7 @@ public class Character
     }
     void AddBirthMark(int amount)
     {
-         Debug.Log($"Start random {amount} BirthMark(s) . . .");
+        Debug.Log($"Start random {amount} BirthMark(s) . . .");
         birthMarks = new List<BirthMark>();
         if(amount == 0)
         {
@@ -270,11 +269,11 @@ public class Character
                     Debug.Log($"Random Tier {birthMarkTier} BirthMark to character.");
                     
                     List<BirthMarkData> bmData = LoadManager.Instance.allBirthMarkDatas.Where(bm => bm.Value.tier == birthMarkTier).Select(bm => bm.Value).ToList();
+                    
                     int randomEffect = UnityEngine.Random.Range(0, bmData.Count);
                     birthMarks.Add(new BirthMark(bmData[randomEffect]));
 
                     break;
-
                 }
                 else
                 {

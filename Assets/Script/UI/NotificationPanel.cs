@@ -87,71 +87,61 @@ public class NotificationPanel : MonoBehaviour
             activitySliderGO.transform.Find("Name").GetComponent<Text>().text = activity.Value.activityName;
             activitySliderGO.name = activity.Value.activityID.ToString();
 
+            Timer timer = (Timer)NotificationManager.Instance.gameObject.transform.Find("ActivitiesList/" + activity.Value.activityID).GetComponent(typeof(Timer));
+            timer.slider = activitySliderGO.GetComponentInChildren<Slider>().gameObject;
 
+            if (!activity.Value.isFinished)
+            {
+                ChangeSpeedUpCost(activitySliderGO.transform.Find("SpeedUpButton").GetComponentInChildren<Text>(), ItemManager.Instance.GetSpeedUpCost(activity.Value.currentPoint));
+
+                activitySliderGO.transform.Find("SpeedUpButton").GetComponent<Button>().onClick.AddListener(() =>
+                {
+                    if (ItemManager.Instance.TryConsumeResources("Diamond", ItemManager.Instance.GetSpeedUpCost(activity.Value.currentPoint)))
+                    {
+                        timer.ForceFinish();
+
+                    }
+
+                });
+            }
 
             switch (activity.Value.activityType)
             {
-               
                 case ActivityType.Quest:
                     {
                         QuestTimer questTimer = NotificationManager.Instance.gameObject.transform.Find("ActivitiesList/" + activity.Value.activityID).GetComponent<QuestTimer>();
                         questTimer.slider = activitySliderGO.GetComponentInChildren<Slider>().gameObject;
+
                         if (activity.Value.isFinished)
                         {
                             activitySliderGO.GetComponentInChildren<Slider>().gameObject.SetActive(false);
                             activitySliderGO.transform.Find("SpeedUpButton").gameObject.SetActive(false);
+
                             Button finishButton = activitySliderGO.transform.Find("FinishButton").GetComponentInChildren<Button>();
-                            finishButton.onClick.AddListener(() => { 
+                            finishButton.onClick.AddListener(() => {
                                 QuestManager.Instance.FinishQuest(activity.Value);
                                 Destroy(questTimer.gameObject);
                                 GameObject.FindObjectOfType<MainCanvas>().RefreshNotificationAmount();
-                                gameObject.SetActive(false); });
+                                gameObject.SetActive(false); 
+                            });
+
                             finishButton.gameObject.SetActive(true);
                         }
                         else
                         {
-                            ChangeSpeedUpCost(activitySliderGO.transform.Find("SpeedUpButton").GetComponentInChildren<Text>(), ItemManager.Instance.GetSpeedUpCost(activity.Value.currentPoint * 20));
 
-                            activitySliderGO.transform.Find("SpeedUpButton").GetComponent<Button>().onClick.AddListener(() =>
-                            {
-                                if (ItemManager.Instance.TryConsumeResources("Diamond", ItemManager.Instance.GetSpeedUpCost(activity.Value.currentPoint * 20)))
-                                {
-                                    questTimer.ForceFinish();
-                                }
-
-                            });
-
-                        }
-                       
+                        }                     
 
                         break;
                     }
                 case ActivityType.Craft:
                     {
-                        CraftTimer craftTimer = NotificationManager.Instance.gameObject.transform.Find("ActivitiesList/" + activity.Value.activityID).GetComponent<CraftTimer>();
-                        craftTimer.slider = activitySliderGO.GetComponentInChildren<Slider>().gameObject;
-
-                        if (!activity.Value.isFinished)
-                        {
-                            ChangeSpeedUpCost(activitySliderGO.transform.Find("SpeedUpButton").GetComponentInChildren<Text>(), ItemManager.Instance.GetSpeedUpCost(activity.Value.currentPoint));
-
-                            activitySliderGO.transform.Find("SpeedUpButton").GetComponent<Button>().onClick.AddListener(() =>
-                            {
-                                if (ItemManager.Instance.TryConsumeResources("Diamond", ItemManager.Instance.GetSpeedUpCost(activity.Value.currentPoint)))
-                                {
-                                    craftTimer.ForceFinish();
-
-                                }
-
-                            });
-                        }
-                        else
-                        {
-
-                        }
-
-
-                            break;
+                       
+                        break;
+                    }
+                case ActivityType.Pregnancy:
+                    {
+                        break;
                     }
                 case ActivityType.Build:
                     {

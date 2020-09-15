@@ -81,7 +81,9 @@ public enum ActivityType
 {
     Quest,
     Build,
-    Craft
+    Craft,
+    Pregnancy,
+    CharacterGrowing
 
 }
 [System.Serializable] 
@@ -92,7 +94,7 @@ public class ActivityInformation
     public ActivityType activityType;
 
     public int informationID;
-    public Builder builderReference;
+    public int builderReferenceID;
     public int teamNumber;
 
     public bool isFinished;

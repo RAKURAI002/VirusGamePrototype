@@ -14,7 +14,8 @@ public class CraftingPanel : MonoBehaviour
 
     private void OnEnable()
     {
-        Resource.ResourceType type = (builder.Type == Building.BuildingType.Kitchen ? Resource.ResourceType.ConsumableRecipe : (builder.Type == Building.BuildingType.Armory ? Resource.ResourceType.GadgetRecipe : Resource.ResourceType.MedicineRecipe));
+        Resource.ResourceType type = (builder.Type == Building.BuildingType.Kitchen ? Resource.ResourceType.ConsumableRecipe :
+            (builder.Type == Building.BuildingType.Armory ? Resource.ResourceType.GadgetRecipe : Resource.ResourceType.MedicineRecipe));
 
         KeyValuePair<string, Resource> defaultCrafting = ItemManager.Instance.AllResources.FirstOrDefault(r => r.Value.type == type);
         if (defaultCrafting.Value != null)
@@ -103,31 +104,15 @@ public class CraftingPanel : MonoBehaviour
                            startPoint = 0,
                            finishPoint = resourceRecipe.craftingData.pointRequired,
                            teamNumber = _teamNumber,
-                           informationID = resourceRecipe.ID,
-                           builderReference = builder
+                           informationID = resource.ID,
+                           builderReferenceID = builder.ID
 
                        }) ;
 
                        builder.TeamLockState.Add(_teamNumber);
 
                    }, false);
-
-            /*
-            if(ItemManager.Instance.TryConsumeResources(resourceRecipe.craftingData.craftingMaterials))
-            {
-               // ItemManager.Instance.AddResource(resource.Name, 1);
-                RefreshCraftingPanel();
-            }
-            NotificationManager.Instance.AddActivity(new ActivityInformation()
-            {
-                activityName = ("Craft:" + resource.Name),
-                activityType = ActivityType.Craft,
-                startTime = DateTime.Now.Ticks,
-                finishTime = DateTime.Now.Ticks + (resourceRecipe.craftingData.point * TimeSpan.TicksPerSecond),
-            //    teamNumber = _teamNumber,
-             //   InformationID = currentQuest.questID
-            });
-            */
+            
         }
         else
         {
@@ -188,7 +173,6 @@ public class CraftingPanel : MonoBehaviour
             default: break;
         }
 
-
         informationPanel.transform.Find("ItemName").GetComponent<Text>().text = resource.Name;
         
         informationPanel.transform.Find("ItemDescription").GetComponent<Text>().text = resource.description;
@@ -229,8 +213,6 @@ public class CraftingPanel : MonoBehaviour
 
     void ClearCraftableListOldData()
     {
-
-
         Transform container = transform.Find("CraftableListPanel/Container");
 
         foreach (Transform transform in container)

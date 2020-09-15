@@ -17,7 +17,7 @@ public class NotificationManager : SingletonComponent<NotificationManager>
         base.Awake();
 
     }
-  
+
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnLevelFinishedLoading;
@@ -33,7 +33,7 @@ public class NotificationManager : SingletonComponent<NotificationManager>
             EventManager.Instance.OnActivityAssigned -= OnActivityAssigned;
             EventManager.Instance.OnActivityFinished -= OnActivityFinished;
         }
-            
+
     }
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     {
@@ -46,24 +46,17 @@ public class NotificationManager : SingletonComponent<NotificationManager>
     #endregion
 
     [SerializeField] private ActivityProgressDictionary processingActivies;
-    public ActivityProgressDictionary ProcessingActivies { get {return processingActivies; } set { processingActivies = value; } }
+    public ActivityProgressDictionary ProcessingActivies { get { return processingActivies; } set { processingActivies = value; } }
 
-    // Start is called before the first frame update
     void Start()
     {
         CheckActivities();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     protected override void OnInitialize()
     {
         processingActivies = new ActivityProgressDictionary();
-        
+
     }
     void CheckActivities()
     {
@@ -73,24 +66,36 @@ public class NotificationManager : SingletonComponent<NotificationManager>
             {
                 case ActivityType.Quest:
                     {
-                        GameObject ActivityTimerGO = new GameObject();
+                        GameObject ActivityTimerGO = new GameObject(activity.Value.activityID.ToString());
                         ActivityTimerGO.transform.SetParent(transform.Find("ActivitiesList"));
-                        ActivityTimerGO.name = activity.Value.activityID.ToString();
                         QuestTimer questTimer = ActivityTimerGO.AddComponent<QuestTimer>();
                         questTimer.activityInformation = activity.Value;
                         break;
                     }
                 case ActivityType.Craft:
                     {
-                        GameObject ActivityTimerGO = new GameObject();
+                        GameObject ActivityTimerGO = new GameObject(activity.Value.activityID.ToString());
                         ActivityTimerGO.transform.SetParent(transform.Find("ActivitiesList"));
-                        ActivityTimerGO.name = activity.Value.activityID.ToString();
                         CraftTimer craftTimer = ActivityTimerGO.AddComponent<CraftTimer>();
                         craftTimer.InitializeData(activity.Value);
                         break;
                     }
                 case ActivityType.Build:
                     {
+                        break;
+                    }
+                case ActivityType.Pregnancy:
+                    {
+                        GameObject ActivityTimerGO = new GameObject(activity.Value.activityID.ToString());
+                        ActivityTimerGO.transform.SetParent(NotificationManager.Instance.gameObject.transform.Find("ActivitiesList"));
+                        QuestTimer questTimer = ActivityTimerGO.AddComponent<QuestTimer>();
+                        questTimer.activityInformation = activity.Value;
+
+                        break;
+                    }
+                default:
+                    {
+                        Debug.LogWarning($"{activity.Value.activityType} is currently unhandled.");
                         break;
                     }
             }
@@ -107,14 +112,12 @@ public class NotificationManager : SingletonComponent<NotificationManager>
     }
     public void RemoveActivity(ActivityInformation activityInformation)
     {
-       // Debug.Log(activityInformation.activityID);
-        if(!processingActivies.Remove(activityInformation.activityID))
+        if (!processingActivies.Remove(activityInformation.activityID))
         {
             Debug.LogError("Remove Activity Failed.");
-            //EventManager.Instance.ActivityFinished(activityInformation);
+
         }
-      //  Debug.Log(processingActivies.Count);
-        
+
     }
     public void OnActivityAssigned(ActivityInformation activityInformation)
     {
@@ -125,7 +128,7 @@ public class NotificationManager : SingletonComponent<NotificationManager>
                 {
                     GameObject ActivityTimerGO = new GameObject(activityInformation.activityID.ToString());
                     ActivityTimerGO.transform.SetParent(NotificationManager.Instance.gameObject.transform.Find("ActivitiesList"));
-                  
+
                     QuestTimer questTimer = ActivityTimerGO.AddComponent<QuestTimer>();
                     questTimer.activityInformation = activityInformation;
                     break;
@@ -143,6 +146,21 @@ public class NotificationManager : SingletonComponent<NotificationManager>
                 {
                     break;
                 }
+            case ActivityType.Pregnancy:
+                {
+                    GameObject ActivityTimerGO = new GameObject(activityInformation.activityID.ToString());
+                    ActivityTimerGO.transform.SetParent(NotificationManager.Instance.gameObject.transform.Find("ActivitiesList"));
+
+                    QuestTimer questTimer = ActivityTimerGO.AddComponent<QuestTimer>();
+                    questTimer.activityInformation = activityInformation;
+
+                    break;
+                }
+            default:
+                {
+                    Debug.LogWarning($"{activityInformation.activityType} is currently unhandled.");
+                    break;
+                }
         }
 
     }
@@ -154,47 +172,46 @@ public class NotificationManager : SingletonComponent<NotificationManager>
 
             case ActivityType.Quest:
                 {
-                 
+                    /// Update in Notification Panel
                     break;
                 }
             case ActivityType.Craft:
                 {
+                    Resource resource = LoadManager.Instance.allResourceData.SingleOrDefault(r => r.Value.ID == activityInformation.informationID).Value;
+
+                    ItemManager.Instance.AddResource(resource.Name, 1);
+
                     CraftTimer craftTimer = NotificationManager.Instance.gameObject.transform.Find("ActivitiesList/" + activityInformation.activityID).GetComponent<CraftTimer>();
                     Destroy(craftTimer.gameObject);
                     RemoveActivity(activityInformation);
+
                     break;
                 }
             case ActivityType.Build:
                 {
                     break;
                 }
+            case ActivityType.Pregnancy:
+                {
+                    QuestTimer timer = NotificationManager.Instance.gameObject.transform.Find("ActivitiesList/" + activityInformation.activityID).GetComponent<QuestTimer>();
+                    Destroy(timer.gameObject);
+                    RemoveActivity(activityInformation);
+                    CharacterManager.Instance.CreateChildCharacter();
+                    break;
+                }
+            default:
+                {
+                    Debug.LogWarning($"{activityInformation.activityType} is currently unhandled.");
+                    break;
+                }
         }
-
-    }
-    public void RefreshFinishedQuestNotification()
-    {/*
-        if (SceneManager.GetActiveScene().name != "MainScene")
-        {
-            Debug.Log("Back to MainScane to refresh Quests' Notification");
-            return;
-        }
-        GameObject questNotification = GameManager.FindInActiveObjectByName("FinishedQuestAmount");
-        if (finishedQuest.Count == 0)
-        {
-            questNotification.SetActive(false);
-        }
-        else
-        {
-            questNotification.SetActive(true);
-            questNotification.GetComponentInChildren<Text>().text = finishedQuest.Count.ToString();
-        }*/
 
     }
 
     int GetActivityID()
     {
-        return processingActivies.Count >= 2 ? (processingActivies.Aggregate((a, b) => a.Key > b.Key ? a : b).Key + 1) : processingActivies.Count;
-        
+        return (processingActivies.Count >= 2 ? (processingActivies.Aggregate((a, b) => a.Key > b.Key ? a : b).Key + 1) : processingActivies.Count) + Constant.IDMask.ACTIVITY_ID_MASK;
+
     }
 
 

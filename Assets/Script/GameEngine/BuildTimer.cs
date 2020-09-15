@@ -6,14 +6,13 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BuildTimer : MonoBehaviour
+public class BuildTimer : Timer
 {
     [SerializeField] Builder thisBuilding;
     Building buildData;
 
     Builder laborCenter;
     GameObject timerCanvas;
-    GameObject slider;
 
     public long timer { get; set; }
     public Vector3 timerOffset;
@@ -28,33 +27,31 @@ public class BuildTimer : MonoBehaviour
     }
     private void OnEnable()
     {
-
+        EventManager.Instance.OnCharacterAssigned += OnCharacterAssigned;
     }
     private void OnDisable()
     {
-
+        if (EventManager.Instance)
+        {
+            EventManager.Instance.OnCharacterAssigned -= OnCharacterAssigned;
+        }
     }
     void Start()
     {
 
         Initiate();
-        InvokeRepeating("IncreaseCurrentPoint", 0f, 1f);
+        InvokeRepeating(nameof(IncreaseCurrentPoint), 0f, 1f);
         CreateSlider();
-
+        GetProductionPoint();
         //  Debug.Log("Upgrading " + thisBuilding.representGameObject.name + " to level" + (thisBuilding.Level) + ". Need " + (pointLeft / TimeSpan.TicksPerSecond) + "s to finish constructing.");
     }
 
     void Update()
     {
-
-        GetProductionPoint();
-
-
         if (CheckCompleteTimer())
         {
             return;
         }
-
 
         timer = (long)((thisBuilding.constructionStatus.finishPoint - thisBuilding.constructionStatus.currentPoint) / productionPoint);
         int hours = Mathf.FloorToInt(timer / 3600);
@@ -63,16 +60,18 @@ public class BuildTimer : MonoBehaviour
 
         slider.GetComponentInChildren<Text>().text = String.Format("{0:00}:{1:00}:{2:00}", hours, minutes, seconds);
     }
+    void OnCharacterAssigned()
+    {
+        GetProductionPoint();
 
+    }
     void Initiate()
     {
         thisBuilding.constructionStatus.isConstructing = true;
 
-
         buildData = LoadManager.Instance.allBuildingData[thisBuilding.Type];
         timerCanvas = GameObject.Find("TimerCanvas");
         timerOffset = new Vector3(0, -1, 0);
-        Debug.Log(thisBuilding.constructionStatus.teamNumber);
         gameObject.GetComponent<SpriteRenderer>().color = Color.red;
 
         GetProductionPoint();
@@ -105,9 +104,9 @@ public class BuildTimer : MonoBehaviour
         }
         return false;
     }
-    public void ForceFinish()
+    public override void ForceFinish()
     {
-       // thisBuilding.constructionStatus.currentPoint = thisBuilding.constructionStatus.finishPoint;
+        thisBuilding.constructionStatus.currentPoint = thisBuilding.constructionStatus.finishPoint;
         return;
     }
     void IncreaseCurrentPoint()
@@ -170,13 +169,12 @@ public class BuildTimer : MonoBehaviour
             return;
         }
         float productionPointTemp = (float)(LoadManager.Instance.allBuildingData[Building.BuildingType.LaborCenter].production[laborCenter.Level]["Production"]);
-        //Debug.Log(thisBuilding.constructionStatus.teamNumber);
         if (laborCenter.CharacterInBuilding[thisBuilding.constructionStatus.teamNumber] != null)
         {
-
             productionPointTemp += laborCenter.CharacterInBuilding[thisBuilding.constructionStatus.teamNumber].Characters.Sum(c => ((c.Stats.strength * 0.2f / 8) + (c.Stats.speed * 0.2f / 8) + (c.Stats.craftsmanship * 0.8f / 3)));
-        //    Debug.Log(laborCenter.CharacterInBuilding[thisBuilding.constructionStatus.teamNumber].Characters.Sum(c => ((c.Stats.strength * 0.2f / 8) + (c.Stats.speed * 0.2f / 8) + (c.Stats.crafting * 0.8f / 3))));
+       
         }
         productionPoint = productionPointTemp;
     }
+
 }

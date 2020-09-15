@@ -477,12 +477,8 @@
             ],
             "production": [
                 {
-                    "keys": [
-                        "Production"
-                    ],
-                    "values": [
-                        20
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
                     "keys": [
@@ -980,12 +976,8 @@
             ],
             "production": [
                 {
-                    "keys": [
-                        "Production"
-                    ],
-                    "values": [
-                        20
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
                     "keys": [
@@ -1219,12 +1211,8 @@
             ],
             "production": [
                 {
-                    "keys": [
-                        "Production"
-                    ],
-                    "values": [
-                        20
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
                     "keys": [
@@ -2791,12 +2779,8 @@
             ],
             "production": [
                 {
-                    "keys": [
-                        "Production"
-                    ],
-                    "values": [
-                        20
-                    ]
+                    "keys": [],
+                    "values": []
                 },
                 {
                     "keys": [

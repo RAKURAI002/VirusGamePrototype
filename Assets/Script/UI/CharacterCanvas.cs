@@ -40,6 +40,7 @@ public class CharacterCanvas : MonoBehaviour
     {
         character = CharacterManager.Instance.AllCharacters[0];
         UpdateInformation();
+
     }
 
     void Update()
@@ -132,9 +133,16 @@ public class CharacterCanvas : MonoBehaviour
 
         Slider expSlider = transform.Find("MainPanel/InformationPanel/EXPSlider").GetComponent<Slider>();
 
-        expSlider.value = character.level * 10 - ((character.level * 5 * (character.level + 1)) - character.Experience);
         expSlider.maxValue = character.level * 10;
+        expSlider.value = character.level * 10 - ((character.level * 5 * (character.level + 1)) - character.Experience);
+        
         expSlider.GetComponentInChildren<Text>().text = ((character.level * 5 * (character.level + 1)) - character.Experience).ToString() + " EXP left";
+
+        Slider hpSlider = transform.Find("MainPanel/InformationPanel/HPSlider").GetComponent<Slider>();
+        hpSlider.maxValue = character.MaxHitPoint;
+        hpSlider.value = character.CurrentHitPoint;
+       
+        hpSlider.GetComponentInChildren<Text>().text = $"{character.CurrentHitPoint} / {character.MaxHitPoint}";
 
     }
 

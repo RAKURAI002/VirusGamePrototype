@@ -70,8 +70,6 @@ public class ItemEffectTimer : MonoBehaviour
 
     private void Initiate()
     {
-        
-
         if (effect.finishTime == 0)
         {
 

@@ -10,6 +10,20 @@ public class BuildingBehavior : MonoBehaviour
 {
     [SerializeField] public Builder builder;
     protected Building buildingData;
+    protected virtual void OnEnable()
+    {
+        EventManager.Instance.OnGameCycleUpdated += OnGameCycleUpdated;
+    }
+    protected virtual void OnDisable()
+    {
+        if (EventManager.Instance)
+        {
+            EventManager.Instance.OnGameCycleUpdated -= OnGameCycleUpdated;
+        }
+    }
+    protected virtual void OnGameCycleUpdated()
+    {
+    }
 
     public void SetBuilder(Builder _builder)
     {
@@ -20,7 +34,6 @@ public class BuildingBehavior : MonoBehaviour
     }
     protected virtual void ContinueFromOffline()
     {
-
     }
 
     protected virtual void Initialize()

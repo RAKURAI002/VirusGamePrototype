@@ -51,8 +51,14 @@ public class EventManager : SingletonComponent<EventManager>
     public event Action<ActivityInformation> OnActivityFinished;
     public event Action<int> OnPlayerLevelUp;
 
+    public event Action OnGameCycleUpdated;
     public event Action OnGameDataLoadFinished;
 
+    public void GameCycleUpdated()
+    {
+        OnGameCycleUpdated?.Invoke();
+
+    }
     public void GameDataLoadFinished()
     {
         Debug.Log($"Load Game data finished.");

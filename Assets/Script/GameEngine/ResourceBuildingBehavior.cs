@@ -6,7 +6,7 @@ using TMPro;
 using UnityEngine.UI;
 using System.Linq;
 using System;
-
+using System.Text;
 /// <summary>
 /// All Collectable Buildings : Farm, WaterTreatmentCenter, Mine, LumberYard.
 /// </summary>
@@ -16,8 +16,9 @@ public class ResourceBuildingBehavior : BuildingBehavior
     [SerializeField] bool isCollectable;
     OnMouseOverHelper onMouseOverHelper;
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
         if (isCollectable)
         {
             EventManager.Instance.OnResourceChanged += OnResourceChanged;
@@ -27,8 +28,9 @@ public class ResourceBuildingBehavior : BuildingBehavior
         }
 
     }
-    private void OnDisable()
+    protected override void OnDisable()
     {
+        base.OnDisable();
         if (EventManager.Instance && isCollectable)
         {
             EventManager.Instance.OnResourceChanged -= OnResourceChanged;
@@ -60,6 +62,111 @@ public class ResourceBuildingBehavior : BuildingBehavior
         }
 
     }
+    protected override void OnGameCycleUpdated()
+    {
+        base.OnGameCycleUpdated();
+        AddResource();
+
+    }
+    void AddResource()
+    {
+        Building buildingData = LoadManager.Instance.allBuildingData[builder.Type];     
+        List<Character> characters = builder.CharacterInBuilding[0].Characters;
+
+        foreach (KeyValuePair<string, int> baseProduction in buildingData.production[builder.Level])
+        {     
+            Resource resource = LoadManager.Instance.allResourceData[baseProduction.Key];
+            if (resource.type != Resource.ResourceType.Material)
+            {
+                return;
+
+            }
+
+            float productionAmount = GetTotalProduction(baseProduction, characters);
+
+            AddProductionToBuilding(productionAmount);
+
+            EventManager.Instance.ResourceChanged(baseProduction.Key);
+        }
+    }
+
+    void AddResourceAfterOffine(int multipler)
+    {
+        Building buildingData = LoadManager.Instance.allBuildingData[builder.Type];
+        List<Character> characters = builder.CharacterInBuilding[0].Characters;
+        int offlineTimePassed = (int)((DateTime.Now.Ticks - LoadManager.Instance.playerData.lastLoginTime) / TimeSpan.TicksPerSecond);
+
+        foreach (KeyValuePair<string, int> baseProduction in buildingData.production[builder.Level])
+        {
+            Resource resource = LoadManager.Instance.allResourceData[baseProduction.Key];
+            if (resource.type != Resource.ResourceType.Material)
+            {
+                return;
+
+            }
+
+            float productionAmount = GetTotalProduction(baseProduction, characters) * multipler;
+
+            Debug.Log($"{offlineTimePassed}s passed since lst login, resulting in add {baseProduction.Key} : {baseProduction.Value}(base) * {multipler}(multipler) = {productionAmount}");
+
+            AddProductionToBuilding(productionAmount);
+
+             EventManager.Instance.ResourceChanged(baseProduction.Key);
+        }
+    }
+
+    float GetTotalProduction(KeyValuePair<string, int> production, List<Character> characters)
+    {
+        StringBuilder log = new StringBuilder();
+        log.AppendLine($"{Constant.TimeCycle.RESOURCE_UPDATE_CYCLE} seconds passed. Base Production of {builder.Type}[ID : {builder.ID}] is {production.Value}");
+
+        float finalUpdatedAmount = production.Value;
+        foreach (Character character in characters)
+        {
+            float productionAmount = character.Stats.speed * 0.2f;
+
+            List<Character.BirthMark> birthMarks = character.BirthMarks.Where(bm => bm.type == typeof(IncreaseProductionOnBuildingBirthMark).ToString()).ToList();
+            Debug.Log(string.Concat(birthMarks.Select(b => b.type.ToString())));
+            if (birthMarks.Count == 0)
+            {
+                continue;
+
+            }
+
+            Debug.Log($"{birthMarks.Count}");
+            List<BirthMarkData> birthMarkDatas = new List<BirthMarkData>();
+            birthMarks.ForEach((bm) =>
+            {
+                BirthMarkData birthMarkData = LoadManager.Instance.allBirthMarkDatas[bm.name];
+                Debug.Log($"{birthMarkData.name}");
+                if (birthMarkData != null)
+                {
+                    birthMarkDatas.Add(ObjectCopier.Clone<BirthMarkData>(birthMarkData));
+                    birthMarkDatas[birthMarkDatas.Count - 1].level = bm.level;
+
+                }
+
+
+            });
+
+            log.AppendLine($"{character.Name} : speed = {character.Stats.speed} increases {character.Stats.speed * 0.2f}");
+            Debug.Log($"{string.Concat(birthMarkDatas.Select(b => ((IncreaseProductionOnBuildingBirthMark)b).buildingType))}");
+            birthMarkDatas.Where(bData => ((IncreaseProductionOnBuildingBirthMark)bData).buildingType.ToArray().Contains(builder.Type)).ToList().ForEach((bData) =>
+            {
+                log.AppendLine($"Affected BirthMarks are {bData.name}(Level{bData.level}) increase {productionAmount * bData.effectValues[bData.level]}");
+                productionAmount += productionAmount * bData.effectValues[bData.level];
+
+            });
+
+            finalUpdatedAmount += productionAmount;
+            log.AppendLine($"Total production : {finalUpdatedAmount}");
+            Debug.Log($"{log}");
+
+
+        }
+
+        return finalUpdatedAmount;
+    }
 
     void OnActivityAssigned(ActivityInformation activityInformation)
     {
@@ -73,8 +180,22 @@ public class ResourceBuildingBehavior : BuildingBehavior
     protected override void ContinueFromOffline()
     {
         base.ContinueFromOffline();
-        long offlineTimePassed = (DateTime.Now.Ticks - LoadManager.Instance.playerData.lastLoginTime) / TimeSpan.TicksPerSecond;
+        int offlineTimePassed = (int)((DateTime.Now.Ticks - LoadManager.Instance.playerData.lastLoginTime) / TimeSpan.TicksPerSecond);
+        int resourceMultipler = offlineTimePassed / Constant.TimeCycle.RESOURCE_UPDATE_CYCLE;
+        AddResourceAfterOffine(resourceMultipler);
 
+    }
+    void AddProductionToBuilding(float amount)
+    {
+        Building buildData = LoadManager.Instance.allBuildingData[builder.Type];
+
+        builder.currentProductionAmount += amount;
+        if (builder.currentProductionAmount >= buildData.maxProductionStored[builder.Level])
+        {
+            builder.currentProductionAmount = buildData.maxProductionStored[builder.Level];
+
+        }
+        RefreshProductionAmount();
 
     }
     void OnClickCollectResource()

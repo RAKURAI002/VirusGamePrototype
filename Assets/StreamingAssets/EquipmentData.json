@@ -1,7 +1,7 @@
 {
     "Items": [
         {
-            "id": 40001,
+            "id": 400001,
             "name": "Item1",
             "rarity": 2,
             "description": "Too mighty blade.",
@@ -27,7 +27,7 @@
             "usingAmount": 0
         },
         {
-            "id": 40002,
+            "id": 400002,
             "name": "Item2",
             "rarity": 5,
             "description": "Seems like a MONKEY's heart ?",
@@ -53,7 +53,7 @@
             "usingAmount": 0
         },
         {
-            "id": 40003,
+            "id": 400003,
             "name": "Item3",
             "rarity": 2,
             "description": "What is this ?",
@@ -79,7 +79,7 @@
             "usingAmount": 0
         },
         {
-            "id": 40004,
+            "id": 400004,
             "name": "Item4",
             "rarity": 3,
             "description": "Hmmm . . .",
@@ -105,7 +105,7 @@
             "usingAmount": 0
         },
         {
-            "id": 40005,
+            "id": 400005,
             "name": "Item5",
             "rarity": 3,
             "description": "Unleash your TRUE power.",
@@ -131,7 +131,7 @@
             "usingAmount": 0
         },
         {
-            "id": 40006,
+            "id": 400006,
             "name": "Item6",
             "rarity": 2,
             "description": "An ancient Sorcerer's boots.",
@@ -157,7 +157,7 @@
             "usingAmount": 0
         },
         {
-            "id": 40007,
+            "id": 400007,
             "name": "Item7",
             "rarity": 3,
             "description": "That seems heavy.",
@@ -183,7 +183,7 @@
             "usingAmount": 0
         },
         {
-            "id": 40008,
+            "id": 400008,
             "name": "Item8",
             "rarity": 2,
             "description": "Can cut everything except trees.",
@@ -209,7 +209,7 @@
             "usingAmount": 0
         },
         {
-            "id": 40009,
+            "id": 400009,
             "name": "Item9",
             "rarity": 2,
             "description": "Make you more tanky.",
@@ -235,7 +235,7 @@
             "usingAmount": 0
         },
         {
-            "id": 40010,
+            "id": 400010,
             "name": "Item10",
             "rarity": 3,
             "description": "Smell bloody . . .",
@@ -261,7 +261,7 @@
             "usingAmount": 0
         },
         {
-            "id": 40011,
+            "id": 400011,
             "name": "Item11",
             "rarity": 4,
             "description": "Better than your Nike :)",
@@ -287,7 +287,7 @@
             "usingAmount": 0
         },
         {
-            "id": 40012,
+            "id": 400012,
             "name": "Item12",
             "rarity": 2,
             "description": "How this could wear as pants ?",
@@ -313,7 +313,7 @@
             "usingAmount": 0
         },
         {
-            "id": 40013,
+            "id": 400013,
             "name": "Item13",
             "rarity": 2,
             "description": "A certain shield.",
@@ -339,7 +339,7 @@
             "usingAmount": 0
         },
         {
-            "id": 40014,
+            "id": 400014,
             "name": "Item14",
             "rarity": 4,
             "description": "Cheese? on head?",
@@ -365,7 +365,7 @@
             "usingAmount": 0
         },
         {
-            "id": 40015,
+            "id": 400015,
             "name": "Item15",
             "rarity": 3,
             "description": "A cursed crown of something. Bruhhh...",

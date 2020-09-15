@@ -15,6 +15,12 @@ public static class Constant
         public static float MYTHOLOGICALRARE_DROP_CHANCE = 0.5f;
 
     }
+    public static class EventOccurChance
+    {
+        public static int BREEDING_CHANCE = 50;
+    
+    }
+
     public static class BirthMarkAmountChance
     {
         public static int BIRTHMARK_GET_ZERO_CHANCE = 20;
@@ -49,7 +55,8 @@ public static class Constant
     {
         public static int RESOURCE_UPDATE_CYCLE = 10;
         public static int CHARACTER_ADDING_EVENT_CYCLE = 60;
-        public static int RESIDENCE_HEALING_CYCLE = 60;
+        public static int GENERAL_GAME_CYCLE = 60;
+        public static int PREGNANCY_GIVE_BIRTH_TIME = 60;
 
     }
     public static class CalculatingFunction
@@ -63,12 +70,13 @@ public static class Constant
 
     public static class IDMask
     {
-        public static int BUILDING_ID_MASK = 10000;
-        public static int CHARACTER_ID_MASK = 20000;
-        public static int QUEST_ID_MASK = 30000;
-        public static int EQUIPMENT_ID_MASK = 40000;
-        public static int RESOURCE_ID_MASK = 50000;
-        public static int ACHIEVEMENT_ID_MASK = 60000;
+        public static int BUILDING_ID_MASK = 100000;
+        public static int CHARACTER_ID_MASK = 200000;
+        public static int QUEST_ID_MASK = 300000;
+        public static int EQUIPMENT_ID_MASK = 400000;
+        public static int RESOURCE_ID_MASK = 500000;
+        public static int ACHIEVEMENT_ID_MASK = 600000;
+        public static int ACTIVITY_ID_MASK = 700000;
 
     }
 

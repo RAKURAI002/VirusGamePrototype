@@ -3,10 +3,81 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Reflection;
-/// <summary>
-/// Implement BirthMark Effects.
-/// </summary>
-/// 
+
+[System.Serializable]
+public abstract class BirthMarkData
+{
+    [SerializeField] public string name;
+    [SerializeField] public int tier;
+    [SerializeField] public int level;
+    [SerializeField] public string spritePath;
+    [SerializeField] public string description;
+
+    [SerializeField] public List<float> effectValues;
+
+    public abstract BirthMarkData CreateBirthMarkObject<T>();
+
+
+}
+
+[System.Serializable]
+public class IncreaseSTATSBirthMark : BirthMarkData
+{
+
+    [SerializeField] public string statToIncrease;
+
+    [SerializeField] public bool isAlliesAffected;
+
+
+    public IncreaseSTATSBirthMark()
+    {
+
+    }
+
+    public override BirthMarkData CreateBirthMarkObject<T>()
+    {
+        return new IncreaseSTATSBirthMark();
+    }
+
+}
+
+[System.Serializable]
+public class IncreaseProductionOnBuildingBirthMark : BirthMarkData
+{
+    [SerializeField] public Building.BuildingType[] buildingType;
+
+    public override BirthMarkData CreateBirthMarkObject<T>()
+    {
+        return new IncreaseProductionOnBuildingBirthMark();
+    }
+
+}
+
+
+
+[System.Serializable]
+public class ChanceToDoubleProductBirthMark : BirthMarkData
+{
+    [SerializeField] public Building.BuildingType buildingType;
+
+    public override BirthMarkData CreateBirthMarkObject<T>()
+    {
+        return new IncreaseProductionOnBuildingBirthMark();
+    }
+
+}
+
+[System.Serializable]
+public class AddMoreActionBirthMark : BirthMarkData
+{
+
+    public override BirthMarkData CreateBirthMarkObject<T>()
+    {
+        return new IncreaseProductionOnBuildingBirthMark();
+    }
+
+}
+
 
 [System.Serializable]
 public class BirthMarkSerializer : ISerializationCallbackReceiver
@@ -41,78 +112,4 @@ public class BirthMarkSerializer : ISerializationCallbackReceiver
     }
 }
 
-
-[System.Serializable]
-public abstract class BirthMarkData 
-{
-    [SerializeField] public string name;
-    [SerializeField] public int tier;
-    [SerializeField] public int level;
-    [SerializeField] public string spritePath;
-    [SerializeField] public string description;
-
-    [SerializeField] public List<float> effectValues;
-
-    public abstract BirthMarkData CreateBirthMarkObject<T>();
-
-
-}
-
-[System.Serializable]
-public class IncreaseSTATSBirthMark : BirthMarkData
-{
-    
-    [SerializeField] public string statToIncrease;
-
-    [SerializeField] public bool isAlliesAffected;
-
-
-    public IncreaseSTATSBirthMark()
-    {
-
-    }
-
-    public override BirthMarkData CreateBirthMarkObject<T>()
-    {
-        return new IncreaseSTATSBirthMark();
-    }
-
-}
-
-[System.Serializable]
-public class IncreaseProductionOnBuildingBirthMark : BirthMarkData
-{
-    [SerializeField] public Building.BuildingType[] buildingType;
-
-    public override BirthMarkData CreateBirthMarkObject<T>()
-    {
-        return new IncreaseProductionOnBuildingBirthMark();
-    }
-    
-}
-
-
-
-[System.Serializable]
-public class ChanceToDoubleProductBirthMark : BirthMarkData
-{
-    [SerializeField] public Building.BuildingType buildingType;
-
-    public override BirthMarkData CreateBirthMarkObject<T>()
-    {
-        return new IncreaseProductionOnBuildingBirthMark();
-    }
-
-}
-
-[System.Serializable]
-public class AddMoreActionBirthMark : BirthMarkData
-{
-
-    public override BirthMarkData CreateBirthMarkObject<T>()
-    {
-        return new IncreaseProductionOnBuildingBirthMark();
-    }
-
-}
 

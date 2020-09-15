@@ -5,12 +5,10 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
-public class CraftTimer : MonoBehaviour
+public class CraftTimer : Timer
 {
     ActivityInformation activityInformation;
-    public GameObject slider { get; set; }
     public bool isFinished;
-
     
     Resource resourceRecipe;
     Builder builder;
@@ -24,15 +22,13 @@ public class CraftTimer : MonoBehaviour
         slider = null;
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         isFinished = false;
         Initiate();
-        InvokeRepeating("IncreaseCurrentPoint", 0f, 1f);
+        InvokeRepeating(nameof(IncreaseCurrentPoint), 0f, 1f);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (isFinished)
@@ -61,13 +57,13 @@ public class CraftTimer : MonoBehaviour
 
     public void InitializeData(ActivityInformation information)
     {
-        this.builder = information.builderReference;
+        this.builder = BuildingManager.Instance.AllBuildings.SingleOrDefault(b => b.ID == information.builderReferenceID);
         this.activityInformation = information;
     }
     void Initiate()
     {
-        resourceRecipe = LoadManager.Instance.allResourceData.SingleOrDefault(r => r.Value.ID == activityInformation.informationID).Value;
-
+        Resource resource = LoadManager.Instance.allResourceData.SingleOrDefault(r => r.Value.ID == activityInformation.informationID).Value;
+        resourceRecipe = LoadManager.Instance.allResourceData[$"Recipe:{resource.Name}"];
         finishPoint = resourceRecipe.craftingData.pointRequired;
 
     }
@@ -105,18 +101,15 @@ public class CraftTimer : MonoBehaviour
             activityInformation.isFinished = true;
             builder.TeamLockState.Remove(activityInformation.teamNumber);
 
-
-            Resource resource = LoadManager.Instance.allResourceData[resourceRecipe.Name.Replace("Recipe:", "")];
-            ItemManager.Instance.AddResource(resource.Name, 1);
-
             EventManager.Instance.ActivityFinished(activityInformation);
             return true;
         }
 
         return false;
     }
+    
 
-    public void ForceFinish()
+    public override void ForceFinish()
     {
         activityInformation.currentPoint = finishPoint;
     }

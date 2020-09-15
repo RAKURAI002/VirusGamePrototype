@@ -13,7 +13,7 @@ public class CharacterManager : SingletonComponent<CharacterManager>
     public int MaxCharacterInGame { get; set; }
     public List<Character> AllCharacters { get { return allCharacters; } set { allCharacters = value; } }
 
-    
+
 
     #region Unity Functions
     protected override void OnInitialize()
@@ -53,7 +53,7 @@ public class CharacterManager : SingletonComponent<CharacterManager>
 
     void Start()
     {
-        InvokeRepeating("CharacterJoiningEvent", Constant.TimeCycle.CHARACTER_ADDING_EVENT_CYCLE, Constant.TimeCycle.CHARACTER_ADDING_EVENT_CYCLE);
+        InvokeRepeating(nameof(CharacterJoiningEvent), Constant.TimeCycle.CHARACTER_ADDING_EVENT_CYCLE, Constant.TimeCycle.CHARACTER_ADDING_EVENT_CYCLE);
 
     }
 
@@ -68,10 +68,10 @@ public class CharacterManager : SingletonComponent<CharacterManager>
 
         }
 
-        int random = UnityEngine.Random.Range(0, 101);
+        int random = UnityEngine.Random.Range(0, 100);
         int joiningChance = Constant.CalculatingFunction.CharacterJoiningChanceCalculation(characterWaitingInLine.Count);
-        Debug.Log($"Chance : 0 - {joiningChance}, Randomed : {random}. Adding event = {!(random >= joiningChance)}");
-        if (random >= joiningChance)
+        Debug.Log($"Chance : 0 - {joiningChance}, Randomed : {random}. Start event = {!(random > joiningChance)}");
+        if (random > joiningChance)
         {
             return;
 
@@ -99,9 +99,19 @@ public class CharacterManager : SingletonComponent<CharacterManager>
         AddCharacterToList(character);
         LoadManager.Instance.SavePlayerDataToJson();
         return;
-        
-    }
 
+    }
+    public void CreateChildCharacter()
+    {
+        int index = UnityEngine.Random.Range(0, LoadManager.Instance.allCharacterData.Count);
+
+        Character.CharacterData characterData = LoadManager.Instance.allCharacterData[index];
+        Character character = new Character(characterData.name, characterData.gender, characterData.spritePath); ;
+        character.workStatus = Character.WorkStatus.Minor;
+        AddCharacterToList(character);
+        LoadManager.Instance.allCharacterData.Remove(characterData);
+        EventManager.Instance.CharacterAssigned();
+    }
 
     public void AddCharacterToList(Character character)
     {
@@ -150,8 +160,7 @@ public class CharacterManager : SingletonComponent<CharacterManager>
         builder.CharacterInBuilding[team].Characters.Add(character);
         character.workStatus = Character.WorkStatus.Working;
         character.WorkingPlaceID = builder.ID;
-        // Debug.Log(Object.ReferenceEquals(builder, BuildManager.Instance.AllBuildings.Single(b => b.ID == builder.ID)));
-        // Debug.Log($"Now {builder.Type} has {builder.CharacterInBuilding.Count} Character(s) assigned.");
+
         LoadManager.Instance.SavePlayerDataToJson();
         EventManager.Instance.CharacterAssigned();
 
@@ -164,7 +173,6 @@ public class CharacterManager : SingletonComponent<CharacterManager>
             Debug.LogWarning("Questing Character can't be Unassign.");
             return false;
         }
-        //  Debug.Log(builder.CharacterInBuilding.Find(cw => cw.Characters.Contains(character)).Characters.Count);
         if (!builder.CharacterInBuilding.Find(cw => cw.Characters.Contains(character)).Characters.Remove(character))  //(ec => ec.Characters.Single(c=> c.WorkingPlaceID == builder.ID)).Remove(character))
         {
             Debug.LogError("Remove Character in Building FAILED.");
@@ -172,7 +180,6 @@ public class CharacterManager : SingletonComponent<CharacterManager>
         }
         character.workStatus = Character.WorkStatus.Idle;
         character.WorkingPlaceID = -1;
-        // Debug.Log(Object.ReferenceEquals(character, CharacterManager.Instance.AllCharacters.Single(c => c.Name == character.Name)));
         Debug.Log($"Stop {character.Name} from working at {builder.Type}. Now {character.Name} is {character.workStatus}");
         EventManager.Instance.CharacterAssigned();
         LoadManager.Instance.SavePlayerDataToJson();

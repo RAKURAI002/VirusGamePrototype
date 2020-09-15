@@ -2,19 +2,50 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-
+using System.Linq;
 
 public class ResidenceBehavior : BuildingBehavior
 {
-
     void Start()
     {
-        InvokeRepeating("HealAllCharacters", Constant.TimeCycle.RESIDENCE_HEALING_CYCLE, Constant.TimeCycle.RESIDENCE_HEALING_CYCLE);
+       
+    }
+    protected override void OnGameCycleUpdated()
+    {
+        base.OnGameCycleUpdated();
+        HealAllCharacters();
+        BreedNewCharacter();
 
     }
 
     void BreedNewCharacter()
     {
+        List<Character> characters = builder.CharacterInBuilding[0].Characters;
+
+        if(characters.Count == 2 && characters[0].Gender != characters[1].Gender)
+        {
+            int random = UnityEngine.Random.Range(0, 100);
+            Debug.Log($"{Constant.TimeCycle.GENERAL_GAME_CYCLE}s passed, Trying to start BreedNewCharacter Event.");
+            Debug.Log($"Chance : 0 - {Constant.EventOccurChance.BREEDING_CHANCE}, Randomed : {random}. Start event = {!(random > Constant.EventOccurChance.BREEDING_CHANCE)}");
+            if (random > Constant.EventOccurChance.BREEDING_CHANCE)
+            {
+              //  return;
+
+            }
+
+            Character female = characters.Single(c => c.Gender == Character.GenderType.Female);
+            female.workStatus = Character.WorkStatus.Pregnant;
+            
+            NotificationManager.Instance.AddActivity(new ActivityInformation()
+            {
+                activityName = ($"Pregnancy:{female.Name}"),
+                activityType = ActivityType.Pregnancy,
+                startPoint = DateTime.Now.Ticks,
+                finishPoint = DateTime.Now.Ticks + (Constant.TimeCycle.PREGNANCY_GIVE_BIRTH_TIME * TimeSpan.TicksPerSecond),
+
+            });
+
+        }
 
     }
 
@@ -23,7 +54,7 @@ public class ResidenceBehavior : BuildingBehavior
         base.ContinueFromOffline();
 
         long offlineTimePassed = (DateTime.Now.Ticks - LoadManager.Instance.playerData.lastLoginTime) / TimeSpan.TicksPerSecond;
-        int healedAmount = (int)offlineTimePassed / Constant.TimeCycle.RESIDENCE_HEALING_CYCLE;
+        int healedAmount = (int)offlineTimePassed / Constant.TimeCycle.GENERAL_GAME_CYCLE;
         ForceHealAllCharacters(healedAmount);
 
     }

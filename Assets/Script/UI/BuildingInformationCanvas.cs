@@ -6,12 +6,11 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-
+using System.Text;
 public class BuildingInformationCanvas : MonoBehaviour
 {
     Builder builder;
     Building buildingData;
-    int x;
     private void Awake()
     {
 
@@ -35,21 +34,21 @@ public class BuildingInformationCanvas : MonoBehaviour
 
         RefreshInformationCanvas();
 
-       
+
     }
     private void OnDisable()
     {
-        if(EventManager.Instance)
+        if (EventManager.Instance)
         {
             EventManager.Instance.OnActivityFinished -= OnActivityFinished;
             EventManager.Instance.OnCharacterAssigned -= RefreshAssignUI;
         }
-           
+
     }
 
-   void OnActivityFinished(ActivityInformation activity)
+    void OnActivityFinished(ActivityInformation activity)
     {
-        if(activity.activityType == ActivityType.Build)
+        if (activity.activityType == ActivityType.Build)
             RefreshInformationCanvas();
     }
     public void ShowThisCanvas(Builder builder)
@@ -150,15 +149,45 @@ public class BuildingInformationCanvas : MonoBehaviour
             destroyButtonGO.SetActive(true);
         }
 
+        if(builder.Level == 0)
+        {
+
+            transform.Find("InformationPanel/BuildingOption").gameObject.SetActive(false);
+        }
+        else
+        {
+            transform.Find("InformationPanel/BuildingOption").gameObject.SetActive(true);
+        }
+
         Image buildingImage = transform.Find("BuildImage").gameObject.GetComponent<Image>();
         Text buildingName = transform.Find("BuildName").gameObject.GetComponent<Text>();
         Text buildingDescription = transform.Find("InformationPanel/BuildDescription").gameObject.GetComponent<Text>();
+        Text buildingProduction = transform.Find("InformationPanel/BuildProduction").gameObject.GetComponent<Text>();
         Text buildingLevel = transform.Find("BuildName/BuildLevel").gameObject.GetComponent<Text>();
-        //Text buildingStatus = transform.Find("InformationPanel/BuildStatus").gameObject.GetComponent<Text>();
+       
+        StringBuilder production = new StringBuilder(); 
 
+        foreach (var item in buildingData.production[builder.Level])
+        {
+            Resource resource = LoadManager.Instance.allResourceData[item.Key];
 
+            if(resource.type == Resource.ResourceType.Material)
+            {
+                production.AppendLine($"{item.Key} : {item.Value} / min");
+            }
+            else
+            {
+                production.AppendLine($"{item.Key} : {item.Value}");
+            }
+
+        }
+
+        buildingProduction.text = production.ToString();
         buildingImage.sprite = builder.representGameObject.GetComponent<SpriteRenderer>().sprite;
         buildingName.text = builder.Type.ToString();
+
+
+
         buildingDescription.text = buildingData.description.ToString();
         buildingLevel.text = "Level : " + builder.Level.ToString();
         /*
@@ -167,7 +196,7 @@ public class BuildingInformationCanvas : MonoBehaviour
                 buildingStatus.text = LoadManager.Instance.allResourceData[resource.Key].Name + " : " + resource.Value.ToString() ; /// ********************************************
         }*/
 
-        
+
         return;
     }
     void UpdateSlider()
@@ -215,12 +244,12 @@ public class BuildingInformationCanvas : MonoBehaviour
         upgradeButton.interactable = true;
         foreach (KeyValuePair<string, int> resource in buildingData.buildingCost[builder.Level])
         {
-           
-            bool isAffordable = (resource.Value <= (ItemManager.Instance.AllResources.ContainsKey(resource.Key)? ItemManager.Instance.AllResources[resource.Key].Amount : 0));
-            upgradeCost.text += "\n" + LoadManager.Instance.allResourceData[resource.Key].Name + " : " +   
+
+            bool isAffordable = (resource.Value <= (ItemManager.Instance.AllResources.ContainsKey(resource.Key) ? ItemManager.Instance.AllResources[resource.Key].Amount : 0));
+            upgradeCost.text += "\n" + LoadManager.Instance.allResourceData[resource.Key].Name + " : " +
             ((!isAffordable ? ($"<color=red>{resource.Value.ToString()}(Not Enough)</color>") : resource.Value.ToString()));
-           
-            if(!isAffordable)
+
+            if (!isAffordable)
             {
                 upgradeButton.interactable = false;
             }
@@ -228,10 +257,10 @@ public class BuildingInformationCanvas : MonoBehaviour
 
         foreach (KeyValuePair<string, int> resource in buildingData.production[builder.Level])
         {
-           
-                buildingProduction.text += "\n" + LoadManager.Instance.allResourceData[resource.Key].Name + " : " + resource.Value.ToString();
 
-          
+            buildingProduction.text += "\n" + LoadManager.Instance.allResourceData[resource.Key].Name + " : " + resource.Value.ToString();
+
+
         }
 
         if (builder.Level == builder.maxLevel)
@@ -248,7 +277,7 @@ public class BuildingInformationCanvas : MonoBehaviour
             }
             newBuildingLevel.text += $"{builder.Level} >> <color=blue>{builder.Level + 1}</color>";
         }
-      
+
     }
 
     public void CloseUpgradePanel()
@@ -276,24 +305,24 @@ public class BuildingInformationCanvas : MonoBehaviour
             return;
         }
 
-        
 
-            Building buildData = LoadManager.Instance.allBuildingData[builder.Type];
 
-            Debug.Log("Try Creating " + builder.Type.ToString());
+        Building buildData = LoadManager.Instance.allBuildingData[builder.Type];
 
-            GameObject assignPanelContainerGO = Instantiate(Resources.Load("Prefabs/UI/AssignPanelContainerPrefab") as GameObject, container.transform);
-            assignPanelContainerGO.transform.Find("BuildingImage").GetComponent<Image>().sprite = Resources.Load<Sprite>(buildData.spritePath[builder.Level]);
-            assignPanelContainerGO.transform.Find("BuildingImage/BuildingName").GetComponent<Text>().text = builder.Type.ToString();
-            assignPanelContainerGO.name = builder.ID.ToString();
+        Debug.Log("Try Creating " + builder.Type.ToString());
 
-            for (int i = 0; i < buildData.maxCharacterStored[builder.Level].amount.Count; i++)
-            {
-                assignPanelContainerGO.GetComponent<AssignSlotCreator>().CreateAssignSlot(assignPanelContainerGO.transform.Find("Container").gameObject, builder, i);
-            }
-        
+        GameObject assignPanelContainerGO = Instantiate(Resources.Load("Prefabs/UI/AssignPanelContainerPrefab") as GameObject, container.transform);
+        assignPanelContainerGO.transform.Find("BuildingImage").GetComponent<Image>().sprite = Resources.Load<Sprite>(buildData.spritePath[builder.Level]);
+        assignPanelContainerGO.transform.Find("BuildingImage/BuildingName").GetComponent<Text>().text = builder.Type.ToString();
+        assignPanelContainerGO.name = builder.ID.ToString();
+
+        for (int i = 0; i < buildData.maxCharacterStored[builder.Level].amount.Count; i++)
+        {
+            assignPanelContainerGO.GetComponent<AssignSlotCreator>().CreateAssignSlot(assignPanelContainerGO.transform.Find("Container").gameObject, builder, i);
+        }
+
     }
-   
+
 
     void CreateCharacterSlot()
     {
@@ -340,16 +369,17 @@ public class BuildingInformationCanvas : MonoBehaviour
         speedUpButton.GetComponentInChildren<Text>().text = speedUpCost.ToString() + " Diamonds";
 
         Debug.Log($"Point left : {pointLeft}, Need {speedUpCost} Diamonds to speed up this.");
-        if(ItemManager.Instance.TryConsumeResources("Diamond", speedUpCost))
+        if (ItemManager.Instance.TryConsumeResources("Diamond", speedUpCost))
         {
             builder.constructionStatus.currentPoint += pointLeft;
+
         }
         else
         {
             Debug.LogWarning($"You need {speedUpCost} Diamonds to purchase this speed up.");
         }
 
-        
+
     }
     void ClearAssignUIOldData()
     {

@@ -118,7 +118,6 @@ public class QuestManager : SingletonComponent<QuestManager>
 
     public void FinishQuest(ActivityInformation quest)
     {
-      //  Debug.Log(quest.activityID);
         QuestData questData = LoadManager.Instance.allQuestData[quest.informationID];
         List<Character> characters = new List<Character>();
         characters.AddRange(townBase.CharacterInBuilding[quest.teamNumber].Characters);
@@ -129,16 +128,14 @@ public class QuestManager : SingletonComponent<QuestManager>
 
         }
 
-        StringBuilder questLog;
-        questLog = new StringBuilder();
+        QuestMechanic questMechanic = new QuestMechanic();
 
-        questLog.AppendLine($"\n<color=red> QUEST LOG </color>");
-        questLog.AppendLine($"Starting {questData.questName} . . .\n");
+        StringBuilder questLog = new StringBuilder();
 
-        DoBattle(characters, questLog, questData);
-
-        ShowResultPanel(GetQuestReward(characters, questLog, questData), questLog);
-
+        questMechanic.Initialize(questData, characters);
+        questLog = questMechanic.StartQuest();
+        ShowResultPanel(questMechanic.GetQuestReward(), questLog);
+        
         BuildingManager.Instance.AllBuildings.SingleOrDefault(b => b.Type == Building.BuildingType.TownBase).TeamLockState.Remove(quest.teamNumber);
 
         NotificationManager.Instance.RemoveActivity(quest);
@@ -146,82 +143,7 @@ public class QuestManager : SingletonComponent<QuestManager>
         LoadManager.Instance.SavePlayerDataToJson();
 
         return;
-
-    }
-    void DoBattle(List<Character> characters, StringBuilder questLog, QuestData questData)
-    {
-        List<Enemy> enemies = new List<Enemy>();
-        enemies.AddRange(LoadManager.Instance.allEnemyData.Where(e => questData.enemiesIDList.Contains(e.ID)));
-
-        Character leader = characters[0];
-        foreach (Enemy enemy in enemies)
-        {
-            questLog.AppendLine($"Wild {enemy.Name} appears !");
-            if (leader.Stats.intelligence >= enemies[0].Stats.intelligence * 3)  // ****************
-            {
-                questLog.AppendLine($"Thanks to leader({leader.Name}) intelligence({leader.Stats.intelligence}),\n team successfully avoid encountering {enemy.Name}({enemy.Stats.intelligence}).");
-            
-            }
-            else
-            {
-                questLog.AppendLine($"Start a battle with {enemy.Name} !");
-                int turn = 1;
-                while( CalculateBattleDamage(leader, enemy, turn, questLog))
-                {
-                    turn++ ;
-
-                }
-                questLog.AppendLine($"Battle finished. ");
-
-            }
-
-        }
-
-    }
-
-    bool CalculateBattleDamage(Character character, Enemy enemy, int turn, StringBuilder questLog)
-    {/*
-        int n = 3;
-       
-        if(turn % 2 == 0)
-        {
-            int damage = (int)Math.Floor(n * Math.Exp(0.004f * (enemy.Stats.attack - character.Stats.defense)) * UnityEngine.Random.Range(0.8f, 1.2f));
-            character.currentHp -= damage;
-            questLog.AppendLine($"{enemy.Name} turn : Dealing {damage} damage to {character.Name}. {character.Name} has {character.currentHp} Hp left.");
-
-        }
-        else
-        {
-            int damage = (int)Math.Floor(n * Math.Exp(0.004f * (character.Stats.attack - enemy.Stats.defense)) * UnityEngine.Random.Range(0.8f, 1.2f));
-            enemy.CurrentHp = enemy.CurrentHp - damage;
-            questLog.AppendLine($"Turn {turn}({character.Name}) : Dealing {damage} damage to {enemy.Name}. {enemy.Name} has {enemy.CurrentHp} Hp left.");
-
-        }
-       */
-        if (character.CurrentHitPoint >= 0 && enemy.CurrentHp >= 0)
-            return true;
-        else
-            return false;
-
-    }
-
-    Dictionary<string, int> GetQuestReward(List<Character> characters, StringBuilder questLog, QuestData currentQuest)
-    {
-        int itemCarryAmount = characters.Sum(c => c.Stats.strength);
-
-        Dictionary<string, int> itemList = new Dictionary<string, int>();
-        foreach (string resourceName in currentQuest.dropResourceName)
-        {
-            Character character = characters[UnityEngine.Random.Range(0, characters.Count - 1)];
-            int amount = character.Stats.perception; // ***************************
-            questLog.AppendLine($"{character.Name} found {LoadManager.Instance.allResourceData[resourceName].Name} : {amount} unit(s)");
-            ItemManager.Instance.AddResource(resourceName, amount);
-            itemList.Add(resourceName, amount);
-
-        }
-
-        return itemList;
-
+        
     }
 
     void ShowResultPanel(Dictionary<string, int> rewardList, StringBuilder questLog)

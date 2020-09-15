@@ -94,6 +94,13 @@ public class GameManager : SingletonComponent<GameManager>
         {
             Debug.LogError("Can't find editBuildingPanel");
         }
+        InvokeRepeating(nameof(BroadCastGeneralGameCycle), Constant.TimeCycle.GENERAL_GAME_CYCLE, Constant.TimeCycle.GENERAL_GAME_CYCLE);
+
+    }
+    void BroadCastGeneralGameCycle()
+    {
+        Debug.Log($"BroadCastGeneralGameCycle Updated.");
+        EventManager.Instance.GameCycleUpdated();
 
     }
     void Update()

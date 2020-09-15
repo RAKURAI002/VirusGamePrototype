@@ -91,7 +91,6 @@ public class BuildingManager : SingletonComponent<BuildingManager>
         }
         else if (buildingData.behaviorType == Building.BuildingBehaviorType.ParticularFunction)
         {
-            Debug.Log($"{builder.Type.ToString() + "Behavior"}");
             Type type = Type.GetType(builder.Type.ToString() + "Behavior");
             if(type == default)
             {
@@ -255,7 +254,9 @@ public class BuildingManager : SingletonComponent<BuildingManager>
         Building buildingData = LoadManager.Instance.allBuildingData[builder.Type];
         DictionaryStringToInt buidingCost = buildingData.buildingCost[builder.Level];
 
-        if (ItemManager.Instance.TryConsumeResources(buildingData.buildingCost[builder.Level]))
+      //  List<Character> characters = BuildingManager.Instance.allBuildings.SingleOrDefault(b => b.Type == Building.BuildingType.LaborCenter).CharacterInBuilding;
+
+        if (ItemManager.Instance.TryConsumeResources(buidingCost))
         {
             return true;
 
