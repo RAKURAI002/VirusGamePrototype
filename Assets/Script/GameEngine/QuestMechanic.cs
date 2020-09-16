@@ -17,7 +17,7 @@ public class QuestMechanic
         questData = _questData;
     }
 
-    public StringBuilder StartQuest()
+    public string StartQuest()
     {
         questLog = new StringBuilder();
 
@@ -26,7 +26,7 @@ public class QuestMechanic
 
         StartBattleEvent();
 
-        return default;
+        return questLog.ToString();
     }
 
     void StartBattleEvent()

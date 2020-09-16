@@ -15,6 +15,9 @@ public class ClockTimer : Timer
     public bool isFinished;
     int speedUpCost;
 
+    long timerTemp;
+
+    
     private void Awake()
     {
         slider = null;
@@ -46,10 +49,11 @@ public class ClockTimer : Timer
         {
             return;
         }
-
+        
         GetSlider();
         slider.GetComponent<Slider>().value = (((timeFinish - activityInformation.startPoint) - timeLeft) / TimeSpan.TicksPerSecond) + 1;
         long timer = ((timeFinish - activityInformation.startPoint) / TimeSpan.TicksPerSecond) - (((timeFinish - activityInformation.startPoint) - timeLeft) / TimeSpan.TicksPerSecond);
+        
         int hours = Mathf.FloorToInt(timer / 3600);
         int minutes = Mathf.FloorToInt(timer % 3600 / 60);
         int seconds = Mathf.FloorToInt(timer % 3600 % 60f);
@@ -62,9 +66,24 @@ public class ClockTimer : Timer
             Resources.FindObjectsOfTypeAll<NotificationPanel>()[0].ChangeSpeedUpCost(activityInformation, speedUpCost);
         }
 
+        if(timerTemp != timer)
+        {
+            timerTemp = timer;
+            slider.GetComponentInChildren<Text>().text = String.Format("{0:00}:{1:00}:{2:00}", hours, minutes, seconds);
+        }
+    }
+
+    public override void UpdateSlider()
+    {
+        long timer = ((timeFinish - activityInformation.startPoint) / TimeSpan.TicksPerSecond) - (((timeFinish - activityInformation.startPoint) - timeLeft) / TimeSpan.TicksPerSecond);
+
+        int hours = Mathf.FloorToInt(timer / 3600);
+        int minutes = Mathf.FloorToInt(timer % 3600 / 60);
+        int seconds = Mathf.FloorToInt(timer % 3600 % 60f);
 
         slider.GetComponentInChildren<Text>().text = String.Format("{0:00}:{1:00}:{2:00}", hours, minutes, seconds);
     }
+        
 
     bool CheckCompleteTimer()
     {
@@ -87,7 +106,21 @@ public class ClockTimer : Timer
         }
         return;
     }
+    protected override void OnActivityAssigned(ActivityInformation activityInformation)
+    {
+        base.OnActivityAssigned(activityInformation);
+        if (slider != null)
+        {
+            long timer = ((timeFinish - activityInformation.startPoint) / TimeSpan.TicksPerSecond) - (((timeFinish - activityInformation.startPoint) - timeLeft) / TimeSpan.TicksPerSecond);
 
+            int hours = Mathf.FloorToInt(timer / 3600);
+            int minutes = Mathf.FloorToInt(timer % 3600 / 60);
+            int seconds = Mathf.FloorToInt(timer % 3600 % 60f);
+
+            slider.GetComponentInChildren<Text>().text = String.Format("{0:00}:{1:00}:{2:00}", hours, minutes, seconds);
+        }
+       
+    }
     public override void ForceFinish()
     {
         FinishTimer();
@@ -104,7 +137,6 @@ public class ClockTimer : Timer
 
     public void FinishTimer()
     {
-        Debug.Log($"FISINHHHHHHHHHHHHHHH {gameObject.name}");
         Destroy(slider);
 
         isFinished = true;

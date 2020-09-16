@@ -40,7 +40,6 @@ public class EventManager : SingletonComponent<EventManager>
 
     #endregion
 
-
     public event Action OnCharacterAssigned;
     public event Action<string> OnResourceChanged;
 

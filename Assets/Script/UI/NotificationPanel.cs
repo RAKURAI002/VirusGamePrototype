@@ -61,7 +61,7 @@ public class NotificationPanel : MonoBehaviour
             activitySliderGO.name = activity.Value.activityID.ToString();
             Timer timer = (Timer)NotificationManager.Instance.gameObject.transform.Find("ActivitiesList/" + activity.Value.activityID).GetComponent(typeof(Timer));
             timer.Slider = activitySliderGO.GetComponentInChildren<Slider>().gameObject;
-
+            timer.UpdateSlider();
 
             if (!activity.Value.isFinished)
             {
@@ -77,7 +77,7 @@ public class NotificationPanel : MonoBehaviour
 
                 });
             }
-            timer.Slider = activitySliderGO.GetComponentInChildren<Slider>().gameObject;
+
             switch (activity.Value.activityType)
             {
                 case ActivityType.Quest:
@@ -130,7 +130,7 @@ public class NotificationPanel : MonoBehaviour
                     }
 
             }
-            timer.Slider = activitySliderGO.GetComponentInChildren<Slider>().gameObject;
+
         }
         
     }

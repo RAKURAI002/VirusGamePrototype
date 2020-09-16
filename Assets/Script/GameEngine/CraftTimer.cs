@@ -13,6 +13,7 @@ public class CraftTimer : Timer
     Resource resourceRecipe;
     Builder builder;
 
+    long timerTemp;
     long timer { get; set; }
     float productionPoint;
     long finishPoint;
@@ -52,7 +53,11 @@ public class CraftTimer : Timer
         int minutes = Mathf.FloorToInt(timer % 3600 / 60);
         int seconds = Mathf.FloorToInt(timer % 3600 % 60f);
 
-        slider.GetComponentInChildren<Text>().text = String.Format("{0:00}:{1:00}:{2:00}", hours, minutes, seconds);
+        if (timerTemp != timer)
+        {
+            timerTemp = timer;
+            slider.GetComponentInChildren<Text>().text = String.Format("{0:00}:{1:00}:{2:00}", hours, minutes, seconds);
+        }
     }
 
     public void InitializeData(ActivityInformation information)
@@ -73,7 +78,6 @@ public class CraftTimer : Timer
     }
     void GetProductionPoint()
     {
-
         float productionPointTemp = (float)(LoadManager.Instance.allBuildingData[builder.Type].production[builder.Level]["Production"]);
 
         if (builder.CharacterInBuilding[activityInformation.teamNumber] != null)
@@ -107,7 +111,15 @@ public class CraftTimer : Timer
 
         return false;
     }
-    
+    public override void UpdateSlider()
+    {
+        timer = (long)((activityInformation.finishPoint - activityInformation.currentPoint) / productionPoint);
+        int hours = Mathf.FloorToInt(timer / 3600);
+        int minutes = Mathf.FloorToInt(timer % 3600 / 60);
+        int seconds = Mathf.FloorToInt(timer % 3600 % 60f);
+
+        slider.GetComponentInChildren<Text>().text = String.Format("{0:00}:{1:00}:{2:00}", hours, minutes, seconds);
+    }
 
     public override void ForceFinish()
     {

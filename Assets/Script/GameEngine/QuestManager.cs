@@ -130,10 +130,13 @@ public class QuestManager : SingletonComponent<QuestManager>
 
         QuestMechanic questMechanic = new QuestMechanic();
 
-        StringBuilder questLog = new StringBuilder();
+        string questLog;
 
         questMechanic.Initialize(questData, characters);
         questLog = questMechanic.StartQuest();
+
+        Debug.Log($"FFFFFFFFFFFFFFFF");
+        Debug.Log($"{questLog}");
         ShowResultPanel(questMechanic.GetQuestReward(), questLog);
         
         BuildingManager.Instance.AllBuildings.SingleOrDefault(b => b.Type == Building.BuildingType.TownBase).TeamLockState.Remove(quest.teamNumber);
@@ -146,7 +149,7 @@ public class QuestManager : SingletonComponent<QuestManager>
         
     }
 
-    void ShowResultPanel(Dictionary<string, int> rewardList, StringBuilder questLog)
+    void ShowResultPanel(Dictionary<string, int> rewardList, string questLog)
     {
         ResultPanel resultPanel =  GameManager.FindInActiveObjectByName("ResultPanel").GetComponent<ResultPanel>() ;
         resultPanel.gameObject.SetActive(true);

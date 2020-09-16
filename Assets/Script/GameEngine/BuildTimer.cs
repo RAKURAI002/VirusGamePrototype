@@ -17,6 +17,7 @@ public class BuildTimer : Timer
     public long timer { get; set; }
     public Vector3 timerOffset;
 
+    long timerTemp;
     [SerializeField] float productionPoint;
 
 
@@ -25,12 +26,14 @@ public class BuildTimer : Timer
         laborCenter = BuildingManager.Instance.AllBuildings.SingleOrDefault(b => b.Type == Building.BuildingType.LaborCenter);
         thisBuilding = BuildingManager.Instance.AllBuildings.Single(builder => builder.representGameObject.name == this.gameObject.name);
     }
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
         EventManager.Instance.OnCharacterAssigned += OnCharacterAssigned;
     }
-    private void OnDisable()
+    protected override void OnDisable()
     {
+        base.OnDisable();
         if (EventManager.Instance)
         {
             EventManager.Instance.OnCharacterAssigned -= OnCharacterAssigned;
@@ -58,7 +61,11 @@ public class BuildTimer : Timer
         int minutes = Mathf.FloorToInt(timer % 3600 / 60);
         int seconds = Mathf.FloorToInt(timer % 3600 % 60f);
 
-        slider.GetComponentInChildren<Text>().text = String.Format("{0:00}:{1:00}:{2:00}", hours, minutes, seconds);
+        if (timerTemp != timer)
+        {
+            timerTemp = timer;
+            slider.GetComponentInChildren<Text>().text = String.Format("{0:00}:{1:00}:{2:00}", hours, minutes, seconds);
+        }
     }
     void OnCharacterAssigned()
     {
@@ -127,7 +134,15 @@ public class BuildTimer : Timer
         slider.GetComponent<Slider>().value = thisBuilding.constructionStatus.currentPoint;
     }
 
+    public override void UpdateSlider()
+    {
+        timer = (long)((thisBuilding.constructionStatus.finishPoint - thisBuilding.constructionStatus.currentPoint) / productionPoint);
+        int hours = Mathf.FloorToInt(timer / 3600);
+        int minutes = Mathf.FloorToInt(timer % 3600 / 60);
+        int seconds = Mathf.FloorToInt(timer % 3600 % 60f);
 
+        slider.GetComponentInChildren<Text>().text = String.Format("{0:00}:{1:00}:{2:00}", hours, minutes, seconds);
+    }
     void CreateSlider()
     {
         GameObject sliderPrefab = Resources.Load("Prefabs/UI/TimeSlider") as GameObject;
