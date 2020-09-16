@@ -13,11 +13,6 @@ public class AreaPanel : MonoBehaviour
 
     [SerializeField] public string areaName;
 
-    private void Start()
-    {
-        
-        
-    }
     private void OnEnable()
     {
         informationPanel.SetActive(false);

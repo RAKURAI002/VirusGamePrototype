@@ -40,12 +40,11 @@ public class EventManager : SingletonComponent<EventManager>
 
     #endregion
 
-    /// Events for Update UI ---------------------------
+
     public event Action OnCharacterAssigned;
     public event Action<string> OnResourceChanged;
 
-    /// ------------------------------------------------
-
+    public event Action<int> OnBuildingModified;
 
     public event Action<ActivityInformation> OnActivityAssigned;
     public event Action<ActivityInformation> OnActivityFinished;
@@ -54,6 +53,10 @@ public class EventManager : SingletonComponent<EventManager>
     public event Action OnGameCycleUpdated;
     public event Action OnGameDataLoadFinished;
 
+    public void BuildingModified(int id)
+    {
+        OnBuildingModified?.Invoke(id);
+    }
     public void GameCycleUpdated()
     {
         OnGameCycleUpdated?.Invoke();

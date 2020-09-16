@@ -68,7 +68,7 @@ public class NotificationManager : SingletonComponent<NotificationManager>
                     {
                         GameObject ActivityTimerGO = new GameObject(activity.Value.activityID.ToString());
                         ActivityTimerGO.transform.SetParent(transform.Find("ActivitiesList"));
-                        QuestTimer questTimer = ActivityTimerGO.AddComponent<QuestTimer>();
+                        ClockTimer questTimer = ActivityTimerGO.AddComponent<ClockTimer>();
                         questTimer.activityInformation = activity.Value;
                         break;
                     }
@@ -88,7 +88,16 @@ public class NotificationManager : SingletonComponent<NotificationManager>
                     {
                         GameObject ActivityTimerGO = new GameObject(activity.Value.activityID.ToString());
                         ActivityTimerGO.transform.SetParent(NotificationManager.Instance.gameObject.transform.Find("ActivitiesList"));
-                        QuestTimer questTimer = ActivityTimerGO.AddComponent<QuestTimer>();
+                        ClockTimer questTimer = ActivityTimerGO.AddComponent<ClockTimer>();
+                        questTimer.activityInformation = activity.Value;
+
+                        break;
+                    }
+                case ActivityType.CharacterGrowing:
+                    {
+                        GameObject ActivityTimerGO = new GameObject(activity.Value.activityID.ToString());
+                        ActivityTimerGO.transform.SetParent(NotificationManager.Instance.gameObject.transform.Find("ActivitiesList"));
+                        ClockTimer questTimer = ActivityTimerGO.AddComponent<ClockTimer>();
                         questTimer.activityInformation = activity.Value;
 
                         break;
@@ -129,7 +138,7 @@ public class NotificationManager : SingletonComponent<NotificationManager>
                     GameObject ActivityTimerGO = new GameObject(activityInformation.activityID.ToString());
                     ActivityTimerGO.transform.SetParent(NotificationManager.Instance.gameObject.transform.Find("ActivitiesList"));
 
-                    QuestTimer questTimer = ActivityTimerGO.AddComponent<QuestTimer>();
+                    ClockTimer questTimer = ActivityTimerGO.AddComponent<ClockTimer>();
                     questTimer.activityInformation = activityInformation;
                     break;
                 }
@@ -144,6 +153,7 @@ public class NotificationManager : SingletonComponent<NotificationManager>
                 }
             case ActivityType.Build:
                 {
+                    Debug.Log($"DDDDDDDDDDD");   
                     break;
                 }
             case ActivityType.Pregnancy:
@@ -151,7 +161,17 @@ public class NotificationManager : SingletonComponent<NotificationManager>
                     GameObject ActivityTimerGO = new GameObject(activityInformation.activityID.ToString());
                     ActivityTimerGO.transform.SetParent(NotificationManager.Instance.gameObject.transform.Find("ActivitiesList"));
 
-                    QuestTimer questTimer = ActivityTimerGO.AddComponent<QuestTimer>();
+                    ClockTimer questTimer = ActivityTimerGO.AddComponent<ClockTimer>();
+                    questTimer.activityInformation = activityInformation;
+
+                    break;
+                }
+            case ActivityType.CharacterGrowing:
+                {
+                    GameObject ActivityTimerGO = new GameObject(activityInformation.activityID.ToString());
+                    ActivityTimerGO.transform.SetParent(NotificationManager.Instance.gameObject.transform.Find("ActivitiesList"));
+
+                    ClockTimer questTimer = ActivityTimerGO.AddComponent<ClockTimer>();
                     questTimer.activityInformation = activityInformation;
 
                     break;
@@ -193,10 +213,25 @@ public class NotificationManager : SingletonComponent<NotificationManager>
                 }
             case ActivityType.Pregnancy:
                 {
-                    QuestTimer timer = NotificationManager.Instance.gameObject.transform.Find("ActivitiesList/" + activityInformation.activityID).GetComponent<QuestTimer>();
+                    Character character = CharacterManager.Instance.AllCharacters.SingleOrDefault( c => c.ID == activityInformation.informationID);
+                    character.workStatus = Character.WorkStatus.Idle;
+                    CharacterManager.Instance.CreateChildCharacter();
+
+                    ClockTimer timer = NotificationManager.Instance.gameObject.transform.Find("ActivitiesList/" + activityInformation.activityID).GetComponent<ClockTimer>();
                     Destroy(timer.gameObject);
                     RemoveActivity(activityInformation);
-                    CharacterManager.Instance.CreateChildCharacter();
+                    break;
+                }
+            case ActivityType.CharacterGrowing:
+                {
+                    ClockTimer timer = NotificationManager.Instance.gameObject.transform.Find("ActivitiesList/" + activityInformation.activityID).GetComponent<ClockTimer>();
+                    Destroy(timer.gameObject);
+                    
+                    RemoveActivity(activityInformation);
+
+                    Character character = CharacterManager.Instance.AllCharacters.SingleOrDefault(c => c.ID == activityInformation.informationID);
+                    character.workStatus = Character.WorkStatus.Idle;
+
                     break;
                 }
             default:
@@ -210,7 +245,7 @@ public class NotificationManager : SingletonComponent<NotificationManager>
 
     int GetActivityID()
     {
-        return (processingActivies.Count >= 2 ? (processingActivies.Aggregate((a, b) => a.Key > b.Key ? a : b).Key + 1) : processingActivies.Count) + Constant.IDMask.ACTIVITY_ID_MASK;
+        return (processingActivies.Count == 0 ? Constant.IDMask.ACTIVITY_ID_MASK : processingActivies.Select(pa => pa.Key).Max()) + 1;
 
     }
 

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public abstract class Timer : MonoBehaviour
 {
-    public GameObject slider { get; set; }
+    protected GameObject slider;
+    public GameObject Slider { get { return slider; } set { slider = value; } }
     public abstract void ForceFinish();
 
 }

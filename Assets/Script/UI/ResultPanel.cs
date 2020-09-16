@@ -80,6 +80,6 @@ public class ResultPanel : MonoBehaviour
         yield return new WaitForEndOfFrame();
 
         gameObject.SetActive(false);
-        MainCanvas.canvasActive = false;
+        MainCanvas.FreezeCamera = false;
     }
 }

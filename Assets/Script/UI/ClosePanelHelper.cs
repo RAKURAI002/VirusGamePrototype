@@ -48,7 +48,7 @@ public class ClosePanelHelper : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
         if (length <= 1)
         {
-            MainCanvas.canvasActive = false;
+            MainCanvas.FreezeCamera = false;
 
         }
        

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
+using System;
 
 public class CharacterManager : SingletonComponent<CharacterManager>
 {
@@ -94,7 +95,7 @@ public class CharacterManager : SingletonComponent<CharacterManager>
 
     public void CreateNewCharacter()
     {
-        Character character = new Character("John " + Random.Range(0, 10000));
+        Character character = new Character("John " + UnityEngine.Random.Range(0, 10000));
         Debug.Log("Creating New Character : " + character.ToString());
         AddCharacterToList(character);
         LoadManager.Instance.SavePlayerDataToJson();
@@ -111,6 +112,15 @@ public class CharacterManager : SingletonComponent<CharacterManager>
         AddCharacterToList(character);
         LoadManager.Instance.allCharacterData.Remove(characterData);
         EventManager.Instance.CharacterAssigned();
+        NotificationManager.Instance.AddActivity(new ActivityInformation() 
+        {
+            activityName = ($"Growing:{character.Name}"),
+            activityType = ActivityType.CharacterGrowing,
+            startPoint = DateTime.Now.Ticks,
+            finishPoint = DateTime.Now.Ticks + (Constant.TimeCycle.CHILD_GROWING_TIME * TimeSpan.TicksPerSecond),
+            informationID = character.ID
+
+        });
     }
 
     public void AddCharacterToList(Character character)
@@ -140,9 +150,9 @@ public class CharacterManager : SingletonComponent<CharacterManager>
             Debug.LogWarning("Can't assign character to TownBase while doing Quest.");
             return false;
         }
-        if (character.workStatus == Character.WorkStatus.Quest)
+        if (character.workStatus != Character.WorkStatus.Idle && character.workStatus != Character.WorkStatus.Working)
         {
-            Debug.LogWarning("Questing Character can't be Assign.");
+            Debug.LogWarning($"{character.workStatus} status is unable to assign work.");
             return false;
         }
         if (builder.CharacterInBuilding[team].Characters.Count >= LoadManager.Instance.allBuildingData[builder.Type].maxCharacterStored[builder.Level].amount[team])
@@ -156,6 +166,7 @@ public class CharacterManager : SingletonComponent<CharacterManager>
             Builder oldBuilder = BuildingManager.Instance.AllBuildings.Single(b => b.ID == character.WorkingPlaceID);
             Debug.Log($"This Character is already doing work at {oldBuilder.Type}. Try canceling old work . . .");
             CancleAssignWork(character, oldBuilder);
+
         }
         builder.CharacterInBuilding[team].Characters.Add(character);
         character.workStatus = Character.WorkStatus.Working;

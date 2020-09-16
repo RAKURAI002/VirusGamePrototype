@@ -77,6 +77,7 @@ public class BuildingManager : SingletonComponent<BuildingManager>
         }
 
         Debug.Log("Create action complete.");
+        EventManager.Instance.BuildingModified(builder.ID);
         LoadManager.Instance.SavePlayerDataToJson();
 
         return true;
@@ -245,6 +246,7 @@ public class BuildingManager : SingletonComponent<BuildingManager>
 
         }
 
+        EventManager.Instance.BuildingModified(builder.ID);
         return true;
 
     }
@@ -271,7 +273,7 @@ public class BuildingManager : SingletonComponent<BuildingManager>
 
     public void RemoveBuilding(Builder destroyBuilding)
     {
-
+        
         destroyBuilding.CurrentActiveAmount--;
         if (destroyBuilding.constructionStatus.isConstructing)
         {
@@ -293,6 +295,7 @@ public class BuildingManager : SingletonComponent<BuildingManager>
         MapManager.Instance.ReclaimConstructableGrid(destroyBuilding);
         RemoveBuildingFromList(destroyBuilding);
         Destroy(destroyBuilding.representGameObject, 0.1f);
+        EventManager.Instance.BuildingModified(destroyBuilding.ID);
 
         LoadManager.Instance.SavePlayerDataToJson();
 

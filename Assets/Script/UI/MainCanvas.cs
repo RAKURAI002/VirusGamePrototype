@@ -19,6 +19,7 @@ public class MainCanvas : MonoBehaviour
     public GameObject[] characterCanvas;
 
     public GameObject resourcePanel;
+    public GameObject resourceCollectorPanel;
 
     public GameObject confirmationPanel;
     public GameObject warningPanel;
@@ -35,7 +36,7 @@ public class MainCanvas : MonoBehaviour
     GameObject finishedActivityAmountGO;
     GameObject waitingCharacterAmountGO;
 
-    public static bool canvasActive { get; set; } /// Freeze action with Camera while Panel is opening.
+    public static bool FreezeCamera { get; set; }
 
     void OnEnable()
     {
@@ -44,9 +45,17 @@ public class MainCanvas : MonoBehaviour
         EventManager.Instance.OnPlayerLevelUp += OnPlayerLevelUp;
         EventManager.Instance.OnResourceChanged += OnResourceChanged;
         EventManager.Instance.OnCharacterAssigned += OnCharacterAddEvent;
+        EventManager.Instance.OnBuildingModified += OnBuildingModified;
+
+    }
+    void OnBuildingModified(int id)
+    {
+        UpdateResourceCollectorPanel();
+
     }
     void OnCharacterAddEvent()
     {
+
         RefreshWaitingCharacterAmount();
     }
     void OnResourceChanged(string name)
@@ -81,6 +90,7 @@ public class MainCanvas : MonoBehaviour
             EventManager.Instance.OnPlayerLevelUp -= OnPlayerLevelUp;
             EventManager.Instance.OnResourceChanged -= OnResourceChanged;
             EventManager.Instance.OnCharacterAssigned -= OnCharacterAddEvent;
+            EventManager.Instance.OnBuildingModified -= OnBuildingModified;
         }
     }
 
@@ -103,21 +113,57 @@ public class MainCanvas : MonoBehaviour
         RefreshNotificationAmount();
         RefreshWaitingCharacterAmount();
         UpdateResourcePanel();
+        UpdateResourceCollectorPanel();
+
     }
     void UpdateResourcePanel()
     {
         resourcePanel.transform.Find("GoldPanel").gameObject.GetComponentInChildren<Text>().text = ItemManager.Instance.GetResourceAmount("Gold").ToString();
         resourcePanel.transform.Find("DiamondPanel").gameObject.GetComponentInChildren<Text>().text = ItemManager.Instance.GetResourceAmount("Diamond").ToString();
 
-        resourcePanel.transform.Find("WoodPanel").gameObject.GetComponentInChildren<Text>().text = ItemManager.Instance.GetResourceAmount("Wood").ToString();
+        resourcePanel.transform.Find("WaterPanel").gameObject.GetComponentInChildren<Text>().text = ItemManager.Instance.GetResourceAmount("Wood").ToString();
         resourcePanel.transform.Find("FoodPanel").gameObject.GetComponentInChildren<Text>().text = ItemManager.Instance.GetResourceAmount("Food").ToString();
     
+    }
+    void UpdateResourceCollectorPanel()
+    {
+        Transform container = resourceCollectorPanel.transform.Find("Container");
+        foreach (Transform transform in container)
+        {
+            Destroy(transform.gameObject);
+
+        }
+
+        Dictionary<Building.BuildingType, string> resourceToCollect = new Dictionary<Building.BuildingType, string>()
+        {
+            { Building.BuildingType.Farm, "Food"},
+            { Building.BuildingType.WaterTreatmentCenter, "Water"},
+            { Building.BuildingType.LumberYard, "Wood"},
+            { Building.BuildingType.Mine, "Gold"},
+
+        };
+
+        foreach (var item in resourceToCollect)
+        {
+            if(BuildingManager.Instance.AllBuildings.Any(b => b.Type == item.Key))
+            {
+                Resource resource = LoadManager.Instance.allResourceData[item.Value];
+                GameObject collectButton = Instantiate(Resources.Load("Prefabs/UI/SimpleButton") as GameObject, container);
+                collectButton.name = $"{item.Value}CollectButton";
+                Button button = collectButton.GetComponent<Button>();
+                button.image.sprite = Resources.Load<Sprite>(resource.spritePath);
+                button.onClick.AddListener(ItemManager.Instance.OnClickCollectResource);
+
+            }
+        }
+
+
     }
     private void Update()
     {
         if (CameraPan.isPanning)
                 return;
-        if (!canvasActive && Input.GetMouseButtonUp(0) )
+        if (!FreezeCamera && Input.GetMouseButtonUp(0) )
         {
             if (!EventSystem.current.IsPointerOverGameObject())
             {
@@ -221,7 +267,7 @@ public class MainCanvas : MonoBehaviour
     {
         confirmationPanel.GetComponent<ExpandConfirmationPanel>().expandingAreaID = int.Parse(selectedGameObject.name);
         confirmationPanel.SetActive(true);
-        canvasActive = true;
+        FreezeCamera = true;
 
     }
     void ShowWarningPanel(GameObject selectedGameObject)
@@ -245,7 +291,7 @@ public class MainCanvas : MonoBehaviour
 
         }*/
         editBuilding.ShowThisCanvas(selectedBuilding);
-        canvasActive = true;
+        FreezeCamera = true;
 
     }
 
@@ -264,7 +310,7 @@ public class MainCanvas : MonoBehaviour
             return;
         }
 
-        canvasActive = false;
+        FreezeCamera = false;
         SceneManager.LoadScene("WorldMap");
 
     }
@@ -284,7 +330,7 @@ public class MainCanvas : MonoBehaviour
     public void OnClickInventory()
     {
         inventoryCanvas.SetActive(true);
-        canvasActive = true;
+        FreezeCamera = true;
 
     }
 
@@ -293,7 +339,7 @@ public class MainCanvas : MonoBehaviour
         characterCanvas[0].SetActive(true);
         characterCanvas[1].SetActive(false);
         characterCanvas[2].SetActive(false);
-        canvasActive = true;
+        FreezeCamera = true;
 
     }
 
@@ -305,7 +351,7 @@ public class MainCanvas : MonoBehaviour
         }
 
         notificationPanelContainer.transform.parent.parent.gameObject.SetActive(true);
-        canvasActive = true;
+        FreezeCamera = true;
 
         int notiAmount = NotificationManager.Instance.ProcessingActivies.Where(pa => pa.Value.isFinished).ToList().Count;
 
@@ -327,7 +373,7 @@ public class MainCanvas : MonoBehaviour
     {
         GameObject characterNotification = transform.Find("AddCharacterPanel").gameObject;
         characterNotification.SetActive(true);
-        canvasActive = true;
+        FreezeCamera = true;
 
       //  int notiAmount = CharacterManager.Instance.characterWaitingInLine.ToList().Count;
 /*
@@ -349,7 +395,7 @@ public class MainCanvas : MonoBehaviour
     public void OnClickToWork()
     {
         toWorkCanvas.SetActive(true);
-        canvasActive = true;
+        FreezeCamera = true;
 
     }
     public void OnClickExitButton()
@@ -367,6 +413,6 @@ public class MainCanvas : MonoBehaviour
 
     {
         yield return new WaitForEndOfFrame();
-        canvasActive = active;
+        FreezeCamera = active;
     }
 }

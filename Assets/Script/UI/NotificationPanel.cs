@@ -26,43 +26,16 @@ public class NotificationPanel : MonoBehaviour
             EventManager.Instance.OnActivityFinished -= OnActivityFinished;
         }
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        // Resources.Load("Prefabs/TownBasePrefab") as GameObject;
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void OnActivityAssigned(ActivityInformation activityInformation)
     {
+        RefreshCanvas();
 
     }
     public void OnActivityFinished(ActivityInformation activityInformation)
     {
         RefreshCanvas();
-        switch (activityInformation.activityType)
-        {
-            case ActivityType.Quest:
-                {
-
-                    break;
-                }
-            case ActivityType.Craft:
-                {
-                    
-                    break;
-                }
-            case ActivityType.Build:
-                {
-                    break;
-                }
-        }
-
-
+       
     }
 
     void RefreshCanvas()
@@ -78,7 +51,7 @@ public class NotificationPanel : MonoBehaviour
         }
     }
     void CreateActivitySlider()
-    {  
+    {
 
         foreach(var activity in NotificationManager.Instance.ProcessingActivies)
         {
@@ -86,9 +59,9 @@ public class NotificationPanel : MonoBehaviour
 
             activitySliderGO.transform.Find("Name").GetComponent<Text>().text = activity.Value.activityName;
             activitySliderGO.name = activity.Value.activityID.ToString();
-
             Timer timer = (Timer)NotificationManager.Instance.gameObject.transform.Find("ActivitiesList/" + activity.Value.activityID).GetComponent(typeof(Timer));
-            timer.slider = activitySliderGO.GetComponentInChildren<Slider>().gameObject;
+            timer.Slider = activitySliderGO.GetComponentInChildren<Slider>().gameObject;
+
 
             if (!activity.Value.isFinished)
             {
@@ -104,14 +77,11 @@ public class NotificationPanel : MonoBehaviour
 
                 });
             }
-
+            timer.Slider = activitySliderGO.GetComponentInChildren<Slider>().gameObject;
             switch (activity.Value.activityType)
             {
                 case ActivityType.Quest:
                     {
-                        QuestTimer questTimer = NotificationManager.Instance.gameObject.transform.Find("ActivitiesList/" + activity.Value.activityID).GetComponent<QuestTimer>();
-                        questTimer.slider = activitySliderGO.GetComponentInChildren<Slider>().gameObject;
-
                         if (activity.Value.isFinished)
                         {
                             activitySliderGO.GetComponentInChildren<Slider>().gameObject.SetActive(false);
@@ -120,7 +90,7 @@ public class NotificationPanel : MonoBehaviour
                             Button finishButton = activitySliderGO.transform.Find("FinishButton").GetComponentInChildren<Button>();
                             finishButton.onClick.AddListener(() => {
                                 QuestManager.Instance.FinishQuest(activity.Value);
-                                Destroy(questTimer.gameObject);
+                                Destroy(timer.gameObject);
                                 GameObject.FindObjectOfType<MainCanvas>().RefreshNotificationAmount();
                                 gameObject.SetActive(false); 
                             });
@@ -148,7 +118,19 @@ public class NotificationPanel : MonoBehaviour
                        
                         break;
                     }
+                case ActivityType.CharacterGrowing:
+                    {
+
+                        break;
+                    }
+                default:
+                    {
+                        Debug.LogWarning($"{activity.Value.activityType} is currently unhandled.");
+                        break;
+                    }
+
             }
+            timer.Slider = activitySliderGO.GetComponentInChildren<Slider>().gameObject;
         }
         
     }

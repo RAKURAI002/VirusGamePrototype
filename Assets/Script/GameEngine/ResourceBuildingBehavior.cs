@@ -201,7 +201,9 @@ public class ResourceBuildingBehavior : BuildingBehavior
     void OnClickCollectResource()
     {
         ItemManager.Instance.AddResource(buildingData.production[builder.Level].First().Key, Mathf.FloorToInt(builder.currentProductionAmount));
+            
         builder.currentProductionAmount -= Mathf.FloorToInt(builder.currentProductionAmount);
+        
         RefreshProductionAmount();
 
     }

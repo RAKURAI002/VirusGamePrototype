@@ -44,7 +44,7 @@ public class TeamSelectorPanel : MonoBehaviour
         this.mode = _mode;
         this.finishPoint = _finishPoint;
        
-        MainCanvas.canvasActive = true;
+        MainCanvas.FreezeCamera = true;
         gameObject.SetActive(true);
         ClearOldAssignUIData();
         switch (mode)

@@ -139,7 +139,7 @@ public class MapManager : SingletonComponent<MapManager>
             {
                 /// Prevent from immediately showing Building Information Panel after build. 
                 Resources.FindObjectsOfTypeAll<BuildingShopPanel>()[0].gameObject.SetActive(false);
-                MainCanvas.canvasActive = true;
+                MainCanvas.FreezeCamera = true;
                 StartCoroutine(DelaySetCanvasActive(false));
                 /// -------------------------------------------------------------------------------
                 Vector2 adjustedPosition = CalculateBuildPosition(i);
@@ -631,6 +631,6 @@ public class MapManager : SingletonComponent<MapManager>
     IEnumerator DelaySetCanvasActive(bool active)
     {
         yield return new WaitForSeconds(1f);
-        MainCanvas.canvasActive = active;
+        MainCanvas.FreezeCamera = active;
     }
 }

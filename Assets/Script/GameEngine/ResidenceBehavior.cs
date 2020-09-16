@@ -34,6 +34,13 @@ public class ResidenceBehavior : BuildingBehavior
             }
 
             Character female = characters.Single(c => c.Gender == Character.GenderType.Female);
+
+            if (female.workStatus == Character.WorkStatus.Pregnant)
+            {
+                return;
+
+            }
+
             female.workStatus = Character.WorkStatus.Pregnant;
             
             NotificationManager.Instance.AddActivity(new ActivityInformation()
@@ -42,6 +49,8 @@ public class ResidenceBehavior : BuildingBehavior
                 activityType = ActivityType.Pregnancy,
                 startPoint = DateTime.Now.Ticks,
                 finishPoint = DateTime.Now.Ticks + (Constant.TimeCycle.PREGNANCY_GIVE_BIRTH_TIME * TimeSpan.TicksPerSecond),
+                informationID = female.ID,
+                
 
             });
 

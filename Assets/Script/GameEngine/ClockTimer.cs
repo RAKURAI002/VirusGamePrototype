@@ -7,15 +7,13 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class QuestTimer : Timer
+public class ClockTimer : Timer
 {
     public ActivityInformation activityInformation { get; set; }
     long timeFinish;
     long timeLeft;
     public bool isFinished;
     int speedUpCost;
-
-    Action callback { get; set; }
 
     private void Awake()
     {
@@ -36,18 +34,19 @@ public class QuestTimer : Timer
             return;
         }
 
-
-
         timeLeft = timeFinish - DateTime.Now.Ticks;
+
         // Debug.Log($"Time Left : {timeLeft} : {timeLeft / TimeSpan.TicksPerSecond }");
         if (CheckCompleteTimer())
         {
             return;
         }
+
         if (slider == null)
         {
             return;
         }
+
         GetSlider();
         slider.GetComponent<Slider>().value = (((timeFinish - activityInformation.startPoint) - timeLeft) / TimeSpan.TicksPerSecond) + 1;
         long timer = ((timeFinish - activityInformation.startPoint) / TimeSpan.TicksPerSecond) - (((timeFinish - activityInformation.startPoint) - timeLeft) / TimeSpan.TicksPerSecond);
@@ -105,13 +104,12 @@ public class QuestTimer : Timer
 
     public void FinishTimer()
     {
+        Debug.Log($"FISINHHHHHHHHHHHHHHH {gameObject.name}");
         Destroy(slider);
 
         isFinished = true;
 
         activityInformation.isFinished = true;
-
-        callback?.Invoke();
 
         EventManager.Instance.ActivityFinished(activityInformation);
 

@@ -63,6 +63,7 @@ public class CharacterCanvas : MonoBehaviour
         characterImage.GetComponent<Image>().sprite = Resources.Load<Sprite>(character.spritePath);
         GameObject statsPanel = transform.Find("MainPanel/InformationPanel/StatusPanel/STATS").gameObject;
         statsPanel.transform.parent.Find("Name").GetComponent<Text>().text = "<color=green>Name</color> : " + character.Name;
+        statsPanel.transform.parent.Find("Gender").GetComponent<Text>().text = "<color=green>Gender</color> : " + character.Gender.ToString();
         statsPanel.transform.parent.Find("Level").GetComponent<Text>().text = "<color=green>Level</color> : " + character.level;
         statsPanel.transform.Find("Healthy").GetComponent<Text>().text = $"Healthy :\t{character.Stats.immunity} + <color=red>{character.equipments.Sum(e => e.Stats.immunity)}</color>";
         statsPanel.transform.Find("Crafting").GetComponent<Text>().text = $"Crafting :\t{character.Stats.craftsmanship} + <color=red>{character.equipments.Sum(e => e.Stats.craftsmanship)}</color>";

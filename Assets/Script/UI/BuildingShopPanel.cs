@@ -25,7 +25,7 @@ public class BuildingShopPanel : MonoBehaviour
     }
     private void OnDisable()
     {
-        MainCanvas.canvasActive = false;
+        MainCanvas.FreezeCamera = false;
         if (EventManager.Instance)
             EventManager.Instance.OnResourceChanged -= OnResourceChanged;
     }
@@ -34,11 +34,11 @@ public class BuildingShopPanel : MonoBehaviour
         if (EventSystem.current.IsPointerOverGameObject())
         {
 
-            MainCanvas.canvasActive = true;
+            MainCanvas.FreezeCamera = true;
         }
         else
         {
-            MainCanvas.canvasActive = false;
+            MainCanvas.FreezeCamera = false;
         }
     }
     void InitializeShopData()

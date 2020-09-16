@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Text;
 using System.Linq;
@@ -59,11 +60,68 @@ public class ItemManager : SingletonComponent<ItemManager>
         return allResources.ContainsKey(name) ? Mathf.FloorToInt(allResources[name].Amount) : 0;
 
     }
-    /// <summary>
-    /// Resource update cycle. Invoked in Start.
-    /// </summary>
 
+    public void OnClickCollectResource()
+    {
+        string buttonName = EventSystem.current.currentSelectedGameObject.name;
 
+        string resourceName = buttonName.Replace("CollectButton", "");
+
+        Building.BuildingType type;
+        switch (resourceName)
+        {
+            case "Wood":
+                {
+                    type = Building.BuildingType.LumberYard;
+                    break;
+                }
+            case "Stone":
+                {
+                    type = Building.BuildingType.Mine;
+                    break;
+                }
+            case "Gold":
+                {
+                    type = Building.BuildingType.Mine;
+                    break;
+
+                }
+            case "Water":
+                {
+                    type = Building.BuildingType.WaterTreatmentCenter;
+                    break;
+                }
+            case "Food":
+                {
+                    type = Building.BuildingType.Farm;
+                    break;
+                }
+            default:
+                {
+                    type = Building.BuildingType.Unknown;
+                    break;
+                }
+
+        }
+
+        List<Builder> builders = BuildingManager.Instance.AllBuildings.Where(b => b.Type == type).ToList();
+
+        if(builders != null)
+        {
+            Building buildingData = LoadManager.Instance.allBuildingData[type];
+            int amount = 0;
+            foreach (var builder in builders)
+            {
+                int amountTemp = Mathf.FloorToInt(builder.currentProductionAmount);
+                amount += amountTemp;
+                builder.currentProductionAmount -= amountTemp;
+
+            }
+
+            ItemManager.Instance.AddResource(buildingData.production[1].First().Key, amount);
+        }
+
+    }
     void CharacterResourceConsuming()
     {
         int decreaseAmount = CharacterManager.Instance.AllCharacters.Count;
