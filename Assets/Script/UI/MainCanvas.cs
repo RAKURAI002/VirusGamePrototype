@@ -29,7 +29,6 @@ public class MainCanvas : MonoBehaviour
 
     public Animator selectButtonAnimator;
     /// --------------------------------------------------
-    GameObject uiCanvas;
 
     bool selectButtonToggle;
     GameObject editBuildingPanel;
@@ -53,11 +52,13 @@ public class MainCanvas : MonoBehaviour
         UpdateResourceCollectorPanel();
 
     }
+
     void OnCharacterAddEvent()
     {
 
         RefreshWaitingCharacterAmount();
     }
+
     void OnResourceChanged(string name)
     {
         Transform resourceGO = resourcePanel.transform.Find(name + "Panel");
@@ -66,10 +67,12 @@ public class MainCanvas : MonoBehaviour
             resourceGO.gameObject.GetComponentInChildren<Text>().text = ItemManager.Instance.GetResourceAmount(name).ToString();
         }
     }
+
     void OnPlayerLevelUp(int level)
     {
         playerLevel.text = "Level " + level.ToString();
     }
+
     private void OnActivityAssigned(ActivityInformation activityInformation)
     {
         
@@ -102,9 +105,6 @@ public class MainCanvas : MonoBehaviour
         playerLevel.text += LoadManager.Instance.playerData.level.ToString();
         selectButtonToggle = false;;
         editBuildingPanel = Resources.FindObjectsOfTypeAll<BuildingInformationCanvas>()[0].gameObject;
-
-        uiCanvas = GameObject.Find("UICanvas");
-
 
         if (editBuildingPanel == null)
         {

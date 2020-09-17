@@ -26,6 +26,9 @@ public class InventoryCanvas : MonoBehaviour
             GameObject itemGO = Instantiate(Resources.Load("Prefabs/UI/ImageWithAmountPrefab") as GameObject, container.transform);
             itemGO.GetComponent<Image>().sprite = Resources.Load<Sprite>(resource.Value.spritePath);
 
+            Debug.Log($"{resource.Value.spritePath}");
+
+            itemGO.transform.Find("NamePanel/Name").GetComponent<Text>().text = resource.Key;
             Text amount = itemGO.GetComponentInChildren<Text>();
             amount.text = ItemManager.Instance.GetResourceAmount(resource.Value.Name).ToString();    
             
@@ -38,7 +41,6 @@ public class InventoryCanvas : MonoBehaviour
         foreach(Transform transform in container.transform)
         {
             Destroy(transform.gameObject);
-
         }
 
         foreach(KeyValuePair<string, Equipment> equipment in ItemManager.Instance.AllEquipments)
@@ -46,6 +48,7 @@ public class InventoryCanvas : MonoBehaviour
             GameObject itemGO = Instantiate(Resources.Load("Prefabs/UI/ImageWithAmountPrefab") as GameObject, container.transform);
             itemGO.GetComponent<Image>().sprite = Resources.Load<Sprite>(equipment.Value.spritePath);
 
+            itemGO.transform.Find("NamePanel/Name").GetComponent<Text>().text = equipment.Key;
             Text amount = itemGO.GetComponentInChildren<Text>();
             amount.text = (equipment.Value.AllAmount).ToString();
 

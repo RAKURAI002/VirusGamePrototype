@@ -401,7 +401,7 @@
             "name": "Golden Burger",
             "rarity": 2,
             "description": "GOLDEN American SPIRIT.",
-            "spritePath": "Sprites/Resource/Golden Burger",
+            "spritePath": "Sprites/Resource/GoldenBurger",
             "craftingData": {
                 "craftingMaterials": {
                     "keys": [],
@@ -434,7 +434,7 @@
             "name": "Common Face Mask",
             "rarity": 1,
             "description": "COUGH COUGH . . .",
-            "spritePath": "Sprites/Resource/Common Face Mask",
+            "spritePath": "Sprites/Resource/CommonFaceMask",
             "craftingData": {
                 "craftingMaterials": {
                     "keys": [],
@@ -467,7 +467,7 @@
             "name": "Ultra Instinct Face Mask",
             "rarity": 5,
             "description": "COUGH!! COUGH!! It's over 9000 !!!?? ",
-            "spritePath": "Sprites/Resource/Ultra Instinct Face Mask",
+            "spritePath": "Sprites/Resource/UltraInstinctFaceMask",
             "craftingData": {
                 "craftingMaterials": {
                     "keys": [],

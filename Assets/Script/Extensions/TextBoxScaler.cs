@@ -15,25 +15,25 @@ public class TextBoxScaler : MonoBehaviour
     void OnEnable()
     {
         Debug.Log($"Scale");
-        Scale();
+        StartCoroutine(Scale());
 
     }
-    public void Scale()
-    {   
-        if(string.IsNullOrEmpty(ExtraText.text))
+    IEnumerator Scale()
+    {
+        yield return new WaitForEndOfFrame();
+
+        if (ExtraText == default(Text))
         {
             GetComponent<RectTransform>().sizeDelta = new Vector2(TargetText.preferredWidth + Offset.x, TargetText.preferredHeight + Offset.y);
-
         }
         else
         {
             GetComponent<RectTransform>().sizeDelta = new Vector2(Mathf.Max(TargetText.preferredWidth, ExtraText.preferredWidth) + Offset.x, 
                 TargetText.preferredHeight + ExtraText.preferredHeight + Offset.y);
-            Debug.Log($"{GetComponent<RectTransform>().sizeDelta}");
-
+           
         }
-
+      //  Debug.Log($"{TargetText.text}");
+      //  Debug.Log($"{GetComponent<RectTransform>().sizeDelta}");
     }
-
 
 }
