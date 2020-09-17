@@ -15,7 +15,6 @@ public class AssignSlotCreator : MonoBehaviour
         assignPanelGO.GetComponentInChildren<Text>().text = $"Team {teamNumber + 1}";
 
 
-
         List<GameObject> slotListGO = new List<GameObject>();
         for (int i = 1; i <= buildData.maxCharacterStored[builder.Level].amount[teamNumber]; i++)
         {
@@ -66,12 +65,13 @@ public class AssignSlotCreator : MonoBehaviour
                 productionPoint += builder.CharacterInBuilding[teamNumber].Characters.Sum(c => ((c.Stats.strength * 0.2f / 8) + (c.Stats.speed * 0.2f / 8) + (c.Stats.craftsmanship * 0.8f / 3)));
            
             }
+            
 
-            assignPanelGO.transform.Find("Duration").GetComponent<Text>().text = $"{(int)(point / productionPoint)} s";
+            assignPanelGO.transform.Find("Duration").GetComponent<Text>().text = GetFormattedDuration((int)(point / productionPoint));
         }
         else if (builder.Type == Building.BuildingType.TownBase)
         {
-            assignPanelGO.transform.Find("Duration").GetComponent<Text>().text = $"{(int)(point)} s";
+            assignPanelGO.transform.Find("Duration").GetComponent<Text>().text = GetFormattedDuration((int)(point));
 
         }
         else if (builder.Type == Building.BuildingType.MedicalCenter || builder.Type == Building.BuildingType.Armory || builder.Type == Building.BuildingType.Kitchen)
@@ -83,7 +83,7 @@ public class AssignSlotCreator : MonoBehaviour
 
             }
 
-            assignPanelGO.transform.Find("Duration").GetComponent<Text>().text = $"{(int)(point / productionPoint)} s";
+            assignPanelGO.transform.Find("Duration").GetComponent<Text>().text = GetFormattedDuration((int)(point / productionPoint));
 
         }
 
@@ -111,6 +111,16 @@ public class AssignSlotCreator : MonoBehaviour
             slotListGO[i].GetComponent<Slot>().character = builder.CharacterInBuilding[teamNumber].Characters[i];
         }
 
+
+    }
+
+    string GetFormattedDuration(int duration)
+    {
+        int hours = Mathf.FloorToInt(duration / 3600);
+        int minutes = Mathf.FloorToInt(duration % 3600 / 60);
+        int seconds = Mathf.FloorToInt(duration % 3600 % 60f);
+
+        return $"{(hours > 0 ?  hours + "H " : "" )}{(minutes > 0 ? minutes + "M " : "")}{(seconds > 0 ? seconds + "s " : "")}";
 
     }
 

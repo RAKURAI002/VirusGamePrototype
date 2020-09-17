@@ -61,6 +61,7 @@ public class MainCanvas : MonoBehaviour
     void OnResourceChanged(string name)
     {
         Transform resourceGO = resourcePanel.transform.Find(name + "Panel");
+        Debug.Log($"{name}");
         if(resourceGO)
         {
             resourceGO.gameObject.GetComponentInChildren<Text>().text = ItemManager.Instance.GetResourceAmount(name).ToString();
@@ -121,7 +122,7 @@ public class MainCanvas : MonoBehaviour
         resourcePanel.transform.Find("GoldPanel").gameObject.GetComponentInChildren<Text>().text = ItemManager.Instance.GetResourceAmount("Gold").ToString();
         resourcePanel.transform.Find("DiamondPanel").gameObject.GetComponentInChildren<Text>().text = ItemManager.Instance.GetResourceAmount("Diamond").ToString();
 
-        resourcePanel.transform.Find("WaterPanel").gameObject.GetComponentInChildren<Text>().text = ItemManager.Instance.GetResourceAmount("Wood").ToString();
+        resourcePanel.transform.Find("WaterPanel").gameObject.GetComponentInChildren<Text>().text = ItemManager.Instance.GetResourceAmount("Water").ToString();
         resourcePanel.transform.Find("FoodPanel").gameObject.GetComponentInChildren<Text>().text = ItemManager.Instance.GetResourceAmount("Food").ToString();
     
     }
@@ -163,7 +164,7 @@ public class MainCanvas : MonoBehaviour
     {
         if (CameraPan.isPanning)
                 return;
-        if (!FreezeCamera && Input.GetMouseButtonUp(0) )
+        if (!FreezeCamera && Input.GetMouseButtonUp(0))
         {
             if (!EventSystem.current.IsPointerOverGameObject())
             {

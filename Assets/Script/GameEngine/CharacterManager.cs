@@ -212,12 +212,6 @@ public class CharacterManager : SingletonComponent<CharacterManager>
                 ApplyItemEffect(character, character.effects[character.effects.Count - 1], false);
 
             }
-
-
-
-            //     Debug.Log(character.Name + $"  {item.effect.name}");
-
-
         }
 
     }

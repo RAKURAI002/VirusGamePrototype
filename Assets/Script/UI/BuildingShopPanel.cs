@@ -8,18 +8,21 @@ using UnityEngine.UI;
 
 public class BuildingShopPanel : MonoBehaviour
 {
-    public Button cancelButton;
+    public GameObject uiCanvas;
+    public Button cancleButton;
     Button currentSelectedButton;
     bool isInitialize;
 
     private void Awake()
     {
         isInitialize = false;
-
+        CreateShopMenu();
     }
     private void OnEnable()
     {
         EventManager.Instance.OnResourceChanged += OnResourceChanged;
+        transform.Find("BackGroundPanel").gameObject.SetActive(true);
+        cancleButton.gameObject.SetActive(false);
         InitializeShopData();
         RefreshPanel();
     }
@@ -33,13 +36,43 @@ public class BuildingShopPanel : MonoBehaviour
     {
         if (EventSystem.current.IsPointerOverGameObject())
         {
-
             MainCanvas.FreezeCamera = true;
         }
         else
         {
             MainCanvas.FreezeCamera = false;
         }
+
+    }
+    void CreateShopMenu()
+    {
+        Transform container = transform.Find("BackGroundPanel/Container");
+
+        List<Building> buildingsShowInShop = LoadManager.Instance.allBuildingData.Select(b => b.Value).ToList();
+
+        buildingsShowInShop.Remove(LoadManager.Instance.allBuildingData[Building.BuildingType.TownBase]);
+        buildingsShowInShop.Remove(LoadManager.Instance.allBuildingData[Building.BuildingType.LaborCenter]);
+
+        Builder laborCenter = BuildingManager.Instance.AllBuildings.SingleOrDefault(b => b.Type == Building.BuildingType.LaborCenter);
+        Building laborCenterData = LoadManager.Instance.allBuildingData[Building.BuildingType.LaborCenter];
+        int baseConstructingPoint = laborCenterData.production[laborCenter.Level]["Production"];
+
+        foreach (var buildingData in buildingsShowInShop)
+        {
+            GameObject shopMenu = Instantiate(Resources.Load("Prefabs/UI/ShopButtonPrefab") as GameObject, container);
+            shopMenu.name = $"{buildingData.type}:ShopButton";
+
+            shopMenu.transform.Find("Image").GetComponent<Image>().sprite = Resources.Load<Sprite>(buildingData.spritePath[1]);
+            shopMenu.transform.Find("Name").GetComponent<Text>().text = buildingData.type.ToString();
+            shopMenu.transform.Find("Information/UpgradePoint").GetComponent<Text>().text = GetFormattedDuration(buildingData.upgradePoint[0] / baseConstructingPoint);
+            shopMenu.transform.Find("Cost/Wood/CostText").GetComponent<Text>().text = buildingData.buildingCost[0]["Wood"].ToString();
+            shopMenu.transform.Find("Cost/Stone/CostText").GetComponent<Text>().text = buildingData.buildingCost[0]["Stone"].ToString();
+
+            shopMenu.GetComponent<Button>().onClick.AddListener(TryPurchaseBuilding);
+
+        }
+
+
     }
     void InitializeShopData()
     {
@@ -55,21 +88,28 @@ public class BuildingShopPanel : MonoBehaviour
         RefreshPanel();
         MapManager.Instance.ShowAvailableTiles();
         currentSelectedButton = EventSystem.current.currentSelectedGameObject.GetComponent<Button>();
-        currentSelectedButton.interactable = false;
-        cancelButton.gameObject.SetActive(true);
 
-        MapManager.Instance.SelectedBuildingName = currentSelectedButton.name.Replace("ShopButton", "");
-        MapManager.Instance.ShowAvailableTiles();
+        cancleButton.gameObject.SetActive(true);
+
+        GameObject.Find("UICanvas").SetActive(false);
+        transform.Find("BackGroundPanel").gameObject.SetActive(false);
+        MapManager.Instance.SelectedBuildingName = currentSelectedButton.name.Replace(":ShopButton", "");
+
     }
+
+    /// Cancle Button
     public void CancelTryPurchaseBuilding()
     {
-        if (currentSelectedButton != null)
-        {
-            currentSelectedButton.interactable = true;
-
-        }
-
+        cancleButton.gameObject.SetActive(false);
+        uiCanvas.SetActive(true);
+        transform.Find("BackGroundPanel").gameObject.SetActive(true);
         MapManager.Instance.CancleShowAvailableTiles();
+
+    }
+    public void ExitButton()
+    {
+        CancelTryPurchaseBuilding();
+        gameObject.SetActive(false);
 
     }
     public void RefreshPanel()
@@ -79,45 +119,28 @@ public class BuildingShopPanel : MonoBehaviour
 
         Debug.Log("Refreshing Building Shop Panel . . .");
 
-        for (int i = 1; i < Enum.GetNames(typeof(Building.BuildingType)).Length; i++)
+        Transform container = transform.Find("BackGroundPanel/Container");
+
+        foreach(Transform buttonTranform in container)
         {
+            Button button = buttonTranform.GetComponent<Button>();
 
-            Button button = transform.Find("Container/ShopButton" + (i).ToString()).GetComponent<Button>();
-            Builder builder = null;
+            button.interactable = true;
+            Building.BuildingType type = (Building.BuildingType)Enum.Parse(typeof(Building.BuildingType), button.name.Replace(":ShopButton", ""));
+            Builder builder = BuildingManager.Instance.AllBuildings.FirstOrDefault( b => b.Type == type);
+            Building buildingData = LoadManager.Instance.allBuildingData[type];
 
-            if (button != null)
+            if (builder != default(Builder))
             {
-                button.interactable = true;
-
-                builder = BuildingManager.Instance.AllBuildings.FirstOrDefault(b => ((int)b.Type) == int.Parse(button.name.Replace("ShopButton", "")));
-
-                if (builder != null)
+                button.transform.Find("Information/Amount").GetComponent<Text>().text = $"{builder.CurrentActiveAmount}/{builder.maxActiveAmount}";
+                if(builder.CurrentActiveAmount == builder.maxActiveAmount)
                 {
-                    button.transform.Find("BGPanel/ActiveAmount").GetComponent<Text>().text = builder.CurrentActiveAmount.ToString() + "/" + builder.maxActiveAmount;
-
+                    button.interactable = false;
                 }
-                else
-                {
-                    builder = new Builder((Building.BuildingType)(i));
-                    button.transform.Find("BGPanel/ActiveAmount").GetComponent<Text>().text = "0 /" + builder.maxActiveAmount;
-
-                }
-
             }
             else
             {
-                Debug.LogWarning($"Can't find Building button {i} !");
-
-            }
-
-            Building buildingData = LoadManager.Instance.allBuildingData[builder.Type];
-
-            if(!isInitialize)
-            {
-                button.transform.Find("BGPanel/UpgradePoint").GetComponent<Text>().text = buildingData.upgradePoint[0].ToString();
-                button.transform.Find("Cost/Wood/CostText").GetComponent<Text>().text = buildingData.buildingCost[0]["Wood"].ToString();
-                button.transform.Find("Cost/Stone/CostText").GetComponent<Text>().text = buildingData.buildingCost[0]["Stone"].ToString();
-                
+                button.transform.Find("Information/Amount").GetComponent<Text>().text = $"0/{buildingData.maxActiveAmount}";
             }
 
             if (!ItemManager.Instance.IsAffordable(buildingData.buildingCost[0]))
@@ -129,31 +152,18 @@ public class BuildingShopPanel : MonoBehaviour
             else
             {
                 button.image.color = Color.white;
-
-            }
-
-        } /// End of all Button loop.
-        isInitialize = true;
-
-        for (int i = 0; i < BuildingManager.Instance.AllBuildings.Count; i++)
-        {
-            if (BuildingManager.Instance.AllBuildings[i].CurrentActiveAmount == BuildingManager.Instance.AllBuildings[i].maxActiveAmount)
-            {
-                Button button = GameObject.Find("ShopButton" + ((int)BuildingManager.Instance.AllBuildings[i].Type).ToString()).GetComponent<Button>();
-                if (button != null)
-                {
-                    button.interactable = false;
-
-                }
-                else
-                {
-                    Debug.LogWarning($"Can't find Building button : {BuildingManager.Instance.AllBuildings[i].Type} !");
-
-                }
-
             }
 
         }
+
+    }
+    string GetFormattedDuration(int duration)
+    {
+        int hours = Mathf.FloorToInt(duration / 3600);
+        int minutes = Mathf.FloorToInt(duration % 3600 / 60);
+        int seconds = Mathf.FloorToInt(duration % 3600 % 60f);
+
+        return $"{(hours > 0 ? hours + "H " : "")}{(minutes > 0 ? minutes + "M " : "")}{(seconds > 0 ? seconds + "s " : "")}";
 
     }
 

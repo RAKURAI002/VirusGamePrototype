@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class BuildTimer : Timer
 {
-    [SerializeField] Builder thisBuilding;
+    [SerializeField] Builder builder;
     Building buildData;
 
     Builder laborCenter;
@@ -24,7 +24,7 @@ public class BuildTimer : Timer
     private void Awake()
     {
         laborCenter = BuildingManager.Instance.AllBuildings.SingleOrDefault(b => b.Type == Building.BuildingType.LaborCenter);
-        thisBuilding = BuildingManager.Instance.AllBuildings.Single(builder => builder.representGameObject.name == this.gameObject.name);
+        builder = BuildingManager.Instance.AllBuildings.Single(builder => builder.representGameObject.name == this.gameObject.name);
     }
     protected override void OnEnable()
     {
@@ -56,7 +56,7 @@ public class BuildTimer : Timer
             return;
         }
 
-        timer = (long)((thisBuilding.constructionStatus.finishPoint - thisBuilding.constructionStatus.currentPoint) / productionPoint);
+        timer = (long)((builder.constructionStatus.finishPoint - builder.constructionStatus.currentPoint) / productionPoint);
         int hours = Mathf.FloorToInt(timer / 3600);
         int minutes = Mathf.FloorToInt(timer % 3600 / 60);
         int seconds = Mathf.FloorToInt(timer % 3600 % 60f);
@@ -74,35 +74,35 @@ public class BuildTimer : Timer
     }
     void Initiate()
     {
-        thisBuilding.constructionStatus.isConstructing = true;
+        builder.constructionStatus.isConstructing = true;
 
-        buildData = LoadManager.Instance.allBuildingData[thisBuilding.Type];
+        buildData = LoadManager.Instance.allBuildingData[builder.Type];
         timerCanvas = GameObject.Find("TimerCanvas");
         timerOffset = new Vector3(0, -1, 0);
         gameObject.GetComponent<SpriteRenderer>().color = Color.red;
 
         GetProductionPoint();
-        if (thisBuilding.constructionStatus.finishPoint == 0)
+        if (builder.constructionStatus.finishPoint == 0)
         {
-            thisBuilding.constructionStatus.finishPoint = thisBuilding.constructionStatus.constructPointRequired;
+            builder.constructionStatus.finishPoint = builder.constructionStatus.constructPointRequired;
         }
         else
         {
             Debug.Log($"Continue from last login : {((DateTime.Now.Ticks - LoadManager.Instance.playerData.lastLoginTime) / TimeSpan.TicksPerSecond) }s passed resulting in " +
-                $"increase currentPoint = {thisBuilding.constructionStatus.currentPoint} + { (int)Math.Round(((DateTime.Now.Ticks - LoadManager.Instance.playerData.lastLoginTime) / TimeSpan.TicksPerSecond) * productionPoint)}");
-            thisBuilding.constructionStatus.currentPoint += (int)Math.Round(((DateTime.Now.Ticks - LoadManager.Instance.playerData.lastLoginTime) / TimeSpan.TicksPerSecond) * productionPoint);
+                $"increase currentPoint = {builder.constructionStatus.currentPoint} + { (int)Math.Round(((DateTime.Now.Ticks - LoadManager.Instance.playerData.lastLoginTime) / TimeSpan.TicksPerSecond) * productionPoint)}");
+            builder.constructionStatus.currentPoint += (int)Math.Round(((DateTime.Now.Ticks - LoadManager.Instance.playerData.lastLoginTime) / TimeSpan.TicksPerSecond) * productionPoint);
         }
-        thisBuilding.constructionStatus.finishPoint = buildData.upgradePoint[thisBuilding.Level];
+        builder.constructionStatus.finishPoint = buildData.upgradePoint[builder.Level];
         // pointLeft = pointFinish - thisBuilding.constructionStatus.currentPoint;
         return;
     }
 
     bool CheckCompleteTimer()
     {
-        if (thisBuilding.constructionStatus.finishPoint <= thisBuilding.constructionStatus.currentPoint)
+        if (builder.constructionStatus.finishPoint <= builder.constructionStatus.currentPoint)
         {
-            thisBuilding.Level++;
-            Debug.Log($"Upgrade Task is completed. Now ID :{thisBuilding.representGameObject.name} level is {thisBuilding.Level}.");
+            builder.Level++;
+            Debug.Log($"Upgrade Task is completed. Now ID :{builder.representGameObject.name} level is {builder.Level}.");
             CancelConstructing();
             EventManager.Instance.ActivityFinished(new ActivityInformation() { activityType = ActivityType.Build});
 
@@ -113,7 +113,7 @@ public class BuildTimer : Timer
     }
     public override void ForceFinish()
     {
-        thisBuilding.constructionStatus.currentPoint = thisBuilding.constructionStatus.finishPoint;
+        builder.constructionStatus.currentPoint = builder.constructionStatus.finishPoint;
         return;
     }
     void IncreaseCurrentPoint()
@@ -130,13 +130,13 @@ public class BuildTimer : Timer
                  $" + AllSpeed {laborCenter.CharacterInBuilding.Sum(c => ((c.Stats.speed * 0.2f/8)))} = {productionPoint}");*/
         }
 
-        thisBuilding.constructionStatus.currentPoint += productionPoint;
-        slider.GetComponent<Slider>().value = thisBuilding.constructionStatus.currentPoint;
+        builder.constructionStatus.currentPoint += productionPoint;
+        slider.GetComponent<Slider>().value = builder.constructionStatus.currentPoint;
     }
 
-    public override void UpdateSlider()
+    public override void InitializeSlider()
     {
-        timer = (long)((thisBuilding.constructionStatus.finishPoint - thisBuilding.constructionStatus.currentPoint) / productionPoint);
+        timer = (long)((builder.constructionStatus.finishPoint - builder.constructionStatus.currentPoint) / productionPoint);
         int hours = Mathf.FloorToInt(timer / 3600);
         int minutes = Mathf.FloorToInt(timer % 3600 / 60);
         int seconds = Mathf.FloorToInt(timer % 3600 % 60f);
@@ -149,9 +149,9 @@ public class BuildTimer : Timer
 
         slider = Instantiate(sliderPrefab, gameObject.transform.position + timerOffset, Quaternion.identity);
         slider.transform.SetParent(timerCanvas.transform);
-        slider.name = thisBuilding.representGameObject.name + "Slider";
-        slider.GetComponent<Slider>().maxValue = thisBuilding.constructionStatus.finishPoint;
-        slider.GetComponent<Slider>().value = thisBuilding.constructionStatus.currentPoint;
+        slider.name = builder.representGameObject.name + "Slider";
+        slider.GetComponent<Slider>().maxValue = builder.constructionStatus.finishPoint;
+        slider.GetComponent<Slider>().value = builder.constructionStatus.currentPoint;
         slider.GetComponent<Slider>().interactable = false;
 
         return;
@@ -159,14 +159,14 @@ public class BuildTimer : Timer
 
     public void CancelConstructing()
     {
-        thisBuilding.constructionStatus.isConstructing = false;
-        thisBuilding.constructionStatus.finishPoint = 0;
-        thisBuilding.constructionStatus.currentPoint = 0;
+        builder.constructionStatus.isConstructing = false;
+        builder.constructionStatus.finishPoint = 0;
+        builder.constructionStatus.currentPoint = 0;
         if (laborCenter != null)
         {
-            laborCenter.TeamLockState.Remove(thisBuilding.constructionStatus.teamNumber);
+            laborCenter.TeamLockState.Remove(builder.constructionStatus.teamNumber);
         }
-        thisBuilding.constructionStatus.teamNumber = 0;
+        builder.constructionStatus.teamNumber = 0;
 
         gameObject.GetComponent<SpriteRenderer>().color = Color.white;
         LoadManager.Instance.SavePlayerDataToJson();
@@ -184,9 +184,9 @@ public class BuildTimer : Timer
             return;
         }
         float productionPointTemp = (float)(LoadManager.Instance.allBuildingData[Building.BuildingType.LaborCenter].production[laborCenter.Level]["Production"]);
-        if (laborCenter.CharacterInBuilding[thisBuilding.constructionStatus.teamNumber] != null)
+        if (laborCenter.CharacterInBuilding[builder.constructionStatus.teamNumber] != null)
         {
-            productionPointTemp += laborCenter.CharacterInBuilding[thisBuilding.constructionStatus.teamNumber].Characters.Sum(c => ((c.Stats.strength * 0.2f / 8) + (c.Stats.speed * 0.2f / 8) + (c.Stats.craftsmanship * 0.8f / 3)));
+            productionPointTemp += laborCenter.CharacterInBuilding[builder.constructionStatus.teamNumber].Characters.Sum(c => ((c.Stats.strength * 0.2f / 8) + (c.Stats.speed * 0.2f / 8) + (c.Stats.craftsmanship * 0.8f / 3)));
        
         }
         productionPoint = productionPointTemp;

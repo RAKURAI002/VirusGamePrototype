@@ -55,13 +55,18 @@ public class NotificationPanel : MonoBehaviour
 
         foreach(var activity in NotificationManager.Instance.ProcessingActivies)
         {
+            if(activity.Value.activityType == ActivityType.Build)
+            {
+                continue;
+            }
+
             GameObject activitySliderGO = Instantiate(Resources.Load("Prefabs/UI/ActivitySliderPrefab") as GameObject, transform.Find("ScrollPanel/Container"));
 
             activitySliderGO.transform.Find("Name").GetComponent<Text>().text = activity.Value.activityName;
             activitySliderGO.name = activity.Value.activityID.ToString();
             Timer timer = (Timer)NotificationManager.Instance.gameObject.transform.Find("ActivitiesList/" + activity.Value.activityID).GetComponent(typeof(Timer));
             timer.Slider = activitySliderGO.GetComponentInChildren<Slider>().gameObject;
-            timer.UpdateSlider();
+            timer.InitializeSlider();
 
             if (!activity.Value.isFinished)
             {

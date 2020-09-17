@@ -14,21 +14,23 @@ public class TextBoxScaler : MonoBehaviour
 
     void OnEnable()
     {
+        Debug.Log($"Scale");
         Scale();
 
     }
     public void Scale()
     {   
-        if(ExtraText == null)
+        if(string.IsNullOrEmpty(ExtraText.text))
         {
             GetComponent<RectTransform>().sizeDelta = new Vector2(TargetText.preferredWidth + Offset.x, TargetText.preferredHeight + Offset.y);
 
         }
-        else if(string.IsNullOrEmpty(ExtraText.text))
+        else
         {
             GetComponent<RectTransform>().sizeDelta = new Vector2(Mathf.Max(TargetText.preferredWidth, ExtraText.preferredWidth) + Offset.x, 
                 TargetText.preferredHeight + ExtraText.preferredHeight + Offset.y);
-            
+            Debug.Log($"{GetComponent<RectTransform>().sizeDelta}");
+
         }
 
     }

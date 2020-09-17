@@ -13,6 +13,11 @@ public class ResidenceBehavior : BuildingBehavior
     protected override void OnGameCycleUpdated()
     {
         base.OnGameCycleUpdated();
+        if (builder.Level == 0)
+        {
+            return;
+        }
+
         HealAllCharacters();
         BreedNewCharacter();
 

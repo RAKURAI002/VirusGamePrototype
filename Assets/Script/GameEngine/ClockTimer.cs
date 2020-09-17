@@ -9,15 +9,23 @@ using UnityEngine.EventSystems;
 
 public class ClockTimer : Timer
 {
-    public ActivityInformation activityInformation { get; set; }
     long timeFinish;
     long timeLeft;
-    public bool isFinished;
     int speedUpCost;
 
     long timerTemp;
 
-    
+    NotificationPanel notificationPanel;
+    protected override void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "MainScene")
+        {
+        }
+        if (scene.name == "WorldMap")
+        {
+        }
+
+    }
     private void Awake()
     {
         slider = null;
@@ -25,9 +33,9 @@ public class ClockTimer : Timer
 
     void Start()
     {
-        isFinished = false;
+        
         Initiate();
-
+      
     }
 
     void Update()
@@ -63,7 +71,8 @@ public class ClockTimer : Timer
         speedUpCost = ItemManager.Instance.GetSpeedUpCost(timer * 20);
         if (speedUpCostTemp != speedUpCost)
         {
-            Resources.FindObjectsOfTypeAll<NotificationPanel>()[0].ChangeSpeedUpCost(activityInformation, speedUpCost);
+            
+            notificationPanel.ChangeSpeedUpCost(activityInformation, speedUpCost);
         }
 
         if(timerTemp != timer)
@@ -73,7 +82,7 @@ public class ClockTimer : Timer
         }
     }
 
-    public override void UpdateSlider()
+    public override void InitializeSlider()
     {
         long timer = ((timeFinish - activityInformation.startPoint) / TimeSpan.TicksPerSecond) - (((timeFinish - activityInformation.startPoint) - timeLeft) / TimeSpan.TicksPerSecond);
 
@@ -95,8 +104,11 @@ public class ClockTimer : Timer
         }
         return false;
     }
+
     void Initiate()
     {
+        isFinished = false;
+
         timeFinish = activityInformation.finishPoint;
         timeLeft = timeFinish - DateTime.Now.Ticks;
         if (activityInformation.isFinished)
@@ -132,6 +144,7 @@ public class ClockTimer : Timer
         slider.GetComponent<Slider>().value = timeLeft;
         slider.GetComponent<Slider>().interactable = false;
 
+        notificationPanel = Resources.FindObjectsOfTypeAll<NotificationPanel>()[0];
         return;
     }
 

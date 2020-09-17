@@ -76,8 +76,8 @@ public class NotificationManager : SingletonComponent<NotificationManager>
                     {
                         GameObject ActivityTimerGO = new GameObject(activity.Value.activityID.ToString());
                         ActivityTimerGO.transform.SetParent(transform.Find("ActivitiesList"));
-                        CraftTimer craftTimer = ActivityTimerGO.AddComponent<CraftTimer>();
-                        craftTimer.InitializeData(activity.Value);
+                        PointTimer craftTimer = ActivityTimerGO.AddComponent<PointTimer>();
+                        craftTimer.activityInformation = (activity.Value);
                         break;
                     }
                 case ActivityType.Build:
@@ -147,8 +147,8 @@ public class NotificationManager : SingletonComponent<NotificationManager>
                     GameObject ActivityTimerGO = new GameObject(activityInformation.activityID.ToString());
                     ActivityTimerGO.transform.SetParent(NotificationManager.Instance.gameObject.transform.Find("ActivitiesList"));
 
-                    CraftTimer craftTimer = ActivityTimerGO.AddComponent<CraftTimer>();
-                    craftTimer.InitializeData(activityInformation);
+                    PointTimer craftTimer = ActivityTimerGO.AddComponent<PointTimer>();
+                    craftTimer.activityInformation = (activityInformation);
                     break;
                 }
             case ActivityType.Build:
@@ -201,7 +201,8 @@ public class NotificationManager : SingletonComponent<NotificationManager>
 
                     ItemManager.Instance.AddResource(resource.Name, 1);
 
-                    CraftTimer craftTimer = NotificationManager.Instance.gameObject.transform.Find("ActivitiesList/" + activityInformation.activityID).GetComponent<CraftTimer>();
+                    PointTimer craftTimer = NotificationManager.Instance.gameObject.transform.Find("ActivitiesList/" 
+                        + activityInformation.activityID).GetComponent<PointTimer>();
                     Destroy(craftTimer.gameObject);
                     RemoveActivity(activityInformation);
 

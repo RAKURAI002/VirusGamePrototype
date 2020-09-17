@@ -8,7 +8,8 @@ using UnityEngine;
 public class Builder
 {
     [System.Serializable]
-    public struct Construction {
+    public struct Construction
+    {
         public bool isConstructing;
         public int constructPointRequired;
         public int teamNumber;
@@ -17,11 +18,11 @@ public class Builder
 
     }
     public Builder()
-    {     
+    {
     }
     public Builder(Building.BuildingType type)
     {
-      //  this.id = BuildManager.Instance.AllBuildings.Count;
+        //  this.id = BuildManager.Instance.AllBuildings.Count;
         this.type = type;
         InitializeData();
 
@@ -66,7 +67,8 @@ public class Builder
     [NonSerialized] public int maxActiveAmount;
     [NonSerialized] public int maxLevel;
 
-    public List<int> TeamLockState {
+    public List<int> TeamLockState
+    {
         get { return teamLockState ?? (teamLockState = new List<int>()); }
         set { teamLockState = value; }
 
@@ -79,14 +81,14 @@ public class Builder
 
         }
 
-        return (BuildingManager.Instance.AllBuildings.Select(b => b.id).Max() + 1 );
+        return (BuildingManager.Instance.AllBuildings.Select(b => b.id).Max() + 1);
 
     }
     public List<CharacterWrapper> CharacterInBuilding
     {
         get
-        {          
-            if(characterTeamsInBuilding == null)
+        {
+            if (characterTeamsInBuilding == null)
             {
                 characterTeamsInBuilding = new List<CharacterWrapper>();
             }
@@ -94,18 +96,18 @@ public class Builder
             int maxTeam = LoadManager.Instance.allBuildingData[this.type].maxCharacterStored[level].amount.Count;
             for (int i = 0; i < maxTeam; i++)
             {
-                    if (characterTeamsInBuilding.ElementAtOrDefault(i) == null)
-                    {
-                            characterTeamsInBuilding.Add(new CharacterWrapper());
+                if (characterTeamsInBuilding.ElementAtOrDefault(i) == null)
+                {
+                    characterTeamsInBuilding.Add(new CharacterWrapper());
 
-                    }
+                }
 
             }
 
-            return characterTeamsInBuilding ;
+            return characterTeamsInBuilding;
 
         }
-        
+
         set
         {
             characterTeamsInBuilding = value;
@@ -115,12 +117,19 @@ public class Builder
     }
 
     public int ID { get { return id; } }
-    public Building.BuildingType Type { get { return type; }}
+    public Building.BuildingType Type { get { return type; } }
     public Vector3 Position { get { return position; } set { position = value; } }
-    public int Level { get { return level; } set { level = value; } }
+    public int Level
+    {
+        get { return level; }
+        set
+        {
+            level = value > maxLevel ? maxLevel : value;
+        }
+    }
     public int CurrentActiveAmount { get { return currentActiveAmount; } set { currentActiveAmount = value; } }
 
-   
+
 
     public void InitializeData()
     {
@@ -131,13 +140,13 @@ public class Builder
             return;
 
         }
-        
+
         this.maxActiveAmount = buildingData.maxActiveAmount;
         this.maxLevel = buildingData.maxLevel;
 
     }
 
-    public override string ToString() 
+    public override string ToString()
     {
         return ($"Type : {type.ToString()}, Position {position}, Level : {level}, CurrentActiveAmount : {currentActiveAmount}, Constructing Status : {constructionStatus.isConstructing} " +
             $" Current active amount : {CurrentActiveAmount}/{maxActiveAmount}, Represent GO : {representGameObject.name}");

@@ -51,14 +51,14 @@ public class GameManager : SingletonComponent<GameManager>
         {
             Awake();
             Start();
-            timerCanvas.SetActive(true);
-            allBuildings.SetActive(true);
+           timerCanvas.transform.position += new Vector3(0, 500, 0) ;
+            allBuildings.transform.position += new Vector3(0, 500, 0);
 
         }
         if (scene.name == "WorldMap")
         {
-            timerCanvas.SetActive(false);
-            allBuildings.SetActive(false);
+            timerCanvas.transform.position += new Vector3(0, -500, 0);
+            allBuildings.transform.position += new Vector3(0, -500, 0);
         }
 
     }

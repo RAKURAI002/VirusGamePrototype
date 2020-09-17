@@ -52,7 +52,6 @@ public abstract class Icon : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         if (!updateTextBuilder.Equals(default(StringBuilder)))
         {
-            Debug.Log(updateTextBuilder.ToString());
             updateText.text = updateTextBuilder.ToString();
             updateTextBuilder.Clear();
 

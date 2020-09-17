@@ -23,6 +23,7 @@ public class BuildingBehavior : MonoBehaviour
     }
     protected virtual void OnGameCycleUpdated()
     {
+
     }
 
     public void SetBuilder(Builder _builder)

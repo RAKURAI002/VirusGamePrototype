@@ -62,22 +62,30 @@ public class BuildingManager : SingletonComponent<BuildingManager>
             return false;
         }
 
-        GameObject builderGO;
         Builder builder = new Builder(type, position);
         Building buildData = LoadManager.Instance.allBuildingData[builder.Type];
 
         builder.constructionStatus = new Builder.Construction { teamNumber = teamNumber, constructPointRequired = buildData.upgradePoint[builder.Level], isConstructing = true };
 
-        InitiateBuilding(builder, out builderGO);
-       
+        InitiateBuilding(builder);
+
         if (laborCenter != null)
         {
             laborCenter.TeamLockState.Add(teamNumber);
 
         }
 
-        Debug.Log("Create action complete.");
+        NotificationManager.Instance.AddActivity(new ActivityInformation()
+        {
+            activityName = $"CreateBuilding:{builder.Type}:{builder.ID}",
+            activityType = ActivityType.Build,
+            teamNumber = teamNumber,
+            builderReferenceID = laborCenter.ID,
+            finishPoint = buildData.upgradePoint[builder.Level],
+            informationID = builder.ID
+        });
         EventManager.Instance.BuildingModified(builder.ID);
+        Debug.Log("Create action complete.");
         LoadManager.Instance.SavePlayerDataToJson();
 
         return true;
@@ -93,7 +101,7 @@ public class BuildingManager : SingletonComponent<BuildingManager>
         else if (buildingData.behaviorType == Building.BuildingBehaviorType.ParticularFunction)
         {
             Type type = Type.GetType(builder.Type.ToString() + "Behavior");
-            if(type == default)
+            if (type == default)
             {
                 Debug.LogWarning($"No Component Script for {builder.Type} as a ParticularFunction. Adding default script . . .");
                 builderGO.AddComponent<BuildingBehavior>().SetBuilder(builder);
@@ -109,16 +117,16 @@ public class BuildingManager : SingletonComponent<BuildingManager>
 
 
     }
-    void InitiateBuilding(Builder builder, out GameObject builderGO)
+    void InitiateBuilding(Builder builder)
     {
         AddBuildingsToList(builder);
         builder.InitializeData();
 
         Building buildData = LoadManager.Instance.allBuildingData[builder.Type];
 
-        builderGO = Instantiate(Resources.Load<GameObject>("Prefabs/BuildingPrefab"), builder.Position, Quaternion.identity);
+        GameObject builderGO = Instantiate(Resources.Load<GameObject>("Prefabs/BuildingPrefab"), builder.Position, Quaternion.identity);
         builderGO.SetActive(false);
-        builderGO.name = builder.ID.ToString();   
+        builderGO.name = builder.ID.ToString();
         builderGO.transform.SetParent(this.gameObject.transform.GetChild(0).transform);
 
         builder.representGameObject = builderGO;
@@ -136,12 +144,9 @@ public class BuildingManager : SingletonComponent<BuildingManager>
     }
     public void LoadBuilding(Builder builder)
     {
-        GameObject builderGO;
-        InitiateBuilding(builder, out builderGO);
+        InitiateBuilding(builder);
 
         ReconnectCharacterReference(builder);
-
-       
 
         Debug.Log("Loading Building From JSON : " + builder.ToString());
         return;
@@ -189,11 +194,9 @@ public class BuildingManager : SingletonComponent<BuildingManager>
         Builder builder = new Builder(type, position);
         Building buildData = LoadManager.Instance.allBuildingData[builder.Type];
 
-        GameObject builderGO;
-
         builder.constructionStatus = new Builder.Construction { teamNumber = 0, currentPoint = buildData.upgradePoint[builder.Level], constructPointRequired = buildData.upgradePoint[builder.Level], isConstructing = true };
 
-        InitiateBuilding(builder, out builderGO);
+        InitiateBuilding(builder);
 
         mapManager.constructableGrid.RemoveAt(cellIndex);
 
@@ -256,7 +259,7 @@ public class BuildingManager : SingletonComponent<BuildingManager>
         Building buildingData = LoadManager.Instance.allBuildingData[builder.Type];
         DictionaryStringToInt buidingCost = buildingData.buildingCost[builder.Level];
 
-      //  List<Character> characters = BuildingManager.Instance.allBuildings.SingleOrDefault(b => b.Type == Building.BuildingType.LaborCenter).CharacterInBuilding;
+        //  List<Character> characters = BuildingManager.Instance.allBuildings.SingleOrDefault(b => b.Type == Building.BuildingType.LaborCenter).CharacterInBuilding;
 
         if (ItemManager.Instance.TryConsumeResources(buidingCost))
         {
@@ -273,7 +276,7 @@ public class BuildingManager : SingletonComponent<BuildingManager>
 
     public void RemoveBuilding(Builder destroyBuilding)
     {
-        
+
         destroyBuilding.CurrentActiveAmount--;
         if (destroyBuilding.constructionStatus.isConstructing)
         {

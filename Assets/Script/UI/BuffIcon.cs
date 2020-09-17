@@ -15,11 +15,11 @@ public class BuffIcon : Icon
     private void Update()
     {
         int duration = CharacterManager.Instance.gameObject.transform.Find("ItemEffectTimer/" + effect.instanceID).GetComponent<ItemEffectTimer>().timeLeft;
+       
         if(duration != _duration)
         {
             updateTextBuilder.Append($"<color=blue>{GetFormattedDuration(duration)}</color>");
             _duration = duration;
-            Debug.Log($"{updateTextBuilder}");
             UpdateText();
         }
         
@@ -55,6 +55,7 @@ public class BuffIcon : Icon
     {
         effect = data as Resource.Effect;
         this.isWink = isWink;
+        Debug.Log($"{effect.spritePath}");
         GetComponent<Image>().sprite = Resources.Load<Sprite>(effect.spritePath);
         SetDescription();
     }

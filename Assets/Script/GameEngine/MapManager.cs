@@ -36,17 +36,12 @@ public class MapManager : SingletonComponent<MapManager>
 
     void Start()
     {
-        if(Instance.secondCalled)
-        {
-            SetExpandedArea();
+        SetExpandedArea();
 
-        }
-        
     }
 
     void Update()
     {
-        // Debug.Log(tilemap.localBounds.ToString());
         if (buildPermission && Input.GetMouseButtonUp(0))
         {
 
@@ -73,7 +68,8 @@ public class MapManager : SingletonComponent<MapManager>
 
     Tilemap tilemap;
     public GridLayout gridLayout;
-
+    public GameObject uiCanvas;
+    public GameObject buildingShopPanel;
     public Tile selectedTile;
     public Tile defaultTileMap;
     Dictionary<int, List<Vector3Int[]>> constructableGridDictionary;
@@ -83,9 +79,6 @@ public class MapManager : SingletonComponent<MapManager>
 
     bool buildPermission;
 
-    /// <summary>
-    /// Destroy expanded area(Trees) and open FogArea.
-    /// </summary>
     public void SetExpandedArea()
     {
         Debug.Log("Seting expanded Area.");
@@ -97,7 +90,7 @@ public class MapManager : SingletonComponent<MapManager>
             {
                 Destroy(treeGO);
             }
-            
+
         }
 
         for (int i = 2; i <= LoadManager.Instance.playerData.level / 5; i++)
@@ -127,10 +120,7 @@ public class MapManager : SingletonComponent<MapManager>
     }
     public string SelectedBuildingName { get; set; }
 
-    /// <summary>
-    /// Select where to Create Building.
-    /// </summary>
-    /// <param name="position"> Building Position </param>
+
     public void ClickTile(Vector3Int position)
     {
         for (int i = 0; i < constructableGrid.Count; i++)
@@ -142,15 +132,17 @@ public class MapManager : SingletonComponent<MapManager>
                 MainCanvas.FreezeCamera = true;
                 StartCoroutine(DelaySetCanvasActive(false));
                 /// -------------------------------------------------------------------------------
+
                 Vector2 adjustedPosition = CalculateBuildPosition(i);
-                 Action<int> callback = (teamNumber) =>
-                {
-                    TeamSelectorCallback((Building.BuildingType)int.Parse(SelectedBuildingName),
-                    teamNumber, adjustedPosition, i);
+                Building.BuildingType type = (Building.BuildingType)Enum.Parse(typeof(Building.BuildingType), SelectedBuildingName);
 
-                };
+                Action<int> callback = (teamNumber) =>
+               {
+                   TeamSelectorCallback(type, teamNumber, adjustedPosition, i);
 
-                Builder builder = new Builder((Building.BuildingType)int.Parse(SelectedBuildingName));
+               };
+
+                Builder builder = new Builder(type);
                 ShowTeamSelectorPanel(builder, callback);
 
                 return;
@@ -219,6 +211,10 @@ public class MapManager : SingletonComponent<MapManager>
         }
 
         tilemap.RefreshAllTiles();
+        uiCanvas.SetActive(true);
+        buildingShopPanel.transform.Find("BackGroundPanel").gameObject.SetActive(true);
+        buildingShopPanel.transform.Find("CancleButton").gameObject.SetActive(false);
+
     }
 
     public bool PurchaseNewArea(int areaID, int purchaseOption) /// 0 = Gold, 1 = Diamond
@@ -574,10 +570,12 @@ public class MapManager : SingletonComponent<MapManager>
             teamSelectorPanel.gameObject.SetActive(true);
             teamSelectorPanel.CreateTeamSelectorPanel(TeamSelectorPanel.Mode.Build, builder,
                 LoadManager.Instance.allBuildingData[builder.Type].upgradePoint[builder.Level], callback, false);
+
             teamSelectorPanel.gameObject.GetComponent<ClosePanelHelper>().SetOnExitCallback(() =>
             {
                 buildPermission = false;
                 CancleShowAvailableTiles();
+               
             });
         }
         else
@@ -595,7 +593,7 @@ public class MapManager : SingletonComponent<MapManager>
 
         buildPermission = false;
         CancleShowAvailableTiles();
-
+        GameManager.FindInActiveObjectByName("UICanvas").SetActive(true);
         return;
     }
     public void ReclaimConstructableGrid(Builder builder)

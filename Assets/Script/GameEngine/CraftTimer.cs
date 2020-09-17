@@ -6,15 +6,12 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 public class CraftTimer : Timer
-{
-    ActivityInformation activityInformation;
-    public bool isFinished;
-    
+{  
     Resource resourceRecipe;
     Builder builder;
 
     long timerTemp;
-    long timer { get; set; }
+    long timer;
     float productionPoint;
     long finishPoint;
 
@@ -111,7 +108,7 @@ public class CraftTimer : Timer
 
         return false;
     }
-    public override void UpdateSlider()
+    public override void InitializeSlider()
     {
         timer = (long)((activityInformation.finishPoint - activityInformation.currentPoint) / productionPoint);
         int hours = Mathf.FloorToInt(timer / 3600);

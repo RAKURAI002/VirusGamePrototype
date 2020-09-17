@@ -135,8 +135,6 @@ public class QuestManager : SingletonComponent<QuestManager>
         questMechanic.Initialize(questData, characters);
         questLog = questMechanic.StartQuest();
 
-        Debug.Log($"FFFFFFFFFFFFFFFF");
-        Debug.Log($"{questLog}");
         ShowResultPanel(questMechanic.GetQuestReward(), questLog);
         
         BuildingManager.Instance.AllBuildings.SingleOrDefault(b => b.Type == Building.BuildingType.TownBase).TeamLockState.Remove(quest.teamNumber);
