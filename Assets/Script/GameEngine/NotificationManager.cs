@@ -153,7 +153,10 @@ public class NotificationManager : SingletonComponent<NotificationManager>
                 }
             case ActivityType.Build:
                 {
-                    Debug.Log($"DDDDDDDDDDD");   
+                    Builder builder = BuildingManager.Instance.AllBuildings.SingleOrDefault(b => b.ID == activityInformation.informationID);
+
+                    builder.representGameObject.GetComponent<BuildTimer>().activityInformation = activityInformation;
+
                     break;
                 }
             case ActivityType.Pregnancy:
@@ -210,6 +213,8 @@ public class NotificationManager : SingletonComponent<NotificationManager>
                 }
             case ActivityType.Build:
                 {
+                    
+                    RemoveActivity(activityInformation);
                     break;
                 }
             case ActivityType.Pregnancy:

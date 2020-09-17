@@ -309,7 +309,6 @@ public class BuildingInformationCanvas : MonoBehaviour
 
         Building buildData = LoadManager.Instance.allBuildingData[builder.Type];
 
-        Debug.Log("Try Creating " + builder.Type.ToString());
 
         GameObject assignPanelContainerGO = Instantiate(Resources.Load("Prefabs/UI/AssignPanelContainerPrefab") as GameObject, container.transform);
         assignPanelContainerGO.transform.Find("BuildingImage").GetComponent<Image>().sprite = Resources.Load<Sprite>(buildData.spritePath[builder.Level]);

@@ -61,7 +61,6 @@ public class MainCanvas : MonoBehaviour
     void OnResourceChanged(string name)
     {
         Transform resourceGO = resourcePanel.transform.Find(name + "Panel");
-        Debug.Log($"{name}");
         if(resourceGO)
         {
             resourceGO.gameObject.GetComponentInChildren<Text>().text = ItemManager.Instance.GetResourceAmount(name).ToString();

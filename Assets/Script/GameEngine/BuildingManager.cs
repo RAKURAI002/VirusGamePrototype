@@ -249,6 +249,17 @@ public class BuildingManager : SingletonComponent<BuildingManager>
 
         }
 
+        Building buildingData = LoadManager.Instance.allBuildingData[builder.Type];
+        NotificationManager.Instance.AddActivity(new ActivityInformation()
+        {
+            activityName = $"CreateBuilding:{builder.Type}:{builder.ID}",
+            activityType = ActivityType.Build,
+            teamNumber = teamNumber,
+            builderReferenceID = laborCenter.ID,
+            finishPoint = buildingData.upgradePoint[builder.Level],
+            informationID = builder.ID
+        });
+
         EventManager.Instance.BuildingModified(builder.ID);
         return true;
 

@@ -104,7 +104,7 @@ public class BuildTimer : Timer
             builder.Level++;
             Debug.Log($"Upgrade Task is completed. Now ID :{builder.representGameObject.name} level is {builder.Level}.");
             CancelConstructing();
-            EventManager.Instance.ActivityFinished(new ActivityInformation() { activityType = ActivityType.Build});
+            EventManager.Instance.ActivityFinished(activityInformation);
 
             gameObject.GetComponent<BuildingBehavior>().UpdatePrefab();
             return true;
