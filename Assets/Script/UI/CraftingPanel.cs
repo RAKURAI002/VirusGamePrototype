@@ -102,7 +102,7 @@ public class CraftingPanel : MonoBehaviour
                            activityName = ("Craft:" + resource.Name),
                            activityType = ActivityType.Craft,
                            startPoint = 0,
-                           finishPoint = resourceRecipe.craftingData.pointRequired,
+                           requiredPoint = resourceRecipe.craftingData.pointRequired,
                            teamNumber = _teamNumber,
                            informationID = resource.ID,
                            builderReferenceID = builder.ID

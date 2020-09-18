@@ -81,7 +81,7 @@ public class BuildingManager : SingletonComponent<BuildingManager>
             activityType = ActivityType.Build,
             teamNumber = teamNumber,
             builderReferenceID = laborCenter.ID,
-            finishPoint = buildData.upgradePoint[builder.Level],
+            requiredPoint = buildData.upgradePoint[builder.Level],
             informationID = builder.ID
         });
         EventManager.Instance.BuildingModified(builder.ID);
@@ -121,7 +121,7 @@ public class BuildingManager : SingletonComponent<BuildingManager>
     {
         AddBuildingsToList(builder);
         builder.InitializeData();
-
+        Debug.Log($"IIIIIIIIII {builder.ID}");
         Building buildData = LoadManager.Instance.allBuildingData[builder.Type];
 
         GameObject builderGO = Instantiate(Resources.Load<GameObject>("Prefabs/BuildingPrefab"), builder.Position, Quaternion.identity);
@@ -200,6 +200,12 @@ public class BuildingManager : SingletonComponent<BuildingManager>
 
         mapManager.constructableGrid.RemoveAt(cellIndex);
 
+        NotificationManager.Instance.AddActivity(new ActivityInformation()
+        {
+            activityName = $"CreateBuilding:{builder.Type}:{builder.ID}",
+            activityType = ActivityType.Build,
+            informationID = builder.ID
+        });
     }
 
     public bool UpgradeBuilding(Builder builder, int teamNumber)
@@ -256,7 +262,7 @@ public class BuildingManager : SingletonComponent<BuildingManager>
             activityType = ActivityType.Build,
             teamNumber = teamNumber,
             builderReferenceID = laborCenter.ID,
-            finishPoint = buildingData.upgradePoint[builder.Level],
+            requiredPoint = buildingData.upgradePoint[builder.Level],
             informationID = builder.ID
         });
 

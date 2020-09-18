@@ -101,9 +101,8 @@ public class MainCanvas : MonoBehaviour
     {
         finishedActivityAmountGO = GameManager.FindInActiveObjectByName("FinishedActivityAmount");
         waitingCharacterAmountGO = GameManager.FindInActiveObjectByName("WaitingCharacterAmount");
-        playerName.text += $"<color=red>{LoadManager.Instance.playerData.name}</color>";
-        playerLevel.text += LoadManager.Instance.playerData.level.ToString();
-        selectButtonToggle = false;;
+        playerName.text = $"<color=red>{LoadManager.Instance.playerData.name}</color>";
+        playerLevel.text = $"Level: {LoadManager.Instance.playerData.level}";
         editBuildingPanel = Resources.FindObjectsOfTypeAll<BuildingInformationCanvas>()[0].gameObject;
 
         if (editBuildingPanel == null)

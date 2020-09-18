@@ -11,7 +11,6 @@ public class PointTimer : Timer
 
     float productionPoint;
 
-    long finishPoint;
     long timer;
     long timerTemp;
 
@@ -39,7 +38,6 @@ public class PointTimer : Timer
     {
         builder = BuildingManager.Instance.AllBuildings.SingleOrDefault(b => b.ID == activityInformation.builderReferenceID);
         isFinished = false;
-        finishPoint = activityInformation.finishPoint;
 
         notificationPanel = Resources.FindObjectsOfTypeAll<NotificationPanel>()[0];
 
@@ -55,7 +53,7 @@ public class PointTimer : Timer
             return;
         }
 
-        timer = (long)((activityInformation.finishPoint - activityInformation.currentPoint) / productionPoint);
+        timer = (long)((activityInformation.requiredPoint - activityInformation.currentPoint) / productionPoint);
         if (CheckCompleteTimer())
         {
             return;
@@ -82,14 +80,14 @@ public class PointTimer : Timer
             if (speedUpCostTemp != speedUpCost)
             {
                 notificationPanel.ChangeSpeedUpCost(activityInformation, speedUpCost);
-            
+
             }
         }
     }
 
     bool CheckCompleteTimer()
     {
-        if (activityInformation.currentPoint >= finishPoint)
+        if (activityInformation.currentPoint >= activityInformation.requiredPoint)
         {
             CancelInvoke("IncreaseCurrentPoint");
             isFinished = true;
@@ -118,13 +116,17 @@ public class PointTimer : Timer
                 c => ((c.Stats.strength * 0.2f / 8) + (c.Stats.speed * 0.2f / 8) + (c.Stats.craftsmanship * 0.8f / 3)));
         }
         productionPoint = productionPointTemp;
+
+        timer = (long)((activityInformation.requiredPoint - activityInformation.currentPoint) / productionPoint);
+        Debug.Log($"SSSSSSSSSSSet new timer {(timer * TimeSpan.TicksPerSecond)} ");
+        activityInformation.finishTime = DateTime.Now.Ticks + (timer * TimeSpan.TicksPerSecond);
     }
 
 
     public override void InitializeSlider()
     {
         slider.name = activityInformation.activityName + "Slider";
-        slider.GetComponent<Slider>().maxValue = activityInformation.finishPoint;
+        slider.GetComponent<Slider>().maxValue = activityInformation.requiredPoint;
 
         int hours = Mathf.FloorToInt(timer / 3600);
         int minutes = Mathf.FloorToInt(timer % 3600 / 60);
@@ -142,7 +144,7 @@ public class PointTimer : Timer
 
     public override void ForceFinish()
     {
-        activityInformation.currentPoint = finishPoint;
+        activityInformation.currentPoint = activityInformation.requiredPoint;
     }
 
 

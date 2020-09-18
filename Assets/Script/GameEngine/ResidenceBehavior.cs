@@ -30,12 +30,15 @@ public class ResidenceBehavior : BuildingBehavior
         if(characters.Count == 2 && characters[0].Gender != characters[1].Gender)
         {
             int random = UnityEngine.Random.Range(0, 100);
+            int chance = buildingData.production[builder.Level]["BreedingChance"];
             Debug.Log($"{Constant.TimeCycle.GENERAL_GAME_CYCLE}s passed, Trying to start BreedNewCharacter Event.");
-            Debug.Log($"Chance : 0 - {Constant.EventOccurChance.BREEDING_CHANCE}, Randomed : {random}. Start event = {!(random > Constant.EventOccurChance.BREEDING_CHANCE)}");
-            if (random > Constant.EventOccurChance.BREEDING_CHANCE)
+            Debug.Log($"Chance : 0 - {chance}, Randomed : {random}. Start event = {!(random > chance)}");
+            if (random < chance)
             {
-              //  return;
-
+            }
+            else
+            {
+               // return;
             }
 
             Character female = characters.Single(c => c.Gender == Character.GenderType.Female);
@@ -53,10 +56,9 @@ public class ResidenceBehavior : BuildingBehavior
                 activityName = ($"Pregnancy:{female.Name}"),
                 activityType = ActivityType.Pregnancy,
                 startPoint = DateTime.Now.Ticks,
-                finishPoint = DateTime.Now.Ticks + (Constant.TimeCycle.PREGNANCY_GIVE_BIRTH_TIME * TimeSpan.TicksPerSecond),
+                requiredPoint = DateTime.Now.Ticks + (Constant.TimeCycle.PREGNANCY_GIVE_BIRTH_TIME * TimeSpan.TicksPerSecond),
                 informationID = female.ID,
-                
-
+               
             });
 
         }

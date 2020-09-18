@@ -54,7 +54,7 @@ public class Character
 
         }
 
-        [SerializeField] public  string name;
+        [SerializeField] public string name;
         [SerializeField] public string spritePath;
         [SerializeField] public string type;
         [SerializeField] public int tier;
@@ -123,7 +123,7 @@ public class Character
             FieldInfo fInfo = typeof(Character.AllStats).GetField(((IncreaseSTATSBirthMark)birthMarkData).statToIncrease.ToLower());
 
             int oldStat = (int)fInfo.GetValue(this.stats);
-            fInfo.SetValue(this.stats, Mathf.RoundToInt( oldStat * (1 + birthMarkData.effectValues[birthMark.level - 1])));
+            fInfo.SetValue(this.stats, Mathf.RoundToInt(oldStat * (1 + birthMarkData.effectValues[birthMark.level - 1])));
 
         }
 
@@ -196,22 +196,26 @@ public class Character
     [SerializeField] public string spritePath;
 
     public int ID { get { return id; } }
-    public string Name { get { return name; } } 
+    public string Name { get { return name; } }
     public int Experience { get { return experience; } }
 
     public int CurrentHitPoint { get { return currentHitPoint; } set { currentHitPoint = value > MaxHitPoint ? MaxHitPoint : value; } }
-    public int MaxHitPoint { get { return (stats.strength * 2); }}
+    public int MaxHitPoint { get { return (stats.strength * 2); } }
 
     public GenderType Gender { get { return gender; } }
     public AllStats Stats { get { return stats; } set { stats = value; } }
     public List<BirthMark> BirthMarks { get { return birthMarks; } }
-    public int WorkingPlaceID { get; set; }
+    public int WorkingPlaceID
+    {
+        get { return workingPlaceID; }
+        set { workingPlaceID = value; }
+    }
 
     void RandomBirthMark()
     {
         int totalDivisor = 0;
         List<int> chanceTable = new List<int>();
-        foreach(var chance in typeof(Constant.BirthMarkAmountChance).GetFields())
+        foreach (var chance in typeof(Constant.BirthMarkAmountChance).GetFields())
         {
             chanceTable.Add((int)chance.GetValue(null));
             totalDivisor += (int)chance.GetValue(null);
@@ -222,7 +226,7 @@ public class Character
 
         for (int i = 0; i < chanceTable.Count; i++)
         {
-            if(randomBirthMarkAmount < chanceTable[i])
+            if (randomBirthMarkAmount < chanceTable[i])
             {
                 AddBirthMark(i);
                 break;
@@ -244,7 +248,7 @@ public class Character
     {
         Debug.Log($"Start random {amount} BirthMark(s) . . .");
         birthMarks = new List<BirthMark>();
-        if(amount == 0)
+        if (amount == 0)
         {
             return;
 
@@ -258,8 +262,8 @@ public class Character
             totalDivisor += (int)chance.GetValue(null);
 
         }
-        
-        for (int birthMarkAmount = 0 ; birthMarkAmount < amount ; birthMarkAmount++)
+
+        for (int birthMarkAmount = 0; birthMarkAmount < amount; birthMarkAmount++)
         {
             int randomTier = UnityEngine.Random.Range(0, totalDivisor);
             for (int birthMarkTier = 1; birthMarkTier <= chanceTable.Count; birthMarkTier++)
@@ -267,9 +271,9 @@ public class Character
                 if (randomTier < chanceTable[birthMarkTier - 1])
                 {
                     Debug.Log($"Random Tier {birthMarkTier} BirthMark to character.");
-                    
+
                     List<BirthMarkData> bmData = LoadManager.Instance.allBirthMarkDatas.Where(bm => bm.Value.tier == birthMarkTier).Select(bm => bm.Value).ToList();
-                    
+
                     int randomEffect = UnityEngine.Random.Range(0, bmData.Count);
                     birthMarks.Add(new BirthMark(bmData[randomEffect]));
 

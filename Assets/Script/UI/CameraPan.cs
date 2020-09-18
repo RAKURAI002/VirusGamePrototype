@@ -88,7 +88,7 @@ public class CameraPan : MonoBehaviour
             StartCoroutine(DelaySetPanning());
 
         }
-  
+
     }
     private void ZoomCamera()
     {
@@ -103,36 +103,51 @@ public class CameraPan : MonoBehaviour
                 touch1 = Input.GetTouch(1).position;
                 scroll = Vector2.Distance(touch0, touch1);
             }
-            scroll = Input.GetAxis("Mouse ScrollWheel");
+            if (Input.touchCount == 2)
+            {
+                Touch touchZero = Input.GetTouch(0);
+                Touch touchOne = Input.GetTouch(1);
 
+                Vector2 touchZeroPrevPos = touchZero.position - touchZero.deltaPosition;
+                Vector2 touchOnePrevPos = touchOne.position - touchOne.deltaPosition;
+
+                float prevMagnitude = (touchZeroPrevPos - touchOnePrevPos).magnitude;
+                float currentMagnitude = (touchZero.position - touchOne.position).magnitude;
+
+                float difference = currentMagnitude - prevMagnitude;
+
+                scroll = Input.GetAxis("Mouse ScrollWheel");
+                scroll = (difference / 100);
+
+            }
         }
 
 #else
              scroll = Input.GetAxis("Mouse ScrollWheel");
 #endif
 
-        if (mainCamera.transform.position.x > boundMax.x || mainCamera.transform.position.x < boundMin.x)
-        {
-            return;
+            if (mainCamera.transform.position.x > boundMax.x || mainCamera.transform.position.x < boundMin.x)
+            {
+                return;
+            }
+
+            mainCamera.orthographicSize -= scroll * MouseZoomSpeed;
+            mainCamera.orthographicSize = Mathf.Clamp(mainCamera.orthographicSize, ZoomMinBound, ZoomMaxBound);
+
         }
+        IEnumerator DelaySetPanning()
+        {
+            yield return new WaitForEndOfFrame();
+            isPanning = false;
 
-        mainCamera.orthographicSize -= scroll * MouseZoomSpeed;
-        mainCamera.orthographicSize = Mathf.Clamp(mainCamera.orthographicSize, ZoomMinBound, ZoomMaxBound);
+        }
+        private Vector3 GetWorldPosition(float z)
+        {
+            Ray mousePos = mainCamera.ScreenPointToRay(Input.mousePosition);
+            Plane ground = new Plane(Vector3.forward, new Vector3(0, 0, z));
+            float distance;
+            ground.Raycast(mousePos, out distance);
+            return mousePos.GetPoint(distance);
 
+        }
     }
-    IEnumerator DelaySetPanning()
-    {
-        yield return new WaitForEndOfFrame();
-        isPanning = false;
-
-    }
-    private Vector3 GetWorldPosition(float z)
-    {
-        Ray mousePos = mainCamera.ScreenPointToRay(Input.mousePosition);
-        Plane ground = new Plane(Vector3.forward, new Vector3(0, 0, z));
-        float distance;
-        ground.Raycast(mousePos, out distance);
-        return mousePos.GetPoint(distance);
-
-    }
-}

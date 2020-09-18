@@ -100,7 +100,9 @@ public class ActivityInformation
     public bool isFinished;
     public long startPoint;
     public float currentPoint;
-    public long finishPoint;
+    public long requiredPoint;
+
+    public long finishTime;
 
 
 }

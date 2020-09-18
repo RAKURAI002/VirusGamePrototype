@@ -8,6 +8,10 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
+#if UNITY_ANDROID
+using Unity.Notifications.Android;
+#endif
+
 public class NotificationManager : SingletonComponent<NotificationManager>
 {
     #region Unity Functions
@@ -51,13 +55,27 @@ public class NotificationManager : SingletonComponent<NotificationManager>
     void Start()
     {
         CheckActivities();
+
     }
 
     protected override void OnInitialize()
     {
         processingActivies = new ActivityProgressDictionary();
 
+#if UNITY_ANDROID
+        AndroidNotificationChannel notificationChannel = new AndroidNotificationChannel()
+        {
+            Id = $"Channel1",
+            Name = "AcitiviyFinished",
+            Importance = Importance.High,
+            Description = "AcitiviyFinishedChannel"
+
+        };
+        AndroidNotificationCenter.RegisterNotificationChannel(notificationChannel);
+#endif
+
     }
+
     void CheckActivities()
     {
         foreach (var activity in processingActivies)
@@ -82,6 +100,11 @@ public class NotificationManager : SingletonComponent<NotificationManager>
                     }
                 case ActivityType.Build:
                     {
+                        Builder builder = BuildingManager.Instance.AllBuildings.SingleOrDefault(b => b.ID == activity.Value.informationID);
+                        Debug.Log($"{builder.representGameObject.name}");
+                        Debug.Log($"{builder.representGameObject.GetComponent<BuildTimer>().name}");
+                        builder.representGameObject.GetComponent<BuildTimer>().activityInformation = activity.Value;
+                        Debug.Log($"{builder.representGameObject.GetComponent<BuildTimer>().activityInformation.activityID}");
                         break;
                     }
                 case ActivityType.Pregnancy:
@@ -117,6 +140,7 @@ public class NotificationManager : SingletonComponent<NotificationManager>
 
         processingActivies.Add(activityInformation.activityID, activityInformation);
 
+        StartCoroutine(SetMobileNotificationSchedule(activityInformation));
         EventManager.Instance.ActivityAssigned(activityInformation);
     }
     public void RemoveActivity(ActivityInformation activityInformation)
@@ -130,6 +154,7 @@ public class NotificationManager : SingletonComponent<NotificationManager>
     }
     public void OnActivityAssigned(ActivityInformation activityInformation)
     {
+
         switch (activityInformation.activityType)
         {
 
@@ -140,6 +165,8 @@ public class NotificationManager : SingletonComponent<NotificationManager>
 
                     ClockTimer questTimer = ActivityTimerGO.AddComponent<ClockTimer>();
                     questTimer.activityInformation = activityInformation;
+
+                    //  finishTimeInSeconds = (int)activityInformation.finishPoint / TimeSpan.TicksPerSecond;
                     break;
                 }
             case ActivityType.Craft:
@@ -156,7 +183,7 @@ public class NotificationManager : SingletonComponent<NotificationManager>
                     Builder builder = BuildingManager.Instance.AllBuildings.SingleOrDefault(b => b.ID == activityInformation.informationID);
 
                     builder.representGameObject.GetComponent<BuildTimer>().activityInformation = activityInformation;
-
+                    Debug.Log($"{builder.representGameObject.GetComponent<BuildTimer>().activityInformation.activityID}");
                     break;
                 }
             case ActivityType.Pregnancy:
@@ -187,8 +214,26 @@ public class NotificationManager : SingletonComponent<NotificationManager>
         }
 
     }
+
+    IEnumerator SetMobileNotificationSchedule(ActivityInformation activityInformation)
+    {
+        yield return new WaitForEndOfFrame();
+
+        Debug.Log($"Noti in {new DateTime(activityInformation.finishTime)} : {activityInformation.finishTime}");
+#if UNITY_ANDROID
+        AndroidNotification androidNotification = new AndroidNotification()
+        {
+            Title = activityInformation.activityName,
+            Text = $"{activityInformation.activityName} is already finished !",
+            FireTime = new DateTime(activityInformation.finishTime),
+        };
+        AndroidNotificationCenter.SendNotification(androidNotification, "Channel1");
+#endif
+
+    }
     public void OnActivityFinished(ActivityInformation activityInformation)
     {
+
 
         switch (activityInformation.activityType)
         {
@@ -204,7 +249,7 @@ public class NotificationManager : SingletonComponent<NotificationManager>
 
                     ItemManager.Instance.AddResource(resource.Name, 1);
 
-                    PointTimer craftTimer = NotificationManager.Instance.gameObject.transform.Find("ActivitiesList/" 
+                    PointTimer craftTimer = NotificationManager.Instance.gameObject.transform.Find("ActivitiesList/"
                         + activityInformation.activityID).GetComponent<PointTimer>();
                     Destroy(craftTimer.gameObject);
                     RemoveActivity(activityInformation);
@@ -213,14 +258,16 @@ public class NotificationManager : SingletonComponent<NotificationManager>
                 }
             case ActivityType.Build:
                 {
-                    
+
                     RemoveActivity(activityInformation);
                     break;
                 }
             case ActivityType.Pregnancy:
                 {
-                    Character character = CharacterManager.Instance.AllCharacters.SingleOrDefault( c => c.ID == activityInformation.informationID);
-                    character.workStatus = Character.WorkStatus.Idle;
+                    Character character = CharacterManager.Instance.AllCharacters.SingleOrDefault(c => c.ID == activityInformation.informationID);
+
+                    character.workStatus = Character.WorkStatus.Working;
+
                     CharacterManager.Instance.CreateChildCharacter();
 
                     ClockTimer timer = NotificationManager.Instance.gameObject.transform.Find("ActivitiesList/" + activityInformation.activityID).GetComponent<ClockTimer>();
@@ -232,7 +279,7 @@ public class NotificationManager : SingletonComponent<NotificationManager>
                 {
                     ClockTimer timer = NotificationManager.Instance.gameObject.transform.Find("ActivitiesList/" + activityInformation.activityID).GetComponent<ClockTimer>();
                     Destroy(timer.gameObject);
-                    
+
                     RemoveActivity(activityInformation);
 
                     Character character = CharacterManager.Instance.AllCharacters.SingleOrDefault(c => c.ID == activityInformation.informationID);

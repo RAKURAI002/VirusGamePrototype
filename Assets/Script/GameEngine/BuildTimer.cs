@@ -41,7 +41,8 @@ public class BuildTimer : Timer
     }
     void Start()
     {
-
+        DateTime dt = new DateTime(LoadManager.Instance.playerData.lastLoginTime);
+        Debug.Log($"{dt.ToString()}");
         Initiate();
         InvokeRepeating(nameof(IncreaseCurrentPoint), 0f, 1f);
         CreateSlider();
@@ -82,6 +83,7 @@ public class BuildTimer : Timer
         gameObject.GetComponent<SpriteRenderer>().color = Color.red;
 
         GetProductionPoint();
+        Debug.Log($"DDDDDDDDDD {builder.constructionStatus.finishPoint}");
         if (builder.constructionStatus.finishPoint == 0)
         {
             builder.constructionStatus.finishPoint = builder.constructionStatus.constructPointRequired;
@@ -190,6 +192,8 @@ public class BuildTimer : Timer
        
         }
         productionPoint = productionPointTemp;
+
+        activityInformation.finishTime = DateTime.Now.Ticks + (timer * TimeSpan.TicksPerSecond);
     }
 
 }

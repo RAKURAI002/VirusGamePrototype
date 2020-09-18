@@ -9,7 +9,7 @@ using UnityEngine.EventSystems;
 
 public class ClockTimer : Timer
 {
-    long timeFinish;
+    long finishTime;
     long timeLeft;
     int speedUpCost;
 
@@ -33,7 +33,6 @@ public class ClockTimer : Timer
 
     void Start()
     {
-        
         Initiate();
       
     }
@@ -45,7 +44,7 @@ public class ClockTimer : Timer
             return;
         }
 
-        timeLeft = timeFinish - DateTime.Now.Ticks;
+        timeLeft = finishTime - DateTime.Now.Ticks;
 
         // Debug.Log($"Time Left : {timeLeft} : {timeLeft / TimeSpan.TicksPerSecond }");
         if (CheckCompleteTimer())
@@ -59,8 +58,8 @@ public class ClockTimer : Timer
         }
         
         GetSlider();
-        slider.GetComponent<Slider>().value = (((timeFinish - activityInformation.startPoint) - timeLeft) / TimeSpan.TicksPerSecond) + 1;
-        long timer = ((timeFinish - activityInformation.startPoint) / TimeSpan.TicksPerSecond) - (((timeFinish - activityInformation.startPoint) - timeLeft) / TimeSpan.TicksPerSecond);
+        slider.GetComponent<Slider>().value = (((finishTime - activityInformation.startPoint) - timeLeft) / TimeSpan.TicksPerSecond) + 1;
+        long timer = ((finishTime - activityInformation.startPoint) / TimeSpan.TicksPerSecond) - (((finishTime - activityInformation.startPoint) - timeLeft) / TimeSpan.TicksPerSecond);
         
         int hours = Mathf.FloorToInt(timer / 3600);
         int minutes = Mathf.FloorToInt(timer % 3600 / 60);
@@ -70,8 +69,7 @@ public class ClockTimer : Timer
         activityInformation.currentPoint = timer;
         speedUpCost = ItemManager.Instance.GetSpeedUpCost(timer * 20);
         if (speedUpCostTemp != speedUpCost)
-        {
-            
+        {   
             notificationPanel.ChangeSpeedUpCost(activityInformation, speedUpCost);
         }
 
@@ -80,11 +78,12 @@ public class ClockTimer : Timer
             timerTemp = timer;
             slider.GetComponentInChildren<Text>().text = String.Format("{0:00}:{1:00}:{2:00}", hours, minutes, seconds);
         }
+
     }
 
     public override void InitializeSlider()
     {
-        long timer = ((timeFinish - activityInformation.startPoint) / TimeSpan.TicksPerSecond) - (((timeFinish - activityInformation.startPoint) - timeLeft) / TimeSpan.TicksPerSecond);
+        long timer = ((finishTime - activityInformation.startPoint) / TimeSpan.TicksPerSecond) - (((finishTime - activityInformation.startPoint) - timeLeft) / TimeSpan.TicksPerSecond);
 
         int hours = Mathf.FloorToInt(timer / 3600);
         int minutes = Mathf.FloorToInt(timer % 3600 / 60);
@@ -96,7 +95,7 @@ public class ClockTimer : Timer
 
     bool CheckCompleteTimer()
     {
-        if (timeFinish <= DateTime.Now.Ticks)
+        if (finishTime <= DateTime.Now.Ticks)
         {
             FinishTimer();
 
@@ -109,13 +108,16 @@ public class ClockTimer : Timer
     {
         isFinished = false;
 
-        timeFinish = activityInformation.finishPoint;
-        timeLeft = timeFinish - DateTime.Now.Ticks;
+        finishTime = activityInformation.requiredPoint;
+        timeLeft = finishTime - DateTime.Now.Ticks;
         if (activityInformation.isFinished)
         {
             Destroy(slider);
 
         }
+
+        activityInformation.finishTime = finishTime;
+
         return;
     }
     protected override void OnActivityAssigned(ActivityInformation activityInformation)
@@ -123,7 +125,7 @@ public class ClockTimer : Timer
         base.OnActivityAssigned(activityInformation);
         if (slider != null)
         {
-            long timer = ((timeFinish - activityInformation.startPoint) / TimeSpan.TicksPerSecond) - (((timeFinish - activityInformation.startPoint) - timeLeft) / TimeSpan.TicksPerSecond);
+            long timer = ((finishTime - activityInformation.startPoint) / TimeSpan.TicksPerSecond) - (((finishTime - activityInformation.startPoint) - timeLeft) / TimeSpan.TicksPerSecond);
 
             int hours = Mathf.FloorToInt(timer / 3600);
             int minutes = Mathf.FloorToInt(timer % 3600 / 60);
@@ -140,7 +142,7 @@ public class ClockTimer : Timer
     void GetSlider()
     {
         slider.name = activityInformation.activityName + "Slider";
-        slider.GetComponent<Slider>().maxValue = ((timeFinish - activityInformation.startPoint) / TimeSpan.TicksPerSecond);
+        slider.GetComponent<Slider>().maxValue = ((finishTime - activityInformation.startPoint) / TimeSpan.TicksPerSecond);
         slider.GetComponent<Slider>().value = timeLeft;
         slider.GetComponent<Slider>().interactable = false;
 

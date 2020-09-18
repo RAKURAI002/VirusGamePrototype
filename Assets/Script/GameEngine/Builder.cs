@@ -63,7 +63,7 @@ public class Builder
 
     [SerializeField] public float currentProductionAmount;
 
-    [NonSerialized] public GameObject representGameObject;
+    public GameObject representGameObject { get; set; }
     [NonSerialized] public int maxActiveAmount;
     [NonSerialized] public int maxLevel;
 

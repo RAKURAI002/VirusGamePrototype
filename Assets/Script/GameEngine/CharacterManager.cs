@@ -117,7 +117,7 @@ public class CharacterManager : SingletonComponent<CharacterManager>
             activityName = ($"Growing:{character.Name}"),
             activityType = ActivityType.CharacterGrowing,
             startPoint = DateTime.Now.Ticks,
-            finishPoint = DateTime.Now.Ticks + (Constant.TimeCycle.CHILD_GROWING_TIME * TimeSpan.TicksPerSecond),
+            requiredPoint = DateTime.Now.Ticks + (Constant.TimeCycle.CHILD_GROWING_TIME * TimeSpan.TicksPerSecond),
             informationID = character.ID
 
         });
@@ -170,8 +170,9 @@ public class CharacterManager : SingletonComponent<CharacterManager>
         }
         builder.CharacterInBuilding[team].Characters.Add(character);
         character.workStatus = Character.WorkStatus.Working;
-        character.WorkingPlaceID = builder.ID;
 
+        character.WorkingPlaceID = builder.ID;
+        Debug.Log($"{character.WorkingPlaceID} : {builder.ID}");
         LoadManager.Instance.SavePlayerDataToJson();
         EventManager.Instance.CharacterAssigned();
 
@@ -179,6 +180,11 @@ public class CharacterManager : SingletonComponent<CharacterManager>
     }
     public bool CancleAssignWork(Character character, Builder builder)
     {
+        if (character.workStatus == Character.WorkStatus.Pregnant)
+        {
+            Debug.LogWarning("Pregnant Character can't be Unassign.");
+            return false;
+        }
         if (character.workStatus == Character.WorkStatus.Quest)
         {
             Debug.LogWarning("Questing Character can't be Unassign.");
@@ -190,7 +196,7 @@ public class CharacterManager : SingletonComponent<CharacterManager>
             return false;
         }
         character.workStatus = Character.WorkStatus.Idle;
-        character.WorkingPlaceID = -1;
+        character.WorkingPlaceID = 0;
         Debug.Log($"Stop {character.Name} from working at {builder.Type}. Now {character.Name} is {character.workStatus}");
         EventManager.Instance.CharacterAssigned();
         LoadManager.Instance.SavePlayerDataToJson();

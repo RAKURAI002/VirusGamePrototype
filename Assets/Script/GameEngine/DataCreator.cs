@@ -299,18 +299,18 @@ public class DataCreator : MonoBehaviour
         mineResourceProduction.Add(new DictionaryStringToInt() { { "Gold", 10 }, { "Stone", 96 } });
         List<DictionaryStringToInt> residentResourceProduction = new List<DictionaryStringToInt>();
         residentResourceProduction.Add(new DictionaryStringToInt());
-        residentResourceProduction.Add(new DictionaryStringToInt() { { "MaxCharacterStored", 3 }, { "BaseHealAmount", 5 }, { "BreedingChance", 5 } });
-        residentResourceProduction.Add(new DictionaryStringToInt() { { "MaxCharacterStored", 4 }, { "BaseHealAmount", 5 }, { "BreedingChance", 5 } });
-        residentResourceProduction.Add(new DictionaryStringToInt() { { "MaxCharacterStored", 5 }, { "BaseHealAmount", 5 }, { "BreedingChance", 5 } });
-        residentResourceProduction.Add(new DictionaryStringToInt() { { "MaxCharacterStored", 6 }, { "BaseHealAmount", 5 }, { "BreedingChance", 5 } });
-        residentResourceProduction.Add(new DictionaryStringToInt() { { "MaxCharacterStored", 7 }, { "BaseHealAmount", 5 }, { "BreedingChance", 5 } });
-        residentResourceProduction.Add(new DictionaryStringToInt() { { "MaxCharacterStored", 8 }, { "BaseHealAmount", 5 }, { "BreedingChance", 5 } });
-        residentResourceProduction.Add(new DictionaryStringToInt() { { "MaxCharacterStored", 9 }, { "BaseHealAmount", 5 }, { "BreedingChance", 5 } });
-        residentResourceProduction.Add(new DictionaryStringToInt() { { "MaxCharacterStored", 10 }, { "BaseHealAmount", 5 }, { "BreedingChance", 5 } });
-        residentResourceProduction.Add(new DictionaryStringToInt() { { "MaxCharacterStored", 11 }, { "BaseHealAmount", 5 }, { "BreedingChance", 5 } });
-        residentResourceProduction.Add(new DictionaryStringToInt() { { "MaxCharacterStored", 12 }, { "BaseHealAmount", 5 }, { "BreedingChance", 5 } });
+        residentResourceProduction.Add(new DictionaryStringToInt() { { "MaxCharacterStored", 3 }, { "BaseHealAmount", 5 }, { "BreedingChance", 20 } });
+        residentResourceProduction.Add(new DictionaryStringToInt() { { "MaxCharacterStored", 4 }, { "BaseHealAmount", 5 }, { "BreedingChance", 22 } });
+        residentResourceProduction.Add(new DictionaryStringToInt() { { "MaxCharacterStored", 5 }, { "BaseHealAmount", 5 }, { "BreedingChance", 24 } });
+        residentResourceProduction.Add(new DictionaryStringToInt() { { "MaxCharacterStored", 6 }, { "BaseHealAmount", 5 }, { "BreedingChance", 26 } });
+        residentResourceProduction.Add(new DictionaryStringToInt() { { "MaxCharacterStored", 7 }, { "BaseHealAmount", 5 }, { "BreedingChance", 28 } });
+        residentResourceProduction.Add(new DictionaryStringToInt() { { "MaxCharacterStored", 8 }, { "BaseHealAmount", 5 }, { "BreedingChance", 30 } });
+        residentResourceProduction.Add(new DictionaryStringToInt() { { "MaxCharacterStored", 9 }, { "BaseHealAmount", 5 }, { "BreedingChance", 32 } });
+        residentResourceProduction.Add(new DictionaryStringToInt() { { "MaxCharacterStored", 10 }, { "BaseHealAmount", 5 }, { "BreedingChance", 34 } });
+        residentResourceProduction.Add(new DictionaryStringToInt() { { "MaxCharacterStored", 11 }, { "BaseHealAmount", 5 }, { "BreedingChance", 36 } });
+        residentResourceProduction.Add(new DictionaryStringToInt() { { "MaxCharacterStored", 12 }, { "BaseHealAmount", 5 }, { "BreedingChance", 38 } });
         List<DictionaryStringToInt> laborProduction = new List<DictionaryStringToInt>();
-        laborProduction.Add(new DictionaryStringToInt() {});
+        laborProduction.Add(new DictionaryStringToInt() { });
         laborProduction.Add(new DictionaryStringToInt() { { "Production", 20 } });
         laborProduction.Add(new DictionaryStringToInt() { { "Production", 20 } });
         laborProduction.Add(new DictionaryStringToInt() { { "Production", 20 } });
@@ -475,7 +475,7 @@ public class DataCreator : MonoBehaviour
 
         r.Add(new Resource(r.Count + 1, "Recipe:Bread", Item.RarityTier.Common, "Recipe.", Resource.ResourceType.ConsumableRecipe, "Sprites/Resource/Recipe",
             new Item.CraftingData(new DictionaryStringToInt() { { "Wheat", 3 } }, 200)));
-        
+
         r.Add(new Resource(r.Count + 1, "Recipe:Burger", Item.RarityTier.Common, "Recipe.", Resource.ResourceType.ConsumableRecipe, "Sprites/Resource/Recipe",
             new Item.CraftingData(new DictionaryStringToInt() { { "Bread", 2 }, { "Meat", 1 } }, 400)));
 
@@ -780,7 +780,13 @@ public class DataCreator : MonoBehaviour
     void CreateAchievementData()
     {
         List<AchievementData> achievements = new List<AchievementData>();
-        achievements.Add(new AchievementData() { id = achievements.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK, name = "Gold>1000", rewards = new DictionaryStringToInt() { { "Stone", 1 }, { "Wood", 5 } }, condition = () => { return ItemManager.Instance.GetResourceAmount("Gold") > 1000; } });
+        achievements.Add(new AchievementData()
+        {
+            id = achievements.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK,
+            name = "Gold>1000",
+            rewards = new DictionaryStringToInt() { { "Stone", 1 }, { "Wood", 5 } },
+            condition = () => { return ItemManager.Instance.GetResourceAmount("Gold") > 1000; }
+        });
 
         string achievementsData = JsonHelper.ToJson<AchievementData>(achievements.ToArray(), true);
         Debug.Log("Saving Achievements Data to JSON : " + achievementsData);

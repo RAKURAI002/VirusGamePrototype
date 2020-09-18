@@ -121,6 +121,21 @@ public class GameManager : SingletonComponent<GameManager>
         Debug.Log("Application ending after " + Time.time + " seconds");
     }
 
+    private void OnApplicationPause(bool pause)
+    {
+        if(pause)
+        {
+            LoadManager.Instance.playerData.lastLoginTime = DateTime.Now.Ticks;
+            LoadManager.Instance.SavePlayerDataToJson();
+            Debug.Log("Application paused after " + Time.time + " seconds");
+
+        }
+        else
+        {
+            Debug.Log("Application resumed after " + Time.time + " seconds");
+        }
+    }
+
     #endregion
 
     public StringBuilder gameLog;
