@@ -55,7 +55,7 @@ public static class Constant
     {
         public static int RESOURCE_UPDATE_CYCLE = 10;
         public static int CHARACTER_ADDING_EVENT_CYCLE = 60;
-        public static int GENERAL_GAME_CYCLE = 30;
+        public static int GENERAL_GAME_CYCLE = 10;
         public static int PREGNANCY_GIVE_BIRTH_TIME = 30;
         public static int CHILD_GROWING_TIME = 60;
     }

@@ -17,7 +17,6 @@ public class ResidenceBehavior : BuildingBehavior
         {
             return;
         }
-
         HealAllCharacters();
         BreedNewCharacter();
 
@@ -32,13 +31,13 @@ public class ResidenceBehavior : BuildingBehavior
             int random = UnityEngine.Random.Range(0, 100);
             int chance = buildingData.production[builder.Level]["BreedingChance"];
             Debug.Log($"{Constant.TimeCycle.GENERAL_GAME_CYCLE}s passed, Trying to start BreedNewCharacter Event.");
-            Debug.Log($"Chance : 0 - {chance}, Randomed : {random}. Start event = {!(random > chance)}");
+            Debug.Log($"Chance : 0 - {chance - 1}, Randomed : {random}. Start event = {(random < chance)}");
             if (random < chance)
             {
             }
             else
             {
-               // return;
+                return;
             }
 
             Character female = characters.Single(c => c.Gender == Character.GenderType.Female);

@@ -81,7 +81,7 @@ public class MapManager : SingletonComponent<MapManager>
 
     public void SetExpandedArea()
     {
-        Debug.Log("Seting expanded Area.");
+        Debug.Log("Setting expanded Area.");
         foreach (int treeID in LoadManager.Instance.playerData.expandedArea)
         {
             GameObject treeGO = GameManager.FindDeepChild(GameObject.Find("Map/Trees").transform, treeID.ToString()).gameObject;
@@ -213,7 +213,12 @@ public class MapManager : SingletonComponent<MapManager>
         tilemap.RefreshAllTiles();
         uiCanvas.SetActive(true);
         buildingShopPanel.transform.Find("BackGroundPanel").gameObject.SetActive(true);
-        buildingShopPanel.transform.Find("CancleButton").gameObject.SetActive(false);
+
+        Transform cancelButton = buildingShopPanel.transform.Find("CancleButton");
+        if (cancelButton)
+        {
+            cancelButton.gameObject.SetActive(false);
+        }
 
     }
 
@@ -575,7 +580,7 @@ public class MapManager : SingletonComponent<MapManager>
             {
                 buildPermission = false;
                 CancleShowAvailableTiles();
-               
+
             });
         }
         else

@@ -31,14 +31,15 @@ public class CameraPan : MonoBehaviour
         boundMax = boundRendererGO.GetComponent<SpriteRenderer>().bounds.max;
 
     }
-    // Update is called once per frame
+
     void Update()
     {
         if (MainCanvas.FreezeCamera)
         {
+            StartCoroutine(DelayOneFrame());
             return;
-
         }
+
         PanCamera();
         ZoomCamera();
         ClampPosition();
@@ -52,7 +53,6 @@ public class CameraPan : MonoBehaviour
                Mathf.Clamp(mainCamera.transform.position.y, boundMin.y + (mainCamera.orthographicSize),
                boundMax.y - (mainCamera.orthographicSize)),
                mainCamera.transform.position.z);
-
     }
     void OnDrawGizmos()
     {
@@ -65,15 +65,15 @@ public class CameraPan : MonoBehaviour
     }
     private void PanCamera()
     {
-
         if (Input.GetMouseButtonDown(0))
         {
+            Debug.Log($"Start");
             touchStart = GetWorldPosition(groundZ);
             totalClickTime = 0f;
-
         }
-        if (Input.GetMouseButton(0))
+        else if (Input.GetMouseButton(0))
         {
+            Debug.Log($"drag");
             totalClickTime += Time.deltaTime;
             if (totalClickTime >= 0.2f)
             {
@@ -81,14 +81,12 @@ public class CameraPan : MonoBehaviour
             }
             Vector3 direction = touchStart - GetWorldPosition(groundZ);
             mainCamera.transform.position += direction;
-
         }
-        if (Input.GetMouseButtonUp(0))
+        else if(Input.GetMouseButtonUp(0))
         {
+            Debug.Log($"stop");
             StartCoroutine(DelaySetPanning());
-
         }
-
     }
     private void ZoomCamera()
     {
@@ -96,13 +94,6 @@ public class CameraPan : MonoBehaviour
 
 #if UNITY_ANDROID
         {
-            if (Input.touchCount >= 2)
-            {
-                Vector2 touch0, touch1;
-                touch0 = Input.GetTouch(0).position;
-                touch1 = Input.GetTouch(1).position;
-                scroll = Vector2.Distance(touch0, touch1);
-            }
             if (Input.touchCount == 2)
             {
                 Touch touchZero = Input.GetTouch(0);
@@ -116,12 +107,9 @@ public class CameraPan : MonoBehaviour
 
                 float difference = currentMagnitude - prevMagnitude;
 
-                scroll = Input.GetAxis("Mouse ScrollWheel");
                 scroll = (difference / 100);
-
             }
         }
-
 #else
              scroll = Input.GetAxis("Mouse ScrollWheel");
 #endif
@@ -141,7 +129,13 @@ public class CameraPan : MonoBehaviour
             isPanning = false;
 
         }
-        private Vector3 GetWorldPosition(float z)
+    IEnumerator DelayOneFrame()
+    {
+        yield return new WaitForEndOfFrame();
+
+
+    }
+    private Vector3 GetWorldPosition(float z)
         {
             Ray mousePos = mainCamera.ScreenPointToRay(Input.mousePosition);
             Plane ground = new Plane(Vector3.forward, new Vector3(0, 0, z));

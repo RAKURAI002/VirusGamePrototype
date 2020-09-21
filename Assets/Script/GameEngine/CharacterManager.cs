@@ -165,7 +165,7 @@ public class CharacterManager : SingletonComponent<CharacterManager>
         {
             Builder oldBuilder = BuildingManager.Instance.AllBuildings.Single(b => b.ID == character.WorkingPlaceID);
             Debug.Log($"This Character is already doing work at {oldBuilder.Type}. Try canceling old work . . .");
-            CancleAssignWork(character, oldBuilder);
+            CancelAssignWork(character, oldBuilder);
 
         }
         builder.CharacterInBuilding[team].Characters.Add(character);
@@ -178,7 +178,7 @@ public class CharacterManager : SingletonComponent<CharacterManager>
 
         return true;
     }
-    public bool CancleAssignWork(Character character, Builder builder)
+    public bool CancelAssignWork(Character character, Builder builder)
     {
         if (character.workStatus == Character.WorkStatus.Pregnant)
         {

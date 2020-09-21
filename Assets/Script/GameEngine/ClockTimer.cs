@@ -15,6 +15,7 @@ public class ClockTimer : Timer
 
     long timerTemp;
 
+
     NotificationPanel notificationPanel;
     protected override void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     {
@@ -95,6 +96,12 @@ public class ClockTimer : Timer
 
     bool CheckCompleteTimer()
     {
+        if(finishTime <= DateTime.Now.AddSeconds(1).Ticks && !isNotiCanceled)
+        {
+            isNotiCanceled = true;
+            NotificationManager.Instance.CancelMobileNotification(activityInformation);
+
+        }
         if (finishTime <= DateTime.Now.Ticks)
         {
             FinishTimer();
@@ -115,7 +122,6 @@ public class ClockTimer : Timer
             Destroy(slider);
 
         }
-
         activityInformation.finishTime = finishTime;
 
         return;

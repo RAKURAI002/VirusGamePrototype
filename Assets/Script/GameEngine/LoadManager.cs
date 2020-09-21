@@ -126,7 +126,7 @@ public class LoadManager : SingletonComponent<LoadManager>
 
     public IEnumerator LoadInGameData()
     {
-        Debug.Log("Fetching Building Data . . .");
+        Debug.Log("Fetching Building data . . .");
         Coroutine c1 = StartCoroutine(GetRequest("/BuildingData.json", (UnityWebRequest req) =>
         {
             if (req.isNetworkError || req.isHttpError)
@@ -148,7 +148,7 @@ public class LoadManager : SingletonComponent<LoadManager>
             }
         }));
 
-        Debug.Log("Fetching Quest Data  . . .");
+        Debug.Log("Fetching Quests' data  . . .");
         Coroutine c2 = StartCoroutine(GetRequest("/QuestData.json", (UnityWebRequest req) =>
         {
             if (req.isNetworkError || req.isHttpError)
@@ -166,7 +166,8 @@ public class LoadManager : SingletonComponent<LoadManager>
                 Debug.Log("Fetching Quest Data completed.\n");
             }
         }));
-        Debug.Log("Fetching Resource Data . . .");
+        
+        Debug.Log("Fetching Resources' data . . .");
         Coroutine c3 = StartCoroutine(GetRequest("/ResourceData.json", (UnityWebRequest req) =>
         {
             if (req.isNetworkError || req.isHttpError)
@@ -184,7 +185,8 @@ public class LoadManager : SingletonComponent<LoadManager>
                 Debug.Log("Fetching Resource Data completed.\n");
             }
         }));
-        Debug.Log("Fetching Equipment Data . . .");
+        
+        Debug.Log("Fetching Equipments' data . . .");
         Coroutine c4 = StartCoroutine(GetRequest("/EquipmentData.json", (UnityWebRequest req) =>
         {
             if (req.isNetworkError || req.isHttpError)
@@ -203,7 +205,8 @@ public class LoadManager : SingletonComponent<LoadManager>
 
             }
         }));
-        Debug.Log("Fetching Enemy Data  . . .");
+        
+        Debug.Log("Fetching Enemies' data  . . .");
         Coroutine c5 = StartCoroutine(GetRequest("/EnemyData.json", (UnityWebRequest req) =>
         {
             if (req.isNetworkError || req.isHttpError)
@@ -217,6 +220,8 @@ public class LoadManager : SingletonComponent<LoadManager>
                 allEnemyData.AddRange(JsonHelper.FromJson<Enemy>(req.downloadHandler.text));
             }
         }));
+
+        Debug.Log("Fetching Characters' data  . . .");
         Coroutine c6 = StartCoroutine(LoadManager.Instance.GetRequest("/CharacterData.json", (UnityWebRequest req) =>
         {
             if (req.isNetworkError || req.isHttpError)
@@ -231,6 +236,8 @@ public class LoadManager : SingletonComponent<LoadManager>
 
             }
         }));
+
+        Debug.Log("Fetching BirthMarks' data  . . .");
         Coroutine c7 = StartCoroutine(LoadManager.Instance.GetRequest("/BirthMarkData.json", (UnityWebRequest req) =>
         {
             if (req.isNetworkError || req.isHttpError)
@@ -253,6 +260,8 @@ public class LoadManager : SingletonComponent<LoadManager>
 
             }
         }));
+
+        Debug.Log("Fetching Achievements' data  . . .");
         Coroutine c8 = StartCoroutine(LoadManager.Instance.GetRequest("/AchievementData.json", (UnityWebRequest req) =>
         {
             if (req.isNetworkError || req.isHttpError)

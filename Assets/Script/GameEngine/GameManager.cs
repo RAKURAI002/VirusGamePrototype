@@ -36,7 +36,7 @@ public class GameManager : SingletonComponent<GameManager>
     void OnDisable()
     {
         SceneManager.sceneLoaded -= OnLevelFinishedLoading;
-        if(EventManager.Instance)
+        if (EventManager.Instance)
             EventManager.Instance.OnGameDataLoadFinished -= OnGameDataLoadFinished;
     }
     void OnGameDataLoadFinished()
@@ -51,7 +51,7 @@ public class GameManager : SingletonComponent<GameManager>
         {
             Awake();
             Start();
-           timerCanvas.transform.position += new Vector3(0, 500, 0) ;
+            timerCanvas.transform.position += new Vector3(0, 500, 0);
             allBuildings.transform.position += new Vector3(0, 500, 0);
 
         }
@@ -89,7 +89,7 @@ public class GameManager : SingletonComponent<GameManager>
             secondCalled = true;
         }
 
-        editBuildingPanel = Resources.FindObjectsOfTypeAll<BuildingInformationCanvas>()[0].gameObject;
+        editBuildingPanel = Resources.FindObjectsOfTypeAll<BuildingInformationPanel>()[0].gameObject;
         if (editBuildingPanel == null)
         {
             Debug.LogError("Can't find editBuildingPanel");
@@ -123,7 +123,7 @@ public class GameManager : SingletonComponent<GameManager>
 
     private void OnApplicationPause(bool pause)
     {
-        if(pause)
+        if (pause)
         {
             LoadManager.Instance.playerData.lastLoginTime = DateTime.Now.Ticks;
             LoadManager.Instance.SavePlayerDataToJson();
@@ -139,7 +139,7 @@ public class GameManager : SingletonComponent<GameManager>
     #endregion
 
     public StringBuilder gameLog;
-    
+
     public void StartTutorial()
     {
         CharacterManager.Instance.CreateNewCharacter();

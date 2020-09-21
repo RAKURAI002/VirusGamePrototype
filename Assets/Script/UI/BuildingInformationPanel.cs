@@ -7,7 +7,7 @@ using UnityEngine.Tilemaps;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Text;
-public class BuildingInformationCanvas : MonoBehaviour
+public class BuildingInformationPanel : MonoBehaviour
 {
     Builder builder;
     Building buildingData;
@@ -51,7 +51,7 @@ public class BuildingInformationCanvas : MonoBehaviour
         if (activity.activityType == ActivityType.Build)
             RefreshInformationCanvas();
     }
-    public void ShowThisCanvas(Builder builder)
+    public void StartShowingPanel(Builder builder)
     {
         this.builder = builder;
 

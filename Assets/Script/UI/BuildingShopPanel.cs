@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class BuildingShopPanel : MonoBehaviour
 {
     public GameObject uiCanvas;
-    public Button cancleButton;
+    public Button cancelButton;
     Button currentSelectedButton;
     bool isInitialize;
 
@@ -22,7 +22,7 @@ public class BuildingShopPanel : MonoBehaviour
     {
         EventManager.Instance.OnResourceChanged += OnResourceChanged;
         transform.Find("BackGroundPanel").gameObject.SetActive(true);
-        cancleButton.gameObject.SetActive(false);
+        cancelButton.gameObject.SetActive(false);
         InitializeShopData();
         RefreshPanel();
     }
@@ -34,16 +34,29 @@ public class BuildingShopPanel : MonoBehaviour
     }
     private void Update()
     {
-        if (EventSystem.current.IsPointerOverGameObject())
+        if (Input.GetMouseButtonUp(0))
         {
-            MainCanvas.FreezeCamera = true;
-        }
-        else
-        {
-            MainCanvas.FreezeCamera = false;
+            if(IsPointerOverUIObject())
+            {
+                MainCanvas.FreezeCamera = true;
+            }
+            else
+            {
+                MainCanvas.FreezeCamera = false;
+            }
         }
 
     }
+    private bool IsPointerOverUIObject()
+    {
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+        return results.Count > 0;
+    }
+
     void CreateShopMenu()
     {
         Transform container = transform.Find("BackGroundPanel/Container");
@@ -85,22 +98,21 @@ public class BuildingShopPanel : MonoBehaviour
     }
     public void TryPurchaseBuilding()
     {
-        RefreshPanel();
         MapManager.Instance.ShowAvailableTiles();
         currentSelectedButton = EventSystem.current.currentSelectedGameObject.GetComponent<Button>();
 
-        cancleButton.gameObject.SetActive(true);
+        cancelButton.gameObject.SetActive(true);
 
         GameObject.Find("UICanvas").SetActive(false);
         transform.Find("BackGroundPanel").gameObject.SetActive(false);
         MapManager.Instance.SelectedBuildingName = currentSelectedButton.name.Replace(":ShopButton", "");
-
+        
     }
 
-    /// Cancle Button
     public void CancelTryPurchaseBuilding()
     {
-        cancleButton.gameObject.SetActive(false);
+
+        cancelButton.gameObject.SetActive(false);
         uiCanvas.SetActive(true);
         transform.Find("BackGroundPanel").gameObject.SetActive(true);
         MapManager.Instance.CancleShowAvailableTiles();

@@ -87,6 +87,13 @@ public class PointTimer : Timer
 
     bool CheckCompleteTimer()
     {
+        if (activityInformation.currentPoint + productionPoint >= activityInformation.requiredPoint 
+            && !isNotiCanceled)
+        {
+            isNotiCanceled = true;
+            NotificationManager.Instance.CancelMobileNotification(activityInformation);
+
+        }
         if (activityInformation.currentPoint >= activityInformation.requiredPoint)
         {
             CancelInvoke("IncreaseCurrentPoint");
@@ -118,8 +125,9 @@ public class PointTimer : Timer
         productionPoint = productionPointTemp;
 
         timer = (long)((activityInformation.requiredPoint - activityInformation.currentPoint) / productionPoint);
-        Debug.Log($"SSSSSSSSSSSet new timer {(timer * TimeSpan.TicksPerSecond)} ");
         activityInformation.finishTime = DateTime.Now.Ticks + (timer * TimeSpan.TicksPerSecond);
+
+        UpdateNotification();
     }
 
 

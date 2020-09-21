@@ -8,6 +8,9 @@ public abstract class Timer : MonoBehaviour
     public ActivityInformation activityInformation;
     public bool isFinished;
 
+    protected bool isInitiated;
+    protected bool isNotiCanceled;
+
     protected virtual void OnEnable()
     {
         SceneManager.sceneLoaded += OnLevelFinishedLoading;
@@ -32,6 +35,12 @@ public abstract class Timer : MonoBehaviour
     }
     public virtual void InitializeSlider()
     {
+    }
+
+    public void UpdateNotification()
+    {
+        NotificationManager.Instance.UpdateMobileNotification(activityInformation);
+
     }
     protected GameObject slider = null;
     public GameObject Slider { get { return slider; } set { slider = value; } }

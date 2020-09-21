@@ -121,7 +121,6 @@ public class BuildingManager : SingletonComponent<BuildingManager>
     {
         AddBuildingsToList(builder);
         builder.InitializeData();
-        Debug.Log($"IIIIIIIIII {builder.ID}");
         Building buildData = LoadManager.Instance.allBuildingData[builder.Type];
 
         GameObject builderGO = Instantiate(Resources.Load<GameObject>("Prefabs/BuildingPrefab"), builder.Position, Quaternion.identity);
@@ -281,14 +280,11 @@ public class BuildingManager : SingletonComponent<BuildingManager>
         if (ItemManager.Instance.TryConsumeResources(buidingCost))
         {
             return true;
-
         }
         else
         {
             return false;
-
         }
-
     }
 
     public void RemoveBuilding(Builder destroyBuilding)
@@ -306,7 +302,7 @@ public class BuildingManager : SingletonComponent<BuildingManager>
         {
             foreach (Character character in cw.Characters)
             {
-                CharacterManager.Instance.CancleAssignWork(character, destroyBuilding);
+                CharacterManager.Instance.CancelAssignWork(character, destroyBuilding);
 
             }
 
@@ -333,16 +329,12 @@ public class BuildingManager : SingletonComponent<BuildingManager>
             foreach (Builder builder in sameTypeBuildings)
             {
                 builder.CurrentActiveAmount = sameTypeBuildings.Length;
-
             }
-
         }
         else
         {
             Debug.LogError("Something happened on RemoveBuildingFromList !");
-
         }
-
     }
 
 }

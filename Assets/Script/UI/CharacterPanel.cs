@@ -7,7 +7,7 @@ using System.Linq;
 using System;
 using System.Reflection;
 
-public class CharacterCanvas : MonoBehaviour
+public class CharacterPanel : MonoBehaviour
 {
 
     public GameObject equipmentContainer;
@@ -308,11 +308,11 @@ public class CharacterCanvas : MonoBehaviour
 
         }
 
-        GameObject cancleButtonGO = Instantiate(Resources.Load("Prefabs/UI/ImageWithAmountPrefab") as GameObject, container.transform);
-        cancleButtonGO.name = "CancleEquippingButton";
-        cancleButtonGO.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/UI/Button/BtnCancel");
-        cancleButtonGO.GetComponentInChildren<Text>().text = "";
-        cancleButtonGO.AddComponent<Button>().onClick.AddListener(() => { UnAssignEquipmentToCharacter(position); UpdateInformation(); });
+        GameObject cancelButtonGO = Instantiate(Resources.Load("Prefabs/UI/ImageWithAmountPrefab") as GameObject, container.transform);
+        cancelButtonGO.name = "CancelEquippingButton";
+        cancelButtonGO.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/UI/Button/BtnCancel");
+        cancelButtonGO.GetComponentInChildren<Text>().text = "";
+        cancelButtonGO.AddComponent<Button>().onClick.AddListener(() => { UnAssignEquipmentToCharacter(position); UpdateInformation(); });
 
         foreach (var equipment in ItemManager.Instance.AllEquipments.Where(e => e.Value.Position == position))
         {

@@ -110,6 +110,7 @@ public class CraftingPanel : MonoBehaviour
                        }) ;
 
                        builder.TeamLockState.Add(_teamNumber);
+                       GetComponent<ClosePanelHelper>().ForceClosePanel();
 
                    }, false);
             
@@ -130,6 +131,7 @@ public class CraftingPanel : MonoBehaviour
         {
             return;
         }
+
         Resource resource = LoadManager.Instance.allResourceData[currentSelectedItemName.Replace("Recipe:", "")];
         Resource resourceRecipe = LoadManager.Instance.allResourceData[currentSelectedItemName];
         GameObject informationPanel = transform.Find("ItemInformationPanel/ItemInformation").gameObject;

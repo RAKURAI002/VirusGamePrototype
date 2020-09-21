@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class AssignWorkCanvas : MonoBehaviour
+public class AssignWorkPanel : MonoBehaviour
 {
 
 

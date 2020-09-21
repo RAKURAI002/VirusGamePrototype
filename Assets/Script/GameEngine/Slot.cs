@@ -26,7 +26,7 @@ public class Slot : MonoBehaviour, IPointerDownHandler
     {
         if(isInteractable && character != null)
         {
-            if(CharacterManager.Instance.CancleAssignWork(character, builder))
+            if(CharacterManager.Instance.CancelAssignWork(character, builder))
             {
                 character = null;
             }

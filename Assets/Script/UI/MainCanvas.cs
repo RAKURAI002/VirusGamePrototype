@@ -45,7 +45,6 @@ public class MainCanvas : MonoBehaviour
         EventManager.Instance.OnResourceChanged += OnResourceChanged;
         EventManager.Instance.OnCharacterAssigned += OnCharacterAddEvent;
         EventManager.Instance.OnBuildingModified += OnBuildingModified;
-
     }
     void OnBuildingModified(int id)
     {
@@ -85,7 +84,6 @@ public class MainCanvas : MonoBehaviour
 
     void OnDisable()
     {
-
         if (EventManager.Instance)
         {
             EventManager.Instance.OnActivityAssigned -= OnActivityAssigned;
@@ -103,7 +101,7 @@ public class MainCanvas : MonoBehaviour
         waitingCharacterAmountGO = GameManager.FindInActiveObjectByName("WaitingCharacterAmount");
         playerName.text = $"<color=red>{LoadManager.Instance.playerData.name}</color>";
         playerLevel.text = $"Level: {LoadManager.Instance.playerData.level}";
-        editBuildingPanel = Resources.FindObjectsOfTypeAll<BuildingInformationCanvas>()[0].gameObject;
+        editBuildingPanel = Resources.FindObjectsOfTypeAll<BuildingInformationPanel>()[0].gameObject;
 
         if (editBuildingPanel == null)
         {
@@ -113,8 +111,8 @@ public class MainCanvas : MonoBehaviour
         RefreshWaitingCharacterAmount();
         UpdateResourcePanel();
         UpdateResourceCollectorPanel();
-
     }
+
     void UpdateResourcePanel()
     {
         resourcePanel.transform.Find("GoldPanel").gameObject.GetComponentInChildren<Text>().text = ItemManager.Instance.GetResourceAmount("Gold").ToString();
@@ -126,6 +124,7 @@ public class MainCanvas : MonoBehaviour
     }
     void UpdateResourceCollectorPanel()
     {
+        Debug.Log($"UpdateResourceCollectorPanel");
         Transform container = resourceCollectorPanel.transform.Find("Container");
         foreach (Transform transform in container)
         {
@@ -146,6 +145,7 @@ public class MainCanvas : MonoBehaviour
         {
             if(BuildingManager.Instance.AllBuildings.Any(b => b.Type == item.Key))
             {
+                Debug.Log($"{item.Key}");
                 Resource resource = LoadManager.Instance.allResourceData[item.Value];
                 GameObject collectButton = Instantiate(Resources.Load("Prefabs/UI/SimpleButton") as GameObject, container);
                 collectButton.name = $"{item.Value}CollectButton";
@@ -277,19 +277,14 @@ public class MainCanvas : MonoBehaviour
     }
     void ShowEditBuildingPanel(GameObject selectedGameObject)
     {  
-        BuildingInformationCanvas editBuilding = editBuildingPanel.GetComponent<BuildingInformationCanvas>();
+        BuildingInformationPanel editBuilding = editBuildingPanel.GetComponent<BuildingInformationPanel>();
         if (editBuilding == null)
         {
             Debug.LogError("Can't find EditBuilding Component.");
         }
         Builder selectedBuilding = BuildingManager.Instance.AllBuildings.Single(b => b.representGameObject == selectedGameObject);
-      /*
-       if(selectedBuilding.Level == 0)
-        {
-            return;
 
-        }*/
-        editBuilding.ShowThisCanvas(selectedBuilding);
+        editBuilding.StartShowingPanel(selectedBuilding);
         FreezeCamera = true;
 
     }
@@ -353,19 +348,6 @@ public class MainCanvas : MonoBehaviour
         FreezeCamera = true;
 
         int notiAmount = NotificationManager.Instance.ProcessingActivies.Where(pa => pa.Value.isFinished).ToList().Count;
-
-        /*
-        if (notiAmount == 0)
-        {
-            finishedQuestAmountGO.SetActive(false);
-
-        }
-        else
-        {
-            finishedQuestAmountGO.GetComponentInChildren<Text>().text = notiAmount.ToString();
-
-        }*/
-
     }
 
     public void OnClickCharacterNotification()
@@ -373,34 +355,16 @@ public class MainCanvas : MonoBehaviour
         GameObject characterNotification = transform.Find("AddCharacterPanel").gameObject;
         characterNotification.SetActive(true);
         FreezeCamera = true;
-
-      //  int notiAmount = CharacterManager.Instance.characterWaitingInLine.ToList().Count;
-/*
-        if (notiAmount == 0)
-        {
-            characterNotification.SetActive(false);
-        
-        }
-        else
-        {
-            characterNotificationButtonContainer.GetComponentInChildren<Text>().text = notiAmount.ToString();
-        
-        }*/
-
-
-
     }
 
     public void OnClickToWork()
     {
         toWorkCanvas.SetActive(true);
         FreezeCamera = true;
-
     }
     public void OnClickExitButton()
     {
         EventSystem.current.currentSelectedGameObject.transform.parent.gameObject.SetActive(false);
-
     }
     public void OpenMenu()
     {
@@ -408,8 +372,7 @@ public class MainCanvas : MonoBehaviour
         selectButtonAnimator.SetBool("IsOpen", selectButtonToggle);
     }
 
-    IEnumerator DelaySetCanvasActive(bool active)
-
+    static IEnumerator DelaySetCanvasActive(bool active)
     {
         yield return new WaitForEndOfFrame();
         FreezeCamera = active;

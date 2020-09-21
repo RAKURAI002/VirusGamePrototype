@@ -12,6 +12,7 @@ public class BuildTimer : Timer
     Building buildData;
 
     Builder laborCenter;
+    Building laborCenterData;
     GameObject timerCanvas;
 
     public long timer { get; set; }
@@ -25,6 +26,7 @@ public class BuildTimer : Timer
     {
         laborCenter = BuildingManager.Instance.AllBuildings.SingleOrDefault(b => b.Type == Building.BuildingType.LaborCenter);
         builder = BuildingManager.Instance.AllBuildings.Single(builder => builder.representGameObject.name == this.gameObject.name);
+        laborCenterData = LoadManager.Instance.allBuildingData[Building.BuildingType.LaborCenter];
     }
     protected override void OnEnable()
     {
@@ -41,12 +43,9 @@ public class BuildTimer : Timer
     }
     void Start()
     {
-        DateTime dt = new DateTime(LoadManager.Instance.playerData.lastLoginTime);
-        Debug.Log($"{dt.ToString()}");
         Initiate();
         InvokeRepeating(nameof(IncreaseCurrentPoint), 0f, 1f);
         CreateSlider();
-        GetProductionPoint();
         //  Debug.Log("Upgrading " + thisBuilding.representGameObject.name + " to level" + (thisBuilding.Level) + ". Need " + (pointLeft / TimeSpan.TicksPerSecond) + "s to finish constructing.");
     }
 
@@ -71,7 +70,7 @@ public class BuildTimer : Timer
     void OnCharacterAssigned()
     {
         GetProductionPoint();
-
+        UpdateNewFinishTime();
     }
     void Initiate()
     {
@@ -83,7 +82,7 @@ public class BuildTimer : Timer
         gameObject.GetComponent<SpriteRenderer>().color = Color.red;
 
         GetProductionPoint();
-        Debug.Log($"DDDDDDDDDD {builder.constructionStatus.finishPoint}");
+
         if (builder.constructionStatus.finishPoint == 0)
         {
             builder.constructionStatus.finishPoint = builder.constructionStatus.constructPointRequired;
@@ -95,12 +94,23 @@ public class BuildTimer : Timer
             builder.constructionStatus.currentPoint += (int)Math.Round(((DateTime.Now.Ticks - LoadManager.Instance.playerData.lastLoginTime) / TimeSpan.TicksPerSecond) * productionPoint);
         }
         builder.constructionStatus.finishPoint = buildData.upgradePoint[builder.Level];
-        // pointLeft = pointFinish - thisBuilding.constructionStatus.currentPoint;
+
+        timer = (long)((builder.constructionStatus.finishPoint - builder.constructionStatus.currentPoint) / productionPoint);
+        activityInformation.finishTime = DateTime.Now.Ticks + (timer * TimeSpan.TicksPerSecond);
+
+        isInitiated = true;
+
         return;
     }
 
     bool CheckCompleteTimer()
     {
+        if (builder.constructionStatus.finishPoint <= builder.constructionStatus.currentPoint + productionPoint
+            && !isNotiCanceled)
+        {
+            isNotiCanceled = true;
+            NotificationManager.Instance.CancelMobileNotification(activityInformation);
+        }
         if (builder.constructionStatus.finishPoint <= builder.constructionStatus.currentPoint)
         {
             builder.Level++;
@@ -113,25 +123,15 @@ public class BuildTimer : Timer
         }
         return false;
     }
+
     public override void ForceFinish()
     {
         builder.constructionStatus.currentPoint = builder.constructionStatus.finishPoint;
         return;
     }
+
     void IncreaseCurrentPoint()
     {
-        {
-            /* long timer = (long)((thisBuilding.constructionStatus.finishPoint - thisBuilding.constructionStatus.currentPoint) / productionPoint);
-             int hours = Mathf.FloorToInt(timer / 3600);
-             int minutes = Mathf.FloorToInt(timer % 3600 / 60);
-             int seconds = Mathf.FloorToInt(timer % 3600 % 60f);
-             Debug.Log($"{thisBuilding.constructionStatus.currentPoint} + {productionPoint} :  {thisBuilding.constructionStatus.finishPoint} ." +
-                 $"{hours}.{minutes}.{seconds} ");/* Increasing : " +
-                 $"{LoadManager.Instance.allBuildingData.Single(b => b.type == Building.BuildingType.LaborCenter).production[laborCenter.Level][-1]}" +
-                 $" + AllStrength : {laborCenter.CharacterInBuilding.Sum(c => ((c.Stats.strength * 0.2f/8)))} + AllCraft : {laborCenter.CharacterInBuilding.Sum(c => ((c.Stats.crafting * 0.8f/3)))}" +
-                 $" + AllSpeed {laborCenter.CharacterInBuilding.Sum(c => ((c.Stats.speed * 0.2f/8)))} = {productionPoint}");*/
-        }
-
         builder.constructionStatus.currentPoint += productionPoint;
         slider.GetComponent<Slider>().value = builder.constructionStatus.currentPoint;
     }
@@ -189,11 +189,25 @@ public class BuildTimer : Timer
         if (laborCenter.CharacterInBuilding[builder.constructionStatus.teamNumber] != null)
         {
             productionPointTemp += laborCenter.CharacterInBuilding[builder.constructionStatus.teamNumber].Characters.Sum(c => ((c.Stats.strength * 0.2f / 8) + (c.Stats.speed * 0.2f / 8) + (c.Stats.craftsmanship * 0.8f / 3)));
-       
+
         }
         productionPoint = productionPointTemp;
 
-        activityInformation.finishTime = DateTime.Now.Ticks + (timer * TimeSpan.TicksPerSecond);
     }
+
+    void UpdateNewFinishTime()
+    {
+        timer = (long)((builder.constructionStatus.finishPoint - builder.constructionStatus.currentPoint) / productionPoint);
+
+        activityInformation.finishTime = DateTime.Now.Ticks + (timer * TimeSpan.TicksPerSecond);
+
+        
+        if (isInitiated)
+        {
+            UpdateNotification();
+        }
+    }
+
+
 
 }

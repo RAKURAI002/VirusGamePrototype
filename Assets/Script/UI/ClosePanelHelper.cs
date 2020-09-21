@@ -6,33 +6,22 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Text;
-public class ClosePanelHelper : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
+public class ClosePanelHelper : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] bool isPointerOverUI;
 
     Action callback;
 
-    public void OnPointerDown(PointerEventData eventData)
-    {
-
-    }
-
-    public void OnPointerUp(PointerEventData eventData)
-    {
-
-    }
-
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log($"ENNNNTERRRRRRR");
         isPointerOverUI = true;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        Debug.Log($"EEEEEEXITTTTTTTTTTTTTTTTTTTTTT");
         isPointerOverUI = false;
     }
+
     private bool IsPointerOverUIObject()
     {
         PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
@@ -43,7 +32,7 @@ public class ClosePanelHelper : MonoBehaviour, IPointerEnterHandler, IPointerExi
         return results.Count > 0;
     }
 
-        void Update()
+    void Update()
     {
 #if UNITY_STANDALONE
         if (Input.GetMouseButtonUp(0) && !isPointerOverUI)
@@ -55,9 +44,9 @@ public class ClosePanelHelper : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
         if (Input.GetMouseButtonUp(0))
         {
-            Debug.Log($"{IsPointerOverUIObject()}");
-            if(!IsPointerOverUIObject())
-              StartCoroutine(ClosePanel());
+            Debug.Log($"{gameObject.name}");
+            if (!IsPointerOverUIObject())
+                StartCoroutine(ClosePanel());
 
         }
 
@@ -78,16 +67,18 @@ public class ClosePanelHelper : MonoBehaviour, IPointerEnterHandler, IPointerExi
     IEnumerator ClosePanel()
     {
         yield return new WaitForEndOfFrame();
-        int length = GameObject.FindObjectsOfType<ClosePanelHelper>().Length;
+
         Debug.Log("ClosePanelHelper : Close Panel by " + gameObject.name);
-        GameObject.FindGameObjectsWithTag("ExtraUIPanel").ToList().ForEach((go) => { Debug.Log(go.name); go.SetActive(false); });
+        GameObject.FindGameObjectsWithTag("ExtraUIPanel").ToList().ForEach(
+            (go) => { Debug.Log(go.name); go.SetActive(false); });
+        GameObject.FindGameObjectsWithTag("Panel").ToList().ForEach(
+            (go) => { Debug.Log(go.name); go.SetActive(false); });
+
         gameObject.SetActive(false);
         callback?.Invoke();
-        if (length <= 1)
-        {
-            MainCanvas.FreezeCamera = false;
-        }
+        MainCanvas.FreezeCamera = false;
+
     }
 
-    
+
 }

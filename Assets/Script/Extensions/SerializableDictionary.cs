@@ -36,6 +36,9 @@ public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IS
     }
 }
 
+[System.Serializable]
+public class DictionaryIntToString : SerializableDictionary<int, string>
+{ }
 [System.Serializable] 
 public class DictionaryIntToInt : SerializableDictionary<int, int> 
 { }
@@ -103,6 +106,8 @@ public class ActivityInformation
     public long requiredPoint;
 
     public long finishTime;
+
+    public int androidNotificationID;
 
 
 }

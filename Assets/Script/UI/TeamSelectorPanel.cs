@@ -34,6 +34,7 @@ public class TeamSelectorPanel : MonoBehaviour
     public void OnClickConfirmTeam(int currentSelectedTeam)
     {
         callback?.Invoke(currentSelectedTeam);
+        UnityEngine.Debug.Log($"TryForc");
         GetComponent<ClosePanelHelper>().ForceClosePanel();
     }
     public void CreateTeamSelectorPanel(Mode _mode, Builder _builder, int _finishPoint, Action<int> _callback, bool _haveCharacterSlot)
