@@ -1,4 +1,4 @@
-﻿/*using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
 using Firebase.Auth;
@@ -127,4 +127,3 @@ public class FireBaseAuth : MonoBehaviour
     
     }
 }
-*/
