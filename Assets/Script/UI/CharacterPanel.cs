@@ -23,7 +23,7 @@ public class CharacterPanel : MonoBehaviour
     private void OnEnable()
     {
         CreateCharacterSlot();
-        EventManager.Instance.OnCharacterAssigned += UpdateInformation;
+        EventManager.Instance.OnCharacterAssigned += OnCharacterAssign;
         EventManager.Instance.OnResourceChanged += OnResourceChanged;
 
     }
@@ -32,19 +32,19 @@ public class CharacterPanel : MonoBehaviour
         if (EventManager.Instance)
         {
             EventManager.Instance.OnResourceChanged -= OnResourceChanged;
-            EventManager.Instance.OnCharacterAssigned -= UpdateInformation;
+            EventManager.Instance.OnCharacterAssigned -= OnCharacterAssign;
         }
     }
-
+    void OnCharacterAssign()
+    {
+        CreateCharacterSlot();
+        UpdateInformation();
+    }
     void Start()
     {
         character = CharacterManager.Instance.AllCharacters[0];
         UpdateInformation();
 
-    }
-
-    void Update()
-    {
     }
 
     void OnResourceChanged(string name)
@@ -76,15 +76,15 @@ public class CharacterPanel : MonoBehaviour
         Text statsPointText = statsPanel.transform.Find("StatsPoint").GetComponent<Text>();
 
         Transform birthMarkContainer = transform.Find("MainPanel/InformationPanel/StatusPanel/BrithMarkPanel/Container");
-        foreach(Transform transform in birthMarkContainer)
+        foreach (Transform transform in birthMarkContainer)
         {
             Destroy(transform.gameObject);
 
         }
 
-        foreach(Character.BirthMark birthMark in character.BirthMarks)
+        foreach (Character.BirthMark birthMark in character.BirthMarks)
         {
-            BirthMarkData birthMarkData = ObjectCopier.Clone(LoadManager.Instance.allBirthMarkDatas[birthMark.name]);
+            BirthMarkData birthMarkData = ObjectCopier.Clone(LoadManager.Instance.allBirthMarkData[birthMark.name]);
             birthMarkData.level = birthMark.level;
             BirthMarkIcon birthMarkIcon = Instantiate(Resources.Load("Prefabs/UI/IconPrefab") as GameObject, birthMarkContainer).AddComponent<BirthMarkIcon>();
             birthMarkIcon.Initialize(birthMarkData, false);
@@ -96,13 +96,13 @@ public class CharacterPanel : MonoBehaviour
 
 
         GameObject buffIconContainer = transform.Find("MainPanel/InformationPanel/BuffIconContainer").gameObject;
-        foreach(Transform transform in buffIconContainer.transform)
+        foreach (Transform transform in buffIconContainer.transform)
         {
             Destroy(transform.gameObject);
 
         }
 
-        foreach(Resource.Effect effect in character.effects)
+        foreach (Resource.Effect effect in character.effects)
         {
             GameObject buffIconGO = Instantiate(Resources.Load("Prefabs/UI/IconPrefab") as GameObject, buffIconContainer.transform);
             buffIconGO.AddComponent<BuffIcon>().Initialize(effect, true);
@@ -136,13 +136,13 @@ public class CharacterPanel : MonoBehaviour
 
         expSlider.maxValue = character.level * 10;
         expSlider.value = character.level * 10 - ((character.level * 5 * (character.level + 1)) - character.Experience);
-        
+
         expSlider.GetComponentInChildren<Text>().text = ((character.level * 5 * (character.level + 1)) - character.Experience).ToString() + " EXP left";
 
         Slider hpSlider = transform.Find("MainPanel/InformationPanel/HPSlider").GetComponent<Slider>();
         hpSlider.maxValue = character.MaxHitPoint;
         hpSlider.value = character.CurrentHitPoint;
-       
+
         hpSlider.GetComponentInChildren<Text>().text = $"{character.CurrentHitPoint} / {character.MaxHitPoint}";
 
     }
@@ -186,11 +186,9 @@ public class CharacterPanel : MonoBehaviour
             else if (character.workStatus == Character.WorkStatus.Idle)
             {
                 characterSlot.GetComponent<Image>().color = Color.white;
-
             }
-
         }
-
+        
     }
     public void OnClickPlusStatsButton()
     {
@@ -210,7 +208,6 @@ public class CharacterPanel : MonoBehaviour
     void OnClickCharacterSlot()
     {
         character = CharacterManager.Instance.AllCharacters.SingleOrDefault(c => c.ID.ToString() == EventSystem.current.currentSelectedGameObject.name);
-
         if (this.character == null)
         {
             Debug.LogError("Can't find Character, Something happened here.");
@@ -224,6 +221,7 @@ public class CharacterPanel : MonoBehaviour
         Debug.Log($"Select : {character.Name}");
         UpdateInformation();
     }
+
 
     public void OnClickCharacterPicture()
     {
@@ -250,11 +248,13 @@ public class CharacterPanel : MonoBehaviour
         }
 
     }
+
     public void OnClickEquipmentSlot()
     {
         equipmentListPanel.SetActive(true);
         RefreshEquipmentsList(EventSystem.current.currentSelectedGameObject.name);
     }
+
     public void OnClickUseItemButton()
     {
         if (character.workStatus == Character.WorkStatus.Quest)
@@ -268,6 +268,7 @@ public class CharacterPanel : MonoBehaviour
         RefreshConsumableItemList();
 
     }
+
     void RefreshConsumableItemList()
     {
         GameObject consumableItemPanelGO = transform.Find("MainPanel/ConsumableItemPanel").gameObject;
@@ -297,6 +298,7 @@ public class CharacterPanel : MonoBehaviour
         }
 
     }
+
     public void RefreshEquipmentsList(string _position)
     {
         Equipment.EquipmentPosition position = (Equipment.EquipmentPosition)Enum.Parse(typeof(Equipment.EquipmentPosition), _position);
@@ -337,6 +339,7 @@ public class CharacterPanel : MonoBehaviour
         }
 
     }
+
     void UnAssignEquipmentToCharacter(Equipment.EquipmentPosition position)
     {
         Equipment equipment = character.equipments.SingleOrDefault(e => e.Position == position);
@@ -351,6 +354,21 @@ public class CharacterPanel : MonoBehaviour
         equipmentListPanel.SetActive(false);
 
         OnClickCharacterPicture();
+    }
+
+    public void OnClickExpelButton()
+    {
+        int index = CharacterManager.Instance.AllCharacters.IndexOf(character);
+        CharacterManager.Instance.ExpelCharacter(character);
+
+        character = CharacterManager.Instance.AllCharacters[index];
+
+        itemSlotPanel.SetActive(false);
+        equipmentListPanel.SetActive(false);
+        transform.Find("MainPanel/ConsumableItemPanel").gameObject.SetActive(false);
+
+        Debug.Log($"Select : {character.Name}");
+        UpdateInformation();
     }
 
     void AssignEquipmentToCharacter(Equipment equipment)

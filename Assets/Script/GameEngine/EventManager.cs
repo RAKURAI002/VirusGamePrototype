@@ -56,6 +56,7 @@ public class EventManager : SingletonComponent<EventManager>
     {
         OnBuildingModified?.Invoke(id);
     }
+
     public void GameCycleUpdated()
     {
         OnGameCycleUpdated?.Invoke();

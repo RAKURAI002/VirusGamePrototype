@@ -142,12 +142,12 @@ public class GameManager : SingletonComponent<GameManager>
 
     public void StartTutorial()
     {
-        CharacterManager.Instance.CreateNewCharacter();
-
         BuildingManager.Instance.ForceCreateBuilding(Building.BuildingType.TownBase, 0);
         BuildingManager.Instance.ForceCreateBuilding(Building.BuildingType.LaborCenter, 0);
         BuildingManager.Instance.ForceCreateBuilding(Building.BuildingType.Residence, 1);
 
+        CharacterManager.Instance.CreateNewCharacter();
+        
         LoadManager.Instance.playerData.completeTutorial = true;
 
     }

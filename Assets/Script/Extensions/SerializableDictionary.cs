@@ -49,7 +49,7 @@ public class DictionaryStringToString : SerializableDictionary<string, string>
 public class DictionaryStringToInt : SerializableDictionary<string, int>
 { }
 [System.Serializable]
-public class CharacterDictionary : SerializableDictionary<int, int>
+public class CharacterDataDictionary : SerializableDictionary<string, Character.CharacterData>
 { }
 [System.Serializable]
 public class ResourceDictionary : SerializableDictionary<string, Resource>

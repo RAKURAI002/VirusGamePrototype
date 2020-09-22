@@ -84,6 +84,7 @@ public class AddCharacterPanel : MonoBehaviour
         EventManager.Instance.CharacterAssigned();
 
     }
+
     public void OnClickRefuseCharacter()
     {
         CharacterManager.Instance.characterWaitingInLine.Remove(character);

@@ -12,9 +12,9 @@ public class AchievementPanel : MonoBehaviour
     void Start()
     {
         GameObject container = transform.Find("AchievementInfo/Container").gameObject;
-        Debug.Log(LoadManager.Instance.allAchievementDatas.Count);
+        Debug.Log(LoadManager.Instance.allAchievementData.Count);
 
-        foreach (var achievement in LoadManager.Instance.allAchievementDatas)
+        foreach (var achievement in LoadManager.Instance.allAchievementData)
         {
             GameObject itemGO = Instantiate(Resources.Load("Prefabs/UI/AchievementPrfabs") as GameObject, container.transform);
 

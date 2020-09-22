@@ -44,10 +44,8 @@ public class ClosePanelHelper : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
         if (Input.GetMouseButtonUp(0))
         {
-            Debug.Log($"{gameObject.name}");
             if (!IsPointerOverUIObject())
                 StartCoroutine(ClosePanel());
-
         }
 
 #endif
@@ -70,13 +68,14 @@ public class ClosePanelHelper : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
         Debug.Log("ClosePanelHelper : Close Panel by " + gameObject.name);
         GameObject.FindGameObjectsWithTag("ExtraUIPanel").ToList().ForEach(
-            (go) => { Debug.Log(go.name); go.SetActive(false); });
+            (go) => {go.SetActive(false); });
         GameObject.FindGameObjectsWithTag("Panel").ToList().ForEach(
-            (go) => { Debug.Log(go.name); go.SetActive(false); });
+            (go) => {go.SetActive(false); });
 
+        MainCanvas.FreezeCamera = false;
         gameObject.SetActive(false);
         callback?.Invoke();
-        MainCanvas.FreezeCamera = false;
+        
 
     }
 

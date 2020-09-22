@@ -67,13 +67,11 @@ public class CameraPan : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log($"Start");
             touchStart = GetWorldPosition(groundZ);
             totalClickTime = 0f;
         }
         else if (Input.GetMouseButton(0))
         {
-            Debug.Log($"drag");
             totalClickTime += Time.deltaTime;
             if (totalClickTime >= 0.2f)
             {
@@ -84,7 +82,6 @@ public class CameraPan : MonoBehaviour
         }
         else if(Input.GetMouseButtonUp(0))
         {
-            Debug.Log($"stop");
             StartCoroutine(DelaySetPanning());
         }
     }

@@ -11,17 +11,14 @@ public class CharacterManager : SingletonComponent<CharacterManager>
     [SerializeField] private List<Character> allCharacters;
     [SerializeField] public List<Character> characterWaitingInLine;
 
-    public int MaxCharacterInGame { get; set; }
+    public int MaxCharacterInGame { get; set; } = 1;
     public List<Character> AllCharacters { get { return allCharacters; } set { allCharacters = value; } }
-
-
 
     #region Unity Functions
     protected override void OnInitialize()
     {
         allCharacters = new List<Character>();
         characterWaitingInLine = new List<Character>();
-
     }
 
     void OnEnable()
@@ -29,7 +26,7 @@ public class CharacterManager : SingletonComponent<CharacterManager>
         SceneManager.sceneLoaded += OnLevelFinishedLoading;
 
         EventManager.Instance.OnGameDataLoadFinished += OnGameDataLoadFinished;
-
+        EventManager.Instance.OnActivityFinished += OnActivityFinished;
     }
 
     void OnDisable()
@@ -37,7 +34,11 @@ public class CharacterManager : SingletonComponent<CharacterManager>
         SceneManager.sceneLoaded -= OnLevelFinishedLoading;
 
         if (EventManager.Instance)
+        {
+            EventManager.Instance.OnActivityFinished += OnActivityFinished;
             EventManager.Instance.OnGameDataLoadFinished -= OnGameDataLoadFinished;
+        }
+            
 
     }
 
@@ -59,6 +60,28 @@ public class CharacterManager : SingletonComponent<CharacterManager>
     }
 
     #endregion
+    void OnActivityFinished(ActivityInformation activityInformation)
+    {
+        if(activityInformation.activityType == ActivityType.Build)
+        {
+            if(BuildingManager.Instance.AllBuildings.SingleOrDefault(b => 
+            b.ID == activityInformation.informationID).Type != Building.BuildingType.Residence)
+            {
+                return;
+            }
+
+            List<Builder> allResidences = BuildingManager.Instance.AllBuildings.Where(b 
+                => b.Type == Building.BuildingType.Residence).ToList();
+            Building residenceData = LoadManager.Instance.allBuildingData[Building.BuildingType.Residence];
+
+            int maxCharacter = 0;
+            foreach (Builder residence in allResidences)
+            {
+                maxCharacter += residenceData.production[residence.Level]["MaxCharacterStored"];
+            }
+            MaxCharacterInGame = maxCharacter;
+        }
+    }
 
     void CharacterJoiningEvent()
     {
@@ -66,7 +89,6 @@ public class CharacterManager : SingletonComponent<CharacterManager>
         if (LoadManager.Instance.allCharacterData.Count <= 0)
         {
             return;
-
         }
 
         int random = UnityEngine.Random.Range(0, 100);
@@ -77,18 +99,16 @@ public class CharacterManager : SingletonComponent<CharacterManager>
             return;
 
         }
-
         CreateWaitingCharacter();
-
     }
     void CreateWaitingCharacter()
     {
         int index = UnityEngine.Random.Range(0, LoadManager.Instance.allCharacterData.Count);
 
-        Character.CharacterData characterData = LoadManager.Instance.allCharacterData[index];
+        Character.CharacterData characterData = LoadManager.Instance.allCharacterData.ElementAt(index).Value;
         Character character = new Character(characterData.name, characterData.gender, characterData.spritePath); ;
         characterWaitingInLine.Add(character);
-        LoadManager.Instance.allCharacterData.Remove(characterData);
+        LoadManager.Instance.allCharacterData.Remove(characterData.name);
         EventManager.Instance.CharacterAssigned();
 
     }
@@ -106,11 +126,11 @@ public class CharacterManager : SingletonComponent<CharacterManager>
     {
         int index = UnityEngine.Random.Range(0, LoadManager.Instance.allCharacterData.Count);
 
-        Character.CharacterData characterData = LoadManager.Instance.allCharacterData[index];
+        Character.CharacterData characterData = LoadManager.Instance.allCharacterData.ElementAt(index).Value;
         Character character = new Character(characterData.name, characterData.gender, characterData.spritePath); ;
         character.workStatus = Character.WorkStatus.Minor;
         AddCharacterToList(character);
-        LoadManager.Instance.allCharacterData.Remove(characterData);
+        LoadManager.Instance.allCharacterData.Remove(characterData.name);
         EventManager.Instance.CharacterAssigned();
         NotificationManager.Instance.AddActivity(new ActivityInformation() 
         {
@@ -168,6 +188,7 @@ public class CharacterManager : SingletonComponent<CharacterManager>
             CancelAssignWork(character, oldBuilder);
 
         }
+
         builder.CharacterInBuilding[team].Characters.Add(character);
         character.workStatus = Character.WorkStatus.Working;
 
@@ -195,12 +216,29 @@ public class CharacterManager : SingletonComponent<CharacterManager>
             Debug.LogError("Remove Character in Building FAILED.");
             return false;
         }
+
         character.workStatus = Character.WorkStatus.Idle;
         character.WorkingPlaceID = 0;
         Debug.Log($"Stop {character.Name} from working at {builder.Type}. Now {character.Name} is {character.workStatus}");
         EventManager.Instance.CharacterAssigned();
         LoadManager.Instance.SavePlayerDataToJson();
         return true;
+    }
+
+    public void ExpelCharacter(Character character)
+    {
+        if(character.workStatus != Character.WorkStatus.Idle)
+        {
+            Debug.Log($"You can't expel {character.workStatus} Character !");
+            return;
+        }
+
+        if(!allCharacters.Remove(character))
+        {
+            Debug.Log($"Can't remove this Character for some reasons !");   
+        }
+        Debug.Log($"Expel {character.Name} successfully.");
+        EventManager.Instance.CharacterAssigned();
     }
 
     public void ConsumeItem(Character character, Resource item)

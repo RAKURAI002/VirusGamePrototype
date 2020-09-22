@@ -21,7 +21,6 @@ public class FireBaseManager : SingletonComponent<FireBaseManager>
     {
 
     }
-        // Start is called before the first frame update
     void Start()
     {
         FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://virusgame-6eb14.firebaseio.com/");
@@ -29,11 +28,6 @@ public class FireBaseManager : SingletonComponent<FireBaseManager>
         // Debug.Log(ReceiveData().Length);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void SendData(string json)
     {
         reference.Child("users/").Child(LoadManager.Instance.playerData.UID).SetRawJsonValueAsync(json);

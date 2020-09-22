@@ -20,19 +20,11 @@ public class LoadManager : SingletonComponent<LoadManager>
     [SerializeField] public EquipmentDictionary allEquipmentData;
     [SerializeField] public List<Enemy> allEnemyData; /// ********************
     [SerializeField] public QuestDataDictionary allQuestData; /// ****************
-    [SerializeField] public List<Character.CharacterData> allCharacterData;
-    [SerializeField] public BirthMarkDataDictionary allBirthMarkDatas;
-    [SerializeField] public List<AchievementData> allAchievementDatas;
+    [SerializeField] public CharacterDataDictionary allCharacterData;
+    [SerializeField] public BirthMarkDataDictionary allBirthMarkData;
+    [SerializeField] public List<AchievementData> allAchievementData;
 
     #region Unity Functions
-    protected override void Awake()
-    {
-        base.Awake();
-    }
-    protected override void OnInitialize()
-    {
-
-    }
 
     void OnEnable()
     {
@@ -60,10 +52,10 @@ public class LoadManager : SingletonComponent<LoadManager>
     void Start()
     {
     }
-
     void Update()
     {
     }
+
     #endregion
     public IEnumerator InitializeGameData()
     {
@@ -230,10 +222,13 @@ public class LoadManager : SingletonComponent<LoadManager>
             }
             else
             {
-                allCharacterData = new List<Character.CharacterData>();
+                allCharacterData = new CharacterDataDictionary();
                 Debug.Log("Fetching Character Data completed.\n");
-                allCharacterData.AddRange(JsonHelper.FromJson<Character.CharacterData>(req.downloadHandler.text));
-
+                var tempData = (JsonHelper.FromJson<Character.CharacterData>(req.downloadHandler.text));
+                foreach (var item in tempData)
+                {
+                    allCharacterData.Add(item.name, item);
+                }     
             }
         }));
 
@@ -246,7 +241,7 @@ public class LoadManager : SingletonComponent<LoadManager>
             }
             else
             {
-                allBirthMarkDatas = new BirthMarkDataDictionary();
+                allBirthMarkData = new BirthMarkDataDictionary();
                 Debug.Log("Fetching Character BirthMark Data completed.\n");
 
                 BirthMarkSerializer birthMarkSerializer = new BirthMarkSerializer();
@@ -255,7 +250,7 @@ public class LoadManager : SingletonComponent<LoadManager>
 
                 foreach (var birthMarkData in birthMarkSerializer.birthMarkDatas)
                 {
-                    allBirthMarkDatas.Add(birthMarkData.name, birthMarkData);
+                    allBirthMarkData.Add(birthMarkData.name, birthMarkData);
                 }
 
             }
@@ -270,9 +265,9 @@ public class LoadManager : SingletonComponent<LoadManager>
             }
             else
             {
-                allAchievementDatas = new List<AchievementData>();
+                allAchievementData = new List<AchievementData>();
                 Debug.Log("Fetching Character Achievement Datas completed.\n");
-                allAchievementDatas = JsonHelper.FromJson<AchievementData>(req.downloadHandler.text).ToList();
+                allAchievementData = JsonHelper.FromJson<AchievementData>(req.downloadHandler.text).ToList();
             }
         }));
 
@@ -318,24 +313,18 @@ public class LoadManager : SingletonComponent<LoadManager>
     {
         foreach (Character character in CharacterManager.Instance.AllCharacters)
         {
-            Character.CharacterData cData = LoadManager.Instance.allCharacterData.SingleOrDefault(c => c.name == character.Name);
-            if (cData != null)
-            {
-                LoadManager.Instance.allCharacterData.Remove(cData);
 
+            if (LoadManager.Instance.allCharacterData.ContainsKey(character.Name))
+            {
+                LoadManager.Instance.allCharacterData.Remove(character.Name);
             }
 
         }
         foreach (Character character in CharacterManager.Instance.characterWaitingInLine)
         {
-
-            Character.CharacterData[] cData = LoadManager.Instance.allCharacterData.Where(c => c.name == character.Name).ToArray();
-
-
-            if (cData.Length != 0)
+            if (LoadManager.Instance.allCharacterData.ContainsKey(character.Name))
             {
-                LoadManager.Instance.allCharacterData.Remove(cData[0]);
-
+                LoadManager.Instance.allCharacterData.Remove(character.Name);
             }
 
         }

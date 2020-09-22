@@ -137,7 +137,7 @@ public class ResourceBuildingBehavior : BuildingBehavior
             List<BirthMarkData> birthMarkDatas = new List<BirthMarkData>();
             birthMarks.ForEach((bm) =>
             {
-                BirthMarkData birthMarkData = LoadManager.Instance.allBirthMarkDatas[bm.name];
+                BirthMarkData birthMarkData = LoadManager.Instance.allBirthMarkData[bm.name];
                 Debug.Log($"{birthMarkData.name}");
                 if (birthMarkData != null)
                 {

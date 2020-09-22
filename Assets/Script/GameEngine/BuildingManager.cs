@@ -53,7 +53,6 @@ public class BuildingManager : SingletonComponent<BuildingManager>
         {
             Debug.LogWarning("Please Create LaborCenter to perform more Building task !");
             return false;
-
         }
 
         if (!ConsumeBuildingCost(new Builder(type)))
@@ -72,7 +71,6 @@ public class BuildingManager : SingletonComponent<BuildingManager>
         if (laborCenter != null)
         {
             laborCenter.TeamLockState.Add(teamNumber);
-
         }
 
         NotificationManager.Instance.AddActivity(new ActivityInformation()
@@ -89,14 +87,12 @@ public class BuildingManager : SingletonComponent<BuildingManager>
         LoadManager.Instance.SavePlayerDataToJson();
 
         return true;
-
     }
     void AddBuildingBehavior(GameObject builderGO, Builder builder, Building buildingData)
     {
         if (buildingData.behaviorType == Building.BuildingBehaviorType.ResourceCollector)
         {
             builderGO.AddComponent<ResourceBuildingBehavior>().SetBuilder(builder);
-
         }
         else if (buildingData.behaviorType == Building.BuildingBehaviorType.ParticularFunction)
         {
@@ -108,14 +104,11 @@ public class BuildingManager : SingletonComponent<BuildingManager>
                 return;
             }
             ((BuildingBehavior)builderGO.AddComponent(type)).SetBuilder(builder);
-
         }
         else
         {
             builderGO.AddComponent<BuildingBehavior>().SetBuilder(builder);
         }
-
-
     }
     void InitiateBuilding(Builder builder)
     {
@@ -135,12 +128,10 @@ public class BuildingManager : SingletonComponent<BuildingManager>
         if (builder.constructionStatus.isConstructing == true)
         {
             builderGO.AddComponent<BuildTimer>();
-
         }
-
         builderGO.SetActive(true);
-
     }
+
     public void LoadBuilding(Builder builder)
     {
         InitiateBuilding(builder);
@@ -318,7 +309,6 @@ public class BuildingManager : SingletonComponent<BuildingManager>
         Resources.FindObjectsOfTypeAll<BuildingShopPanel>()[0].RefreshPanel();
 
         return;
-
     }
     public void RemoveBuildingFromList(Builder b)
     {

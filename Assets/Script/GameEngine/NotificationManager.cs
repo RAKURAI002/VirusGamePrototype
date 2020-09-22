@@ -242,7 +242,6 @@ public class NotificationManager : SingletonComponent<NotificationManager>
 #if UNITY_ANDROID
         AndroidNotification androidNotification = new AndroidNotification()
         {
-
             Title = activityInformation.activityName,
             Text = $"{activityInformation.activityName} is already finished !",
             FireTime = new DateTime(activityInformation.finishTime),
@@ -254,8 +253,10 @@ public class NotificationManager : SingletonComponent<NotificationManager>
     }
     public void CancelMobileNotification(ActivityInformation activityInformation)
     {
+#if UNITY_ANDROID
         Debug.Log($"{activityInformation.activityName} canceled.");
         AndroidNotificationCenter.CancelScheduledNotification(activityInformation.androidNotificationID);
+#endif
     }
 
     public void OnActivityFinished(ActivityInformation activityInformation)

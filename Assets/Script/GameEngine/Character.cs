@@ -71,7 +71,6 @@ public class Character
         Arm,
         Leg,
         Foot
-
     }
 
     public enum HealthStatus
@@ -118,7 +117,7 @@ public class Character
         BirthMark[] statsBirthMarks = birthMarks.Where(bm => bm.type == typeof(IncreaseSTATSBirthMark).ToString()).ToArray();
         foreach (BirthMark birthMark in statsBirthMarks)
         {
-            BirthMarkData birthMarkData = LoadManager.Instance.allBirthMarkDatas[birthMark.name];
+            BirthMarkData birthMarkData = LoadManager.Instance.allBirthMarkData[birthMark.name];
 
             FieldInfo fInfo = typeof(Character.AllStats).GetField(((IncreaseSTATSBirthMark)birthMarkData).statToIncrease.ToLower());
 
@@ -272,7 +271,7 @@ public class Character
                 {
                     Debug.Log($"Random Tier {birthMarkTier} BirthMark to character.");
 
-                    List<BirthMarkData> bmData = LoadManager.Instance.allBirthMarkDatas.Where(bm => bm.Value.tier == birthMarkTier).Select(bm => bm.Value).ToList();
+                    List<BirthMarkData> bmData = LoadManager.Instance.allBirthMarkData.Where(bm => bm.Value.tier == birthMarkTier).Select(bm => bm.Value).ToList();
 
                     int randomEffect = UnityEngine.Random.Range(0, bmData.Count);
                     birthMarks.Add(new BirthMark(bmData[randomEffect]));

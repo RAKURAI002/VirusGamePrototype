@@ -108,7 +108,6 @@ public class FireBaseAuth : MonoBehaviour
     }
     IEnumerator LoadNewScene()
     {
-
         yield return new WaitForSeconds(1);
 
         AsyncOperation async = SceneManager.LoadSceneAsync("MainScene");
@@ -121,11 +120,9 @@ public class FireBaseAuth : MonoBehaviour
     {
         AsyncOperation async = SceneManager.LoadSceneAsync("MainScene");
         yield return async;
-
     }
     void LoadScene()
     {
-
         SceneManager.LoadSceneAsync("MainScene");
     
     }

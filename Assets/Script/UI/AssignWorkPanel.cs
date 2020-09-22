@@ -6,12 +6,6 @@ using UnityEngine.UI;
 
 public class AssignWorkPanel : MonoBehaviour
 {
-
-
-    private void Awake()
-    {
-    }
-
     private void OnEnable()
     {
         RefreshAssignUI();
@@ -103,8 +97,6 @@ public class AssignWorkPanel : MonoBehaviour
 
     public void RefreshAssignUI()
     {
-        //Debug.Log("Refreshing AssignWork Canvas . . .");
-
         ClearOldAssignUIData();
         CreateCharacterSlot();
         CreateAssignBuildingContainer();

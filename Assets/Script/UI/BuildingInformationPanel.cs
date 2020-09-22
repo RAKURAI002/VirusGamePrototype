@@ -81,7 +81,7 @@ public class BuildingInformationPanel : MonoBehaviour
     public void OnClickCraftButton()
     {
 
-        ShowCraftingPanelPanel();
+        ShowCraftingPanel();
     }
     public void OnClickDestroyButton()
     {
@@ -130,7 +130,7 @@ public class BuildingInformationPanel : MonoBehaviour
 
     }
 
-    void ShowCraftingPanelPanel()
+    void ShowCraftingPanel()
     {
         GameObject craftingPanel = GameManager.FindInActiveObjectByName("CraftingPanel");
         craftingPanel.GetComponent<CraftingPanel>().ShowCraftingPanel(builder);

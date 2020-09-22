@@ -14,7 +14,6 @@ public class ItemManager : SingletonComponent<ItemManager>
     /// Contains all of Player's Equipments.
     private EquipmentDictionary allEquipments;
 
-    /// 1 Resource update cycle's period.
     float RESOURCE_CICLE_TIME = Constant.TimeCycle.RESOURCE_UPDATE_CYCLE;
 
     public ResourceDictionary AllResources { get { return allResources; } set { allResources = value; } }
@@ -101,7 +100,6 @@ public class ItemManager : SingletonComponent<ItemManager>
                     type = Building.BuildingType.Unknown;
                     break;
                 }
-
         }
 
         List<Builder> builders = BuildingManager.Instance.AllBuildings.Where(b => b.Type == type).ToList();
@@ -183,7 +181,7 @@ public class ItemManager : SingletonComponent<ItemManager>
                 List<BirthMarkData> birthMarkDatas = new List<BirthMarkData>();
                 birthMarks.ForEach((bm) =>
                 {
-                    BirthMarkData birthMarkData = LoadManager.Instance.allBirthMarkDatas[bm.name];
+                    BirthMarkData birthMarkData = LoadManager.Instance.allBirthMarkData[bm.name];
                     Debug.Log($"{birthMarkData.name}");
                     if (birthMarkData != null)
                     {
