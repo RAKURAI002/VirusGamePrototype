@@ -10,6 +10,9 @@ public class ClosePanelHelper : MonoBehaviour, IPointerEnterHandler, IPointerExi
 {
     [SerializeField] bool isPointerOverUI;
 
+    [Header("Close Setting")]
+    public bool isCloseAllPanel;
+
     Action callback;
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -69,8 +72,12 @@ public class ClosePanelHelper : MonoBehaviour, IPointerEnterHandler, IPointerExi
         Debug.Log("ClosePanelHelper : Close Panel by " + gameObject.name);
         GameObject.FindGameObjectsWithTag("ExtraUIPanel").ToList().ForEach(
             (go) => {go.SetActive(false); });
-        GameObject.FindGameObjectsWithTag("Panel").ToList().ForEach(
-            (go) => {go.SetActive(false); });
+        if(isCloseAllPanel)
+        {
+            GameObject.FindGameObjectsWithTag("Panel").ToList().ForEach(
+           (go) => { go.SetActive(false); });
+
+        }
 
         MainCanvas.FreezeCamera = false;
         gameObject.SetActive(false);
