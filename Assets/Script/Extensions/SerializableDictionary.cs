@@ -56,6 +56,10 @@ public class EquipmentDictionary : SerializableDictionary<string, Equipment>
 { }
 
 [System.Serializable]
+public class DeadCharacterDictionary : SerializableDictionary<Character, long>
+{ }
+
+[System.Serializable]
 public class BuildingDictionary : SerializableDictionary<Building.BuildingType, Building>
 { }
 public class BuilderDictionary : SerializableDictionary<int, Builder>

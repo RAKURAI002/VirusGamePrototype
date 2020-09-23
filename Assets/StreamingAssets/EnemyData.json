@@ -8,8 +8,10 @@
                 "defense": 3,
                 "speed": 7,
                 "hitPoint": 8,
-                "intelligence": 3
-            }
+                "intelligence": 3,
+                "perception": 0
+            },
+            "expReceived": 5
         },
         {
             "id": 2,
@@ -19,8 +21,10 @@
                 "defense": 7,
                 "speed": 2,
                 "hitPoint": 13,
-                "intelligence": 6
-            }
+                "intelligence": 6,
+                "perception": 0
+            },
+            "expReceived": 10
         },
         {
             "id": 3,
@@ -30,8 +34,10 @@
                 "defense": 20,
                 "speed": 0,
                 "hitPoint": 30,
-                "intelligence": 6
-            }
+                "intelligence": 6,
+                "perception": 0
+            },
+            "expReceived": 15
         },
         {
             "id": 4,
@@ -41,8 +47,10 @@
                 "defense": 0,
                 "speed": 0,
                 "hitPoint": -1,
-                "intelligence": 6
-            }
+                "intelligence": 6,
+                "perception": 0
+            },
+            "expReceived": 20
         },
         {
             "id": 5,
@@ -52,8 +60,10 @@
                 "defense": 99,
                 "speed": 99,
                 "hitPoint": 99,
-                "intelligence": 99
-            }
+                "intelligence": 99,
+                "perception": 0
+            },
+            "expReceived": 25
         }
     ]
 }

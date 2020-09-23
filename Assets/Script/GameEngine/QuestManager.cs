@@ -12,25 +12,30 @@ public class QuestManager : SingletonComponent<QuestManager>
 {
 
     public bool isAvoidBattle; //กดเลือกมั้ย
-    int turn; //เทิร์นแต่ละครั้ง
-    int totalDamage;
+    int turn;
+    List<float> characterOldHP;
+    List<int> enemyActionPoint;
+    List<int> characterActionPoint;
+    public bool isRetreat;
+
+
 
     #region Unity Functions
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnLevelFinishedLoading;
-
+ 
     }
 
     void OnDisable()
     {
         SceneManager.sceneLoaded -= OnLevelFinishedLoading;
-        if(EventManager.Instance)
+        if (EventManager.Instance)
         {
 
 
         }
-           
+
     }
 
     protected override void OnInitialize()
@@ -45,7 +50,7 @@ public class QuestManager : SingletonComponent<QuestManager>
         {
             Awake();
             Start();
-            
+
         }
 
         if (scene.name == "WorldMap")
@@ -60,18 +65,18 @@ public class QuestManager : SingletonComponent<QuestManager>
     protected override void Awake()
     {
         base.Awake();
-        
+
     }
-    
+
     void Start()
     {
         townBase = BuildManager.Instance.AllBuildings.SingleOrDefault(b => b.Type == Building.BuildingType.TownBase);
-    
+
     }
- 
+
     #endregion
     public string selectingLevel { get; set; }
-    
+
     [SerializeField] Builder townBase;
 
     public void StartQuest(int _teamNumber)
@@ -95,17 +100,17 @@ public class QuestManager : SingletonComponent<QuestManager>
 
         List<Character> characters = new List<Character>();
         characters.AddRange(townBase.CharacterInBuilding[_teamNumber].Characters);
-        foreach(Character character in characters)
+        foreach (Character character in characters)
         {
             character.workStatus = Character.WorkStatus.Quest;
 
         }
 
         int minSpeed = characters.Aggregate((c, min) => (min.Stats.speed < c.Stats.speed ? min : c)).Stats.speed;
-        int questDuration = currentQuest.duration ; // *****************
+        int questDuration = currentQuest.duration; // *****************
         Debug.Log($"The least Character speed stats is {minSpeed} resulting in taking {questDuration} seconds for this quest.");
 
-        NotificationManager.Instance.AddActivity(new ActivityInformation(){
+        NotificationManager.Instance.AddActivity(new ActivityInformation() {
             activityName = ("Quest:" + currentQuest.questName),
             activityType = ActivityType.Quest,
             startPoint = DateTime.Now.Ticks,
@@ -120,17 +125,17 @@ public class QuestManager : SingletonComponent<QuestManager>
         BuildManager.Instance.AllBuildings.SingleOrDefault(b => b.Type == Building.BuildingType.TownBase).TeamLockState.Add(_teamNumber);
 
         LoadManager.Instance.SavePlayerDataToJson();
-  
+
     }
 
     public void FinishQuest(ActivityInformation quest)
     {
-      //  Debug.Log(quest.activityID);
+        //  Debug.Log(quest.activityID);
         QuestData questData = LoadManager.Instance.allQuestData[quest.informationID];
         List<Character> characters = new List<Character>();
         characters.AddRange(townBase.CharacterInBuilding[quest.teamNumber].Characters);
 
-        foreach(Character character in characters)
+        foreach (Character character in characters)
         {
             character.workStatus = Character.WorkStatus.Working;
 
@@ -139,103 +144,319 @@ public class QuestManager : SingletonComponent<QuestManager>
         StringBuilder questLog;
         questLog = new StringBuilder();
 
+        StringBuilder detailLog;
+        detailLog = new StringBuilder();
+
         questLog.AppendLine($"\n<color=red> QUEST LOG </color>");
-        questLog.AppendLine($"Starting {questData.questName} . . .\n");
+        questLog.AppendLine($"\nStarting {questData.questName} . . .");
+        detailLog.AppendLine($"\n<color=red> FIGHT LOG </color>");
+        detailLog.AppendLine($"\nStarting {questData.questName} . . .");
 
-        DoBattle(characters, questLog, questData, quest);
+        DoBattle(characters, questLog, detailLog, questData, quest);
 
-        ShowResultPanel(GetQuestReward(characters, questLog, questData), questLog);
+
+        ShowResultPanel(GetQuestReward(characters, questLog, questData), questLog, detailLog);
 
         BuildManager.Instance.AllBuildings.SingleOrDefault(b => b.Type == Building.BuildingType.TownBase).TeamLockState.Remove(quest.teamNumber);
 
         NotificationManager.Instance.RemoveActivity(quest);
-        
+
         LoadManager.Instance.SavePlayerDataToJson();
 
         return;
 
     }
-    void DoBattle(List<Character> characters, StringBuilder questLog, QuestData questData, ActivityInformation quest)
+    void DoBattle(List<Character> characters, StringBuilder questLog, StringBuilder detailLog, QuestData questData, ActivityInformation quest)
     {
+
         List<Enemy> enemies = new List<Enemy>();
-        enemies.AddRange(LoadManager.Instance.allEnemyData.Where(e => questData.enemiesIDList.Contains(e.ID)));
+
+        foreach (Enemy enemy in LoadManager.Instance.allEnemyData.Where(e => questData.enemiesIDList.Contains(e.ID)))
+        {
+            enemies.Add(ObjectCopier.Clone(enemy));
+        }
+
+
 
         Character leader = characters[0];
 
         int teamSpeed = characters.Sum(c => c.Stats.speed);
         int enemiesSpeed = enemies.Sum(e => e.Stats.speed);
 
+
+
         foreach (Enemy enemy in enemies)
         {
+
+            Debug.Log("enemy CurrentHp" + enemy.CurrentHp.ToString());
             questLog.AppendLine($"Wild {enemy.Name} appears !");
-            if ((leader.Stats.intelligence >= enemies[0].Stats.intelligence * 3) && (teamSpeed > enemiesSpeed))  // ****************
+        }
+
+        if ((leader.Stats.intelligence >= enemies[0].Stats.intelligence * 5) && (teamSpeed > enemiesSpeed))  // ****************
+        {
+
+            foreach (Enemy enemy in enemies)
             {
 
-
-                Debug.Log($"Thanks to leader({leader.Name}) intelligence({leader.Stats.intelligence}), \nteam successfully avoid encountering {enemy.Name}({enemy.Stats.intelligence}).");
+               // Debug.Log($"Thanks to leader({leader.Name}) intelligence({leader.Stats.intelligence}), \nteam successfully avoid encountering {enemy.Name}({enemy.Stats.intelligence}).");
                 questLog.AppendLine($"Thanks to leader({leader.Name}) intelligence({leader.Stats.intelligence}),\n team successfully avoid encountering {enemy.Name}({enemy.Stats.intelligence}).");
+                detailLog.AppendLine($"Thanks to leader({leader.Name}) intelligence({leader.Stats.intelligence}),\n team successfully avoid encountering {enemy.Name}({enemy.Stats.intelligence}).");
             }
+        }
 
-            //ถ้าไม่ได้ก็ต้องสู้จ้า
-            else
+        //ถ้าไม่ได้ก็ต้องสู้จ้า
+        else
+        {
+            foreach (Enemy enemy in enemies)
             {
                 questLog.AppendLine($"Start a battle with {enemy.Name} !");
-                Debug.Log($"Start a battle with {enemy.Name} !");
+                detailLog.AppendLine($"\nStart a battle with {enemy.Name} !");
+            }
 
-                //ถ้าเลือก
-                if (quest.AvoidBattle)
+            InitActionPoint(characters, enemies);
+
+            //ถ้าเลือก
+            if (quest.AvoidBattle)
+            {
+                Debug.Log("AvoidBattle");
+
+                detailLog.AppendLine($"Try to run away from {(enemies.Count > 1 ? "enemies" : "enemy")} !");
+                //ถ้าหนีไม่ได้
+                if (!TryRunForLife())
                 {
-                    questLog.AppendLine($"Try to run away from {enemy.Name} !");
-                    //ถ้าหนีไม่ได้
-                    if (!TryRunForLife(characters, enemy))
-                    {
+                    Debug.Log("Fail to run away");
 
-                        questLog.AppendLine($"Fail to run away from the {enemy.Name}!");
+                    detailLog.AppendLine($"Fail to run away from the {(enemies.Count > 1 ? "enemies" : "enemy")}!");
+                    //เริ่มเทิร์น  
 
-                        //เริ่มเทิร์น  
-                        turn = 1;
-                        while (!CalculateBattleDamage(leader, enemy, turn, questLog))
-                        {
-
-                            Debug.Log("Turn " + turn);
-                            turn++;
-                        }
-                        questLog.AppendLine($"Battle finished. ");
-                    }
-                    else
-                    {
-                        Debug.Log("avoid success");
-                        questLog.AppendLine($"Successfully run away from the {enemy.Name}");
-                        questLog.AppendLine($"Battle finished. ");
-                    }
+                    while (!CalculateBattleTurn(characters, enemies, questLog, detailLog, questData));
+                    turn = 0;
 
                 }
                 else
                 {
-                    //เริ่มเทิร์น  
-                    Debug.Log("No Avoid");
-                    turn = 1;
-                    while (!CalculateBattleDamage(leader, enemy, turn, questLog))
-                    {
+                    Debug.Log("Avoid success.");
 
-                        Debug.Log("Turn " + turn);
+                    detailLog.AppendLine($"Successfully run away from the {(enemies.Count > 1 ? "enemies" : "enemy")}.");
+
+                    ShowCharactersHP(characters, questData.EXPreceived, questLog, detailLog);
+
+
+                }
+
+            }
+            else
+            {
+                //เริ่มเทิร์น  m
+                Debug.Log("DidntAvoidBattle");
+                while (!CalculateBattleTurn(characters, enemies, questLog, detailLog, questData)) ;
+                turn = 0;
+            }
+        }
+
+    }
+
+    bool CalculateBattleTurn(List<Character> characters, List<Enemy> enemies, StringBuilder questLog, StringBuilder detailLog, QuestData questData)
+    {
+
+        int exp;
+        float earliestReach = 100;
+        float sumCharacterHP = characters.Sum(ch => ch.CurrentHitPoint > 0 ? ch.CurrentHitPoint : 0);
+        float sumEnemyHP = enemies.Sum(e => e.CurrentHp > 0 ? (float)e.CurrentHp : 0);
+
+        List<Character> aliveCharacter = new List<Character>();
+        Character cLeader = characters[0];
+        aliveCharacter = characters.Where(ch => ch.CurrentHitPoint > 0).ToList();
+
+
+        List<Enemy> aliveEnemy = new List<Enemy>();
+        aliveEnemy = enemies.Where(e => e.CurrentHp > 0).ToList();
+
+        IncrementAll(characters, enemies);
+
+
+
+        for (int j = 0; j < enemyActionPoint.Count; j++)
+        {
+            if (enemyActionPoint[j] >= earliestReach)
+            {
+                
+                Enemy enemy = enemies[j];
+
+                if (enemy.CurrentHp > 0 && aliveCharacter != null)
+                {
+                    // Debug.Log("enemy turn");
+                 
                         turn++;
+                        detailLog.AppendLine($"\n{enemies[j].Name} attacks the team in turn {turn}.");
+
+                        int random = UnityEngine.Random.Range(0, aliveCharacter.Count - 1);
+                        StartTurnFor(aliveCharacter[random], cLeader, enemies[j], detailLog, true);
+                    
+                        enemyActionPoint[j] -= 100;
+                        
+                        aliveCharacter = characters.Where(ch => ch.CurrentHitPoint > 0).ToList();
+                    
+                    // Debug.Log("attack character number" + (random + 1).ToString());
+                    //   Debug.Log("enemy actionPoint remain" + actionPoint[j].ToString());
+                }
+
+            }
+        }
+
+        for (int j = 0; j < characterActionPoint.Count; j++)
+        {
+            if (characterActionPoint[j] >= earliestReach)
+            {
+
+                Character currentCharacter = characters[j];
+
+                if (currentCharacter.CurrentHitPoint > 0 && sumEnemyHP > 0)
+                {
+               
+                   // Debug.Log("currentCharacter turn");
+                    characterActionPoint[j] -= 100;
+
+        
+                        if (isRetreat)
+                        {
+                            turn++;
+                            //    Debug.Log("Too weak");
+
+                            exp = questData.EXPreceived + enemies.Sum(e => e.CurrentHp <= 0 ? e.EXPreceived : 0);
+
+                            detailLog.AppendLine($"\n{currentCharacter.Name} in turn {turn}. ");
+                            detailLog.AppendLine($"Too panicked. Try to retreat.");
+                            return TryRetreat(questLog, detailLog, characters,exp);
+
+                        }
+
+                    
+                    if (aliveEnemy != null)
+                    {
+                        turn++;
+                        detailLog.AppendLine($"\n{currentCharacter.Name} attacks enemy in turn {turn}.");
+                        int random = UnityEngine.Random.Range(0, aliveEnemy.Count - 1);
+                        StartTurnFor(currentCharacter, cLeader, aliveEnemy[random], detailLog, false);
+                        aliveEnemy = enemies.Where(e => e.CurrentHp > 0).ToList();
                     }
-                    questLog.AppendLine($"Battle finished. ");
+                    //Debug.Log("character actionPoint remains" + actionPoint[j].ToString());  
+
+
                 }
             }
+        }
 
+
+        if (sumCharacterHP > 0 && sumEnemyHP > 0)
+        {
+            return false;
+        }
+        else
+        {
+
+            exp = questData.EXPreceived + enemies.Sum(e => e.CurrentHp < 0 ? e.EXPreceived : 0);
+            //  Debug.Log("go on");
+            ShowCharactersHP(characters, exp, questLog, detailLog);
+            return true;
+        }
+
+
+
+    }
+
+    void ShowCharactersHP(List<Character> characters,int exp, StringBuilder questLog, StringBuilder detailLog)
+    {
+        int i = 0;
+        //Debug.Log("ShowCharactersHP");
+
+        questLog.AppendLine($"Battle finished. ");
+        detailLog.AppendLine($"\nBattle finished. ");
+
+
+
+        foreach (Character character in characters)
+        {
+            if (character.CurrentHitPoint <= 0)
+            {
+                CharacterManager.Instance.allDeadcharacter.Add(character, DateTime.Now.AddSeconds(20).Ticks);
+                CharacterManager.Instance.AllCharacters.Remove(character);
+                LoadManager.Instance.SavePlayerDataToJson();
+
+
+                CharacterManager.Instance.CancleAssignWork(character, townBase);
+            }
+            else
+            {
+                    character.AddEXP(exp); 
+            }
+            questLog.AppendLine($"Sufferd {characterOldHP[i] - character.CurrentHitPoint} damage.  {character.Name} has  {(character.CurrentHitPoint < 0 ? 0 : character.CurrentHitPoint)} Hp left. And get {(character.CurrentHitPoint < 0 ? 0 : exp)} EXP. ");
+            detailLog.AppendLine($"Sufferd {characterOldHP[i] - character.CurrentHitPoint} damage.  {character.Name} has {(character.CurrentHitPoint < 0 ? 0 : character.CurrentHitPoint)} Hp left.And get {(character.CurrentHitPoint < 0 ? 0 : exp)} EXP.");
+            i++;
+        }
+    }
+
+
+    void StartTurnFor(Character character, Character charLeader, Enemy enemy, StringBuilder detailLog, bool whosTurn)
+    {
+        int n = 3;
+        int damage = (int)Math.Floor(n * Math.Exp(0.004f * (character.Stats.strength - enemy.Stats.defense)) * UnityEngine.Random.Range(0.8f, 1.2f));
+
+
+        Debug.Log("start turn");
+
+        if (!TryDodge(character, enemy, whosTurn))
+        {
+        //มีโอกาสทำให้ดาเมจแรงขึ้น
+
+
+        if (whosTurn)
+        {
+            float totalDamage = damage + WeakpointDamage(damage, charLeader, enemy, whosTurn, detailLog) + CriticalAttack(damage, detailLog, character, enemy, whosTurn);
+            character.CurrentHitPoint = character.CurrentHitPoint - totalDamage;
+            detailLog.AppendLine($"{character.Name} HP remains {(character.CurrentHitPoint > 0 ? character.CurrentHitPoint : 0)} HP.");
+            Debug.Log("damage and hp" + totalDamage.ToString() + " " + character.MaxHitPoint);
+            isRetreat = checkRetreat(totalDamage, character);
+        }
+        else
+        {
+            float totalDamage = damage + WeakpointDamage(damage, charLeader, enemy, whosTurn, detailLog) + CriticalAttack(damage, detailLog, character, enemy, whosTurn);
+            enemy.CurrentHp = enemy.CurrentHp - totalDamage;
+            detailLog.AppendLine($"{enemy.Name} HP remains {(enemy.CurrentHp > 0 ? enemy.CurrentHp : 0)} HP.");
+        }
+
+
+        }
+       else
+          {
+
+              detailLog.AppendLine($"Defender successfully dodge fron attacker in turn {turn}");
+          }
+       
+
+    }
+
+    bool checkRetreat(float damage, Character character)
+    {
+        Debug.Log("damage and hpp" + damage.ToString() + " " + (((float)60 / 100) * (float)character.MaxHitPoint).ToString());
+        if (damage >= ((float)60 / 100) * (float)character.MaxHitPoint)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
 
     }
 
     //ใหม่//
-    bool TryRunForLife(List<Character> characters, Enemy enemy)
+    bool TryRunForLife()
     {
         int chancePercent = Constant.RUNAWAY_CHANCE;
         int randValue = UnityEngine.Random.Range(1, 101);
 
-        if (randValue < chancePercent)
+        if (randValue <= chancePercent)
         {
             return true;
         }
@@ -245,61 +466,111 @@ public class QuestManager : SingletonComponent<QuestManager>
         }
     }
 
-    bool TryRetreat(StringBuilder questLog)
+    bool TryRetreat(StringBuilder questLog, StringBuilder detailLog, List<Character> characters,int exp)
     {
         int chancePercent = Constant.RETREAT_CHANCE;
         int randValue = UnityEngine.Random.Range(1, 101);
-        if (randValue < chancePercent)
+  
+        if (randValue <= chancePercent)   
         {
-            questLog.AppendLine($"Successfully Retreat");
+
+          //  Debug.Log("Retreat");
+            detailLog.AppendLine($"Successfully Retreat.");
+
+            ShowCharactersHP(characters, exp, questLog, detailLog);
+             
             return true;
         }
         else
         {
-            questLog.AppendLine($"fail to Retreat");
+         //   Debug.Log("nFail Retreat");
+            detailLog.AppendLine($"Fail to Retreat.");
+
             return false;
         }
     }
 
-    bool TryDodge(StringBuilder questLog, Character character, Enemy enemy)
+    //true คือ enemy attack
+    bool TryDodge(Character character, Enemy enemy, bool whosTurn)
     {
-        int chancePercent = Constant.DODGE_CHANCE;
+        Double chancePercent = 0;
         int randValue = UnityEngine.Random.Range(1, 101);
-        if (randValue < chancePercent)
+        int attackerPer = (whosTurn ?  enemy.Stats.perception :  character.Stats.perception);
+        int defenderPer = (whosTurn ?  character.Stats.perception :  enemy.Stats.perception);
+
+        if (attackerPer > defenderPer)
         {
-            return true;
+            if (attackerPer > 2 * defenderPer)
+            {
+                chancePercent = Constant.DODGE_CHANCE_AD;
+            }
+            else if ((attackerPer / defenderPer) < 1.2)
+            {
+                chancePercent = Constant.BASE_DODGE_CHANCE;
+            }
+            else
+            {
+                chancePercent = Constant.BASE_DODGE_CHANCE - (((Double)(attackerPer / defenderPer) - 1.2) * 1.25 * (Double)(Constant.MAX_ACCURACY_AD - Constant.MIN_ACCURACY_AD)) + Constant.MIN_ACCURACY_AD;
+            }
+        }
+        else if (defenderPer > attackerPer)
+        {
+            if (defenderPer > 3.5 * attackerPer)
+            {
+                chancePercent = Constant.DODGE_CHANCE_DA;
+            }
+            else if ((defenderPer / attackerPer) < 1.3)
+            {
+                chancePercent = Constant.BASE_DODGE_CHANCE;
+            }
+            else
+            {
+                chancePercent = Constant.BASE_DODGE_CHANCE - (((Double)(defenderPer / attackerPer) - 1.3) * 0.4545 * (Double)(Constant.MAX_ACCURACY_DA - Constant.MIN_ACCURACY_DA)) + Constant.MIN_ACCURACY_DA;
+            }
+        }
+
+        if (randValue <= chancePercent)
+        {
+            return true; 
         }
         else
         {
             return false;
         }
+        
     }
 
-    float WeakpointDamage(Character character, Enemy enemy, int damage, StringBuilder questLog)
+    float WeakpointDamage(int damage, Character leader, Enemy enemy, bool whosTurn, StringBuilder detailLog)
     {
-        int chancePercent = Constant.DODGE_CHANCE;
-        int randValue = UnityEngine.Random.Range(1, 101);
+
+        int attackerInt= (whosTurn ? enemy.Stats.intelligence : leader.Stats.intelligence);
+        int defenderInt = (whosTurn ? leader.Stats.intelligence : enemy.Stats.intelligence);
+
         float weakpointDamage = 0;
-        if (randValue < chancePercent)  //ลืมอ่ะ
+
+        if (  attackerInt > 2 * defenderInt)  //ลืมอ่ะ 
         {
-            weakpointDamage = (float)damage * ((float)20 / 100);
-            questLog.AppendLine($"Found weak spot. get more damage {weakpointDamage} damage.");
+
+            weakpointDamage = damage * (((float)attackerInt/defenderInt * 10)/100);
+            detailLog.AppendLine($"Found weak spot. get more damage {weakpointDamage} damage.");
         }
 
         return weakpointDamage;
 
     }
-    int CriticalAttack(Character character, int damage, StringBuilder questLog)
+    int CriticalAttack(int damage, StringBuilder detailLog, Character character, Enemy enemy, bool whosTurn )
     {
         int critical = 0;
-        int chancePercent = Constant.CRITICAL_CHANCE;
+        int  luckChance = (whosTurn ? enemy.Stats.luck : character.Stats.luck);
+   
+        int chancePercent = Constant.CRITICAL_CHANCE + luckChance;
         int randValue = UnityEngine.Random.Range(1, 101);
         //มี 45 เปอที่อาจเกิด damage เพิ่มได้
-        if (randValue < chancePercent)
+        if (randValue <= chancePercent)
         {
 
             critical = damage;
-            questLog.AppendLine($"get critical hit {critical} damage.");
+            detailLog.AppendLine($"get critical hit {critical} damage.");
 
 
         }
@@ -307,145 +578,130 @@ public class QuestManager : SingletonComponent<QuestManager>
         return critical;
     }
 
-    //โอกาสในการใช้ไอเทมที่แบกมาด้วย 
-    void TryUseItem()
+
+   
+  
+
+    void InitActionPoint(List<Character> characters , List<Enemy> enemies)
     {
+
+        enemyActionPoint = new List<int>();
+        characterActionPoint = new List<int>();
+        characterOldHP = new List<float>();
+
+        foreach (Enemy enemy in enemies)
+        {
+            enemyActionPoint.Add(enemy.Stats.speed);
+        }
+        foreach (Character character in characters)
+        {
+       
+            characterActionPoint.Add(character.Stats.speed);
+            characterOldHP.Add(character.CurrentHitPoint);
+        }
 
     }
-    bool CalculateBattleDamage(Character character, Enemy enemy, int turn, StringBuilder questLog)
+
+     void IncrementAll(List<Character> characters, List<Enemy> enemies)
     {
-        
-        /*  int n = 3;
-         int damage = 0;
-         //ถ้าเทิร์นเลขคู่จะเป็นตาเอเนมี่
-          if (turn % 2 == 0)
-         {
-             damage = (int)Math.Floor(n * Math.Exp(0.004f * (enemy.Stats.attack - character.Stats.defense)) * UnityEngine.Random.Range(0.8f, 1.2f));
-
-             //จะพยายามหลบ
-             if (!TryDodge(questLog, character, enemy))
-             {
-                 questLog.AppendLine($"Try to dodge but too bad ,{character.Name} fail");
-                 character.currentHp -= damage;
-                 totalDamage = totalDamage + damage;
-
-             }
-             else
-             {
-                 questLog.AppendLine($"Successfully dodge in turn {turn}");
-             }
-
-         }
-
-         //ตาเรา
-         else
-         {
-
-             damage = (int)Math.Floor(n * Math.Exp(0.004f * (character.Stats.attack - enemy.Stats.defense)) * UnityEngine.Random.Range(0.8f, 1.2f));
-
-             //มีโอกาสทำให้ดาเมจแรงขึ้น
-             enemy.CurrentHp = enemy.CurrentHp - (damage + CriticalAttack(character, damage, questLog) + WeakpointDamage(character, enemy, damage, questLog));
-
-         }*/
-
-        //ถ้ามีใครเลือดน้อยกว่า 0 หรือตายก้จะจบ
-      if (/*character.currentHp */ 2 >= 0 && enemy.CurrentHp >= 0)
+        for (int i = 0; i < enemies.Count; i++)
         {
-            if (/*character.currentHp */ 2 <= 2 && /*character.currentHp*/ 2 < enemy.CurrentHp)
-            {
-                questLog.AppendLine($"Too weak. Trying to retreat.");
-                questLog.AppendLine($"Sufferd {totalDamage} damage.  {character.Name} has ....... Hp left.");
-                return TryRetreat(questLog);
-
-            }
-            return false;
-         }
-        else
+            enemyActionPoint[i] += enemies[i].Stats.speed;
+            Debug.Log("actionPoint enemy " + i + " " + enemyActionPoint[i].ToString());
+        }
+     
+        for (int i = 0; i < characters.Count; i++)
         {
-            Debug.Log("total2" + totalDamage.ToString());
-           questLog.AppendLine($"Sufferd {totalDamage} damage.  {character.Name} has ....... Hp left.");
-            return true;
+            characterActionPoint[i] += characters[i].Stats.speed;
+            Debug.Log("actionPoint character " + i + " " + characterActionPoint[i].ToString());
         }
     }
+
+    //true คิอ enemy attack
+   
 
     Dictionary<string, int> GetQuestReward(List<Character> characters, StringBuilder questLog, QuestData currentQuest)
     {
-        int itemCarryAmount = characters.Sum(c => c.Stats.strength);
+
+     
 
         Dictionary<string, int> itemList = new Dictionary<string, int>();
 
-        LootEvent(characters, itemList, questLog);
+        LootEvent(characters, itemList, questLog, currentQuest);
 
-        foreach (string resourceName in currentQuest.dropResourceName)
+        if (characters.Sum(ch => (ch.CurrentHitPoint > 0 ? ch.CurrentHitPoint : 0)) > 0)
         {
-            Character character = characters[UnityEngine.Random.Range(0, characters.Count - 1)];
-            int amount = character.Stats.perception; // ***************************
-            questLog.AppendLine($"{character.Name} found {LoadManager.Instance.allResourceData[resourceName].Name} : {amount} unit(s)");
-            ItemManager.Instance.AddResource(resourceName, amount);
-            itemList.Add(resourceName, amount);
+            foreach (string resourceName in currentQuest.dropResourceName)
+            {
+                Character character = characters[UnityEngine.Random.Range(0, characters.Count - 1)];
+                int amount = character.Stats.perception; // ***************************
+
+                questLog.AppendLine($"Team found {LoadManager.Instance.allResourceData[resourceName].Name} : {amount} unit(s)");
+
+                ItemManager.Instance.AddResource(resourceName, amount);
+                if (itemList.Keys.Contains(resourceName) == true)
+                {
+                    itemList[resourceName] = itemList[resourceName] + amount;
+                }
+                else
+                {
+                    itemList.Add(resourceName, amount);
+                }
+            }
 
         }
-
+        else 
+        {
+            questLog.AppendLine($"All characters died. No Item.");
+        }
         return itemList;
 
     }
 
-    void LootEvent(List<Character> characters, Dictionary<string, int> itemList, StringBuilder questLog)
+    void LootEvent(List<Character> characters, Dictionary<string, int> itemList, StringBuilder questLog, QuestData currentQuest)
     {
         int charactersLuck = characters.Min(c => c.Stats.luck);
         //   int charactersobserve = characters.Min(c => c.Stats.observing);
 
         int randomItem = UnityEngine.Random.Range(1, 101);
 
-        if (randomItem < 50)
-        {
-            Debug.Log("drop item");
-            //สุ่มว่าจะดรอปอะไร
-            int itemDrop = UnityEngine.Random.Range(0, LoadManager.Instance.allEquipmentData.Count);
-            string itemName = LoadManager.Instance.allEquipmentData.SingleOrDefault(r => r.Value.ID == itemDrop).Key;
-
-            //สุ่มเปอร์เซ็นดรอปสำเร็จ
-            int chanceDrop = (int)LoadManager.Instance.allEquipmentData[itemName].Rarity;
-            int randomChance = UnityEngine.Random.Range(0, 100);
-
-            //สุ่มจำนวนที่จะดรอป ตาม luck 
-            int amount = UnityEngine.Random.Range(1, charactersLuck);
-
-            if (randomChance <= chanceDrop)
+      
+       
+           foreach ( var item in currentQuest.dropResourceName)
             {
-                Debug.Log("drop item" + itemName.ToString());
-                questLog.AppendLine($"luckily found {itemName} : {amount} unit(s)");
-                itemList.Add(itemName, amount);
+                 Debug.Log("drop item");
+                Debug.Log("drop item" + item.ToString());
+                //สุ่มเปอร์เซ็นดรอปสำเร็จ
+                int chanceDrop = LoadManager.Instance.allResourceData.ContainsKey(item) == true ? (int)LoadManager.Instance.allResourceData[item].Rarity : (int)LoadManager.Instance.allEquipmentData[item].Rarity;
+                int randomChance = UnityEngine.Random.Range(1, 101);
+
+                //สุ่มจำนวนที่จะดรอป ตาม luck 
+                int amount = UnityEngine.Random.Range(1, charactersLuck);
+
+                if (randomChance <= chanceDrop)
+                {
+                    Debug.Log("drop item " + item.ToString() + " " + amount );
+                    questLog.AppendLine($"luckily found {item} : {amount} unit(s)");
+                     itemList.Add(item, amount);
+                    
+
+                }
             }
-        }
-        else
-        {
-            Debug.Log("drop resource");
-            //สุ่มว่าจะดรอปอะไร
-            int itemDrop = UnityEngine.Random.Range(4, 7);
-            string itemName = LoadManager.Instance.allResourceData.SingleOrDefault(r => r.Value.ID == itemDrop).Key;
-
-            //สุ่มเปอร์เซ็นดรอปสำเร็จ
-            int chanceDrop = (int)LoadManager.Instance.allResourceData[itemName].Rarity;
-            float randomChance = UnityEngine.Random.Range(0, 100);
-
-            //สุ่มจำนวนที่จะดรอป ตาม luck 
-            int amount = UnityEngine.Random.Range(1, charactersLuck);
-
-            if (randomChance <= chanceDrop)
-            {
-                questLog.AppendLine($"luckily found {itemName} : {amount} unit(s)");
-                itemList.Add(itemName, amount);
-            }
-        }
+          
+                
+           
+          
+        
+        
 
     }
 
-    void ShowResultPanel(Dictionary<string, int> rewardList, StringBuilder questLog)
+    void ShowResultPanel(Dictionary<string, int> rewardList, StringBuilder questLog, StringBuilder detailLog)
     {
         ResultPanel resultPanel =  GameManager.FindInActiveObjectByName("ResultPanel").GetComponent<ResultPanel>() ;
         resultPanel.gameObject.SetActive(true);
         resultPanel.QuestLog = questLog.ToString();
+        resultPanel.DetailQuestLog = detailLog.ToString();
         resultPanel.ShowResultPanel(rewardList);
         
     }

@@ -11,6 +11,8 @@ public class ResultPanel : MonoBehaviour
     List<GameObject> itemImageGO;
     bool isPointerOverUI;
     public string QuestLog { get; set; }
+
+    public string DetailQuestLog { get; set; }
     private void Awake()
     {
         itemImageGO = new List<GameObject>();
@@ -76,11 +78,32 @@ public class ResultPanel : MonoBehaviour
 
     public void ShowQuestLog()
     {
+
+
+
         GameObject logGO = Instantiate(Resources.Load("Prefabs/UI/QuestLogPanel") as GameObject, gameObject.transform);
         logGO.transform.Find("ScrollPanel/Container").GetComponent<Text>().text = QuestLog;
-        logGO.GetComponentInChildren<Button>().onClick.AddListener(()=> { EventSystem.current.currentSelectedGameObject.transform.parent.gameObject.SetActive(false); });
-    }
+        logGO.transform.Find("ExitButton").GetComponent<Button>().onClick.AddListener(()=> { EventSystem.current.currentSelectedGameObject.transform.parent.gameObject.SetActive(false); });
 
+        logGO.transform.Find("QuestLog").gameObject.SetActive(false);
+
+        logGO.transform.Find("QuestLog").GetComponent<Button>().onClick.AddListener(() => {
+
+            logGO.transform.Find("ScrollPanel/Container").GetComponent<Text>().text = QuestLog;
+            logGO.transform.Find("QuestLog").gameObject.SetActive(false);
+            logGO.transform.Find("DetailLog").gameObject.SetActive(true);
+
+        });
+
+
+        logGO.transform.Find("DetailLog").GetComponent<Button>().onClick.AddListener(() => {
+
+           logGO.transform.Find("ScrollPanel/Container").GetComponent<Text>().text = DetailQuestLog;
+           logGO.transform.Find("QuestLog").gameObject.SetActive(true);
+            logGO.transform.Find("DetailLog").gameObject.SetActive(false);
+        });
+    }
+     
     public void OnClickShowQuestLog()
     {
         ShowQuestLog();

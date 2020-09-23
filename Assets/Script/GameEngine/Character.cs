@@ -93,6 +93,7 @@ public class Character
         this.name = name;
         gender = Convert.ToBoolean(UnityEngine.Random.Range(0, 2)) ? GenderType.Male : GenderType.Female;
 
+       
         stats = new AllStats();
 
         FieldInfo[] fInfos = stats.GetType().GetFields();
@@ -108,6 +109,9 @@ public class Character
             fInfo.SetValue(this.stats, (int)fInfo.GetValue(this.stats) + 1);
 
         }
+
+
+        currentHitPoint = MaxHitPoint;
 
         level = 1;
 
@@ -164,15 +168,24 @@ public class Character
     [SerializeField] private int workingPlaceID = -1;
 
     [SerializeField] public int statsUpPoint;
-    [SerializeField] public int hitPoint;
+    [SerializeField] public float hitPoint; 
+
 
     [SerializeField] public List<Resource.Effect> effects;
 
     [SerializeField] public string spritePath;
 
+    [SerializeField] private float currentHitPoint;
+
+
     public int ID { get { return id; } }
     public string Name { get { return name; } }
     public int Experience { get { return experience; } }
+
+    public float CurrentHitPoint { get { return currentHitPoint; } set { currentHitPoint = value > MaxHitPoint ? MaxHitPoint : value; } }
+
+    public float MaxHitPoint { get { return (stats.strength * 2) ; } }
+
     public GenderType Gender { get { return gender; } }
     public AllStats Stats { get { return stats; } set { stats = value; } }
     public List<BirthMark> BirthMarks { get { return birthMarks; } }

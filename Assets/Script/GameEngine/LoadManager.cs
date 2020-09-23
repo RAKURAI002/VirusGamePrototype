@@ -97,7 +97,7 @@ public class LoadManager : SingletonComponent<LoadManager>
         playerData.equipmentInPossession = ItemManager.Instance.AllEquipments;
         playerData.currentActivities = NotificationManager.Instance.ProcessingActivies;
         playerData.characterWaitingInLine = CharacterManager.Instance.characterWaitingInLine;
-
+        playerData.allDeadCharacter = CharacterManager.Instance.allDeadcharacter;
         string playerDatas = JsonUtility.ToJson(playerData, true);
         // Debug.Log("Saving Data to JSON to " + Application.persistentDataPath + playerDatas);
         System.IO.File.WriteAllText(Application.persistentDataPath + "/PlayerData.json", playerDatas);
@@ -287,6 +287,7 @@ public class LoadManager : SingletonComponent<LoadManager>
 
         CharacterManager.Instance.characterWaitingInLine = playerData.characterWaitingInLine;
 
+        CharacterManager.Instance.allDeadcharacter = playerData.allDeadCharacter;
         /// Load Player's progress to Map.
         MapManager.Instance.SetExpandedArea();
         MapManager.Instance.LoadBuildingToScene();

@@ -27,6 +27,9 @@ public class MainCanvas : MonoBehaviour
     public Text playerLevel;
 
     public Animator selectButtonAnimator;
+
+    public GameObject returnCharacterPanel;
+
     /// --------------------------------------------------
     GameObject uiCanvas;
 
@@ -34,7 +37,7 @@ public class MainCanvas : MonoBehaviour
     GameObject editBuildingPanel;
     GameObject finishedActivityAmountGO;
     GameObject waitingCharacterAmountGO;
-
+    GameObject deadCharacterGO;
     public static bool canvasActive { get; set; } /// Freeze action with Camera while Panel is opening.
 
     void OnEnable()
@@ -89,6 +92,7 @@ public class MainCanvas : MonoBehaviour
     {
         finishedActivityAmountGO = GameManager.FindInActiveObjectByName("FinishedActivityAmount");
         waitingCharacterAmountGO = GameManager.FindInActiveObjectByName("WaitingCharacterAmount");
+        deadCharacterGO = GameManager.FindInActiveObjectByName("GraveButton");
         playerName.text += $"<color=red>{LoadManager.Instance.playerData.name}</color>";
         playerLevel.text += LoadManager.Instance.playerData.level.ToString();
         selectButtonToggle = false;;
@@ -103,6 +107,7 @@ public class MainCanvas : MonoBehaviour
         }
         RefreshNotificationAmount();
         RefreshWaitingCharacterAmount();
+       
         UpdateResourcePanel();
     }
     void UpdateResourcePanel()
@@ -183,6 +188,8 @@ public class MainCanvas : MonoBehaviour
 
             }
         }
+
+       RefreshDeadCharacterAmount();
     }
     public void RefreshNotificationAmount()
     {
@@ -218,6 +225,24 @@ public class MainCanvas : MonoBehaviour
         }
 
     }
+
+    public void RefreshDeadCharacterAmount()
+    {
+        int characterAmount = CharacterManager.Instance.allDeadcharacter.Count(c => c.Value > DateTime.Now.Ticks);
+
+        if (characterAmount == 0)
+        {
+            deadCharacterGO.transform.gameObject.SetActive(false);
+
+        }
+        else
+        {
+            deadCharacterGO.transform.gameObject.SetActive(true);
+        }
+
+    }
+
+
     void ShowExpandAreaPanel(GameObject selectedGameObject)
     {
         confirmationPanel.GetComponent<ExpandConfirmationPanel>().expandingAreaID = int.Parse(selectedGameObject.name);
@@ -347,7 +372,14 @@ public class MainCanvas : MonoBehaviour
 
     }
 
-    public void OnClickToWork()
+    public void OnClickReturnCharacterNotification()
+    {
+        GameObject characterNotification = transform.Find("ReturnCharacterPanel").gameObject;
+        characterNotification.SetActive(true);
+        canvasActive = true;
+    }
+
+        public void OnClickToWork()
     {
         toWorkCanvas.SetActive(true);
         canvasActive = true;

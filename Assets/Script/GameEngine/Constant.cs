@@ -5,7 +5,16 @@ using System;
 
 public static class Constant
 {
-    public static int DODGE_CHANCE = 20;
+    public static int BASE_DODGE_CHANCE = 20;
+
+    public static int DODGE_CHANCE_AD = 2;
+    public static int MAX_ACCURACY_AD = 18;
+    public static int MIN_ACCURACY_AD = 0;
+
+    public static int DODGE_CHANCE_DA = 85;
+    public static int MAX_ACCURACY_DA = 65;
+    public static int MIN_ACCURACY_DA = 0;
+
     public static int RETREAT_CHANCE = 20;
     public static int RUNAWAY_CHANCE = 30;
     public static int CRITICAL_CHANCE = 10;

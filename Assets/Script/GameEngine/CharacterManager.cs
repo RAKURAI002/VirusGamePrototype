@@ -7,12 +7,13 @@ using UnityEngine.Networking;
 
 public class CharacterManager : SingletonComponent<CharacterManager>
 {
+    
     [SerializeField] private List<Character> allCharacters;
     [SerializeField] public List<Character> characterWaitingInLine;
     public List<Character> AllCharacters { get { return allCharacters; } set { allCharacters = value; } }
 
-    
-
+    [SerializeField] public DeadCharacterDictionary  allDeadcharacter;
+ 
     #region Unity Functions
     protected override void OnInitialize()
     {
@@ -174,6 +175,7 @@ public class CharacterManager : SingletonComponent<CharacterManager>
         EventManager.Instance.CharacterAssigned();
         LoadManager.Instance.SavePlayerDataToJson();
         return true;
+        
     }
 
     public void ConsumeItem(Character character, Resource item)

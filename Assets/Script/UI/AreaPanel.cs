@@ -15,8 +15,7 @@ public class AreaPanel : MonoBehaviour
 
     private void Start()
     {
-        
-        
+        QuestManager.Instance.isAvoidBattle = false;
     }
     private void OnEnable()
     {
@@ -54,5 +53,9 @@ public class AreaPanel : MonoBehaviour
                 BuildManager.Instance.AllBuildings.SingleOrDefault(b => b.Type == Building.BuildingType.TownBase),
                 LoadManager.Instance.allQuestData.SingleOrDefault(q => q.Value.questName == QuestManager.Instance.selectingLevel).Value.duration, QuestManager.Instance.StartQuest , true);
     
+    }
+    public void OnClickAvoidBattle()
+    {
+        QuestManager.Instance.isAvoidBattle = true;
     }
 }

@@ -351,12 +351,7 @@ public class ItemManager : SingletonComponent<ItemManager>
     }
     public void AddTest()
     {
-        AddResource(1, 10);
-        AddResource(2, 10);
-        AddResource(6, 10);
-        AddResource(4, 10);
-        AddResource(3, 10);
-        AddResource(5, 10);
+    
         AddResource("Stone", 1000);
         AddResource("Wood", 1000);
         AddResource("Gold", 100);
@@ -378,24 +373,8 @@ public class ItemManager : SingletonComponent<ItemManager>
         AddResource("Recipe:Medicine(maybe)", 10);
 
 
-        AddEquipment(1, 1);
-        AddEquipment(1, 1);
-        AddEquipment(2, 1);
-        AddEquipment(3, 1);
-
-        AddEquipment(4, 1);
-        AddEquipment(5, 1);
-        AddEquipment(6, 1);
-        AddEquipment(7, 1);
-        AddEquipment(8, 1);
-        AddEquipment(9, 1);
-        AddEquipment(10, 1);
-        AddEquipment(11, 1);
-
-        AddEquipment(12, 1);
-        AddEquipment(13, 1);
-        AddEquipment(14, 1);
-        AddEquipment(15, 1);
+        AddResource("Food", 1000);
+        AddResource("Water", 1000);
     }
 
 }

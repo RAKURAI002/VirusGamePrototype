@@ -11,5 +11,5 @@ public class QuestData
     [SerializeField] public List<string> dropResourceName;
     [SerializeField] public List<int> enemiesIDList;
     [SerializeField] public int duration;
-
+    [SerializeField] public int EXPreceived;
 }

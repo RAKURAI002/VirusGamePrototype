@@ -18,7 +18,8 @@
             "enemiesIDList": [
                 1
             ],
-            "duration": 30
+            "duration": 30,
+            "EXPreceived": 5
         },
         {
             "questID": 2,
@@ -38,7 +39,8 @@
             "enemiesIDList": [
                 1
             ],
-            "duration": 60
+            "duration": 60,
+            "EXPreceived": 10
         },
         {
             "questID": 3,
@@ -59,7 +61,8 @@
                 1,
                 2
             ],
-            "duration": 90
+            "duration": 90,
+            "EXPreceived": 15
         },
         {
             "questID": 4,
@@ -81,7 +84,8 @@
                 2,
                 3
             ],
-            "duration": 120
+            "duration": 120,
+            "EXPreceived": 20
         }
     ]
 }

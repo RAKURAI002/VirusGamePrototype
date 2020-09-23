@@ -393,6 +393,7 @@ public class DataCreator : MonoBehaviour
         q[0].dropResourceName = new List<string>() { "Wood" };
         q[0].enemiesIDList = new List<int>() { 1 };
         q[0].duration = 30;
+        q[0].EXPreceived = 5;
 
         q[1] = new QuestData();
         q[1].questID = 2;
@@ -401,6 +402,7 @@ public class DataCreator : MonoBehaviour
         q[1].dropResourceName = new List<string>() { "Wood" };
         q[1].enemiesIDList = new List<int>() { 1 };
         q[1].duration = 60;
+        q[1].EXPreceived = 10;
 
         q[2] = new QuestData();
         q[2].questID = 3;
@@ -409,6 +411,7 @@ public class DataCreator : MonoBehaviour
         q[2].dropResourceName = new List<string>() { "Wood" };
         q[2].enemiesIDList = new List<int>() { 1, 2 };
         q[2].duration = 90;
+        q[2].EXPreceived = 15;
 
         q[3] = new QuestData();
         q[3].questID = 4;
@@ -417,7 +420,7 @@ public class DataCreator : MonoBehaviour
         q[3].dropResourceName = new List<string>() { "Wood" };
         q[3].enemiesIDList = new List<int>() { 1, 2, 3 };
         q[3].duration = 120;
-
+        q[3].EXPreceived = 20;
         string questDatas = JsonHelper.ToJson(q, true);// Newtonsoft.Json.JsonConvert.SerializeObject(playerData, Newtonsoft.Json.Formatting.Indented); //JsonUtility.ToJson(playerData, true); 
         Debug.Log("Saving Data to JSON : " + questDatas);
         System.IO.File.WriteAllText(Application.streamingAssetsPath + "/QuestData.json", questDatas);
@@ -495,11 +498,11 @@ public class DataCreator : MonoBehaviour
     {
         List<Enemy> e = new List<Enemy>();
 
-        e.Add(new Enemy(1, "Wolf Alpha", new Enemy.AllStats { attack = 5, defense = 3, hitPoint = 8, speed = 7, intelligence = 3 }));
-        e.Add(new Enemy(2, "Wolf Beta", new Enemy.AllStats { attack = 2, defense = 7, hitPoint = 13, speed = 2, intelligence = 6 }));
-        e.Add(new Enemy(3, "The Guardian", new Enemy.AllStats { attack = 0, defense = 20, hitPoint = 30, speed = 0, intelligence = 6 }));
-        e.Add(new Enemy(4, "Something that already died", new Enemy.AllStats { attack = 1000, defense = 0, hitPoint = -1, speed = 0, intelligence = 6 }));
-        e.Add(new Enemy(5, "Hatsune Miku (GOD form)", new Enemy.AllStats { attack = 99, defense = 99, hitPoint = 99, speed = 99, intelligence = 99 }));
+        e.Add(new Enemy(1, "Wolf Alpha", new Enemy.AllStats { attack = 5, defense = 3, hitPoint = 8, speed = 7, intelligence = 3, luck = 2 }, 5));
+        e.Add(new Enemy(2, "Wolf Beta", new Enemy.AllStats { attack = 2, defense = 7, hitPoint = 13, speed = 2, intelligence = 6, luck = 4 }, 10));
+        e.Add(new Enemy(3, "The Guardian", new Enemy.AllStats { attack = 0, defense = 20, hitPoint = 30, speed = 0, intelligence = 6, luck = 5}, 15));
+        e.Add(new Enemy(4, "Something that already died", new Enemy.AllStats { attack = 1000, defense = 0, hitPoint = -1, speed = 0, intelligence = 6, luck = 7 }, 20));
+        e.Add(new Enemy(5, "Hatsune Miku (GOD form)", new Enemy.AllStats { attack = 99, defense = 99, hitPoint = 99, speed = 99, intelligence = 99, luck = 9 }, 25));
 
         string enemyDatas = JsonHelper.ToJson(e.ToArray(), true);// Newtonsoft.Json.JsonConvert.SerializeObject(playerData, Newtonsoft.Json.Formatting.Indented); //JsonUtility.ToJson(playerData, true); 
         Debug.Log("Saving Data to JSON : " + enemyDatas);

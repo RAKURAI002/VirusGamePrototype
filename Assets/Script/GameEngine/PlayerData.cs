@@ -14,8 +14,8 @@ public class PlayerData
         currentActivities = new ActivityProgressDictionary();
         expandedArea = new List<int>();
         level = 1;
-
         characterWaitingInLine = new List<Character>();
+        allDeadCharacter = new DeadCharacterDictionary();
 
     }
 
@@ -25,6 +25,7 @@ public class PlayerData
     [SerializeField] public List<Builder> buildingInPossession;
     [SerializeField] public List<Character> characterInPossession;
     [SerializeField] public List<Character> characterWaitingInLine;
+    [SerializeField] public DeadCharacterDictionary allDeadCharacter;
     [SerializeField] public ResourceDictionary resourceInPossession;
     [SerializeField] public EquipmentDictionary equipmentInPossession;
 
