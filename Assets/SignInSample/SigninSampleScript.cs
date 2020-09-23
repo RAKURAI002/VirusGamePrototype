@@ -12,13 +12,11 @@ using Firebase.Auth;
 public class SigninSampleScript : MonoBehaviour
 {
     public Text statusText;
-
+    public Text text;
     public string webClientId = "503284986617-pfqma7n52qicbe78jd44psvpem1me8sk.apps.googleusercontent.com";
 
     private GoogleSignInConfiguration configuration;
 
-    // Defer the configuration creation until Awake so the web Client ID
-    // Can be set via the property inspector in the Editor.
     void Awake()
     {
         configuration = new GoogleSignInConfiguration
@@ -26,8 +24,12 @@ public class SigninSampleScript : MonoBehaviour
             WebClientId = webClientId,
             RequestIdToken = true
         };
+        
     }
-
+    private void Update()
+    {
+        text.text = FirebaseAuth.DefaultInstance.CurrentUser?.DisplayName;
+    }
     public void OnSignIn()
     {
         Debug.Log($"Try Sign in");

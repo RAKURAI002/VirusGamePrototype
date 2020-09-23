@@ -32,7 +32,8 @@ public class ClosePanelHelper : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
         List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
-        return results.Count > 0;
+        //  return results.Count == 0 ? false : results.Select(r => r.gameObject.name).Contains(gameObject.name);
+        return results.Where(r => r.gameObject.name == gameObject.name).ToList().Count > 0;
     }
 
     void Update()

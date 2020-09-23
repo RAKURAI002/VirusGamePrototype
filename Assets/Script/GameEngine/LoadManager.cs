@@ -6,7 +6,10 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
-
+using Firebase;
+using Firebase.Database;
+using Firebase.Unity.Editor;
+using Firebase.Auth;
 /// <summary>
 /// Load all In-Game data and Player data to Runtime.
 /// </summary>
@@ -90,6 +93,13 @@ public class LoadManager : SingletonComponent<LoadManager>
 
     void LoadPlayerDataFromJson(string file_path)
     {
+        if (FirebaseAuth.DefaultInstance.CurrentUser == null)
+        {
+            Debug.Log("No FireBaseUser detected, trying sign-in as guest.");
+            FireBaseManager.Instance.SignInAsGuest();
+
+        }
+
         Debug.Log("Fetching Player data form JSON . . .");
 
         playerData = new PlayerData();
@@ -112,7 +122,7 @@ public class LoadManager : SingletonComponent<LoadManager>
             playerData.completeTutorial = false;
 
         }
-
+        Debug.Log($"Currently working on Firebase User : {FirebaseAuth.DefaultInstance.CurrentUser.DisplayName}");
         return;
     }
 
@@ -307,7 +317,7 @@ public class LoadManager : SingletonComponent<LoadManager>
         RemoveDuplicateCharacterData();
 
         EventManager.Instance.GameDataLoadFinished();
-
+        FireBaseManager.Instance.SendData(JsonUtility.ToJson(playerData, true));
     }
     void RemoveDuplicateCharacterData()
     {
@@ -335,8 +345,11 @@ public class LoadManager : SingletonComponent<LoadManager>
         if (!playerData.completeTutorial)
         {
             Debug.Log("First login detected, Starting Tutorial . . . ");
-            GameManager.Instance.StartTutorial();
-
+            StartCoroutine(GameManager.Instance.StartTutorial());
+        }
+        else
+        {
+            GameObject.Find("MainCanvas/Fog").GetComponent<Animation>().Play();
         }
     }
 
@@ -349,14 +362,8 @@ public class LoadManager : SingletonComponent<LoadManager>
             yield return request.SendWebRequest();
             callback(request);
         }
+    }
 
-    }
-    IEnumerator WaitAllCoroutine(List<IEnumerator> coroutineList, Action OnComplete)
-    {
-        foreach (IEnumerator coroutine in coroutineList)
-            yield return StartCoroutine(coroutine);
-        OnComplete.Invoke();
-    }
 }
 
 public static class JsonHelper

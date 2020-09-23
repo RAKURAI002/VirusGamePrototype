@@ -184,18 +184,14 @@ public class BuildingManager : SingletonComponent<BuildingManager>
         Builder builder = new Builder(type, position);
         Building buildData = LoadManager.Instance.allBuildingData[builder.Type];
 
-        builder.constructionStatus = new Builder.Construction { teamNumber = 0, currentPoint = buildData.upgradePoint[builder.Level], constructPointRequired = buildData.upgradePoint[builder.Level], isConstructing = true };
+        builder.constructionStatus = new Builder.Construction() { isConstructing = false };
+
+        builder.Level = 1;
+
 
         InitiateBuilding(builder);
 
         mapManager.constructableGrid.RemoveAt(cellIndex);
-
-        NotificationManager.Instance.AddActivity(new ActivityInformation()
-        {
-            activityName = $"CreateBuilding:{builder.Type}:{builder.ID}",
-            activityType = ActivityType.Build,
-            informationID = builder.ID
-        });
     }
 
     public bool UpgradeBuilding(Builder builder, int teamNumber)

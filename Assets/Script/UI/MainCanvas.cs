@@ -19,6 +19,7 @@ public class MainCanvas : MonoBehaviour
     public GameObject[] characterCanvas;
 
     public GameObject resourcePanel;
+    public GameObject optionPanel;
     public GameObject resourceCollectorPanel;
 
     public GameObject confirmationPanel;
@@ -45,6 +46,7 @@ public class MainCanvas : MonoBehaviour
         EventManager.Instance.OnResourceChanged += OnResourceChanged;
         EventManager.Instance.OnCharacterAssigned += OnCharacterAddEvent;
         EventManager.Instance.OnBuildingModified += OnBuildingModified;
+        EventManager.Instance.OnPlayerNameChanged += OnPlayerNameChanged;
     }
     void OnBuildingModified(int id)
     {
@@ -92,6 +94,7 @@ public class MainCanvas : MonoBehaviour
             EventManager.Instance.OnResourceChanged -= OnResourceChanged;
             EventManager.Instance.OnCharacterAssigned -= OnCharacterAddEvent;
             EventManager.Instance.OnBuildingModified -= OnBuildingModified;
+            EventManager.Instance.OnPlayerNameChanged -= OnPlayerNameChanged;
         }
     }
 
@@ -121,6 +124,10 @@ public class MainCanvas : MonoBehaviour
         resourcePanel.transform.Find("WaterPanel").gameObject.GetComponentInChildren<Text>().text = ItemManager.Instance.GetResourceAmount("Water").ToString();
         resourcePanel.transform.Find("FoodPanel").gameObject.GetComponentInChildren<Text>().text = ItemManager.Instance.GetResourceAmount("Food").ToString();
     
+    }
+    void OnPlayerNameChanged()
+    {
+        playerName.text = $"<color=red>{LoadManager.Instance.playerData.name}</color>";
     }
     void UpdateResourceCollectorPanel()
     {
@@ -287,6 +294,10 @@ public class MainCanvas : MonoBehaviour
         editBuilding.StartShowingPanel(selectedBuilding);
         FreezeCamera = true;
 
+    }
+    public void OnClickOptionButton()
+    {
+        optionPanel.SetActive(true);
     }
 
     public void OnClickWorldMap()

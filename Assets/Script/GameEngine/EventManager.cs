@@ -42,12 +42,15 @@ public class EventManager : SingletonComponent<EventManager>
 
     public event Action OnCharacterAssigned;
     public event Action<string> OnResourceChanged;
+    
 
     public event Action<int> OnBuildingModified;
 
     public event Action<ActivityInformation> OnActivityAssigned;
     public event Action<ActivityInformation> OnActivityFinished;
+
     public event Action<int> OnPlayerLevelUp;
+    public event Action OnPlayerNameChanged;
 
     public event Action OnGameCycleUpdated;
     public event Action OnGameDataLoadFinished;
@@ -60,7 +63,6 @@ public class EventManager : SingletonComponent<EventManager>
     public void GameCycleUpdated()
     {
         OnGameCycleUpdated?.Invoke();
-
     }
     public void GameDataLoadFinished()
     {
@@ -71,13 +73,16 @@ public class EventManager : SingletonComponent<EventManager>
     public void ResourceChanged(string resourceName)
     {
         OnResourceChanged?.Invoke(resourceName);
-
     }
 
     public void PlayerLevelUp(int level)
     {
         OnPlayerLevelUp?.Invoke(level);
+    }
 
+    public void PlayerNameChanged()
+    {
+        OnPlayerNameChanged?.Invoke();
     }
 
     public void ActivityAssigned(ActivityInformation activityInformation)

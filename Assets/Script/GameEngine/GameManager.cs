@@ -140,15 +140,26 @@ public class GameManager : SingletonComponent<GameManager>
 
     public StringBuilder gameLog;
 
-    public void StartTutorial()
+    public IEnumerator StartTutorial()
     {
+        Debug.Log($"kkk");
+        GameTutorialManager gameTutorialManager = Resources.FindObjectsOfTypeAll<GameTutorialManager>()[0];
+
+        Coroutine getPlayerName = StartCoroutine(gameTutorialManager.GetPlayerName());
+
+        yield return getPlayerName;
+
         BuildingManager.Instance.ForceCreateBuilding(Building.BuildingType.TownBase, 0);
         BuildingManager.Instance.ForceCreateBuilding(Building.BuildingType.LaborCenter, 0);
         BuildingManager.Instance.ForceCreateBuilding(Building.BuildingType.Residence, 1);
 
         CharacterManager.Instance.CreateNewCharacter();
-        
+        GameObject.Find("MainCanvas/Fog").GetComponent<Animation>().Play();
+
+        EventManager.Instance.PlayerNameChanged();
         LoadManager.Instance.playerData.completeTutorial = true;
+
+
 
     }
 

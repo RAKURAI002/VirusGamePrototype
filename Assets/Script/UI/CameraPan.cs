@@ -26,7 +26,7 @@ public class CameraPan : MonoBehaviour
     private void Start()
     {
         mainCamera = Camera.main;
-        transform.position = new Vector3(-35f, 40f, -10);
+        transform.position = new Vector3(-40f, 30f, -10);
         boundMin = boundRendererGO.GetComponent<SpriteRenderer>().bounds.min;
         boundMax = boundRendererGO.GetComponent<SpriteRenderer>().bounds.max;
 

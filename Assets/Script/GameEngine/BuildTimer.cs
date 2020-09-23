@@ -93,10 +93,17 @@ public class BuildTimer : Timer
                 $"increase currentPoint = {builder.constructionStatus.currentPoint} + { (int)Math.Round(((DateTime.Now.Ticks - LoadManager.Instance.playerData.lastLoginTime) / TimeSpan.TicksPerSecond) * productionPoint)}");
             builder.constructionStatus.currentPoint += (int)Math.Round(((DateTime.Now.Ticks - LoadManager.Instance.playerData.lastLoginTime) / TimeSpan.TicksPerSecond) * productionPoint);
         }
+
         builder.constructionStatus.finishPoint = buildData.upgradePoint[builder.Level];
 
         timer = (long)((builder.constructionStatus.finishPoint - builder.constructionStatus.currentPoint) / productionPoint);
+
+        Debug.Log($"{timer}");
+        Debug.Log($"{activityInformation.activityName}");
         activityInformation.finishTime = DateTime.Now.Ticks + (timer * TimeSpan.TicksPerSecond);
+
+
+        
 
         isInitiated = true;
 
@@ -111,6 +118,7 @@ public class BuildTimer : Timer
             isNotiCanceled = true;
             NotificationManager.Instance.CancelMobileNotification(activityInformation);
         }
+
         if (builder.constructionStatus.finishPoint <= builder.constructionStatus.currentPoint)
         {
             builder.Level++;
