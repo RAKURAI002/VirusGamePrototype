@@ -10,41 +10,39 @@ using Firebase.Auth;
 using System.Linq;
 using System.Threading.Tasks;
 using Google;
+using System;
+using UnityEngine.Networking;
 
 public class FireBaseManager : SingletonComponent<FireBaseManager>
 {
-
     Firebase.Auth.FirebaseAuth auth;
     public DatabaseReference reference;
     public string webClientId = "503284986617-pfqma7n52qicbe78jd44psvpem1me8sk.apps.googleusercontent.com";
 
-    private GoogleSignInConfiguration configuration;
-
     protected override void Awake()
     {
         base.Awake();
-    
+
     }
 
     protected override void OnInitialize()
     {
+        Debug.Log($"Setup FireBase Default Instance.");
         auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
         FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://virus-game-project.firebaseio.com/");
         reference = FirebaseDatabase.DefaultInstance.RootReference;
 
-        configuration = new GoogleSignInConfiguration
-        {
-            WebClientId = webClientId,
-            RequestIdToken = true
-        };
     }
     void Start()
     {
     }
 
-    public async void SignInAsGuest()
+    public Task<FirebaseUser> SignInAsGuest()
     {
-        await auth.SignInAnonymouslyAsync().ContinueWith<FirebaseUser>(task => {
+        Debug.Log($"Now waiting for sign-in operation . . .");
+        return auth.SignInAnonymouslyAsync().ContinueWith<FirebaseUser>(task =>
+        {
+            Debug.Log($"{task.Status}");
             if (task.IsCanceled)
             {
                 Debug.LogError("SignInAnonymouslyAsync was canceled.");
@@ -65,6 +63,12 @@ public class FireBaseManager : SingletonComponent<FireBaseManager>
     }
     public void SignInWithGoogle()
     {
+        GoogleSignIn.Configuration = new GoogleSignInConfiguration
+        {
+            WebClientId = webClientId,
+            RequestIdToken = true
+        };
+
         Task<GoogleSignInUser> signIn = GoogleSignIn.DefaultInstance.SignIn();
 
         TaskCompletionSource<FirebaseUser> signInCompleted = new TaskCompletionSource<FirebaseUser>();
@@ -86,7 +90,8 @@ public class FireBaseManager : SingletonComponent<FireBaseManager>
                 Debug.Log($"Token : {((Task<GoogleSignInUser>)task).Result.IdToken}");
                 Firebase.Auth.FirebaseAuth auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
                 Credential credential = Firebase.Auth.GoogleAuthProvider.GetCredential(((Task<GoogleSignInUser>)task).Result.IdToken, null);
-                auth.SignInWithCredentialAsync(credential).ContinueWith(authTask => {
+                auth.SignInWithCredentialAsync(credential).ContinueWith(authTask =>
+                {
                     Debug.Log($"{authTask.Status}");
                     if (authTask.IsCanceled)
                     {
@@ -117,25 +122,31 @@ public class FireBaseManager : SingletonComponent<FireBaseManager>
 
     public void SendData(string json)
     {
-        FirebaseDatabase.DefaultInstance.RootReference.Child("users/").Child(LoadManager.Instance.playerData.UID).SetRawJsonValueAsync(json);
+        Debug.Log($"Sending data to FireBase.");
+        FirebaseDatabase.DefaultInstance.RootReference.Child("users/").Child(FirebaseAuth.DefaultInstance.CurrentUser.UserId).SetRawJsonValueAsync(json);
     }
 
-    public DataSnapshot[] ReceiveData()
+    public async Task<DataSnapshot> ReceivePlayerData()
     {
-        DataSnapshot snapshot = null;
-        FirebaseDatabase.DefaultInstance.GetReference("users/").GetValueAsync().ContinueWith(task => { 
-            if (task.IsCompleted) { 
-                snapshot = task.Result;
-                Debug.Log(snapshot.Children.Where(ss => ss.Key == LoadManager.Instance.playerData.UID).ToList()[0].GetRawJsonValue()); 
-            } });
+        Debug.Log($"Accessing {FirebaseAuth.DefaultInstance.CurrentUser.UserId} node.");
 
-        return snapshot.Children.Where(ss => ss.Key == LoadManager.Instance.playerData.UID).ToArray() ;//JsonHelper.ToJson(snapshot.Children.Where(ss => ss.Key == PlayerData.UID).ToArray());
+        var ds = await FirebaseDatabase.DefaultInstance.RootReference.Child($"users/{FirebaseAuth.DefaultInstance.CurrentUser.UserId}").GetValueAsync();
+
+        //Debug.Log($"{task.Result.GetRawJsonValue()}");
+        //{FirebaseAuth.DefaultInstance.CurrentUser.UserId}
+        return ds;// task.Result;
     }
-    IEnumerator ReceiveDataCoroutine()
+    IEnumerator CheckInternetConnection(Action<bool> action)
     {
-        Task<DataSnapshot> task = FirebaseDatabase.DefaultInstance.GetReference("users/").GetValueAsync();
-        yield return null;
-        DataSnapshot snapshot = task.Result;
-        
+        UnityWebRequest request = new UnityWebRequest("http://google.com");
+        yield return request.SendWebRequest();
+        if (request.error != null)
+        {
+            action(false);
+        }
+        else
+        {
+            action(true);
+        }
     }
 }

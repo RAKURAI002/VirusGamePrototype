@@ -10,6 +10,8 @@ using Firebase;
 using Firebase.Database;
 using Firebase.Unity.Editor;
 using Firebase.Auth;
+using System.Threading.Tasks;
+
 /// <summary>
 /// Load all In-Game data and Player data to Runtime.
 /// </summary>
@@ -45,6 +47,7 @@ public class LoadManager : SingletonComponent<LoadManager>
         {
             Awake();
             Start();
+            GameObject.Find("MainCanvas/Fog").GetComponent<Animation>().Play();
         }
         if (!secondCalled)
         {
@@ -62,13 +65,14 @@ public class LoadManager : SingletonComponent<LoadManager>
     #endregion
     public IEnumerator InitializeGameData()
     {
-        Debug.Log("Loading Player Data . . .");
-        LoadPlayerDataFromJson(Application.persistentDataPath + "/PlayerData.json");
-
         Debug.Log("Loading Game Data . . .");
         Coroutine LoadGameDataCoroutine = StartCoroutine(LoadInGameData());
 
+        Debug.Log("Loading Player Data . . .");
+        Coroutine LoadPlayerDataCoroutine = StartCoroutine(LoadPlayerData());
+       
         yield return LoadGameDataCoroutine;
+        yield return LoadPlayerDataCoroutine;
 
         LoadPlayerDataToScene();
 
@@ -76,7 +80,7 @@ public class LoadManager : SingletonComponent<LoadManager>
 
     }
 
-    public void SavePlayerDataToJson()
+    public void SavePlayerDataToFireBase()
     {
         playerData.characterInPossession = CharacterManager.Instance.AllCharacters;
         playerData.resourceInPossession = ItemManager.Instance.AllResources;
@@ -85,45 +89,48 @@ public class LoadManager : SingletonComponent<LoadManager>
         playerData.currentActivities = NotificationManager.Instance.ProcessingActivies;
         playerData.characterWaitingInLine = CharacterManager.Instance.characterWaitingInLine;
 
-        string playerDatas = JsonUtility.ToJson(playerData, true);
+        string playerDataJson = JsonUtility.ToJson(playerData, true);
         // Debug.Log("Saving Data to JSON to " + Application.persistentDataPath + playerDatas);
-        System.IO.File.WriteAllText(Application.persistentDataPath + "/PlayerData.json", playerDatas);
+
+        FireBaseManager.Instance.SendData(playerDataJson);
+       // System.IO.File.WriteAllText(Application.persistentDataPath + "/PlayerData.json", playerDataJson);
 
     }
 
-    void LoadPlayerDataFromJson(string file_path)
+    IEnumerator LoadPlayerData()
     {
+        Debug.Log("Fetching Player data from FireBase . . .");
+
+        playerData = new PlayerData();
+        
         if (FirebaseAuth.DefaultInstance.CurrentUser == null)
         {
             Debug.Log("No FireBaseUser detected, trying sign-in as guest.");
-            FireBaseManager.Instance.SignInAsGuest();
-
-        }
-
-        Debug.Log("Fetching Player data form JSON . . .");
-
-        playerData = new PlayerData();
-
-        string file = null;
-
-        if (File.Exists(file_path))
-        {
-            file = File.ReadAllText(file_path);
-            if (file != null)
+            var task = FireBaseManager.Instance.SignInAsGuest().ContinueWith(user =>
             {
-                playerData = JsonUtility.FromJson<PlayerData>(file);
-                Debug.Log(file);
-            }
+                Debug.Log($"Sign-in successfully");
+            }).Wait(10000);
+
+            playerData.completeTutorial = false;
+            playerData.UID = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
+            string playerDatas = JsonUtility.ToJson(playerData, true);
+
+            FireBaseManager.Instance.SendData(playerDatas);
         }
         else
         {
-            Debug.Log("There no file in directory. Creating new PlayerData.json on " + file_path);
-            File.Create(file_path);
-            playerData.completeTutorial = false;
+            string playerDatas = JsonUtility.ToJson(playerData, true);
 
+            var ds = FireBaseManager.Instance.ReceivePlayerData();
+
+            yield return new WaitUntil(() => ds.IsCompleted);
+            Debug.Log($"{ds.Status}");
+            Debug.Log($"Datasnapshot : {ds.Result.GetRawJsonValue()}");
+
+            playerData = JsonUtility.FromJson<PlayerData>(ds.Result.GetRawJsonValue());
         }
-        Debug.Log($"Currently working on Firebase User : {FirebaseAuth.DefaultInstance.CurrentUser.DisplayName}");
-        return;
+        
+        Debug.Log($"Currently working on Firebase User : {FirebaseAuth.DefaultInstance.CurrentUser?.UserId}");
     }
 
     public IEnumerator LoadInGameData()
@@ -317,26 +324,24 @@ public class LoadManager : SingletonComponent<LoadManager>
         RemoveDuplicateCharacterData();
 
         EventManager.Instance.GameDataLoadFinished();
-        FireBaseManager.Instance.SendData(JsonUtility.ToJson(playerData, true));
     }
+
     void RemoveDuplicateCharacterData()
     {
         foreach (Character character in CharacterManager.Instance.AllCharacters)
         {
-
             if (LoadManager.Instance.allCharacterData.ContainsKey(character.Name))
             {
                 LoadManager.Instance.allCharacterData.Remove(character.Name);
             }
-
         }
+
         foreach (Character character in CharacterManager.Instance.characterWaitingInLine)
         {
             if (LoadManager.Instance.allCharacterData.ContainsKey(character.Name))
             {
                 LoadManager.Instance.allCharacterData.Remove(character.Name);
             }
-
         }
     }
 
@@ -380,7 +385,6 @@ public static class JsonHelper
         wrapper.Items = array;
         return JsonUtility.ToJson(wrapper);
     }
-
     public static string ToJson<T>(T[] array, bool prettyPrint)
     {
         Wrapper<T> wrapper = new Wrapper<T>();

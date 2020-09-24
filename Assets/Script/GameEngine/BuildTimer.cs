@@ -98,12 +98,12 @@ public class BuildTimer : Timer
 
         timer = (long)((builder.constructionStatus.finishPoint - builder.constructionStatus.currentPoint) / productionPoint);
 
-        Debug.Log($"{timer}");
-        Debug.Log($"{activityInformation.activityName}");
-        activityInformation.finishTime = DateTime.Now.Ticks + (timer * TimeSpan.TicksPerSecond);
+        activityInformation = NotificationManager.Instance.ProcessingActivies.SingleOrDefault(p => p.Value.informationID == builder.ID).Value;
+        if (activityInformation != null)
+        {
+            activityInformation.finishTime = DateTime.Now.Ticks + (timer * TimeSpan.TicksPerSecond);
 
-
-        
+        }
 
         isInitiated = true;
 
@@ -124,6 +124,11 @@ public class BuildTimer : Timer
             builder.Level++;
             Debug.Log($"Upgrade Task is completed. Now ID :{builder.representGameObject.name} level is {builder.Level}.");
             CancelConstructing();
+            if (activityInformation == null)
+            {
+                activityInformation = NotificationManager.Instance.ProcessingActivies.SingleOrDefault(p => p.Value.informationID == builder.ID).Value;
+                Debug.Log($"{activityInformation.activityName}");
+            }
             EventManager.Instance.ActivityFinished(activityInformation);
 
             gameObject.GetComponent<BuildingBehavior>().UpdatePrefab();
@@ -179,7 +184,7 @@ public class BuildTimer : Timer
         builder.constructionStatus.teamNumber = 0;
 
         gameObject.GetComponent<SpriteRenderer>().color = Color.white;
-        LoadManager.Instance.SavePlayerDataToJson();
+        LoadManager.Instance.SavePlayerDataToFireBase();
         Destroy(slider);
         Destroy(this);
 
@@ -203,12 +208,11 @@ public class BuildTimer : Timer
 
     }
 
-    void UpdateNewFinishTime()
+    public void UpdateNewFinishTime()
     {
         timer = (long)((builder.constructionStatus.finishPoint - builder.constructionStatus.currentPoint) / productionPoint);
 
         activityInformation.finishTime = DateTime.Now.Ticks + (timer * TimeSpan.TicksPerSecond);
-
         
         if (isInitiated)
         {

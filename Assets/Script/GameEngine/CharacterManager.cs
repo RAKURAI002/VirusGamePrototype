@@ -118,7 +118,7 @@ public class CharacterManager : SingletonComponent<CharacterManager>
         Character character = new Character("John " + UnityEngine.Random.Range(0, 10000));
         Debug.Log("Creating New Character : " + character.ToString());
         AddCharacterToList(character);
-        LoadManager.Instance.SavePlayerDataToJson();
+        LoadManager.Instance.SavePlayerDataToFireBase();
         return;
 
     }
@@ -194,7 +194,7 @@ public class CharacterManager : SingletonComponent<CharacterManager>
 
         character.WorkingPlaceID = builder.ID;
         Debug.Log($"{character.WorkingPlaceID} : {builder.ID}");
-        LoadManager.Instance.SavePlayerDataToJson();
+        LoadManager.Instance.SavePlayerDataToFireBase();
         EventManager.Instance.CharacterAssigned();
 
         return true;
@@ -221,7 +221,7 @@ public class CharacterManager : SingletonComponent<CharacterManager>
         character.WorkingPlaceID = 0;
         Debug.Log($"Stop {character.Name} from working at {builder.Type}. Now {character.Name} is {character.workStatus}");
         EventManager.Instance.CharacterAssigned();
-        LoadManager.Instance.SavePlayerDataToJson();
+        LoadManager.Instance.SavePlayerDataToFireBase();
         return true;
     }
 

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
 
-public class FireBaseAuth : MonoBehaviour
+public class FireBaseEmailAuth : MonoBehaviour
 {
     private FirebaseAuth auth;
     public InputField emailInput, passwordInput, cPasswordInput;

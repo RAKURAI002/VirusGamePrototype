@@ -112,12 +112,12 @@ public class GameManager : SingletonComponent<GameManager>
         LoadManager.Instance.playerData.level++;
         Debug.Log($"Now Player Level is {LoadManager.Instance.playerData.level}.");
         EventManager.Instance.PlayerLevelUp(LoadManager.Instance.playerData.level);
-        LoadManager.Instance.SavePlayerDataToJson();
+        LoadManager.Instance.SavePlayerDataToFireBase();
     }
     private void OnApplicationQuit()
     {
         LoadManager.Instance.playerData.lastLoginTime = DateTime.Now.Ticks;
-        LoadManager.Instance.SavePlayerDataToJson();
+        LoadManager.Instance.SavePlayerDataToFireBase();
         Debug.Log("Application ending after " + Time.time + " seconds");
     }
 
@@ -126,7 +126,7 @@ public class GameManager : SingletonComponent<GameManager>
         if (pause)
         {
             LoadManager.Instance.playerData.lastLoginTime = DateTime.Now.Ticks;
-            LoadManager.Instance.SavePlayerDataToJson();
+            LoadManager.Instance.SavePlayerDataToFireBase();
             Debug.Log("Application paused after " + Time.time + " seconds");
 
         }
@@ -142,7 +142,6 @@ public class GameManager : SingletonComponent<GameManager>
 
     public IEnumerator StartTutorial()
     {
-        Debug.Log($"kkk");
         GameTutorialManager gameTutorialManager = Resources.FindObjectsOfTypeAll<GameTutorialManager>()[0];
 
         Coroutine getPlayerName = StartCoroutine(gameTutorialManager.GetPlayerName());
@@ -158,9 +157,7 @@ public class GameManager : SingletonComponent<GameManager>
 
         EventManager.Instance.PlayerNameChanged();
         LoadManager.Instance.playerData.completeTutorial = true;
-
-
-
+        LoadManager.Instance.SavePlayerDataToFireBase();
     }
 
     public static string GetGameObjectPath(GameObject obj)

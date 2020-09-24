@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using Firebase.Auth;
 
 [System.Serializable]
 public class PlayerData
 {
     public PlayerData()
     {
+       // UID = ""// FirebaseAuth.DefaultInstance.CurrentUser?.UserId;
         buildingInPossession = new List<Builder>();
         characterInPossession = new List<Character>();
         resourceInPossession = new ResourceDictionary();

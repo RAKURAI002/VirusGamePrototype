@@ -112,7 +112,7 @@ public class QuestManager : SingletonComponent<QuestManager>
 
         BuildingManager.Instance.AllBuildings.SingleOrDefault(b => b.Type == Building.BuildingType.TownBase).TeamLockState.Add(_teamNumber);
 
-        LoadManager.Instance.SavePlayerDataToJson();
+        LoadManager.Instance.SavePlayerDataToFireBase();
   
     }
 
@@ -141,7 +141,7 @@ public class QuestManager : SingletonComponent<QuestManager>
 
         NotificationManager.Instance.RemoveActivity(quest);
         
-        LoadManager.Instance.SavePlayerDataToJson();
+        LoadManager.Instance.SavePlayerDataToFireBase();
 
         return;
         

@@ -77,7 +77,6 @@ public class GameTutorialManager : MonoBehaviour
             case NameInputState.NotReachMinimum: { statusText.text = "Characters must more than 2."; break; }
             default: { statusText.text = ""; break; }
         }
-
     }
     void Start()
     {

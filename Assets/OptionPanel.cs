@@ -32,5 +32,9 @@ public class OptionPanel : MonoBehaviour
     {
         Debug.Log($"Trying to sign-in Google Account");
     }
-
+    public void OnClickDeleteData()
+    {
+        Debug.Log($"Signout");
+        FirebaseAuth.DefaultInstance.SignOut();
+    }
 }

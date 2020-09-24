@@ -22,7 +22,8 @@ public class SigninSampleScript : MonoBehaviour
         configuration = new GoogleSignInConfiguration
         {
             WebClientId = webClientId,
-            RequestIdToken = true
+            RequestIdToken = true,
+            
         };
         
     }
@@ -177,7 +178,22 @@ public class SigninSampleScript : MonoBehaviour
     }
     public void test()
     {
-        FirebaseDatabase.DefaultInstance.RootReference.Child("users/").SetRawJsonValueAsync("");
+        FirebaseAuth.DefaultInstance.SignInAnonymouslyAsync().ContinueWith(task => {
+            if (task.IsCanceled)
+            {
+                Debug.LogError("SignInAnonymouslyAsync was canceled.");
+                return;
+            }
+            if (task.IsFaulted)
+            {
+                Debug.LogError("SignInAnonymouslyAsync encountered an error: " + task.Exception);
+                return;
+            }
+            AddStatusText("Welcome: " + task.Result.DisplayName + "!");
+            Firebase.Auth.FirebaseUser newUser = task.Result;
+            Debug.LogFormat("User signed in successfully: {0} ({1})",
+                newUser.DisplayName, newUser.UserId);
+        });
 
     }
 }

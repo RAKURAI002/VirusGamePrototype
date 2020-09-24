@@ -84,7 +84,7 @@ public class BuildingManager : SingletonComponent<BuildingManager>
         });
         EventManager.Instance.BuildingModified(builder.ID);
         Debug.Log("Create action complete.");
-        LoadManager.Instance.SavePlayerDataToJson();
+        LoadManager.Instance.SavePlayerDataToFireBase();
 
         return true;
     }
@@ -231,7 +231,7 @@ public class BuildingManager : SingletonComponent<BuildingManager>
             builder.constructionStatus.teamNumber = teamNumber;
             builder.representGameObject.AddComponent<BuildTimer>();
             Debug.Log("Upgrade action complete.");
-            LoadManager.Instance.SavePlayerDataToJson();
+            LoadManager.Instance.SavePlayerDataToFireBase();
 
         }
         else
@@ -300,7 +300,7 @@ public class BuildingManager : SingletonComponent<BuildingManager>
         Destroy(destroyBuilding.representGameObject, 0.1f);
         EventManager.Instance.BuildingModified(destroyBuilding.ID);
 
-        LoadManager.Instance.SavePlayerDataToJson();
+        LoadManager.Instance.SavePlayerDataToFireBase();
 
         Resources.FindObjectsOfTypeAll<BuildingShopPanel>()[0].RefreshPanel();
 

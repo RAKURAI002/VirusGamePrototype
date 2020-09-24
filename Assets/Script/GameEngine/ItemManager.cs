@@ -129,7 +129,7 @@ public class ItemManager : SingletonComponent<ItemManager>
 
         ConsumeResource("Foods", decreaseAmount);
         ConsumeResource("Water", decreaseAmount);
-        LoadManager.Instance.SavePlayerDataToJson();
+        LoadManager.Instance.SavePlayerDataToFireBase();
         return;
 
     }
@@ -261,7 +261,7 @@ public class ItemManager : SingletonComponent<ItemManager>
 
         allEquipments[name].AllAmount += amount;
         Debug.Log($"Adding {allEquipments[name].Name} : {amount} unit(s) to Player. Now Player have {allEquipments[name].AllAmount}.");
-        LoadManager.Instance.SavePlayerDataToJson();
+        LoadManager.Instance.SavePlayerDataToFireBase();
         return;
 
     }
@@ -300,7 +300,7 @@ public class ItemManager : SingletonComponent<ItemManager>
         }
         Debug.Log($"Adding {LoadManager.Instance.allResourceData[name].Name} : {amount} unit(s) to Player . . .");
         EventManager.Instance.ResourceChanged(name);
-        LoadManager.Instance.SavePlayerDataToJson();
+        LoadManager.Instance.SavePlayerDataToFireBase();
 
         return true;
     }
@@ -372,7 +372,7 @@ public class ItemManager : SingletonComponent<ItemManager>
         {
             allResources[name].Amount -= amount;
             EventManager.Instance.ResourceChanged(name);
-            LoadManager.Instance.SavePlayerDataToJson();
+            LoadManager.Instance.SavePlayerDataToFireBase();
         }
         return true;
 

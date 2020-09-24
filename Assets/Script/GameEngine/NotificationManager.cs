@@ -50,10 +50,10 @@ public class NotificationManager : SingletonComponent<NotificationManager>
     }
     #endregion
 
-    [SerializeField] private ActivityProgressDictionary processingActivies;
+    [SerializeField] private ActivityProgressDictionary allProcessingActivies;
     [SerializeField] private DictionaryIntToString androidNotificationSchedule;
 
-    public ActivityProgressDictionary ProcessingActivies { get { return processingActivies; } set { processingActivies = value; } }
+    public ActivityProgressDictionary ProcessingActivies { get { return allProcessingActivies; } set { allProcessingActivies = value; } }
 
     void Start()
     {
@@ -63,7 +63,7 @@ public class NotificationManager : SingletonComponent<NotificationManager>
 
     protected override void OnInitialize()
     {
-        processingActivies = new ActivityProgressDictionary();
+        allProcessingActivies = new ActivityProgressDictionary();
         androidNotificationSchedule = new DictionaryIntToString();
 
 #if UNITY_ANDROID
@@ -83,7 +83,7 @@ public class NotificationManager : SingletonComponent<NotificationManager>
 
     void CheckActivities()
     {
-        foreach (var activity in processingActivies)
+        foreach (var activity in allProcessingActivies)
         {
             switch (activity.Value.activityType)
             {
@@ -110,6 +110,9 @@ public class NotificationManager : SingletonComponent<NotificationManager>
                         Debug.Log($"{builder.representGameObject.GetComponent<BuildTimer>().name}");
                         builder.representGameObject.GetComponent<BuildTimer>().activityInformation = activity.Value;
                         Debug.Log($"{builder.representGameObject.GetComponent<BuildTimer>().activityInformation.activityID}");
+                        builder.representGameObject.GetComponent<BuildTimer>().UpdateNewFinishTime();
+
+
                         break;
                     }
                 case ActivityType.Pregnancy:
@@ -148,20 +151,20 @@ public class NotificationManager : SingletonComponent<NotificationManager>
 
         activityInformation.activityID = GetActivityID();
 
-        processingActivies.Add(activityInformation.activityID, activityInformation);
+        allProcessingActivies.Add(activityInformation.activityID, activityInformation);
 
         StartCoroutine(SetMobileNotificationSchedule(activityInformation));
         EventManager.Instance.ActivityAssigned(activityInformation);
     }
+
     public void RemoveActivity(ActivityInformation activityInformation)
     {
-        if (!processingActivies.Remove(activityInformation.activityID))
+        if (!allProcessingActivies.Remove(activityInformation.activityID))
         {
             Debug.LogError("Remove Activity Failed.");
-
         }
-
     }
+
     public void OnActivityAssigned(ActivityInformation activityInformation)
     {
         switch (activityInformation.activityType)
@@ -253,6 +256,8 @@ public class NotificationManager : SingletonComponent<NotificationManager>
     }
     public void CancelMobileNotification(ActivityInformation activityInformation)
     {
+        if (activityInformation == null)
+            return;
 #if UNITY_ANDROID
         Debug.Log($"{activityInformation.activityName} canceled.");
         AndroidNotificationCenter.CancelScheduledNotification(activityInformation.androidNotificationID);
@@ -324,7 +329,7 @@ public class NotificationManager : SingletonComponent<NotificationManager>
 
     int GetActivityID()
     {
-        return (processingActivies.Count == 0 ? Constant.IDMask.ACTIVITY_ID_MASK : processingActivies.Select(pa => pa.Key).Max()) + 1;
+        return (allProcessingActivies.Count == 0 ? Constant.IDMask.ACTIVITY_ID_MASK : allProcessingActivies.Select(pa => pa.Key).Max()) + 1;
 
     }
 

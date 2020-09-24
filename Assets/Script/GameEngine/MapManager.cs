@@ -27,7 +27,6 @@ public class MapManager : SingletonComponent<MapManager>
 
     void OnDisable()
     {
-
         if (EventManager.Instance)
         {
             EventManager.Instance.OnPlayerLevelUp -= OnPlayerLevelUp;

@@ -41,8 +41,7 @@ public class EventManager : SingletonComponent<EventManager>
     #endregion
 
     public event Action OnCharacterAssigned;
-    public event Action<string> OnResourceChanged;
-    
+    public event Action<string> OnResourceChanged; 
 
     public event Action<int> OnBuildingModified;
 
@@ -66,7 +65,7 @@ public class EventManager : SingletonComponent<EventManager>
     }
     public void GameDataLoadFinished()
     {
-        Debug.Log($"Load Game data finished.");
+        Debug.Log($"Load Game data finished. Ready to start !");
         OnGameDataLoadFinished?.Invoke();
 
     }

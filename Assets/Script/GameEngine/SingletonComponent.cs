@@ -40,7 +40,8 @@ public class SingletonComponent<T> : MonoBehaviour where T : Object
     #region Unity Functions
     protected virtual void Awake()
 	{
-		SetInstance();
+        Debug.Log($"Awaking {gameObject.name}.");
+        SetInstance();
 
 	}
 

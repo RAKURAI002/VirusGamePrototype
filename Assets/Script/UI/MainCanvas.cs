@@ -131,7 +131,6 @@ public class MainCanvas : MonoBehaviour
     }
     void UpdateResourceCollectorPanel()
     {
-        Debug.Log($"UpdateResourceCollectorPanel");
         Transform container = resourceCollectorPanel.transform.Find("Container");
         foreach (Transform transform in container)
         {
