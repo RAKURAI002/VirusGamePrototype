@@ -28,6 +28,7 @@ public class NotificationManager : SingletonComponent<NotificationManager>
         SceneManager.sceneLoaded += OnLevelFinishedLoading;
         EventManager.Instance.OnActivityAssigned += OnActivityAssigned;
         EventManager.Instance.OnActivityFinished += OnActivityFinished;
+        EventManager.Instance.OnGameDataLoadFinished += CheckActivities;
     }
 
     void OnDisable()
@@ -37,6 +38,7 @@ public class NotificationManager : SingletonComponent<NotificationManager>
         {
             EventManager.Instance.OnActivityAssigned -= OnActivityAssigned;
             EventManager.Instance.OnActivityFinished -= OnActivityFinished;
+            EventManager.Instance.OnGameDataLoadFinished -= CheckActivities;
         }
 
     }
@@ -57,7 +59,7 @@ public class NotificationManager : SingletonComponent<NotificationManager>
 
     void Start()
     {
-        CheckActivities();
+        
 
     }
 
@@ -106,13 +108,13 @@ public class NotificationManager : SingletonComponent<NotificationManager>
                 case ActivityType.Build:
                     {
                         Builder builder = BuildingManager.Instance.AllBuildings.SingleOrDefault(b => b.ID == activity.Value.informationID);
-                        Debug.Log($"{builder.representGameObject.name}");
-                        Debug.Log($"{builder.representGameObject.GetComponent<BuildTimer>().name}");
-                        builder.representGameObject.GetComponent<BuildTimer>().activityInformation = activity.Value;
-                        Debug.Log($"{builder.representGameObject.GetComponent<BuildTimer>().activityInformation.activityID}");
-                        builder.representGameObject.GetComponent<BuildTimer>().UpdateNewFinishTime();
 
-
+                        BuildTimer buildTimer = builder.representGameObject.GetComponent<BuildTimer>();
+                        if (buildTimer)
+                        {
+                            buildTimer.activityInformation = activity.Value;
+                            buildTimer.UpdateNewFinishTime();
+                        }
                         break;
                     }
                 case ActivityType.Pregnancy:

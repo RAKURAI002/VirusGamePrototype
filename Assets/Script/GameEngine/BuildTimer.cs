@@ -21,7 +21,17 @@ public class BuildTimer : Timer
     long timerTemp;
     [SerializeField] float productionPoint;
 
-
+    private void OnApplicationPause(bool pause)
+    {
+        if (pause)
+        {
+          
+        }
+        else
+        {
+            builder.constructionStatus.currentPoint += (int)Math.Round(((DateTime.Now.Ticks - LoadManager.Instance.playerData.lastLoginTime) / TimeSpan.TicksPerSecond) * productionPoint);
+        }
+    }
     private void Awake()
     {
         laborCenter = BuildingManager.Instance.AllBuildings.SingleOrDefault(b => b.Type == Building.BuildingType.LaborCenter);
@@ -67,11 +77,13 @@ public class BuildTimer : Timer
             slider.GetComponentInChildren<Text>().text = String.Format("{0:00}:{1:00}:{2:00}", hours, minutes, seconds);
         }
     }
+
     void OnCharacterAssigned()
     {
         GetProductionPoint();
         UpdateNewFinishTime();
     }
+
     void Initiate()
     {
         builder.constructionStatus.isConstructing = true;

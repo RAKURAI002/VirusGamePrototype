@@ -9,6 +9,8 @@ using UnityEngine.Events;
 using System;
 public class GameTutorialManager : MonoBehaviour
 {
+
+
     enum NameInputState 
     { 
         Unknown,
@@ -80,7 +82,6 @@ public class GameTutorialManager : MonoBehaviour
     }
     void Start()
     {
-
     }
 
     // Update is called once per frame

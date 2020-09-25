@@ -7,6 +7,9 @@ using System;
 using System.Text;
 using System.Linq;
 
+#if UNITY_ANDROID
+using Unity.Notifications.Android;
+#endif
 public class GameManager : SingletonComponent<GameManager>
 {
 
@@ -32,6 +35,8 @@ public class GameManager : SingletonComponent<GameManager>
         SceneManager.sceneLoaded += OnLevelFinishedLoading;
 
         EventManager.Instance.OnGameDataLoadFinished += OnGameDataLoadFinished;
+
+        
     }
     void OnDisable()
     {
@@ -97,6 +102,15 @@ public class GameManager : SingletonComponent<GameManager>
         InvokeRepeating(nameof(BroadCastGeneralGameCycle), Constant.TimeCycle.GENERAL_GAME_CYCLE, Constant.TimeCycle.GENERAL_GAME_CYCLE);
 
     }
+    public void ReloadGame()
+    {
+        Debug.Log($"Reload Game, destroying {transform.parent.gameObject.name} . . .");
+        Destroy(transform.parent.gameObject);
+
+        SceneManager.LoadScene("MainScene");
+        //SceneManager.LoadScene(SceneManager.GetSceneByName("MainScene").name);
+    }
+
     void BroadCastGeneralGameCycle()
     {
         Debug.Log($"BroadCastGeneralGameCycle Updated.");
@@ -199,4 +213,5 @@ public class GameManager : SingletonComponent<GameManager>
         }
         return null;
     }
+
 }

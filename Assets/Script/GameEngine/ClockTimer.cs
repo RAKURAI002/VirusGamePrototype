@@ -126,6 +126,7 @@ public class ClockTimer : Timer
 
         return;
     }
+
     protected override void OnActivityAssigned(ActivityInformation activityInformation)
     {
         base.OnActivityAssigned(activityInformation);
@@ -141,6 +142,7 @@ public class ClockTimer : Timer
         }
        
     }
+
     public override void ForceFinish()
     {
         FinishTimer();

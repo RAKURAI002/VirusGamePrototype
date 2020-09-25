@@ -36,14 +36,12 @@ public class MapManager : SingletonComponent<MapManager>
     void Start()
     {
         SetExpandedArea();
-
     }
 
     void Update()
     {
         if (buildPermission && Input.GetMouseButtonUp(0))
         {
-
             Vector3 mousePos = Input.mousePosition;
             mousePos.z = -Camera.main.transform.position.z;
             Vector3 mouseToWorldPoint = Camera.main.ScreenToWorldPoint(mousePos);
@@ -118,7 +116,6 @@ public class MapManager : SingletonComponent<MapManager>
 
     }
     public string SelectedBuildingName { get; set; }
-
 
     public void ClickTile(Vector3Int position)
     {
@@ -597,7 +594,7 @@ public class MapManager : SingletonComponent<MapManager>
 
         buildPermission = false;
         CancleShowAvailableTiles();
-        GameManager.FindInActiveObjectByName("UICanvas").SetActive(true);
+        GameManager.FindInActiveObjectByName("GUICanvas").SetActive(true);
         return;
     }
     public void ReclaimConstructableGrid(Builder builder)

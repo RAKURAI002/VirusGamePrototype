@@ -34,11 +34,18 @@ public class LoadManager : SingletonComponent<LoadManager>
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnLevelFinishedLoading;
+        Application.quitting += OnApplicationTryToQuit;
     }
 
     void OnDisable()
     {
         SceneManager.sceneLoaded -= OnLevelFinishedLoading;
+        Application.quitting -= OnApplicationTryToQuit;
+    }
+
+    private void OnApplicationTryToQuit()
+    {
+        SavePlayerDataToFireBase();
     }
 
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
@@ -109,7 +116,9 @@ public class LoadManager : SingletonComponent<LoadManager>
             var task = FireBaseManager.Instance.SignInAsGuest().ContinueWith(user =>
             {
                 Debug.Log($"Sign-in successfully");
-            }).Wait(10000);
+            });
+
+            yield return new WaitUntil(() => task.IsCompleted);
 
             playerData.completeTutorial = false;
             playerData.UID = FirebaseAuth.DefaultInstance.CurrentUser.UserId;

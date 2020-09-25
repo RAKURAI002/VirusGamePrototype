@@ -47,6 +47,7 @@ public class MainCanvas : MonoBehaviour
         EventManager.Instance.OnCharacterAssigned += OnCharacterAddEvent;
         EventManager.Instance.OnBuildingModified += OnBuildingModified;
         EventManager.Instance.OnPlayerNameChanged += OnPlayerNameChanged;
+        EventManager.Instance.OnGameDataLoadFinished += OnGameDataLoadFinished;
     }
     void OnBuildingModified(int id)
     {
@@ -95,6 +96,7 @@ public class MainCanvas : MonoBehaviour
             EventManager.Instance.OnCharacterAssigned -= OnCharacterAddEvent;
             EventManager.Instance.OnBuildingModified -= OnBuildingModified;
             EventManager.Instance.OnPlayerNameChanged -= OnPlayerNameChanged;
+            EventManager.Instance.OnGameDataLoadFinished -= OnGameDataLoadFinished;
         }
     }
 
@@ -115,7 +117,10 @@ public class MainCanvas : MonoBehaviour
         UpdateResourcePanel();
         UpdateResourceCollectorPanel();
     }
-
+    void OnGameDataLoadFinished()
+    {
+        Start();
+    }
     void UpdateResourcePanel()
     {
         resourcePanel.transform.Find("GoldPanel").gameObject.GetComponentInChildren<Text>().text = ItemManager.Instance.GetResourceAmount("Gold").ToString();
@@ -125,10 +130,12 @@ public class MainCanvas : MonoBehaviour
         resourcePanel.transform.Find("FoodPanel").gameObject.GetComponentInChildren<Text>().text = ItemManager.Instance.GetResourceAmount("Food").ToString();
     
     }
+
     void OnPlayerNameChanged()
     {
         playerName.text = $"<color=red>{LoadManager.Instance.playerData.name}</color>";
     }
+
     void UpdateResourceCollectorPanel()
     {
         Transform container = resourceCollectorPanel.transform.Find("Container");
@@ -268,6 +275,12 @@ public class MainCanvas : MonoBehaviour
         }
 
     }
+
+    public void OnClickTryReconnectInternet()
+    {
+        GameManager.Instance.ReloadGame();
+    }
+
     void ShowExpandAreaPanel(GameObject selectedGameObject)
     {
         confirmationPanel.GetComponent<ExpandConfirmationPanel>().expandingAreaID = int.Parse(selectedGameObject.name);
@@ -382,9 +395,21 @@ public class MainCanvas : MonoBehaviour
         selectButtonAnimator.SetBool("IsOpen", selectButtonToggle);
     }
 
-    static IEnumerator DelaySetCanvasActive(bool active)
+   public void TestAddResource()
     {
-        yield return new WaitForEndOfFrame();
-        FreezeCamera = active;
+        ItemManager.Instance.AddTest();
     }
+    public void TestAddLevel()
+    {
+        LoadManager.Instance.playerData.level++;
+    }
+    public void TestAddCharacter()
+    {
+        CharacterManager.Instance.CreateNewCharacter();
+    }
+    public void TestResetFireBase()
+    {
+        FireBaseManager.Instance.SignOut();
+    }
+
 }

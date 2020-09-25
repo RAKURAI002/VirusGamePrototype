@@ -361,6 +361,7 @@ public class BuildingInformationPanel : MonoBehaviour
     }
     public void OnClickSpeedUpButton()
     {
+        Debug.Log($"Try spending Diamonds to skip the task.");
         float pointLeft = builder.constructionStatus.finishPoint - builder.constructionStatus.currentPoint;
 
         int speedUpCost = ItemManager.Instance.GetSpeedUpCost(pointLeft);

@@ -103,7 +103,7 @@ public class BuildingShopPanel : MonoBehaviour
 
         cancelButton.gameObject.SetActive(true);
 
-        GameObject.Find("UICanvas").SetActive(false);
+        GameObject.Find("GUICanvas").SetActive(false);
         transform.Find("BackGroundPanel").gameObject.SetActive(false);
         MapManager.Instance.SelectedBuildingName = currentSelectedButton.name.Replace(":ShopButton", "");
         

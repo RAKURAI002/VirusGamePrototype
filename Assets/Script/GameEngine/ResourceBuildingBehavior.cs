@@ -79,7 +79,6 @@ public class ResourceBuildingBehavior : BuildingBehavior
             if (resource.type != Resource.ResourceType.Material)
             {
                 return;
-
             }
 
             float productionAmount = GetTotalProduction(baseProduction, characters);
@@ -102,7 +101,6 @@ public class ResourceBuildingBehavior : BuildingBehavior
             if (resource.type != Resource.ResourceType.Material)
             {
                 return;
-
             }
 
             float productionAmount = GetTotalProduction(baseProduction, characters) * multipler;
@@ -143,10 +141,7 @@ public class ResourceBuildingBehavior : BuildingBehavior
                 {
                     birthMarkDatas.Add(ObjectCopier.Clone<BirthMarkData>(birthMarkData));
                     birthMarkDatas[birthMarkDatas.Count - 1].level = bm.level;
-
                 }
-
-
             });
 
             log.AppendLine($"{character.Name} : speed = {character.Stats.speed} increases {character.Stats.speed * 0.2f}");
@@ -177,14 +172,16 @@ public class ResourceBuildingBehavior : BuildingBehavior
         }
 
     }
+
     protected override void ContinueFromOffline()
     {
         base.ContinueFromOffline();
+
         int offlineTimePassed = (int)((DateTime.Now.Ticks - LoadManager.Instance.playerData.lastLoginTime) / TimeSpan.TicksPerSecond);
         int resourceMultipler = offlineTimePassed / Constant.TimeCycle.RESOURCE_UPDATE_CYCLE;
         AddResourceAfterOffine(resourceMultipler);
-
     }
+
     void AddProductionToBuilding(float amount)
     {
         Building buildData = LoadManager.Instance.allBuildingData[builder.Type];
@@ -193,11 +190,10 @@ public class ResourceBuildingBehavior : BuildingBehavior
         if (builder.currentProductionAmount >= buildData.maxProductionStored[builder.Level])
         {
             builder.currentProductionAmount = buildData.maxProductionStored[builder.Level];
-
         }
         RefreshProductionAmount();
-
     }
+
     void OnClickCollectResource()
     {
         ItemManager.Instance.AddResource(buildingData.production[builder.Level].First().Key, Mathf.FloorToInt(builder.currentProductionAmount));
@@ -211,7 +207,6 @@ public class ResourceBuildingBehavior : BuildingBehavior
     void OnResourceChanged(string name)
     {
         RefreshProductionAmount();
-
     }
 
     void CreateSpriteFillMode()
@@ -254,9 +249,8 @@ public class ResourceBuildingBehavior : BuildingBehavior
     {
         Transform production = transform.Find("Production");
         Transform amount = transform.Find("Production/Amount");
-        if (builder.Level != 0 && !builder.constructionStatus.isConstructing)
+        if (builder.Level != 0) // && !builder.constructionStatus.isConstructing)
         {
-
             production.gameObject.SetActive(true);
             amount.GetComponent<TextMeshPro>().text = $"{Mathf.FloorToInt(builder.currentProductionAmount)} / {buildingData.maxProductionStored[builder.Level]}";
 

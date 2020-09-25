@@ -12,12 +12,14 @@ using System.Threading.Tasks;
 using Google;
 using System;
 using UnityEngine.Networking;
-
+#if UNITY_ANDROID
+using Unity.Notifications.Android;
+#endif
 public class FireBaseManager : SingletonComponent<FireBaseManager>
 {
     Firebase.Auth.FirebaseAuth auth;
     public DatabaseReference reference;
-    public string webClientId = "503284986617-pfqma7n52qicbe78jd44psvpem1me8sk.apps.googleusercontent.com";
+    public string webClientId = Constant.FireBaseData.WEB_CLIENT_ID;
 
     protected override void Awake()
     {
@@ -32,9 +34,16 @@ public class FireBaseManager : SingletonComponent<FireBaseManager>
         FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://virus-game-project.firebaseio.com/");
         reference = FirebaseDatabase.DefaultInstance.RootReference;
 
+        GoogleSignIn.Configuration = new GoogleSignInConfiguration
+        {
+            WebClientId = webClientId,
+            RequestIdToken = true
+        };
+
     }
     void Start()
     {
+        StartCoroutine(CheckInternetConnection((result) => { }));
     }
 
     public Task<FirebaseUser> SignInAsGuest()
@@ -63,18 +72,12 @@ public class FireBaseManager : SingletonComponent<FireBaseManager>
     }
     public void SignInWithGoogle()
     {
-        GoogleSignIn.Configuration = new GoogleSignInConfiguration
-        {
-            WebClientId = webClientId,
-            RequestIdToken = true
-        };
 
         Task<GoogleSignInUser> signIn = GoogleSignIn.DefaultInstance.SignIn();
 
         TaskCompletionSource<FirebaseUser> signInCompleted = new TaskCompletionSource<FirebaseUser>();
         signIn.ContinueWith(task =>
         {
-            Debug.Log($"Start ");
             if (task.IsCanceled)
             {
                 Debug.LogError("SignInWithCredentialAsync was canceled.");
@@ -109,11 +112,43 @@ public class FireBaseManager : SingletonComponent<FireBaseManager>
 
                         Firebase.Auth.FirebaseUser newUser = authTask.Result;
 
-                        newUser.UpdateEmailAsync(((Task<GoogleSignInUser>)task).Result.Email);
-
+                        LoadManager.Instance.playerData.UID = newUser.UserId;
                         Debug.LogFormat("User signed in successfully: {0} ({1})",
                             newUser.DisplayName, newUser.UserId);
-                        FirebaseDatabase.DefaultInstance.RootReference.Child($"{auth.CurrentUser.DisplayName}/").SetRawJsonValueAsync("");
+
+                        var dsTask = FireBaseManager.Instance.ReceivePlayerData();
+                        TaskCompletionSource<DataSnapshot> taskCompletionSource = new TaskCompletionSource<DataSnapshot>();
+                        dsTask.ContinueWith((dt) =>
+                        {
+                            if (dt.IsCanceled)
+                            {
+                                Debug.Log($"canceled");
+                                taskCompletionSource.SetCanceled();
+                            }
+                            else if (dt.IsFaulted)
+                            {
+                                Debug.Log($"{dt.Exception}");
+                                taskCompletionSource.SetException(authTask.Exception);
+                            }
+                            else
+                            {
+                                taskCompletionSource.SetResult(dt.Result);
+                                Debug.Log($"{dt.Result}");
+                                if (dt.Result == null)
+                                {
+   
+                                }
+                                else
+                                {
+                                    LoadManager.Instance.playerData = JsonUtility.FromJson<PlayerData>(dt.Result.GetRawJsonValue());
+                                    Debug.Log($"Completed !");
+
+                                    GameObject.Find("ManagerCaller").GetComponent<ManagerCaller>().ReloadScene();
+
+                                }
+
+                            }
+                        });
                     }
                 });
             }
@@ -129,14 +164,20 @@ public class FireBaseManager : SingletonComponent<FireBaseManager>
     public async Task<DataSnapshot> ReceivePlayerData()
     {
         Debug.Log($"Accessing {FirebaseAuth.DefaultInstance.CurrentUser.UserId} node.");
-
         var ds = await FirebaseDatabase.DefaultInstance.RootReference.Child($"users/{FirebaseAuth.DefaultInstance.CurrentUser.UserId}").GetValueAsync();
 
-        //Debug.Log($"{task.Result.GetRawJsonValue()}");
-        //{FirebaseAuth.DefaultInstance.CurrentUser.UserId}
-        return ds;// task.Result;
+        return ds;
     }
-    IEnumerator CheckInternetConnection(Action<bool> action)
+
+    public void SignOut()
+    {
+#if UNITY_ANDROID
+        AndroidNotificationCenter.CancelAllNotifications();
+        FirebaseAuth.DefaultInstance.SignOut();
+#endif
+    }
+
+    public IEnumerator CheckInternetConnection(Action<bool> action)
     {
         UnityWebRequest request = new UnityWebRequest("http://google.com");
         yield return request.SendWebRequest();

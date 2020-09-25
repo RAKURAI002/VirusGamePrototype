@@ -63,8 +63,11 @@ public static class Constant
     {
         public static Func<int, int> CharacterJoiningChanceCalculation = characterWaitingAmount => { return 40 / ((characterWaitingAmount / 5) + 1); };
 
+    }
 
-
+    public static class FireBaseData
+    {
+        public static string WEB_CLIENT_ID = "503284986617-pfqma7n52qicbe78jd44psvpem1me8sk.apps.googleusercontent.com";
     }
 
 

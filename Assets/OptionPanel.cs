@@ -12,7 +12,7 @@ public class OptionPanel : MonoBehaviour
 {
     private void OnEnable()
     {
-        
+
     }
     void Start()
     {
@@ -35,6 +35,21 @@ public class OptionPanel : MonoBehaviour
     public void OnClickDeleteData()
     {
         Debug.Log($"Signout");
-        FirebaseAuth.DefaultInstance.SignOut();
+        FireBaseManager.Instance.SignOut();
+        GameManager.Instance.ReloadGame();
+    }
+    public void OnClickSignInWithGoogle()
+    {
+        FireBaseManager.Instance.SignInWithGoogle();
+    }
+    public void OnClickSignInWithFacebook()
+    {
+        var s = FirebaseAuth.DefaultInstance.CurrentUser.ProviderData.ToList();
+        foreach (var item in s)
+        {
+            Debug.Log($"{item.Email??""} {item.DisplayName ?? ""} {item.ProviderId ?? ""} {item.PhotoUrl.ToString() ?? ""}");
+        }
+
+
     }
 }

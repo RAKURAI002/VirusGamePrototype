@@ -33,6 +33,17 @@ public class PointTimer : Timer
             EventManager.Instance.OnCharacterAssigned -= OnCharacterAssigned;
         }
     }
+    private void OnApplicationPause(bool pause)
+    {
+        if (pause)
+        {
+
+        }
+        else
+        {
+           
+        }
+    }
 
     void Start()
     {
