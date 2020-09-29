@@ -158,7 +158,6 @@ public class MainCanvas : MonoBehaviour
         {
             if(BuildingManager.Instance.AllBuildings.Any(b => b.Type == item.Key))
             {
-                Debug.Log($"{item.Key}");
                 Resource resource = LoadManager.Instance.allResourceData[item.Value];
                 GameObject collectButton = Instantiate(Resources.Load("Prefabs/UI/SimpleButton") as GameObject, container);
                 collectButton.name = $"{item.Value}CollectButton";
@@ -276,10 +275,6 @@ public class MainCanvas : MonoBehaviour
 
     }
 
-    public void OnClickTryReconnectInternet()
-    {
-        GameManager.Instance.ReloadGame();
-    }
 
     void ShowExpandAreaPanel(GameObject selectedGameObject)
     {

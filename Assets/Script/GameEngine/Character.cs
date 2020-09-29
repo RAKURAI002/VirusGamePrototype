@@ -99,7 +99,8 @@ public class Character
         gender = Convert.ToBoolean(UnityEngine.Random.Range(0, 2)) ? GenderType.Male : GenderType.Female;
         level = 1;
 
-        RandomCharacterStats();
+        RandomCharacterStars();
+        RandomCharacterStats(); 
         RandomBirthMark();
         ApplyBirthMarkStats();
 
@@ -110,8 +111,8 @@ public class Character
         healthStatus = HealthStatus.Healthly;
         spritePath = "Sprites/Character/Character" + UnityEngine.Random.Range(1, 10).ToString();
         effects = new List<Resource.Effect>();
-
     }
+
     void ApplyBirthMarkStats()
     {
         BirthMark[] statsBirthMarks = birthMarks.Where(bm => bm.type == typeof(IncreaseSTATSBirthMark).ToString()).ToArray();
@@ -123,10 +124,31 @@ public class Character
 
             int oldStat = (int)fInfo.GetValue(this.stats);
             fInfo.SetValue(this.stats, Mathf.RoundToInt(oldStat * (1 + birthMarkData.effectValues[birthMark.level - 1])));
-
         }
 
     }
+
+    void RandomCharacterStars()
+    {
+        stars = new AllStats();
+
+        FieldInfo[] fInfos = stars.GetType().GetFields();
+        FieldInfo fInfo = stars.GetType().GetFields()[UnityEngine.Random.Range(0, fInfos.Length)];
+        fInfo.SetValue(this.stars, (int)fInfo.GetValue(this.stars) + 1);
+        Debug.Log($"{name} {fInfo.Name}");
+    }
+
+    public void InheritStars(Character father, Character mother)
+    {
+        List<FieldInfo> fatherFieldInfos = Stars.GetType().GetFields().Where(s =>
+        (int)s.GetValue(father.Stars) != 0).ToList();
+
+        List<FieldInfo> motherFieldInfos = Stars.GetType().GetFields().Where(s =>
+       (int)s.GetValue(mother.Stars) != 0).ToList();
+
+
+    }
+
     void RandomCharacterStats()
     {
         stats = new AllStats();
@@ -142,9 +164,9 @@ public class Character
         {
             FieldInfo fInfo = stats.GetType().GetFields()[UnityEngine.Random.Range(0, fInfos.Length)];
             fInfo.SetValue(this.stats, (int)fInfo.GetValue(this.stats) + 1);
-
         }
     }
+
     public Character(string name, GenderType gender, string spritePath) : this(name)
     {
         this.gender = gender;
@@ -179,6 +201,7 @@ public class Character
     [SerializeField] private int experience;
     [SerializeField] private GenderType gender;
     [SerializeField] private AllStats stats;
+    [SerializeField] private AllStats stars;
     [SerializeField] private List<BirthMark> birthMarks;
 
     [SerializeField] public List<Equipment> equipments;
@@ -203,6 +226,7 @@ public class Character
 
     public GenderType Gender { get { return gender; } }
     public AllStats Stats { get { return stats; } set { stats = value; } }
+    public AllStats Stars { get { return stars; } set { stars = value; } }
     public List<BirthMark> BirthMarks { get { return birthMarks; } }
     public int WorkingPlaceID
     {
@@ -298,6 +322,19 @@ public class Character
             statsUpPoint += 3;
 
         }
+
+    }
+    public void IncreaseStatsFromPoint(string statsName)
+    {
+        FieldInfo stats = typeof(Character.AllStats).GetField(statsName.ToLower());
+        FieldInfo stars = typeof(Character.AllStats).GetField(statsName.ToLower());
+
+        int statsBonus = (int)stars.GetValue(this.stars);
+        Debug.Log($"{statsBonus}");
+        stats.SetValue(Stats, (int)stats.GetValue(Stats) + 1 + statsBonus);
+
+        statsUpPoint--;
+
 
     }
     public void IncreaseStats(AllStats _stats)

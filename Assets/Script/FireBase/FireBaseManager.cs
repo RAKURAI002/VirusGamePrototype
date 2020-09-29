@@ -12,9 +12,11 @@ using System.Threading.Tasks;
 using Google;
 using System;
 using UnityEngine.Networking;
+
 #if UNITY_ANDROID
 using Unity.Notifications.Android;
 #endif
+
 public class FireBaseManager : SingletonComponent<FireBaseManager>
 {
     Firebase.Auth.FirebaseAuth auth;
@@ -30,7 +32,7 @@ public class FireBaseManager : SingletonComponent<FireBaseManager>
     protected override void OnInitialize()
     {
         Debug.Log($"Setup FireBase Default Instance.");
-        auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
+        auth = FirebaseAuth.DefaultInstance;
         FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://virus-game-project.firebaseio.com/");
         reference = FirebaseDatabase.DefaultInstance.RootReference;
 
@@ -43,7 +45,6 @@ public class FireBaseManager : SingletonComponent<FireBaseManager>
     }
     void Start()
     {
-        StartCoroutine(CheckInternetConnection((result) => { }));
     }
 
     public Task<FirebaseUser> SignInAsGuest()
@@ -63,7 +64,7 @@ public class FireBaseManager : SingletonComponent<FireBaseManager>
                 return null;
             }
 
-            Firebase.Auth.FirebaseUser newUser = task.Result;
+            FirebaseUser newUser = task.Result;
             Debug.LogFormat("User signed in successfully: {0} ({1})",
                 newUser.DisplayName, newUser.UserId);
             return task.Result;
@@ -72,7 +73,6 @@ public class FireBaseManager : SingletonComponent<FireBaseManager>
     }
     public void SignInWithGoogle()
     {
-
         Task<GoogleSignInUser> signIn = GoogleSignIn.DefaultInstance.SignIn();
 
         TaskCompletionSource<FirebaseUser> signInCompleted = new TaskCompletionSource<FirebaseUser>();
@@ -111,7 +111,7 @@ public class FireBaseManager : SingletonComponent<FireBaseManager>
                         signInCompleted.SetResult(((Task<FirebaseUser>)authTask).Result);
 
                         Firebase.Auth.FirebaseUser newUser = authTask.Result;
-
+                        FirebaseDatabase.DefaultInstance.RootReference.Child($"users/{LoadManager.Instance.playerData.UID}").RemoveValueAsync();
                         LoadManager.Instance.playerData.UID = newUser.UserId;
                         Debug.LogFormat("User signed in successfully: {0} ({1})",
                             newUser.DisplayName, newUser.UserId);
@@ -132,21 +132,15 @@ public class FireBaseManager : SingletonComponent<FireBaseManager>
                             }
                             else
                             {
+                                Debug.Log($"Completed !");
                                 taskCompletionSource.SetResult(dt.Result);
-                                Debug.Log($"{dt.Result}");
-                                if (dt.Result == null)
+                                
+                                if (dt.Result != null)
                                 {
-   
+                                    Debug.Log($"Old account detected : {dt.Result}");
+                                    // LoadManager.Instance.playerData = JsonUtility.FromJson<PlayerData>(dt.Result.GetRawJsonValue());
+                                    GameManager.Instance.ShowAccountSelector(JsonUtility.FromJson<PlayerData>(dt.Result.GetRawJsonValue()));
                                 }
-                                else
-                                {
-                                    LoadManager.Instance.playerData = JsonUtility.FromJson<PlayerData>(dt.Result.GetRawJsonValue());
-                                    Debug.Log($"Completed !");
-
-                                    GameObject.Find("ManagerCaller").GetComponent<ManagerCaller>().ReloadScene();
-
-                                }
-
                             }
                         });
                     }
@@ -155,14 +149,25 @@ public class FireBaseManager : SingletonComponent<FireBaseManager>
         });
     }
 
-    public void SendData(string json)
+    public IEnumerator SendData(string json)
     {
         Debug.Log($"Sending data to FireBase.");
-        FirebaseDatabase.DefaultInstance.RootReference.Child("users/").Child(FirebaseAuth.DefaultInstance.CurrentUser.UserId).SetRawJsonValueAsync(json);
+        Task task = FirebaseDatabase.DefaultInstance.RootReference.Child("users/").Child(FirebaseAuth.DefaultInstance.CurrentUser.UserId).SetRawJsonValueAsync(json);
+        Task timeout = Task.Delay(10000);
+        yield return new WaitUntil(() => task.IsCompleted || timeout.IsCompleted);
+       
+        if (timeout.IsCompleted)
+        {
+            GameManager.FindInActiveObjectByName("InternetWarningPanel").SetActive(true);
+        }
+        
     }
 
     public async Task<DataSnapshot> ReceivePlayerData()
     {
+        Debug.Log($"Checking internet connection . . .");
+       // Coroutine coroutine =  StartCoroutine(CheckInternetConnection());
+
         Debug.Log($"Accessing {FirebaseAuth.DefaultInstance.CurrentUser.UserId} node.");
         var ds = await FirebaseDatabase.DefaultInstance.RootReference.Child($"users/{FirebaseAuth.DefaultInstance.CurrentUser.UserId}").GetValueAsync();
 
@@ -174,20 +179,22 @@ public class FireBaseManager : SingletonComponent<FireBaseManager>
 #if UNITY_ANDROID
         AndroidNotificationCenter.CancelAllNotifications();
         FirebaseAuth.DefaultInstance.SignOut();
+        GoogleSignIn.DefaultInstance.SignOut();
+        GameManager.Instance.ReloadGame();
 #endif
     }
 
-    public IEnumerator CheckInternetConnection(Action<bool> action)
+    public IEnumerator CheckInternetConnection()
     {
         UnityWebRequest request = new UnityWebRequest("http://google.com");
         yield return request.SendWebRequest();
-        if (request.error != null)
+        if (request.error == null)
         {
-            action(false);
+            GameManager.FindInActiveObjectByName("InternetWarningPanel").SetActive(true);
         }
         else
         {
-            action(true);
+
         }
     }
 }

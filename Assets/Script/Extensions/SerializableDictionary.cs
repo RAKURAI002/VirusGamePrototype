@@ -97,6 +97,7 @@ public class ActivityInformation
     public ActivityType activityType;
 
     public int informationID;
+    public int informationID2;
     public int builderReferenceID;
     public int teamNumber;
 
@@ -104,12 +105,9 @@ public class ActivityInformation
     public long startPoint;
     public float currentPoint;
     public long requiredPoint;
-
     public long finishTime;
 
     public int androidNotificationID;
-
-
 }
 
 [System.Serializable]

@@ -55,7 +55,11 @@ public class CharacterPanel : MonoBehaviour
             RefreshConsumableItemList();
 
         }
-        UpdateInformation();
+        if(LoadManager.Instance.allResourceData[name].type == Resource.ResourceType.Consumable)
+        {
+            UpdateInformation();
+        }
+      
     }
     void UpdateInformation()
     {
@@ -65,11 +69,11 @@ public class CharacterPanel : MonoBehaviour
         statsPanel.transform.parent.Find("Name").GetComponent<Text>().text = "<color=green>Name</color> : " + character.Name;
         statsPanel.transform.parent.Find("Gender").GetComponent<Text>().text = "<color=green>Gender</color> : " + character.Gender.ToString();
         statsPanel.transform.parent.Find("Level").GetComponent<Text>().text = "<color=green>Level</color> : " + character.level;
-        statsPanel.transform.Find("Healthy").GetComponent<Text>().text = $"Healthy :\t{character.Stats.immunity} + <color=red>{character.equipments.Sum(e => e.Stats.immunity)}</color>";
-        statsPanel.transform.Find("Crafting").GetComponent<Text>().text = $"Crafting :\t{character.Stats.craftsmanship} + <color=red>{character.equipments.Sum(e => e.Stats.craftsmanship)}</color>";
+        statsPanel.transform.Find("Immunity").GetComponent<Text>().text = $"Immunity :\t{character.Stats.immunity} + <color=red>{character.equipments.Sum(e => e.Stats.immunity)}</color>";
+        statsPanel.transform.Find("Craftsmanship").GetComponent<Text>().text = $"Craftsmanship :\t{character.Stats.craftsmanship} + <color=red>{character.equipments.Sum(e => e.Stats.craftsmanship)}</color>";
         statsPanel.transform.Find("Intelligence").GetComponent<Text>().text = $"Intelligence :\t{character.Stats.intelligence} + <color=red>{character.equipments.Sum(e => e.Stats.intelligence)}</color>";
         statsPanel.transform.Find("Strength").GetComponent<Text>().text = $"Strength :\t{character.Stats.strength} + <color=red>{character.equipments.Sum(e => e.Stats.strength)}</color>";
-        statsPanel.transform.Find("Observing").GetComponent<Text>().text = $"Observing :\t{character.Stats.perception} + <color=red>{character.equipments.Sum(e => e.Stats.perception)}</color>";
+        statsPanel.transform.Find("Perception").GetComponent<Text>().text = $"Perception :\t{character.Stats.perception} + <color=red>{character.equipments.Sum(e => e.Stats.perception)}</color>";
         statsPanel.transform.Find("Luck").GetComponent<Text>().text = $"Luck :\t{character.Stats.luck} + <color=red>{character.equipments.Sum(e => e.Stats.luck)}</color>";
         statsPanel.transform.Find("Speed").GetComponent<Text>().text = $"Speed :\t{character.Stats.speed} + <color=red>{character.equipments.Sum(e => e.Stats.speed)}</color>";
 
@@ -79,7 +83,6 @@ public class CharacterPanel : MonoBehaviour
         foreach (Transform transform in birthMarkContainer)
         {
             Destroy(transform.gameObject);
-
         }
 
         foreach (Character.BirthMark birthMark in character.BirthMarks)
@@ -90,6 +93,46 @@ public class CharacterPanel : MonoBehaviour
             birthMarkIcon.Initialize(birthMarkData, false);
 
         }
+        transform.Find("MainPanel/InformationPanel/StatusPanel/Stars").gameObject.SetActive(false);
+        transform.Find("MainPanel/InformationPanel/StatusPanel/STATS").gameObject.SetActive(true);
+
+        Transform starsPanel = transform.Find("MainPanel/InformationPanel/StatusPanel/Stars");
+        
+       
+        Image[] stars = starsPanel.GetComponentsInChildren<Image>();
+        foreach (Image star in stars)
+        {
+            Destroy(star.gameObject);
+        }
+
+        List<FieldInfo> fieldInfos = character.Stars.GetType().GetFields().Where(s =>
+        (int)s.GetValue(character.Stars) != 0).ToList();
+
+        foreach (var fieldInfo in fieldInfos)
+        {
+            Transform container = starsPanel.Find($"{fieldInfo.Name.First().ToString().ToUpper() + fieldInfo.Name.Substring(1)}/Container");
+            int fieldValue = (int)fieldInfo.GetValue(character.Stars);
+            Debug.Log($"{container.name}");
+            for (int i = 0; i < fieldValue / 2; i++)
+            {
+                GameObject starGO = new GameObject("Star");
+                starGO.transform.SetParent(container);
+                
+                starGO.AddComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/UI/Star");
+                starGO.GetComponent<RectTransform>().sizeDelta = new Vector2(20, 20);
+                starGO.GetComponent<RectTransform>().localScale = Vector3.one;
+            }
+            if (fieldValue % 2 != 0)
+            {
+                Debug.Log($"Half");
+                GameObject starGO = new GameObject();
+              
+                starGO.transform.SetParent(container);
+                starGO.AddComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/UI/Half_Star");
+                starGO.GetComponent<RectTransform>().sizeDelta = new Vector2(10, 20);
+                starGO.GetComponent<RectTransform>().localScale = Vector3.one;
+            }
+        }
 
 
         List<Transform> plusButtons = new List<Transform>();
@@ -99,7 +142,6 @@ public class CharacterPanel : MonoBehaviour
         foreach (Transform transform in buffIconContainer.transform)
         {
             Destroy(transform.gameObject);
-
         }
 
         foreach (Resource.Effect effect in character.effects)
@@ -131,7 +173,6 @@ public class CharacterPanel : MonoBehaviour
 
         }
 
-
         Slider expSlider = transform.Find("MainPanel/InformationPanel/EXPSlider").GetComponent<Slider>();
 
         expSlider.maxValue = character.level * 10;
@@ -149,7 +190,7 @@ public class CharacterPanel : MonoBehaviour
 
     void CreateCharacterSlot()
     {
-        GameObject container = gameObject.transform.Find("CharacterPanel/Container").gameObject;
+        GameObject container = gameObject.transform.Find("SelectCharacterPanel/Container").gameObject;
         if (container == null)
         {
             Debug.LogError("Can't find Scrollview container for Character.");
@@ -190,17 +231,30 @@ public class CharacterPanel : MonoBehaviour
         }
         
     }
+
+    public void OnClickStatsMenu()
+    {
+        transform.Find("MainPanel/InformationPanel/StatusPanel/Stars").gameObject.SetActive(false);
+        transform.Find("MainPanel/InformationPanel/StatusPanel/STATS").gameObject.SetActive(true);
+    }
+
+    public void OnClickStarsMenu()
+    { 
+        transform.Find("MainPanel/InformationPanel/StatusPanel/STATS").gameObject.SetActive(false);
+        transform.Find("MainPanel/InformationPanel/StatusPanel/Stars").gameObject.SetActive(true);
+    }
+
+    public void OnClickItemsMenu()
+    {
+
+    }
     public void OnClickPlusStatsButton()
     {
         string statsName = EventSystem.current.currentSelectedGameObject.transform.parent.name;
 
-        Debug.Log(statsName.ToLower());
-        FieldInfo fInfo = typeof(Character.AllStats).GetField(statsName.ToLower());
-        //  Debug.Log(typeof(Character.AllStats).GetField(statsName.ToLower()).ToString());
+        character.IncreaseStatsFromPoint(statsName);
 
-        fInfo.SetValue(character.Stats, (int)fInfo.GetValue(character.Stats) + 1);
-        character.statsUpPoint--;
-        //character.IncreaseStats(new Character.AllStats() { fInfo.ReflectedType = 1 });
+
         UpdateInformation();
 
     }
@@ -286,6 +340,7 @@ public class CharacterPanel : MonoBehaviour
             {
                 return;
             }
+
             GameObject itemGO = Instantiate(Resources.Load("Prefabs/UI/ImageWithAmountPrefab") as GameObject, container.transform);
             itemGO.GetComponent<Image>().sprite = Resources.Load<Sprite>(item.Value.spritePath);
 
@@ -296,7 +351,6 @@ public class CharacterPanel : MonoBehaviour
             amount.text = ItemManager.Instance.GetResourceAmount(item.Value.Name).ToString();
 
         }
-
     }
 
     public void RefreshEquipmentsList(string _position)
@@ -333,9 +387,7 @@ public class CharacterPanel : MonoBehaviour
             {
                 image.color = Color.red;
                 button.interactable = false;
-
             }
-
         }
 
     }

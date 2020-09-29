@@ -14,21 +14,4 @@ public class ManagerCaller : MonoBehaviour
             Instantiate(Resources.Load("Prefabs/AllManager") as GameObject);
         }
     }
-
-    public void ReloadScene()
-    {
-        StartCoroutine(ReloadSceneCoroutine());
-    }
-
-    IEnumerator ReloadSceneCoroutine()
-    {
-        GameObject dontDestroyManager = GameObject.FindGameObjectWithTag("DontDestroyManager");
-        Debug.Log($"Destroying {dontDestroyManager.name}");
-        Destroy(dontDestroyManager);
-
-        yield return new WaitForEndOfFrame();
-        
-        Debug.Log($"Reloading scene . . .");
-        SceneManager.LoadScene("MainScene");
-    }
 }

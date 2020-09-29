@@ -297,11 +297,11 @@ public class NotificationManager : SingletonComponent<NotificationManager>
                 }
             case ActivityType.Pregnancy:
                 {
-                    Character character = CharacterManager.Instance.AllCharacters.SingleOrDefault(c => c.ID == activityInformation.informationID);
+                    Character femaleCharacter = CharacterManager.Instance.AllCharacters.SingleOrDefault(c => c.ID == activityInformation.informationID);
+                    Character maleCharacter = CharacterManager.Instance.AllCharacters.SingleOrDefault(c => c.ID == activityInformation.informationID2);
+                    femaleCharacter.workStatus = Character.WorkStatus.Working;
 
-                    character.workStatus = Character.WorkStatus.Working;
-
-                    CharacterManager.Instance.CreateChildCharacter();
+                    CharacterManager.Instance.CreateChildCharacter(maleCharacter, femaleCharacter);
 
                     ClockTimer timer = NotificationManager.Instance.gameObject.transform.Find("ActivitiesList/" + activityInformation.activityID).GetComponent<ClockTimer>();
                     Destroy(timer.gameObject);

@@ -41,6 +41,7 @@ public class ResidenceBehavior : BuildingBehavior
             }
 
             Character female = characters.Single(c => c.Gender == Character.GenderType.Female);
+            Character male = characters.Single(c => c.Gender == Character.GenderType.Male);
 
             if (female.workStatus == Character.WorkStatus.Pregnant)
             {
@@ -57,6 +58,7 @@ public class ResidenceBehavior : BuildingBehavior
                 startPoint = DateTime.Now.Ticks,
                 requiredPoint = DateTime.Now.Ticks + (Constant.TimeCycle.PREGNANCY_GIVE_BIRTH_TIME * TimeSpan.TicksPerSecond),
                 informationID = female.ID,
+                informationID2 = male.ID
                
             });
 

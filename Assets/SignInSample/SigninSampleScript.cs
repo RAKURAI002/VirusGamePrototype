@@ -148,7 +148,6 @@ public class SigninSampleScript : MonoBehaviour
               .ContinueWith(OnAuthenticationFinished);
     }
 
-
     public void OnGamesSignIn()
     {
         GoogleSignIn.Configuration = configuration;

@@ -150,7 +150,6 @@ public class Builder
     {
         return ($"Type : {type.ToString()}, Position {position}, Level : {level}, CurrentActiveAmount : {currentActiveAmount}, Constructing Status : {constructionStatus.isConstructing} " +
             $" Current active amount : {CurrentActiveAmount}/{maxActiveAmount}, Represent GO : {representGameObject.name}");
-
     }
 
 

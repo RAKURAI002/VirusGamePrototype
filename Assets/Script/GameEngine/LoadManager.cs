@@ -29,6 +29,8 @@ public class LoadManager : SingletonComponent<LoadManager>
     [SerializeField] public BirthMarkDataDictionary allBirthMarkData;
     [SerializeField] public List<AchievementData> allAchievementData;
 
+    bool isDataLoaded;
+
     #region Unity Functions
 
     void OnEnable()
@@ -54,7 +56,8 @@ public class LoadManager : SingletonComponent<LoadManager>
         {
             Awake();
             Start();
-            GameObject.Find("MainCanvas/Fog").GetComponent<Animation>().Play();
+            GameObject.Find("MainCanvas/Fog").GetComponent<Animation>().Play("Fog_On_Start_Game");
+
         }
         if (!secondCalled)
         {
@@ -77,13 +80,18 @@ public class LoadManager : SingletonComponent<LoadManager>
 
         Debug.Log("Loading Player Data . . .");
         Coroutine LoadPlayerDataCoroutine = StartCoroutine(LoadPlayerData());
-       
+
         yield return LoadGameDataCoroutine;
         yield return LoadPlayerDataCoroutine;
+        Debug.Log($"isDataLoad : {isDataLoaded}");
+        if (isDataLoaded)
+        {
+            LoadPlayerDataToScene();
 
-        LoadPlayerDataToScene();
+            CheckFirstLogin();
+        }
 
-        CheckFirstLogin();
+
 
     }
 
@@ -99,8 +107,8 @@ public class LoadManager : SingletonComponent<LoadManager>
         string playerDataJson = JsonUtility.ToJson(playerData, true);
         // Debug.Log("Saving Data to JSON to " + Application.persistentDataPath + playerDatas);
 
-        FireBaseManager.Instance.SendData(playerDataJson);
-       // System.IO.File.WriteAllText(Application.persistentDataPath + "/PlayerData.json", playerDataJson);
+        StartCoroutine(FireBaseManager.Instance.SendData(playerDataJson));
+        // System.IO.File.WriteAllText(Application.persistentDataPath + "/PlayerData.json", playerDataJson);
 
     }
 
@@ -109,7 +117,8 @@ public class LoadManager : SingletonComponent<LoadManager>
         Debug.Log("Fetching Player data from FireBase . . .");
 
         playerData = new PlayerData();
-        
+        isDataLoaded = false;
+        Debug.Log($"isDataLoad : {isDataLoaded}");
         if (FirebaseAuth.DefaultInstance.CurrentUser == null)
         {
             Debug.Log("No FireBaseUser detected, trying sign-in as guest.");
@@ -118,27 +127,50 @@ public class LoadManager : SingletonComponent<LoadManager>
                 Debug.Log($"Sign-in successfully");
             });
 
-            yield return new WaitUntil(() => task.IsCompleted);
+            Task timeout = Task.Delay(10000);
+            Debug.Log($"{timeout.Status} : {task.Status}");
+            yield return new WaitUntil(() => task.IsCompleted || timeout.IsCompleted);
 
-            playerData.completeTutorial = false;
-            playerData.UID = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
-            string playerDatas = JsonUtility.ToJson(playerData, true);
+            Debug.Log($"Task {task.IsCompleted} : Timeout {timeout.IsCompleted}");
+            if (timeout.IsCompleted)
+            {
+                Debug.Log($"Connection timeout.");
+                GameManager.FindInActiveObjectByName("InternetWarningPanel").SetActive(true);
+            }
+            else
+            {
+                playerData.completeTutorial = false;
+                playerData.UID = FirebaseAuth.DefaultInstance.CurrentUser.UserId;
+                string playerDatas = JsonUtility.ToJson(playerData, true);
 
-            FireBaseManager.Instance.SendData(playerDatas);
+                FireBaseManager.Instance.SendData(playerDatas);
+                isDataLoaded = true;
+            }
+
         }
         else
         {
-            string playerDatas = JsonUtility.ToJson(playerData, true);
+            var task = FireBaseManager.Instance.ReceivePlayerData();
 
-            var ds = FireBaseManager.Instance.ReceivePlayerData();
+            Task timeout = Task.Delay(10000);
+            Debug.Log($"{timeout.Status} : {task.Status}");
+            yield return new WaitUntil(() => task.IsCompleted || timeout.IsCompleted);
 
-            yield return new WaitUntil(() => ds.IsCompleted);
-            Debug.Log($"{ds.Status}");
-            Debug.Log($"Datasnapshot : {ds.Result.GetRawJsonValue()}");
+            Debug.Log($"{task.IsCompleted} : {timeout.IsCompleted}");
+            if (timeout.IsCompleted)
+            {
+                Debug.Log($"Connection timeout.");
+                GameManager.FindInActiveObjectByName("InternetWarningPanel").SetActive(true);
+            }
+            else
+            {
+                Debug.Log($"{task.Result.GetRawJsonValue()}");
+                playerData = JsonUtility.FromJson<PlayerData>(task.Result.GetRawJsonValue());
+                isDataLoaded = true;
+            }
 
-            playerData = JsonUtility.FromJson<PlayerData>(ds.Result.GetRawJsonValue());
         }
-        
+        Debug.Log($"isDataLoad : {isDataLoaded}");
         Debug.Log($"Currently working on Firebase User : {FirebaseAuth.DefaultInstance.CurrentUser?.UserId}");
     }
 
@@ -184,7 +216,7 @@ public class LoadManager : SingletonComponent<LoadManager>
                 Debug.Log("Fetching Quest Data completed.\n");
             }
         }));
-        
+
         Debug.Log("Fetching Resources' data . . .");
         Coroutine c3 = StartCoroutine(GetRequest("/ResourceData.json", (UnityWebRequest req) =>
         {
@@ -203,7 +235,7 @@ public class LoadManager : SingletonComponent<LoadManager>
                 Debug.Log("Fetching Resource Data completed.\n");
             }
         }));
-        
+
         Debug.Log("Fetching Equipments' data . . .");
         Coroutine c4 = StartCoroutine(GetRequest("/EquipmentData.json", (UnityWebRequest req) =>
         {
@@ -223,7 +255,7 @@ public class LoadManager : SingletonComponent<LoadManager>
 
             }
         }));
-        
+
         Debug.Log("Fetching Enemies' data  . . .");
         Coroutine c5 = StartCoroutine(GetRequest("/EnemyData.json", (UnityWebRequest req) =>
         {
@@ -254,7 +286,7 @@ public class LoadManager : SingletonComponent<LoadManager>
                 foreach (var item in tempData)
                 {
                     allCharacterData.Add(item.name, item);
-                }     
+                }
             }
         }));
 
@@ -324,15 +356,16 @@ public class LoadManager : SingletonComponent<LoadManager>
         ItemManager.Instance.AllResources = playerData.resourceInPossession;
         ItemManager.Instance.AllEquipments = playerData.equipmentInPossession;
         NotificationManager.Instance.ProcessingActivies = playerData.currentActivities;
-
+        Debug.Log("1");
         CharacterManager.Instance.characterWaitingInLine = playerData.characterWaitingInLine;
-
+        Debug.Log("2");
         /// Load Player's progress to Map.
-        MapManager.Instance.SetExpandedArea();
-        MapManager.Instance.LoadBuildingToScene();
+        MapManager.Instance.SetExpandedArea(); Debug.Log("3");
+        MapManager.Instance.LoadBuildingToScene(); Debug.Log("4");
         RemoveDuplicateCharacterData();
-
+        Debug.Log("Finished !");
         EventManager.Instance.GameDataLoadFinished();
+
     }
 
     void RemoveDuplicateCharacterData()
@@ -363,7 +396,7 @@ public class LoadManager : SingletonComponent<LoadManager>
         }
         else
         {
-            GameObject.Find("MainCanvas/Fog").GetComponent<Animation>().Play();
+            GameObject.Find("MainCanvas/Fog").GetComponent<Animation>().Play("Fog_On_Start_Game");
         }
     }
 

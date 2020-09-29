@@ -73,7 +73,7 @@ public class GameManager : SingletonComponent<GameManager>
     GameObject editBuildingPanel;
     GameObject dontDestroyManager;
 
-    public bool isGameDataLoaded;
+    public static bool isGameDataLoaded;
 
 
 
@@ -167,11 +167,33 @@ public class GameManager : SingletonComponent<GameManager>
         BuildingManager.Instance.ForceCreateBuilding(Building.BuildingType.Residence, 1);
 
         CharacterManager.Instance.CreateNewCharacter();
-        GameObject.Find("MainCanvas/Fog").GetComponent<Animation>().Play();
-
+        
         EventManager.Instance.PlayerNameChanged();
         LoadManager.Instance.playerData.completeTutorial = true;
         LoadManager.Instance.SavePlayerDataToFireBase();
+        GameObject.Find("MainCanvas/Fog").GetComponent<Animation>().Play("Fog_On_Start_Game");
+
+    }
+
+    public void ShowAccountSelector(PlayerData playerData)
+    {
+        AccountSelectorPanel accountSelectorPanel = GameManager.FindObjectOfType<AccountSelectorPanel>();
+        accountSelectorPanel.gameObject.SetActive(true);
+
+        accountSelectorPanel.SetAccountInformation(playerData);
+
+    }
+
+    public void ChangeAccount(PlayerData playerData)
+    {
+        string uid = LoadManager.Instance.playerData.UID;
+        LoadManager.Instance.playerData = playerData;
+
+        if(uid != LoadManager.Instance.playerData.UID)
+        {
+            ReloadGame();
+        }
+
     }
 
     public static string GetGameObjectPath(GameObject obj)

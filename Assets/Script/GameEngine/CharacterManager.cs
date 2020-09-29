@@ -38,8 +38,6 @@ public class CharacterManager : SingletonComponent<CharacterManager>
             EventManager.Instance.OnActivityFinished += OnActivityFinished;
             EventManager.Instance.OnGameDataLoadFinished -= OnGameDataLoadFinished;
         }
-            
-
     }
 
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
@@ -50,13 +48,11 @@ public class CharacterManager : SingletonComponent<CharacterManager>
             Start();
         }
         secondCalled = true;
-
     }
 
     void Start()
     {
         InvokeRepeating(nameof(CharacterJoiningEvent), Constant.TimeCycle.CHARACTER_ADDING_EVENT_CYCLE, Constant.TimeCycle.CHARACTER_ADDING_EVENT_CYCLE);
-
     }
 
     #endregion
@@ -97,10 +93,10 @@ public class CharacterManager : SingletonComponent<CharacterManager>
         if (random > joiningChance)
         {
             return;
-
         }
         CreateWaitingCharacter();
     }
+
     void CreateWaitingCharacter()
     {
         int index = UnityEngine.Random.Range(0, LoadManager.Instance.allCharacterData.Count);
@@ -122,13 +118,16 @@ public class CharacterManager : SingletonComponent<CharacterManager>
         return;
 
     }
-    public void CreateChildCharacter()
+    public void CreateChildCharacter(Character father, Character mother)
     {
         int index = UnityEngine.Random.Range(0, LoadManager.Instance.allCharacterData.Count);
 
         Character.CharacterData characterData = LoadManager.Instance.allCharacterData.ElementAt(index).Value;
         Character character = new Character(characterData.name, characterData.gender, characterData.spritePath); ;
         character.workStatus = Character.WorkStatus.Minor;
+
+        character.InheritStars(father, mother);
+
         AddCharacterToList(character);
         LoadManager.Instance.allCharacterData.Remove(characterData.name);
         EventManager.Instance.CharacterAssigned();
