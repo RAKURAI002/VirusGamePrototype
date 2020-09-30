@@ -6,24 +6,11 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Text;
-public class ClosePanelHelper : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class ClosePanelHelper : MonoBehaviour
 {
-    [SerializeField] bool isPointerOverUI;
-
-    [Header("Close Setting")]
     public bool isCloseAllPanel;
 
     Action callback;
-
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        isPointerOverUI = true;
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        isPointerOverUI = false;
-    }
 
     private bool IsPointerOverUIObject()
     {
@@ -32,12 +19,7 @@ public class ClosePanelHelper : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
         List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
-      
-        /*foreach (var item in results)
-        {
-            Debug.Log($"{item.gameObject.name}");
-        }
-        Debug.Log($"{results.Count} : {gameObject.name}");*/
+    
         return results.Where(r => r.gameObject.name == gameObject.name).ToList().Count > 0;
     }
 

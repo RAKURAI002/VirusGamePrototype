@@ -22,7 +22,6 @@ public class PointTimer : Timer
     {
         base.OnEnable();
         EventManager.Instance.OnCharacterAssigned += OnCharacterAssigned;
-
     }
 
     protected override void OnDisable()

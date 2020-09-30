@@ -211,7 +211,7 @@ public class Character
 
     [SerializeField] public int statsUpPoint;
 
-    [SerializeField] private int currentHitPoint;
+    [SerializeField] private float currentHitPoint;
 
     [SerializeField] public List<Resource.Effect> effects;
 
@@ -221,7 +221,7 @@ public class Character
     public string Name { get { return name; } }
     public int Experience { get { return experience; } }
 
-    public int CurrentHitPoint { get { return currentHitPoint; } set { currentHitPoint = value > MaxHitPoint ? MaxHitPoint : value; } }
+    public float CurrentHitPoint { get { return currentHitPoint; } set { currentHitPoint = value > MaxHitPoint ? MaxHitPoint : value; } }
     public int MaxHitPoint { get { return (stats.strength * 2); } }
 
     public GenderType Gender { get { return gender; } }

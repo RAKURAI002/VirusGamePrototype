@@ -14,8 +14,10 @@ public class DataCreator : MonoBehaviour
         CreateBirthMarkData();
         CreateAchievementData();
         CreateEquipmentJsonData();
-
+        CreateStoryQuestData();
+        CreateDailyQuestData();
     }
+
     List<string> GetSpritePath(string name)
     {
 
@@ -33,6 +35,7 @@ public class DataCreator : MonoBehaviour
 
         return spritePath;
     }
+
     void CreateEquipmentJsonData()
     {
         List<Equipment> equipment = new List<Equipment>();
@@ -510,16 +513,17 @@ public class DataCreator : MonoBehaviour
     {
         List<Enemy> e = new List<Enemy>();
 
-        e.Add(new Enemy(1, "Wolf Alpha", new Enemy.AllStats { attack = 5, defense = 3, hitPoint = 8, speed = 7, intelligence = 3 }));
-        e.Add(new Enemy(2, "Wolf Beta", new Enemy.AllStats { attack = 2, defense = 7, hitPoint = 13, speed = 2, intelligence = 6 }));
-        e.Add(new Enemy(3, "The Guardian", new Enemy.AllStats { attack = 0, defense = 20, hitPoint = 30, speed = 0, intelligence = 6 }));
-        e.Add(new Enemy(4, "Something that already died", new Enemy.AllStats { attack = 1000, defense = 0, hitPoint = -1, speed = 0, intelligence = 6 }));
-        e.Add(new Enemy(5, "Hatsune Miku (GOD form)", new Enemy.AllStats { attack = 99, defense = 99, hitPoint = 99, speed = 99, intelligence = 99 }));
+        e.Add(new Enemy(1, "Wolf Alpha", new Enemy.AllStats { attack = 5, defense = 3, hitPoint = 8, speed = 7, intelligence = 3, luck = 2 }, 5));
+        e.Add(new Enemy(2, "Wolf Beta", new Enemy.AllStats { attack = 2, defense = 7, hitPoint = 13, speed = 2, intelligence = 6, luck = 4 }, 10));
+        e.Add(new Enemy(3, "The Guardian", new Enemy.AllStats { attack = 0, defense = 20, hitPoint = 30, speed = 0, intelligence = 6, luck = 5 }, 15));
+        e.Add(new Enemy(4, "Something that already died", new Enemy.AllStats { attack = 1000, defense = 0, hitPoint = -1, speed = 0, intelligence = 6, luck = 7 }, 20));
+        e.Add(new Enemy(5, "Hatsune Miku (GOD form)", new Enemy.AllStats { attack = 99, defense = 99, hitPoint = 99, speed = 99, intelligence = 99, luck = 9 }, 25));
 
         string enemyDatas = JsonHelper.ToJson(e.ToArray(), true);// Newtonsoft.Json.JsonConvert.SerializeObject(playerData, Newtonsoft.Json.Formatting.Indented); //JsonUtility.ToJson(playerData, true); 
         Debug.Log("Saving Data to JSON : " + enemyDatas);
         System.IO.File.WriteAllText(Application.streamingAssetsPath + "/EnemyData.json", enemyDatas);
     }
+
 
     void CreateBirthMarkData()
     {
@@ -777,21 +781,70 @@ public class DataCreator : MonoBehaviour
         System.IO.File.WriteAllText(Application.streamingAssetsPath + "/BirthMarkData.json", birthMarkDatasJSON);
 
     }
+
     void CreateAchievementData()
     {
         List<AchievementData> achievements = new List<AchievementData>();
-        achievements.Add(new AchievementData()
-        {
-            id = achievements.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK,
-            name = "Gold>1000",
-            rewards = new DictionaryStringToInt() { { "Stone", 1 }, { "Wood", 5 } },
-            condition = () => { return ItemManager.Instance.GetResourceAmount("Gold") > 1000; }
-        });
+        achievements.Add(new AchievementData() { id = achievements.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK, type = AchievementData.QuestType.Achievement, name = "Login achievement.", rewards = new DictionaryStringToInt() { { "Stone", 100 }, { "Wood", 100 }, { "Food", 100 }, { "Water", 100 } }, condition = () => { return true; } });
+        achievements.Add(new AchievementData() { id = achievements.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK, type = AchievementData.QuestType.Achievement, name = "More than 1000 Food.", rewards = new DictionaryStringToInt() { { "Gold", 50 } }, condition = () => { return ItemManager.Instance.GetResourceAmount("Food") >= 1000; } });
+        achievements.Add(new AchievementData() { id = achievements.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK, type = AchievementData.QuestType.Achievement, name = "More than 1000 Wood.", rewards = new DictionaryStringToInt() { { "Gold", 50 } }, condition = () => { return ItemManager.Instance.GetResourceAmount("Wood") >= 1000; } });
+        achievements.Add(new AchievementData() { id = achievements.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK, type = AchievementData.QuestType.Achievement, name = "More than 1000 Water.", rewards = new DictionaryStringToInt() { { "Gold", 50 } }, condition = () => { return ItemManager.Instance.GetResourceAmount("Water") >= 1000; } });
+        achievements.Add(new AchievementData() { id = achievements.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK, type = AchievementData.QuestType.Achievement, name = "There are 5 peoples.", rewards = new DictionaryStringToInt() { { "Food", 500 }, { "Water", 500 } }, condition = () => { return true; } });
+        achievements.Add(new AchievementData() { id = achievements.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK, type = AchievementData.QuestType.Achievement, name = "Player lavel up to 5.", rewards = new DictionaryStringToInt() { { "Diamond", 25 } }, condition = () => { return true; } });
+        achievements.Add(new AchievementData() { id = achievements.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK, type = AchievementData.QuestType.Achievement, name = "Use item 50 time.", rewards = new DictionaryStringToInt() { { "Ultra Instinct Face Mask", 1 } }, condition = () => { return true; } });
+        achievements.Add(new AchievementData() { id = achievements.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK, type = AchievementData.QuestType.Achievement, name = "Cure infected people 5 time.", rewards = new DictionaryStringToInt() { { "Common Face Mask", 3 }, { "Medicine(maybe)", 3 } }, condition = () => { return true; } });
+        achievements.Add(new AchievementData() { id = achievements.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK, type = AchievementData.QuestType.Achievement, name = "People level up to 10 have 10 peoples.", rewards = new DictionaryStringToInt() { { "Food", 1000 }, { "Water", 1000 } }, condition = () => { return true; } });
+        achievements.Add(new AchievementData() { id = achievements.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK, type = AchievementData.QuestType.Achievement, name = "Survey area 10 time.", rewards = new DictionaryStringToInt() { { "Burger", 1 }, { "Bread", 3 } }, condition = () => { return true; } });
+        achievements.Add(new AchievementData() { id = achievements.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK, type = AchievementData.QuestType.Achievement, name = "Working fishery 10 time.", rewards = new DictionaryStringToInt() { { "Meteorite", 1 } }, condition = () => { return true; } });
+        achievements.Add(new AchievementData() { id = achievements.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK, type = AchievementData.QuestType.Achievement, name = "Have building Level maximum.", rewards = new DictionaryStringToInt() { { "Diamond", 10 }, { "Gold", 200 } }, condition = () => { return true; } });
 
         string achievementsData = JsonHelper.ToJson<AchievementData>(achievements.ToArray(), true);
-        Debug.Log("Saving Achievements Data to JSON : " + achievementsData);
+        Debug.Log("Saving achievementsData Data to JSON : " + achievementsData);
         System.IO.File.WriteAllText(Application.streamingAssetsPath + "/AchievementData.json", achievementsData);
 
+    }
+
+    void CreateDailyQuestData()
+    {
+        List<AchievementData> dailyQuests = new List<AchievementData>();
+        dailyQuests.Add(new AchievementData() { id = dailyQuests.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK, type = AchievementData.QuestType.Daily, name = "Login daily.", rewards = new DictionaryStringToInt() { { "Stone", 100 }, { "Wood", 100 }, { "Food", 100 }, { "Water", 100 } }, condition = () => { return true; } });
+        dailyQuests.Add(new AchievementData() { id = dailyQuests.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK, type = AchievementData.QuestType.Daily, name = "More than 1000 Food.", rewards = new DictionaryStringToInt() { { "Gold", 50 } }, condition = () => { return ItemManager.Instance.GetResourceAmount("Food") >= 1000; } });
+        dailyQuests.Add(new AchievementData() { id = dailyQuests.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK, type = AchievementData.QuestType.Daily, name = "More than 1000 Wood.", rewards = new DictionaryStringToInt() { { "Gold", 50 } }, condition = () => { return ItemManager.Instance.GetResourceAmount("Wood") >= 1000; } });
+        dailyQuests.Add(new AchievementData() { id = dailyQuests.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK, type = AchievementData.QuestType.Daily, name = "More than 1000 Water.", rewards = new DictionaryStringToInt() { { "Gold", 50 } }, condition = () => { return ItemManager.Instance.GetResourceAmount("Water") >= 1000; } });
+        dailyQuests.Add(new AchievementData() { id = dailyQuests.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK, type = AchievementData.QuestType.Daily, name = "There are 5 peoples.", rewards = new DictionaryStringToInt() { { "Food", 500 }, { "Water", 500 } }, condition = () => { return true; } });
+        dailyQuests.Add(new AchievementData() { id = dailyQuests.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK, type = AchievementData.QuestType.Daily, name = "Player lavel up to 5.", rewards = new DictionaryStringToInt() { { "Diamond", 25 } }, condition = () => { return true; } });
+        dailyQuests.Add(new AchievementData() { id = dailyQuests.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK, type = AchievementData.QuestType.Daily, name = "Use item 50 time.", rewards = new DictionaryStringToInt() { { "Ultra Instinct Face Mask", 1 } }, condition = () => { return true; } });
+        dailyQuests.Add(new AchievementData() { id = dailyQuests.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK, type = AchievementData.QuestType.Daily, name = "Cure infected people 5 time.", rewards = new DictionaryStringToInt() { { "Common Face Mask", 3 }, { "Medicine(maybe)", 3 } }, condition = () => { return true; } });
+        dailyQuests.Add(new AchievementData() { id = dailyQuests.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK, type = AchievementData.QuestType.Daily, name = "People level up to 10 have 10 peoples.", rewards = new DictionaryStringToInt() { { "Food", 1000 }, { "Water", 1000 } }, condition = () => { return true; } });
+        dailyQuests.Add(new AchievementData() { id = dailyQuests.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK, type = AchievementData.QuestType.Daily, name = "Survey area 10 time.", rewards = new DictionaryStringToInt() { { "Burger", 1 }, { "Bread", 3 } }, condition = () => { return true; } });
+        dailyQuests.Add(new AchievementData() { id = dailyQuests.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK, type = AchievementData.QuestType.Daily, name = "Working fishery 10 time.", rewards = new DictionaryStringToInt() { { "Meteorite", 1 } }, condition = () => { return true; } });
+        dailyQuests.Add(new AchievementData() { id = dailyQuests.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK, type = AchievementData.QuestType.Daily, name = "Have building Level maximum.", rewards = new DictionaryStringToInt() { { "Diamond", 10 }, { "Gold", 200 } }, condition = () => { return true; } });
+
+        string dailyQuestData = JsonHelper.ToJson<AchievementData>(dailyQuests.ToArray(), true);
+        Debug.Log("Saving achievementsData Data to JSON : " + dailyQuestData);
+        System.IO.File.WriteAllText(Application.streamingAssetsPath + "/DailyQuestData.json", dailyQuestData);
+
+    }
+
+    void CreateStoryQuestData()
+    {
+        List<AchievementData> storyQuests = new List<AchievementData>();
+        storyQuests.Add(new AchievementData() { id = storyQuests.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK, type = AchievementData.QuestType.Story, name = "Login story.", rewards = new DictionaryStringToInt() { { "Stone", 100 }, { "Wood", 100 }, { "Food", 100 }, { "Water", 100 } }, condition = () => { return true; } });
+        storyQuests.Add(new AchievementData() { id = storyQuests.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK, type = AchievementData.QuestType.Story, name = "More than 1000 Food.", rewards = new DictionaryStringToInt() { { "Gold", 50 } }, condition = () => { return ItemManager.Instance.GetResourceAmount("Food") >= 1000; } });
+        storyQuests.Add(new AchievementData() { id = storyQuests.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK, type = AchievementData.QuestType.Story, name = "More than 1000 Wood.", rewards = new DictionaryStringToInt() { { "Gold", 50 } }, condition = () => { return ItemManager.Instance.GetResourceAmount("Wood") >= 1000; } });
+        storyQuests.Add(new AchievementData() { id = storyQuests.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK, type = AchievementData.QuestType.Story, name = "More than 1000 Water.", rewards = new DictionaryStringToInt() { { "Gold", 50 } }, condition = () => { return ItemManager.Instance.GetResourceAmount("Water") >= 1000; } });
+        storyQuests.Add(new AchievementData() { id = storyQuests.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK, type = AchievementData.QuestType.Story, name = "There are 5 peoples.", rewards = new DictionaryStringToInt() { { "Food", 500 }, { "Water", 500 } }, condition = () => { return true; } });
+        storyQuests.Add(new AchievementData() { id = storyQuests.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK, type = AchievementData.QuestType.Story, name = "Player lavel up to 5.", rewards = new DictionaryStringToInt() { { "Diamond", 25 } }, condition = () => { return true; } });
+        storyQuests.Add(new AchievementData() { id = storyQuests.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK, type = AchievementData.QuestType.Story, name = "Use item 50 time.", rewards = new DictionaryStringToInt() { { "Ultra Instinct Face Mask", 1 } }, condition = () => { return true; } });
+        storyQuests.Add(new AchievementData() { id = storyQuests.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK, type = AchievementData.QuestType.Story, name = "Cure infected people 5 time.", rewards = new DictionaryStringToInt() { { "Common Face Mask", 3 }, { "Medicine(maybe)", 3 } }, condition = () => { return true; } });
+        storyQuests.Add(new AchievementData() { id = storyQuests.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK, type = AchievementData.QuestType.Story, name = "People level up to 10 have 10 peoples.", rewards = new DictionaryStringToInt() { { "Food", 1000 }, { "Water", 1000 } }, condition = () => { return true; } });
+        storyQuests.Add(new AchievementData() { id = storyQuests.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK, type = AchievementData.QuestType.Story, name = "Survey area 10 time.", rewards = new DictionaryStringToInt() { { "Burger", 1 }, { "Bread", 3 } }, condition = () => { return true; } });
+        storyQuests.Add(new AchievementData() { id = storyQuests.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK, type = AchievementData.QuestType.Story, name = "Working fishery 10 time.", rewards = new DictionaryStringToInt() { { "Meteorite", 1 } }, condition = () => { return true; } });
+        storyQuests.Add(new AchievementData() { id = storyQuests.Count + 1 + Constant.IDMask.ACHIEVEMENT_ID_MASK, type = AchievementData.QuestType.Story, name = "Have building Level maximum.", rewards = new DictionaryStringToInt() { { "Diamond", 10 }, { "Gold", 200 } }, condition = () => { return true; } });
+
+        string storyQuestData = JsonHelper.ToJson<AchievementData>(storyQuests.ToArray(), true);
+        Debug.Log("Saving achievementsData Data to JSON : " + storyQuestData);
+        System.IO.File.WriteAllText(Application.streamingAssetsPath + "/StoryQuestData.json", storyQuestData);
 
     }
 

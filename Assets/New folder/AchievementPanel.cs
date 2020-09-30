@@ -8,32 +8,87 @@ using System;
 
 public class AchievementPanel : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+    void ShowAchievementPanel()
     {
-        GameObject container = transform.Find("AchievementInfo/Container").gameObject;
-        Debug.Log(LoadManager.Instance.allAchievementData.Count);
+        Transform container = transform.Find("QuestList/Container");
+        foreach (Transform transform in container)
+        {
+            Destroy(transform.gameObject);
+        }
 
         foreach (var achievement in LoadManager.Instance.allAchievementData)
         {
-            GameObject itemGO = Instantiate(Resources.Load("Prefabs/UI/AchievementPrfabs") as GameObject, container.transform);
+            GameObject itemGO = Instantiate(Resources.Load("Prefabs/UI/AchievementPrefab") as GameObject, container.transform);
 
             Text name = itemGO.GetComponentInChildren<Text>();
             name.text = achievement.name;
 
             Button button = itemGO.GetComponentInChildren<Button>();
             button.onClick.AddListener(()=> { GetReward(achievement); });
+        }
+    }
 
+    void ShowDailyQuestPanel()
+    {
+        Transform container = transform.Find("QuestList/Container");
+        foreach (Transform transform in container)
+        {
+            Destroy(transform.gameObject);
         }
 
+        foreach (var quest in LoadManager.Instance.allDailyQuestData)
+        {
+            GameObject itemGO = Instantiate(Resources.Load("Prefabs/UI/AchievementPrefab") as GameObject, container);
+
+            Text name = itemGO.GetComponentInChildren<Text>();
+            name.text = quest.name;
+
+            Button button = itemGO.GetComponentInChildren<Button>();
+            button.onClick.AddListener(() => { GetReward(quest); });
+        }
+    }
+
+    void ShowStoryQuestPanel()
+    {
+        Transform container = transform.Find("QuestList/Container");
+        foreach (Transform transform in container)
+        {
+            Destroy(transform.gameObject);
+        }
+
+        foreach (var story in LoadManager.Instance.allStoryQuestData)
+        {
+            GameObject itemGO = Instantiate(Resources.Load("Prefabs/UI/AchievementPrefab") as GameObject, container);
+
+            Text name = itemGO.GetComponentInChildren<Text>();
+            name.text = story.name;
+
+            Button button = itemGO.GetComponentInChildren<Button>();
+            button.onClick.AddListener(() => { GetReward(story); });
+        }
+    }
+
+    public void OnClickAchievement()
+    {
+        ShowAchievementPanel();
+    }
+
+    public void OnClickDaily()
+    {
+        ShowDailyQuestPanel();
+    }
+
+    public void OnClickStory()
+    {
+        ShowStoryQuestPanel();
     }
 
 
-
-    void GetReward(AchievementData achievements)
+    void GetReward(AchievementData quest)
     {
-        string itemReward = achievements.name;
-        foreach (KeyValuePair<string, int> resourceName in achievements.rewards)
+        string itemReward = quest.name;
+        foreach (KeyValuePair<string, int> resourceName in quest.rewards)
         {
             int amount = resourceName.Value;
  

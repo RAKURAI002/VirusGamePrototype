@@ -93,16 +93,22 @@ public class BuildingInformationPanel : MonoBehaviour
     public void OnClickConfirmUpgrade()
     {
         ShowTeamSelectorPanel();
-
-
-        //EventSystem.current.currentSelectedGameObject.transform.parent.gameObject.SetActive(false);
     }
+
     void ShowTeamSelectorPanel()
     {
         Builder laborCenter = BuildingManager.Instance.AllBuildings.SingleOrDefault(b => b.Type == Building.BuildingType.LaborCenter);
-
+        Debug.Log($"{laborCenter.CharacterInBuilding.Count}");
+        Debug.Log($"{laborCenter.TeamLockState.Count}");
         if (laborCenter != null)
         {
+            if (laborCenter.CharacterInBuilding.Count == 1 && laborCenter.TeamLockState.Count == 0)
+            {
+                TeamSelectorCallback(0);
+                CloseUpgradePanel();
+                return;
+            }
+
             TeamSelectorPanel teamSelectorPanel = Resources.FindObjectsOfTypeAll<TeamSelectorPanel>()[0];
             teamSelectorPanel.gameObject.SetActive(true);
             teamSelectorPanel.CreateTeamSelectorPanel(TeamSelectorPanel.Mode.Build, builder,
@@ -116,25 +122,24 @@ public class BuildingInformationPanel : MonoBehaviour
 
         }
     }
+
     void TeamSelectorCallback(int teamnumber)
     {
         BuildingManager.Instance.UpgradeBuilding(builder, teamnumber);
         return;
-
     }
+
     void ShowAssignPanel()
     {
         GameObject assignPanel = transform.Find("AssignPanel").gameObject;
         assignPanel.SetActive(true);
         RefreshAssignUI();
-
     }
 
     void ShowCraftingPanel()
     {
         GameObject craftingPanel = GameManager.FindInActiveObjectByName("CraftingPanel");
         craftingPanel.GetComponent<CraftingPanel>().ShowCraftingPanel(builder);
-
     }
 
     public void RefreshInformationCanvas()
@@ -149,9 +154,8 @@ public class BuildingInformationPanel : MonoBehaviour
             destroyButtonGO.SetActive(true);
         }
 
-        if(builder.Level == 0)
+        if (builder.Level == 0)
         {
-
             transform.Find("InformationPanel/BuildingOption").gameObject.SetActive(false);
         }
         else
@@ -164,14 +168,14 @@ public class BuildingInformationPanel : MonoBehaviour
         Text buildingDescription = transform.Find("InformationPanel/BuildDescription").gameObject.GetComponent<Text>();
         Text buildingProduction = transform.Find("InformationPanel/BuildProduction").gameObject.GetComponent<Text>();
         Text buildingLevel = transform.Find("BuildName/BuildLevel").gameObject.GetComponent<Text>();
-       
-        StringBuilder production = new StringBuilder(); 
+
+        StringBuilder production = new StringBuilder();
 
         foreach (var item in buildingData.production[builder.Level])
         {
             Resource resource = LoadManager.Instance.allResourceData[item.Key];
 
-            if(resource.type == Resource.ResourceType.Material)
+            if (resource.type == Resource.ResourceType.Material)
             {
                 production.AppendLine($"{item.Key} : {item.Value} / min");
             }
@@ -179,26 +183,18 @@ public class BuildingInformationPanel : MonoBehaviour
             {
                 production.AppendLine($"{item.Key} : {item.Value}");
             }
-
         }
 
         buildingProduction.text = production.ToString();
         buildingImage.sprite = builder.representGameObject.GetComponent<SpriteRenderer>().sprite;
         buildingName.text = builder.Type.ToString();
 
-
-
         buildingDescription.text = buildingData.description.ToString();
         buildingLevel.text = "Level : " + builder.Level.ToString();
-        /*
-        foreach (KeyValuePair<string, int> resource in buildingData.production[builder.Level])
-        {
-                buildingStatus.text = LoadManager.Instance.allResourceData[resource.Key].Name + " : " + resource.Value.ToString() ; /// ********************************************
-        }*/
-
 
         return;
     }
+
     void UpdateSlider()
     {
         if (builder.constructionStatus.isConstructing)
@@ -214,7 +210,6 @@ public class BuildingInformationPanel : MonoBehaviour
             int minutes = Mathf.FloorToInt(timer % 3600 / 60);
             int seconds = Mathf.FloorToInt(timer % 3600 % 60f);
 
-
             Text text = slider.transform.GetComponentInChildren<Text>();
             text.text = "Upgrading : " + (hours == 0 ? "" : hours.ToString() + " HR ") + (minutes == 0 ? "" : minutes.ToString() + " M ") + seconds + " S";
 
@@ -227,8 +222,8 @@ public class BuildingInformationPanel : MonoBehaviour
             Slider slider = transform.Find("TimerSlider").GetComponent<Slider>();
             slider.gameObject.SetActive(false);
         }
-
     }
+
     void RefreshUpgradePanel()
     {
         Text buildingProduction = transform.Find("UpgradeInformationPanel/InformationPanel/BaseProduction").gameObject.GetComponent<Text>();
@@ -244,7 +239,6 @@ public class BuildingInformationPanel : MonoBehaviour
         upgradeButton.interactable = true;
         foreach (KeyValuePair<string, int> resource in buildingData.buildingCost[builder.Level])
         {
-
             bool isAffordable = (resource.Value <= (ItemManager.Instance.AllResources.ContainsKey(resource.Key) ? ItemManager.Instance.AllResources[resource.Key].Amount : 0));
             upgradeCost.text += "\n" + LoadManager.Instance.allResourceData[resource.Key].Name + " : " +
             ((!isAffordable ? ($"<color=red>{resource.Value.ToString()}(Not Enough)</color>") : resource.Value.ToString()));
@@ -259,8 +253,6 @@ public class BuildingInformationPanel : MonoBehaviour
         {
 
             buildingProduction.text += "\n" + LoadManager.Instance.allResourceData[resource.Key].Name + " : " + resource.Value.ToString();
-
-
         }
 
         if (builder.Level == builder.maxLevel)
@@ -277,7 +269,6 @@ public class BuildingInformationPanel : MonoBehaviour
             }
             newBuildingLevel.text += $"{builder.Level} >> <color=blue>{builder.Level + 1}</color>";
         }
-
     }
 
     public void CloseUpgradePanel()
@@ -290,7 +281,6 @@ public class BuildingInformationPanel : MonoBehaviour
     public void RefreshAssignUI()
     {
         Debug.Log("Refreshing AssignWork Canvas . . .");
-
         ClearAssignUIOldData();
         CreateCharacterSlot();
         CreateAssignBuildingContainer();
@@ -305,10 +295,7 @@ public class BuildingInformationPanel : MonoBehaviour
             return;
         }
 
-
-
         Building buildData = LoadManager.Instance.allBuildingData[builder.Type];
-
 
         GameObject assignPanelContainerGO = Instantiate(Resources.Load("Prefabs/UI/AssignPanelContainerPrefab") as GameObject, container.transform);
         assignPanelContainerGO.transform.Find("BuildingImage").GetComponent<Image>().sprite = Resources.Load<Sprite>(buildData.spritePath[builder.Level]);
@@ -319,13 +306,10 @@ public class BuildingInformationPanel : MonoBehaviour
         {
             assignPanelContainerGO.GetComponent<AssignSlotCreator>().CreateAssignSlot(assignPanelContainerGO.transform.Find("Container").gameObject, builder, i);
         }
-
     }
-
 
     void CreateCharacterSlot()
     {
-
         GameObject container = gameObject.transform.Find("AssignPanel/CharacterPanel/Container").gameObject;
         if (container == null)
         {
@@ -335,7 +319,6 @@ public class BuildingInformationPanel : MonoBehaviour
         // Debug.Log(CharacterManager.Instance.AllCharacters.Count);
         foreach (Character character in CharacterManager.Instance.AllCharacters)
         {
-
             GameObject characterSlot = new GameObject();
             characterSlot.name = character.ID.ToString();
 
@@ -357,8 +340,8 @@ public class BuildingInformationPanel : MonoBehaviour
                 characterSlot.GetComponent<Image>().color = Color.white;
             }
         }
-
     }
+
     public void OnClickSpeedUpButton()
     {
         Debug.Log($"Try spending Diamonds to skip the task.");
@@ -372,15 +355,13 @@ public class BuildingInformationPanel : MonoBehaviour
         if (ItemManager.Instance.TryConsumeResources("Diamond", speedUpCost))
         {
             builder.constructionStatus.currentPoint += pointLeft;
-
         }
         else
         {
             Debug.LogWarning($"You need {speedUpCost} Diamonds to purchase this speed up.");
         }
-
-
     }
+
     void ClearAssignUIOldData()
     {
         GameObject assignContainer = gameObject.transform.Find("AssignPanel/TeamPanel/Container").gameObject;

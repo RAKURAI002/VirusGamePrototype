@@ -11,11 +11,9 @@ public class BuildingShopPanel : MonoBehaviour
     public GameObject uiCanvas;
     public Button cancelButton;
     Button currentSelectedButton;
-    bool isInitialize;
 
     private void Awake()
     {
-        isInitialize = false;
         CreateShopMenu();
     }
     private void OnEnable()

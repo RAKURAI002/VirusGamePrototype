@@ -16,12 +16,13 @@ public class MainCanvas : MonoBehaviour
     public GameObject inventoryCanvas;
     public GameObject buildingShopCanvas;
     public GameObject toWorkCanvas;
-    public GameObject[] characterCanvas;
+    public GameObject characterCanvas;
 
+    public GameObject revivePanel;
     public GameObject resourcePanel;
     public GameObject optionPanel;
     public GameObject resourceCollectorPanel;
-
+    public GameObject acheivementPanel;
     public GameObject confirmationPanel;
     public GameObject warningPanel;
     public GameObject notificationPanelContainer;
@@ -35,7 +36,7 @@ public class MainCanvas : MonoBehaviour
     GameObject editBuildingPanel;
     GameObject finishedActivityAmountGO;
     GameObject waitingCharacterAmountGO;
-
+    GameObject deadCharacterGO;
     public static bool FreezeCamera { get; set; }
 
     void OnEnable()
@@ -57,7 +58,7 @@ public class MainCanvas : MonoBehaviour
 
     void OnCharacterAddEvent()
     {
-
+        RefreshDeadCharacterAmount();
         RefreshWaitingCharacterAmount();
     }
 
@@ -102,6 +103,7 @@ public class MainCanvas : MonoBehaviour
 
     private void Start()
     {
+        deadCharacterGO = GameManager.FindInActiveObjectByName("ReviveButton");
         finishedActivityAmountGO = GameManager.FindInActiveObjectByName("FinishedActivityAmount");
         waitingCharacterAmountGO = GameManager.FindInActiveObjectByName("WaitingCharacterAmount");
         playerName.text = $"<color=red>{LoadManager.Instance.playerData.name}</color>";
@@ -116,11 +118,14 @@ public class MainCanvas : MonoBehaviour
         RefreshWaitingCharacterAmount();
         UpdateResourcePanel();
         UpdateResourceCollectorPanel();
+        RefreshDeadCharacterAmount();
     }
+
     void OnGameDataLoadFinished()
     {
         Start();
     }
+
     void UpdateResourcePanel()
     {
         resourcePanel.transform.Find("GoldPanel").gameObject.GetComponentInChildren<Text>().text = ItemManager.Instance.GetResourceAmount("Gold").ToString();
@@ -129,6 +134,21 @@ public class MainCanvas : MonoBehaviour
         resourcePanel.transform.Find("WaterPanel").gameObject.GetComponentInChildren<Text>().text = ItemManager.Instance.GetResourceAmount("Water").ToString();
         resourcePanel.transform.Find("FoodPanel").gameObject.GetComponentInChildren<Text>().text = ItemManager.Instance.GetResourceAmount("Food").ToString();
     
+    }
+    public void RefreshDeadCharacterAmount()
+    {
+        int characterAmount = CharacterManager.Instance.allDeadcharacter.Count(c => c.Value > DateTime.Now.Ticks);
+
+        if (characterAmount == 0)
+        {
+            deadCharacterGO.transform.gameObject.SetActive(false);
+
+        }
+        else
+        {
+            deadCharacterGO.transform.gameObject.SetActive(true);
+        }
+
     }
 
     void OnPlayerNameChanged()
@@ -172,7 +192,7 @@ public class MainCanvas : MonoBehaviour
     }
     private void Update()
     {
-        if (CameraPan.isPanning)
+        if (CameraPanning.isPanning)
                 return;
         if (!FreezeCamera && Input.GetMouseButtonUp(0))
         {
@@ -234,8 +254,6 @@ public class MainCanvas : MonoBehaviour
                             break;
                         }
                 }
-
-                
 
             }
         }
@@ -348,11 +366,8 @@ public class MainCanvas : MonoBehaviour
 
     public void OnClickCharacter()
     {
-        characterCanvas[0].SetActive(true);
-        characterCanvas[1].SetActive(false);
-        characterCanvas[2].SetActive(false);
+        characterCanvas.SetActive(true);
         FreezeCamera = true;
-
     }
 
     public void OnClickNotification()
@@ -380,23 +395,40 @@ public class MainCanvas : MonoBehaviour
         toWorkCanvas.SetActive(true);
         FreezeCamera = true;
     }
-    public void OnClickExitButton()
+
+    public void OnClickAcheivemnetButton()
     {
-        EventSystem.current.currentSelectedGameObject.transform.parent.gameObject.SetActive(false);
+        acheivementPanel.SetActive(true);
+        FreezeCamera = true;
     }
+    public void OnClickReviveButton()
+    {
+        revivePanel.SetActive(true);
+        FreezeCamera = true;
+    }
+
     public void OpenMenu()
     {
         selectButtonToggle = !selectButtonToggle;
         selectButtonAnimator.SetBool("IsOpen", selectButtonToggle);
     }
+    public void OnClickReviveCharacterButton()
+    {
+        GameObject characterNotification = transform.Find("ReviveCharacterPanel").gameObject;
+        characterNotification.SetActive(true);
+        FreezeCamera = true;
+    }
 
-   public void TestAddResource()
+    public void TestAddResource()
     {
         ItemManager.Instance.AddTest();
     }
     public void TestAddLevel()
     {
         LoadManager.Instance.playerData.level++;
+        Debug.Log($"Now Player Level is {LoadManager.Instance.playerData.level}.");
+        EventManager.Instance.PlayerLevelUp(LoadManager.Instance.playerData.level);
+        LoadManager.Instance.SavePlayerDataToFireBase();
     }
     public void TestAddCharacter()
     {
@@ -407,4 +439,5 @@ public class MainCanvas : MonoBehaviour
         FireBaseManager.Instance.SignOut();
     }
 
+    
 }

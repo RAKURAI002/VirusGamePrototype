@@ -13,6 +13,7 @@ using Firebase.Auth;
 using System.Threading.Tasks;
 
 /// <summary>
+/// Everything starts from here.
 /// Load all In-Game data and Player data to Runtime.
 /// </summary>
 public class LoadManager : SingletonComponent<LoadManager>
@@ -20,14 +21,15 @@ public class LoadManager : SingletonComponent<LoadManager>
     [SerializeField] public PlayerData playerData { get; set; }
 
     [SerializeField] public BuildingDictionary allBuildingData;
-
     [SerializeField] public ResourceDictionary allResourceData;
     [SerializeField] public EquipmentDictionary allEquipmentData;
-    [SerializeField] public List<Enemy> allEnemyData; /// ********************
-    [SerializeField] public QuestDataDictionary allQuestData; /// ****************
+    [SerializeField] public List<Enemy> allEnemyData;
+    [SerializeField] public QuestDataDictionary allQuestData;
     [SerializeField] public CharacterDataDictionary allCharacterData;
     [SerializeField] public BirthMarkDataDictionary allBirthMarkData;
     [SerializeField] public List<AchievementData> allAchievementData;
+    [SerializeField] public List<AchievementData> allStoryQuestData;
+    [SerializeField] public List<AchievementData> allDailyQuestData;
 
     bool isDataLoaded;
 
@@ -50,6 +52,18 @@ public class LoadManager : SingletonComponent<LoadManager>
         SavePlayerDataToFireBase();
     }
 
+    void Start()
+    {
+    }
+    void Update()
+    {
+    }
+
+    #endregion
+
+    /// <summary>
+    /// DontDestroyOnLoad objects don't call Awake and Start on scene change.
+    /// </summary>
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     {
         if (scene.name == "MainScene" && secondCalled)
@@ -65,14 +79,6 @@ public class LoadManager : SingletonComponent<LoadManager>
         secondCalled = true;
     }
 
-    void Start()
-    {
-    }
-    void Update()
-    {
-    }
-
-    #endregion
     public IEnumerator InitializeGameData()
     {
         Debug.Log("Loading Game Data . . .");
@@ -83,16 +89,13 @@ public class LoadManager : SingletonComponent<LoadManager>
 
         yield return LoadGameDataCoroutine;
         yield return LoadPlayerDataCoroutine;
-        Debug.Log($"isDataLoad : {isDataLoaded}");
+
         if (isDataLoaded)
         {
             LoadPlayerDataToScene();
 
             CheckFirstLogin();
         }
-
-
-
     }
 
     public void SavePlayerDataToFireBase()
@@ -103,13 +106,11 @@ public class LoadManager : SingletonComponent<LoadManager>
         playerData.equipmentInPossession = ItemManager.Instance.AllEquipments;
         playerData.currentActivities = NotificationManager.Instance.ProcessingActivies;
         playerData.characterWaitingInLine = CharacterManager.Instance.characterWaitingInLine;
-
+        playerData.allDeadCharacter = CharacterManager.Instance.allDeadcharacter;
         string playerDataJson = JsonUtility.ToJson(playerData, true);
         // Debug.Log("Saving Data to JSON to " + Application.persistentDataPath + playerDatas);
 
         StartCoroutine(FireBaseManager.Instance.SendData(playerDataJson));
-        // System.IO.File.WriteAllText(Application.persistentDataPath + "/PlayerData.json", playerDataJson);
-
     }
 
     IEnumerator LoadPlayerData()
@@ -118,7 +119,7 @@ public class LoadManager : SingletonComponent<LoadManager>
 
         playerData = new PlayerData();
         isDataLoaded = false;
-        Debug.Log($"isDataLoad : {isDataLoaded}");
+
         if (FirebaseAuth.DefaultInstance.CurrentUser == null)
         {
             Debug.Log("No FireBaseUser detected, trying sign-in as guest.");
@@ -128,10 +129,10 @@ public class LoadManager : SingletonComponent<LoadManager>
             });
 
             Task timeout = Task.Delay(10000);
-            Debug.Log($"{timeout.Status} : {task.Status}");
+
             yield return new WaitUntil(() => task.IsCompleted || timeout.IsCompleted);
 
-            Debug.Log($"Task {task.IsCompleted} : Timeout {timeout.IsCompleted}");
+            Debug.Log($"Result : Task {task.IsCompleted} / Timeout {timeout.IsCompleted}");
             if (timeout.IsCompleted)
             {
                 Debug.Log($"Connection timeout.");
@@ -153,7 +154,7 @@ public class LoadManager : SingletonComponent<LoadManager>
             var task = FireBaseManager.Instance.ReceivePlayerData();
 
             Task timeout = Task.Delay(10000);
-            Debug.Log($"{timeout.Status} : {task.Status}");
+
             yield return new WaitUntil(() => task.IsCompleted || timeout.IsCompleted);
 
             Debug.Log($"{task.IsCompleted} : {timeout.IsCompleted}");
@@ -324,8 +325,38 @@ public class LoadManager : SingletonComponent<LoadManager>
             else
             {
                 allAchievementData = new List<AchievementData>();
-                Debug.Log("Fetching Character Achievement Datas completed.\n");
+                Debug.Log("Fetching Achievement Datas completed.\n");
                 allAchievementData = JsonHelper.FromJson<AchievementData>(req.downloadHandler.text).ToList();
+            }
+        }));
+
+        Debug.Log("Fetching StoryQuest' data  . . .");
+        Coroutine c9 = StartCoroutine(LoadManager.Instance.GetRequest("/StoryQuestData.json", (UnityWebRequest req) =>
+        {
+            if (req.isNetworkError || req.isHttpError)
+            {
+                Debug.Log($"{req.error}: {req.downloadHandler.text}");
+            }
+            else
+            {
+                allStoryQuestData = new List<AchievementData>();
+                Debug.Log("Fetching StoryQuest Datas completed.\n");
+                allStoryQuestData = JsonHelper.FromJson<AchievementData>(req.downloadHandler.text).ToList();
+            }
+        }));
+
+        Debug.Log("Fetching DailyQuest' data  . . .");
+        Coroutine c10 = StartCoroutine(LoadManager.Instance.GetRequest("/DailyQuestData.json", (UnityWebRequest req) =>
+        {
+            if (req.isNetworkError || req.isHttpError)
+            {
+                Debug.Log($"{req.error}: {req.downloadHandler.text}");
+            }
+            else
+            {
+                allDailyQuestData = new List<AchievementData>();
+                Debug.Log("Fetching DailyQuest Datas completed.\n");
+                allDailyQuestData = JsonHelper.FromJson<AchievementData>(req.downloadHandler.text).ToList();
             }
         }));
 
@@ -347,6 +378,9 @@ public class LoadManager : SingletonComponent<LoadManager>
 
         yield return c8;
 
+        yield return c9;
+
+        yield return c10;
     }
 
     void LoadPlayerDataToScene()
@@ -356,16 +390,14 @@ public class LoadManager : SingletonComponent<LoadManager>
         ItemManager.Instance.AllResources = playerData.resourceInPossession;
         ItemManager.Instance.AllEquipments = playerData.equipmentInPossession;
         NotificationManager.Instance.ProcessingActivies = playerData.currentActivities;
-        Debug.Log("1");
         CharacterManager.Instance.characterWaitingInLine = playerData.characterWaitingInLine;
-        Debug.Log("2");
+        CharacterManager.Instance.allDeadcharacter = playerData.allDeadCharacter;
         /// Load Player's progress to Map.
-        MapManager.Instance.SetExpandedArea(); Debug.Log("3");
-        MapManager.Instance.LoadBuildingToScene(); Debug.Log("4");
+        MapManager.Instance.SetExpandedArea(); 
+        MapManager.Instance.LoadBuildingToScene();
         RemoveDuplicateCharacterData();
-        Debug.Log("Finished !");
-        EventManager.Instance.GameDataLoadFinished();
 
+        EventManager.Instance.GameDataLoadFinished();
     }
 
     void RemoveDuplicateCharacterData()
@@ -405,7 +437,6 @@ public class LoadManager : SingletonComponent<LoadManager>
         string finalPath = System.IO.Path.Combine(Application.streamingAssetsPath + path);
         using (UnityWebRequest request = UnityWebRequest.Get(finalPath))
         {
-            // Send the request and wait for a response
             yield return request.SendWebRequest();
             callback(request);
         }

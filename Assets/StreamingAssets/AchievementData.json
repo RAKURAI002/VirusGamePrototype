@@ -2,18 +2,187 @@
     "Items": [
         {
             "id": 600001,
-            "name": "Gold>1000",
+            "name": "Login achievement.",
             "description": "",
             "rewards": {
                 "keys": [
                     "Stone",
-                    "Wood"
+                    "Wood",
+                    "Food",
+                    "Water"
+                ],
+                "values": [
+                    100,
+                    100,
+                    100,
+                    100
+                ]
+            },
+            "type": 1
+        },
+        {
+            "id": 600002,
+            "name": "More than 1000 Food.",
+            "description": "",
+            "rewards": {
+                "keys": [
+                    "Gold"
+                ],
+                "values": [
+                    50
+                ]
+            },
+            "type": 1
+        },
+        {
+            "id": 600003,
+            "name": "More than 1000 Wood.",
+            "description": "",
+            "rewards": {
+                "keys": [
+                    "Gold"
+                ],
+                "values": [
+                    50
+                ]
+            },
+            "type": 1
+        },
+        {
+            "id": 600004,
+            "name": "More than 1000 Water.",
+            "description": "",
+            "rewards": {
+                "keys": [
+                    "Gold"
+                ],
+                "values": [
+                    50
+                ]
+            },
+            "type": 1
+        },
+        {
+            "id": 600005,
+            "name": "There are 5 peoples.",
+            "description": "",
+            "rewards": {
+                "keys": [
+                    "Food",
+                    "Water"
+                ],
+                "values": [
+                    500,
+                    500
+                ]
+            },
+            "type": 1
+        },
+        {
+            "id": 600006,
+            "name": "Player lavel up to 5.",
+            "description": "",
+            "rewards": {
+                "keys": [
+                    "Diamond"
+                ],
+                "values": [
+                    25
+                ]
+            },
+            "type": 1
+        },
+        {
+            "id": 600007,
+            "name": "Use item 50 time.",
+            "description": "",
+            "rewards": {
+                "keys": [
+                    "Ultra Instinct Face Mask"
+                ],
+                "values": [
+                    1
+                ]
+            },
+            "type": 1
+        },
+        {
+            "id": 600008,
+            "name": "Cure infected people 5 time.",
+            "description": "",
+            "rewards": {
+                "keys": [
+                    "Common Face Mask",
+                    "Medicine(maybe)"
+                ],
+                "values": [
+                    3,
+                    3
+                ]
+            },
+            "type": 1
+        },
+        {
+            "id": 600009,
+            "name": "People level up to 10 have 10 peoples.",
+            "description": "",
+            "rewards": {
+                "keys": [
+                    "Food",
+                    "Water"
+                ],
+                "values": [
+                    1000,
+                    1000
+                ]
+            },
+            "type": 1
+        },
+        {
+            "id": 600010,
+            "name": "Survey area 10 time.",
+            "description": "",
+            "rewards": {
+                "keys": [
+                    "Burger",
+                    "Bread"
                 ],
                 "values": [
                     1,
-                    5
+                    3
                 ]
-            }
+            },
+            "type": 1
+        },
+        {
+            "id": 600011,
+            "name": "Working fishery 10 time.",
+            "description": "",
+            "rewards": {
+                "keys": [
+                    "Meteorite"
+                ],
+                "values": [
+                    1
+                ]
+            },
+            "type": 1
+        },
+        {
+            "id": 600012,
+            "name": "Have building Level maximum.",
+            "description": "",
+            "rewards": {
+                "keys": [
+                    "Diamond",
+                    "Gold"
+                ],
+                "values": [
+                    10,
+                    200
+                ]
+            },
+            "type": 1
         }
     ]
 }

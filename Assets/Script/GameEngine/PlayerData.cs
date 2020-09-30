@@ -19,7 +19,7 @@ public class PlayerData
         level = 1;
 
         characterWaitingInLine = new List<Character>();
-
+        allDeadCharacter = new DeadCharacterDictionary();
     }
 
     [SerializeField] public string UID = "DEFAULT_UID";
@@ -30,7 +30,7 @@ public class PlayerData
     [SerializeField] public List<Character> characterWaitingInLine;
     [SerializeField] public ResourceDictionary resourceInPossession;
     [SerializeField] public EquipmentDictionary equipmentInPossession;
-
+    [SerializeField] public DeadCharacterDictionary allDeadCharacter;
     [SerializeField] public List<int> expandedArea;
 
     [SerializeField] public ActivityProgressDictionary currentActivities;

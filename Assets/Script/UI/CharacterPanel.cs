@@ -124,7 +124,6 @@ public class CharacterPanel : MonoBehaviour
             }
             if (fieldValue % 2 != 0)
             {
-                Debug.Log($"Half");
                 GameObject starGO = new GameObject();
               
                 starGO.transform.SetParent(container);

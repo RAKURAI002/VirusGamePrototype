@@ -78,6 +78,10 @@ public class CharacterAmountDictionary : SerializableDictionary<int, MaxCharacte
 [System.Serializable]
 public class ActivityProgressDictionary : SerializableDictionary<int, ActivityInformation>
 { }
+[System.Serializable]
+public class DeadCharacterDictionary : SerializableDictionary<Character, long>
+{ }
+
 
 [System.Serializable]
 public enum ActivityType
@@ -100,6 +104,7 @@ public class ActivityInformation
     public int informationID2;
     public int builderReferenceID;
     public int teamNumber;
+    public object extraData;
 
     public bool isFinished;
     public long startPoint;

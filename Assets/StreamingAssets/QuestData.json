@@ -1,7 +1,7 @@
 {
     "Items": [
         {
-            "questID": 300001,
+            "questID": 1,
             "questName": "Area1-1Normal",
             "requireStats": {
                 "speed": 0,
@@ -18,10 +18,11 @@
             "enemiesIDList": [
                 1
             ],
-            "duration": 30
+            "duration": 30,
+            "EXPreceived": 5
         },
         {
-            "questID": 300002,
+            "questID": 2,
             "questName": "Area1-2Normal",
             "requireStats": {
                 "speed": 0,
@@ -38,10 +39,11 @@
             "enemiesIDList": [
                 1
             ],
-            "duration": 60
+            "duration": 60,
+            "EXPreceived": 10
         },
         {
-            "questID": 300003,
+            "questID": 3,
             "questName": "Area1-3Normal",
             "requireStats": {
                 "speed": 0,
@@ -59,10 +61,11 @@
                 1,
                 2
             ],
-            "duration": 90
+            "duration": 90,
+            "EXPreceived": 15
         },
         {
-            "questID": 300004,
+            "questID": 4,
             "questName": "Area1-1Hard",
             "requireStats": {
                 "speed": 0,
@@ -81,7 +84,8 @@
                 2,
                 3
             ],
-            "duration": 120
+            "duration": 120,
+            "EXPreceived": 20
         }
     ]
 }

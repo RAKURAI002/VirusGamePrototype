@@ -261,7 +261,6 @@ public class NotificationManager : SingletonComponent<NotificationManager>
         if (activityInformation == null)
             return;
 #if UNITY_ANDROID
-        Debug.Log($"{activityInformation.activityName} canceled.");
         AndroidNotificationCenter.CancelScheduledNotification(activityInformation.androidNotificationID);
 #endif
     }

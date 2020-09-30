@@ -11,20 +11,13 @@ public class AchievementData
     [SerializeField] public string description;
     [SerializeField] public DictionaryStringToInt rewards;
     [SerializeField] public Func<bool> condition;
-
-}
-
-public class AchievementSerializer : ISerializationCallbackReceiver
-{
-    List<AchievementData> achievementDatas;
-    public void OnAfterDeserialize()
+    [SerializeField] public QuestType type;
+    public enum QuestType
     {
-       
-    }
-
-    public void OnBeforeSerialize()
-    {
-        
+        Daily,
+        Achievement,
+        Story
     }
 }
+
 

@@ -11,6 +11,7 @@ public class CharacterManager : SingletonComponent<CharacterManager>
     [SerializeField] private List<Character> allCharacters;
     [SerializeField] public List<Character> characterWaitingInLine;
 
+    [SerializeField] public DeadCharacterDictionary allDeadcharacter;
     public int MaxCharacterInGame { get; set; } = 1;
     public List<Character> AllCharacters { get { return allCharacters; } set { allCharacters = value; } }
 
@@ -184,7 +185,7 @@ public class CharacterManager : SingletonComponent<CharacterManager>
         {
             Builder oldBuilder = BuildingManager.Instance.AllBuildings.Single(b => b.ID == character.WorkingPlaceID);
             Debug.Log($"This Character is already doing work at {oldBuilder.Type}. Try canceling old work . . .");
-            CancelAssignWork(character, oldBuilder);
+            CancelAssignWork(character);
 
         }
 
@@ -198,19 +199,16 @@ public class CharacterManager : SingletonComponent<CharacterManager>
 
         return true;
     }
-    public bool CancelAssignWork(Character character, Builder builder)
+    public bool CancelAssignWork(Character character)
     {
-        if (character.workStatus == Character.WorkStatus.Pregnant)
+        Builder builder = BuildingManager.Instance.AllBuildings.SingleOrDefault(b => b.ID == character.WorkingPlaceID);
+        if (character.workStatus == Character.WorkStatus.Pregnant || character.workStatus == Character.WorkStatus.Quest)
         {
-            Debug.LogWarning("Pregnant Character can't be Unassign.");
+            Debug.LogWarning($"{character.workStatus} Character can't be Unassign.");
             return false;
         }
-        if (character.workStatus == Character.WorkStatus.Quest)
-        {
-            Debug.LogWarning("Questing Character can't be Unassign.");
-            return false;
-        }
-        if (!builder.CharacterInBuilding.Find(cw => cw.Characters.Contains(character)).Characters.Remove(character))  //(ec => ec.Characters.Single(c=> c.WorkingPlaceID == builder.ID)).Remove(character))
+
+        if (!builder.CharacterInBuilding.Find(cw => cw.Characters.Contains(character)).Characters.Remove(character)) 
         {
             Debug.LogError("Remove Character in Building FAILED.");
             return false;

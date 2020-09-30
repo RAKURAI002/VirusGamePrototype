@@ -111,8 +111,7 @@ public class FireBaseManager : SingletonComponent<FireBaseManager>
                         signInCompleted.SetResult(((Task<FirebaseUser>)authTask).Result);
 
                         Firebase.Auth.FirebaseUser newUser = authTask.Result;
-                        FirebaseDatabase.DefaultInstance.RootReference.Child($"users/{LoadManager.Instance.playerData.UID}").RemoveValueAsync();
-                        LoadManager.Instance.playerData.UID = newUser.UserId;
+                        
                         Debug.LogFormat("User signed in successfully: {0} ({1})",
                             newUser.DisplayName, newUser.UserId);
 
@@ -135,20 +134,32 @@ public class FireBaseManager : SingletonComponent<FireBaseManager>
                                 Debug.Log($"Completed !");
                                 taskCompletionSource.SetResult(dt.Result);
                                 
-                                if (dt.Result != null)
+                                if (dt.Result.Value != null)
                                 {
-                                    Debug.Log($"Old account detected : {dt.Result}");
+                                    Debug.Log($"{dt.Result.GetRawJsonValue()}");
                                     // LoadManager.Instance.playerData = JsonUtility.FromJson<PlayerData>(dt.Result.GetRawJsonValue());
                                     GameManager.Instance.ShowAccountSelector(JsonUtility.FromJson<PlayerData>(dt.Result.GetRawJsonValue()));
                                 }
+                                else
+                                {
+                                    DeleteOldAccount(LoadManager.Instance.playerData.UID);
+                                    LoadManager.Instance.playerData.UID = newUser.UserId;
+                                    LoadManager.Instance.SavePlayerDataToFireBase();
+                                }
+
                             }
+
                         });
                     }
                 });
             }
         });
     }
+    public void DeleteOldAccount(string uid)
+    {
+        FirebaseDatabase.DefaultInstance.RootReference.Child($"users/{uid}").RemoveValueAsync();
 
+    }
     public IEnumerator SendData(string json)
     {
         Debug.Log($"Sending data to FireBase.");

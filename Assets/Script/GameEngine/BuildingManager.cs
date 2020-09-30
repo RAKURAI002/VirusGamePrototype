@@ -15,21 +15,25 @@ public class BuildingManager : SingletonComponent<BuildingManager>
     protected override void Awake()
     {
         base.Awake();
+    }
 
-    }
-    protected override void OnInitialize()
-    {
-    }
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnLevelFinishedLoading;
-
     }
+
     void OnDisable()
     {
         SceneManager.sceneLoaded -= OnLevelFinishedLoading;
+    }
+
+    void Start()
+    {
 
     }
+
+    #endregion
+
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     {
         if (scene.name == "MainScene" && secondCalled)
@@ -38,13 +42,7 @@ public class BuildingManager : SingletonComponent<BuildingManager>
             Start();
         }
         secondCalled = true;
-
     }
-    void Start()
-    {
-
-    }
-    #endregion
 
     public bool CreateNewBuilding(Building.BuildingType type, int teamNumber, Vector2 position)
     {
@@ -82,12 +80,15 @@ public class BuildingManager : SingletonComponent<BuildingManager>
             requiredPoint = buildData.upgradePoint[builder.Level],
             informationID = builder.ID
         });
+
         EventManager.Instance.BuildingModified(builder.ID);
         Debug.Log("Create action complete.");
         LoadManager.Instance.SavePlayerDataToFireBase();
 
         return true;
     }
+
+
     void AddBuildingBehavior(GameObject builderGO, Builder builder, Building buildingData)
     {
         if (buildingData.behaviorType == Building.BuildingBehaviorType.ResourceCollector)
@@ -110,6 +111,7 @@ public class BuildingManager : SingletonComponent<BuildingManager>
             builderGO.AddComponent<BuildingBehavior>().SetBuilder(builder);
         }
     }
+
     void InitiateBuilding(Builder builder)
     {
         AddBuildingsToList(builder);
@@ -142,6 +144,7 @@ public class BuildingManager : SingletonComponent<BuildingManager>
         return;
 
     }
+
     void ReconnectCharacterReference(Builder builder)
     {
         for (int i = builder.CharacterInBuilding.Count - 1; i >= 0; i--)
@@ -149,11 +152,10 @@ public class BuildingManager : SingletonComponent<BuildingManager>
             for (int j = builder.CharacterInBuilding[i].Characters.Count - 1; j >= 0; j--)
             {
                 builder.CharacterInBuilding[i].Characters[j] = CharacterManager.Instance.AllCharacters.Single(c => c.ID == builder.CharacterInBuilding[i].Characters[j].ID);
-
             }
-
         }
     }
+
     void AddBuildingsToList(Builder builder)
     {
         allBuildings.Add(builder);
@@ -164,14 +166,11 @@ public class BuildingManager : SingletonComponent<BuildingManager>
             foreach (Builder sameBuilder in sameTypeBuilding)
             {
                 sameBuilder.CurrentActiveAmount = sameTypeBuilding.Length;
-
             }
-
         }
         else
         {
             Debug.LogError("Something happened on AddBuildingsToList !");
-
         }
 
     }
@@ -289,7 +288,7 @@ public class BuildingManager : SingletonComponent<BuildingManager>
         {
             foreach (Character character in cw.Characters)
             {
-                CharacterManager.Instance.CancelAssignWork(character, destroyBuilding);
+                CharacterManager.Instance.CancelAssignWork(character);
 
             }
 

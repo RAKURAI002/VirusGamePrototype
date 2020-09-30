@@ -13,30 +13,21 @@ public class DraggableItem : MonoBehaviour, IPointerDownHandler, IDragHandler, I
     
     GameObject draggingGO = null;
     [SerializeField] Character character;
-    // Start is called before the first frame update
+
     void Start()
     {
         character = CharacterManager.Instance.AllCharacters.Single(c => c.ID.ToString() == gameObject.name);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void OnDrag(PointerEventData eventData)
     {
-        //Debug.Log("Dragged");
         if(draggingGO == null)
         {
             return;
         }
         draggingGO.transform.position = Input.mousePosition;
-        
-       
-       
     }
+
     public void OnPointerDown(PointerEventData eventData)
     {
         Debug.Log(this.gameObject.name + " Was Clicked.");
@@ -56,10 +47,8 @@ public class DraggableItem : MonoBehaviour, IPointerDownHandler, IDragHandler, I
         draggingGO.transform.SetParent(gameObject.transform.parent.transform.parent.transform.parent.transform);
         draggingGO.transform.position = Input.mousePosition;
         draggingGO.AddComponent<Image>().sprite = gameObject.GetComponent<Image>().sprite;
-        draggingGO.AddComponent<CanvasGroup>().blocksRaycasts = false;
-        
+        draggingGO.AddComponent<CanvasGroup>().blocksRaycasts = false;  
     }
-
 
     public void OnPointerUp(PointerEventData eventData)
     {
@@ -67,10 +56,9 @@ public class DraggableItem : MonoBehaviour, IPointerDownHandler, IDragHandler, I
         if (draggingGO == null || eventData.pointerEnter ==null)
         {
         }
-        else if (eventData.pointerEnter.tag == "DropSlot")
+        
+        if (eventData.pointerEnter.tag == "DropSlot")
         {
-            
-
             Slot slot = eventData.pointerEnter.GetComponent<Slot>();
            // Debug.Log($"Finding {slot.character.Name} :  {slot.character.ID}");
             if (CharacterManager.Instance.AssignWork(character, slot.builder, slot.teamNumber))
@@ -78,9 +66,6 @@ public class DraggableItem : MonoBehaviour, IPointerDownHandler, IDragHandler, I
                 slot.character = CharacterManager.Instance.AllCharacters.Single(c => c.ID.ToString() == draggingGO.name);
                 eventData.pointerEnter.GetComponent<Slot>().character = character;
             }
-          
-                
-
         }
 
         Destroy(draggingGO);

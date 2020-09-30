@@ -10,6 +10,8 @@ using System.Linq;
 #if UNITY_ANDROID
 using Unity.Notifications.Android;
 #endif
+
+
 public class GameManager : SingletonComponent<GameManager>
 {
 
@@ -18,6 +20,7 @@ public class GameManager : SingletonComponent<GameManager>
     {
         base.Awake();
     }
+
     protected override void OnInitialize()
     {
         dontDestroyManager = GameObject.FindGameObjectWithTag("DontDestroyManager");
@@ -30,25 +33,25 @@ public class GameManager : SingletonComponent<GameManager>
         StartCoroutine(LoadManager.Instance.InitializeGameData());
 
     }
+
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnLevelFinishedLoading;
-
-        EventManager.Instance.OnGameDataLoadFinished += OnGameDataLoadFinished;
-
-        
+        EventManager.Instance.OnGameDataLoadFinished += OnGameDataLoadFinished;     
     }
+
     void OnDisable()
     {
         SceneManager.sceneLoaded -= OnLevelFinishedLoading;
         if (EventManager.Instance)
             EventManager.Instance.OnGameDataLoadFinished -= OnGameDataLoadFinished;
     }
+
     void OnGameDataLoadFinished()
     {
         isGameDataLoaded = true;
-
     }
+
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     {
         Debug.Log($"Loading {scene.name} . . .");
@@ -65,17 +68,13 @@ public class GameManager : SingletonComponent<GameManager>
             timerCanvas.transform.position += new Vector3(0, -500, 0);
             allBuildings.transform.position += new Vector3(0, -500, 0);
         }
-
     }
 
     GameObject timerCanvas;
     GameObject allBuildings;
-    GameObject editBuildingPanel;
     GameObject dontDestroyManager;
 
     public static bool isGameDataLoaded;
-
-
 
     void Start()
     {
@@ -94,40 +93,11 @@ public class GameManager : SingletonComponent<GameManager>
             secondCalled = true;
         }
 
-        editBuildingPanel = Resources.FindObjectsOfTypeAll<BuildingInformationPanel>()[0].gameObject;
-        if (editBuildingPanel == null)
-        {
-            Debug.LogError("Can't find editBuildingPanel");
-        }
         InvokeRepeating(nameof(BroadCastGeneralGameCycle), Constant.TimeCycle.GENERAL_GAME_CYCLE, Constant.TimeCycle.GENERAL_GAME_CYCLE);
 
     }
-    public void ReloadGame()
-    {
-        Debug.Log($"Reload Game, destroying {transform.parent.gameObject.name} . . .");
-        Destroy(transform.parent.gameObject);
 
-        SceneManager.LoadScene("MainScene");
-        //SceneManager.LoadScene(SceneManager.GetSceneByName("MainScene").name);
-    }
 
-    void BroadCastGeneralGameCycle()
-    {
-        Debug.Log($"BroadCastGeneralGameCycle Updated.");
-        EventManager.Instance.GameCycleUpdated();
-
-    }
-    void Update()
-    {
-
-    }
-    public void AddLevelTest()
-    {
-        LoadManager.Instance.playerData.level++;
-        Debug.Log($"Now Player Level is {LoadManager.Instance.playerData.level}.");
-        EventManager.Instance.PlayerLevelUp(LoadManager.Instance.playerData.level);
-        LoadManager.Instance.SavePlayerDataToFireBase();
-    }
     private void OnApplicationQuit()
     {
         LoadManager.Instance.playerData.lastLoginTime = DateTime.Now.Ticks;
@@ -142,17 +112,26 @@ public class GameManager : SingletonComponent<GameManager>
             LoadManager.Instance.playerData.lastLoginTime = DateTime.Now.Ticks;
             LoadManager.Instance.SavePlayerDataToFireBase();
             Debug.Log("Application paused after " + Time.time + " seconds");
-
-        }
-        else
-        {
-            Debug.Log("Application resumed after " + Time.time + " seconds");
         }
     }
-
     #endregion
 
-    public StringBuilder gameLog;
+    public void ReloadGame()
+    {
+        Debug.Log($"Reload Game, destroying {transform.parent.gameObject.name} . . .");
+        Destroy(transform.parent.gameObject);
+
+        SceneManager.LoadScene("MainScene");
+    }
+
+    /// <summary>
+    /// General purpose event.
+    /// </summary>
+    void BroadCastGeneralGameCycle()
+    {
+        Debug.Log($"BroadCastGeneralGameCycle Updated.");
+        EventManager.Instance.GameCycleUpdated();
+    }
 
     public IEnumerator StartTutorial()
     {
@@ -177,23 +156,32 @@ public class GameManager : SingletonComponent<GameManager>
 
     public void ShowAccountSelector(PlayerData playerData)
     {
-        AccountSelectorPanel accountSelectorPanel = GameManager.FindObjectOfType<AccountSelectorPanel>();
+        Debug.Log($"ShowAccountSelector");
+        AccountSelectorPanel accountSelectorPanel = Resources.FindObjectsOfTypeAll<AccountSelectorPanel>()[0];
         accountSelectorPanel.gameObject.SetActive(true);
 
-        accountSelectorPanel.SetAccountInformation(playerData);
+        StartCoroutine(accountSelectorPanel.SetAccountInformation(playerData));
 
     }
 
     public void ChangeAccount(PlayerData playerData)
     {
-        string uid = LoadManager.Instance.playerData.UID;
-        LoadManager.Instance.playerData = playerData;
+        string currentUID = LoadManager.Instance.playerData.UID;
 
-        if(uid != LoadManager.Instance.playerData.UID)
+        if(playerData.UID != currentUID)
         {
+            Debug.Log($"Changing account progress . . .");
+            LoadManager.Instance.playerData = playerData;
+            LoadManager.Instance.SavePlayerDataToFireBase();
+            FireBaseManager.Instance.DeleteOldAccount(playerData.UID);
             ReloadGame();
         }
-
+        else
+        {
+            LoadManager.Instance.playerData.UID = playerData.UID;
+            LoadManager.Instance.SavePlayerDataToFireBase();
+            FireBaseManager.Instance.DeleteOldAccount(playerData.UID);
+        }
     }
 
     public static string GetGameObjectPath(GameObject obj)
@@ -206,6 +194,7 @@ public class GameManager : SingletonComponent<GameManager>
         }
         return path;
     }
+
     public static Transform FindDeepChild(Transform aParent, string aName)
     {
         Queue<Transform> queue = new Queue<Transform>();
@@ -220,6 +209,7 @@ public class GameManager : SingletonComponent<GameManager>
         }
         return null;
     }
+
     public static GameObject FindInActiveObjectByName(string name)
     {
         Transform[] objs = Resources.FindObjectsOfTypeAll<Transform>() as Transform[];
